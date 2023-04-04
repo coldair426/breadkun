@@ -1,0 +1,32 @@
+$gray-00: #f8f9fa; // 기본글자색
+$gray-09: #212529; // 기본배경색
+
+.header {
+  background-color: $gray-09;
+  position: sticky;
+  top: 0;
+}
+.header__wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px $gray-00 solid;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  height: 58px;
+  background-color: $gray-09;
+}
+.header__logo {
+  margin-left: 15px;
+  height: 40px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.header__button {
+  margin-right: 20px;
+  height: 45px;
+  &:hover {
+    cursor: pointer;
+  }
+}
