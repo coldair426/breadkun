@@ -1,0 +1,26 @@
+// 웹폰트(둥근모꼴)
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+$gray-00: #f8f9fa; // 기본글자색
+$gray-09: #212529; // 기본배경색
+#root {
+  -webkit-font-smoothing: antialiased; // webkit(크롬, 사파리) 글자 부드럽게
+  -moz-osx-font-smoothing: grayscale; // 파이어폭스 글자 부드럽게
+  font-family: 'DungGeunMo', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  color: $gray-00;
+}
+/* a태그 설정 초기화 */
+a,
+a:link,
+a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+/* button 속성 초기화 */
+button {
+  all: unset;
+}
