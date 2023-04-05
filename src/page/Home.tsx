@@ -11,7 +11,7 @@ function Home() {
 
   return (
     <div className={hs('home')}>
-      <div className={hs('test1')}>ㅎ엉레ㅓ낸ㅁ어레ㅐ엥ㄻ느ㅔ리ㅡ메니으</div>
+      <div className={hs('test1')}>메인페이지</div>
     </div>
   );
 }

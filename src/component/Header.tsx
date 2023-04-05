@@ -8,14 +8,12 @@ const hs = classNames.bind(styles);
 function Header({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
   return (
     <header className={hs('header')}>
-      <div className={hs('header__wrap')}>
-        <Link to={'/'}>
-          <img className={hs('header__logo')} src='/logo/breadkunLogoDarkMode.png' alt='breadkun-header-logo' />
-        </Link>
-        <button onClick={() => setMenuBox(true)}>
-          <img className={hs('header__button')} src='/icon/header-menu-button.png' alt='breadkun-header-menu' />
-        </button>
-      </div>
+      <Link to={'/'}>
+        <img className={hs('header__logo')} src='/logo/breadkunLogoDarkMode.png' alt='breadkun-header-logo' />
+      </Link>
+      <button onClick={() => setMenuBox(true)}>
+        <img className={hs('header__button')} src='/icon/header-menu-button.png' alt='breadkun-header-menu' />
+      </button>
     </header>
   );
 }

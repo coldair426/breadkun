@@ -1,14 +1,18 @@
 $gray-00: #f8f9fa; // 기본글자색
-$gray-08: #343a40;
+$gray-07: #495057;
 .bus {
-  border-right: 1px solid $gray-00;
-  border-left: 1px solid $gray-00;
-  padding: 20px 0;
+  padding: 0;
 }
-.bus__contents {
-  background-color: $gray-08;
-  margin: 0 20px;
-  border: 1px solid $gray-00;
-  border-radius: 25px;
-  height: 900px;
+.bus__block1 {
+  background-color: $gray-07;
+  margin: 0 10px;
+  border-radius: 40px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.bus__block1--title {
+  margin-top: 30px;
+  font-size: 15px;
+  text-align: center;
 }
