@@ -1,13 +1,16 @@
 import React from 'react';
-import '../style/Header.scss';
+import styles from '../style/Header.module.scss';
+import classNames from 'classnames/bind';
+
+const hs = classNames.bind(styles);
 
 function Header() {
   return (
-    <header className='header'>
-      <div className='header__wrap'>
-        <img className='header__logo' src='/logo/breadkunLogoDarkMode.png' alt='breadkun-header-logo' />
+    <header className={hs('header')}>
+      <div className={hs('header__wrap')}>
+        <img className={hs('header__logo')} src='/logo/breadkunLogoDarkMode.png' alt='breadkun-header-logo' />
         <button>
-          <img className='header__button' src='/icon/header-menu-button.png' alt='breadkun-header-menu' />
+          <img className={hs('header__button')} src='/icon/header-menu-button.png' alt='breadkun-header-menu' />
         </button>
       </div>
     </header>

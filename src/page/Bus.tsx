@@ -1,10 +1,13 @@
 import React from 'react';
-import '../style/Bus.scss';
+import styles from '../style/Bus.module.scss';
+import classNames from 'classnames/bind';
+
+const bs = classNames.bind(styles);
 
 function Bus() {
   return (
-    <div className='bus'>
-      <div className='bus__contents'></div>
+    <div className={bs('bus')}>
+      <div className={bs('bus__contents')}></div>
     </div>
   );
 }
