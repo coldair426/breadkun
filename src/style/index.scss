@@ -1,4 +1,5 @@
 $gray-09: #212529; // 기본배경색
 body {
   background-color: $gray-09;
+  scroll-behavior: smooth; // 부드러운 스크롤 효과
 }

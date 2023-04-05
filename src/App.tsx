@@ -6,6 +6,7 @@ import Header from './component/Header';
 import Bus from './page/Bus';
 import Footer from './component/Footer';
 import MenuBox from './component/MenuBox';
+import Home from './page/Home';
 
 function App() {
   const [menuBox, setMenuBox] = useState(false);
@@ -13,10 +14,10 @@ function App() {
     <>
       <Reset />
       <Header setMenuBox={setMenuBox} />
-      {menuBox && <MenuBox menuBox={menuBox} setMenuBox={setMenuBox} />}
+      {menuBox && <MenuBox setMenuBox={setMenuBox} />}
       <Routes>
-        <Route path='/' element={<>메인입니다.</>} />
-        <Route path='/bus' element={<Bus></Bus>} />
+        <Route path='/' element={<Home />} />
+        <Route path='/bus' element={<Bus />} />
       </Routes>
       <Footer />
     </>

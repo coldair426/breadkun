@@ -5,23 +5,28 @@ import { NavLink } from 'react-router-dom';
 
 const ms = classNames.bind(styles);
 
-function MenuBox({ menuBox, setMenuBox }: { menuBox: boolean; setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
-  // MenuBox active 시, 부모요소 스크롤 정지
+function MenuBox({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    const parentElement = document.body; // DOM의 body 태그 지정
+    // MenuBox 마운트시,
+    parentElement.style.overflow = 'hidden';
+    parentElement.addEventListener('touchmove', handleTouchMove, { passive: false }); // Touch 디바이스 스크롤 정지
+    // MenuBox 언마운트시,
     return () => {
-      document.body.style.overflow = 'unset';
+      parentElement.style.overflow = 'auto';
+      parentElement.removeEventListener('touchmove', handleTouchMove); // Touch 디바이스 스크롤 정지 해제
     };
-  }, [menuBox]);
+  }, []);
+  const handleTouchMove = (e: TouchEvent) => e.preventDefault();
 
   return (
     <div className={ms('menu-box')}>
-      <div className={ms('menu-box__mask')} />
+      <div className={ms('menu-box__mask')} onClick={() => setMenuBox(false)} />
       <div className={ms('menu-box__menus')}>
-        <NavLink className={ms('menu-box__menu')} to={'/'}>
+        <NavLink className={({ isActive }) => (isActive ? ms('menu-box__menu-active') : ms('menu-box__menu'))} to={'/'} onClick={() => setMenuBox(false)}>
           HOME
         </NavLink>
-        <NavLink className={ms('menu-box__menu')} to={'/bus'}>
+        <NavLink className={({ isActive }) => (isActive ? ms('menu-box__menu-active') : ms('menu-box__menu'))} to={'/bus'} onClick={() => setMenuBox(false)}>
           BUS
         </NavLink>
         <button className={ms('menu-box__exit')} onClick={() => setMenuBox(false)}>

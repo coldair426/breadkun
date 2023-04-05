@@ -1,0 +1,14 @@
+$gray-00: #f8f9fa; // 기본글자색
+$gray-08: #343a40;
+.home {
+  border-right: 1px solid $gray-00;
+  border-left: 1px solid $gray-00;
+  padding: 20px 0;
+}
+.test1 {
+  background-color: $gray-08;
+  margin: 0 20px;
+  border: 1px solid $gray-00;
+  border-radius: 25px;
+  height: 900px;
+}

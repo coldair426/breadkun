@@ -17,8 +17,7 @@ $gray-09: #212529; // 기본배경색
 a,
 a:link,
 a:visited {
-  color: inherit;
-  text-decoration: none;
+  color: inherit; // color를 부모로 부터 상속
 }
 /* button 속성 초기화 */
 button {
