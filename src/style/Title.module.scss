@@ -1,24 +1,21 @@
-$gray08: #343a40;
+$iconBackground: #404258;
 
 .title {
   display: flex;
   align-items: center;
   margin: 0 0 15px 0;
 }
-.title__before {
+.title__icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
-  width: 40px;
-  border-radius: 25px;
-  background-color: $gray08;
+  height: 45px;
+  width: 45px;
+  border-radius: 20px;
+  background-color: $iconBackground;
   margin-left: 15px;
   margin-right: 15px;
 }
-.title__before-img {
-  height: 15px;
-}
-.title__name {
+.title__letter {
   font-size: 21px;
 }

@@ -4,13 +4,19 @@ import classNames from 'classnames/bind';
 
 const ts = classNames.bind(styles);
 
-function Title({ title }: { title: string }) {
+function Title({ letter, imgSrc, imgH }: { letter: string; imgSrc: string; imgH: string }) {
   return (
     <div className={ts('title')}>
-      <button className={ts('title__before')}>
-        <img className={ts('title__before-img')} src='/icon/title-before.png' alt='before-button' />
-      </button>
-      <div className={ts('title__name')}>{title}</div>
+      <div className={ts('title__icon')}>
+        <img
+          src={imgSrc}
+          alt='before-button'
+          style={{
+            height: imgH,
+          }}
+        />
+      </div>
+      <div className={ts('title__letter')}>{letter}</div>
     </div>
   );
 }
