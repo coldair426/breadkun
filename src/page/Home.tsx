@@ -6,7 +6,7 @@ const hs = classNames.bind(styles);
 
 function Home() {
   useEffect(() => {
-    window.scrollTo(0, 0); // scroll to the top of the page
+    window.scrollTo(0, 0); // 페이지 최상단으로 스크롤링
   }, []);
 
   return (
