@@ -10,13 +10,12 @@ function Bus() {
   useEffect(() => {
     // 페이지 최상단으로 스크롤링
     window.scrollTo(0, 0);
-    // 현재위치 업데이트
+    // 현재위치를 최초 1회 제공
     navigator.geolocation.getCurrentPosition((position) => setLocation({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
   }, []);
-
+  // 현재위치를 업데이트하는 함수
   const updateLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => setLocation({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
-    console.log(location);
   };
 
   return (
