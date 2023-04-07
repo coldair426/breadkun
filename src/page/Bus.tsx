@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from '../style/Bus.module.scss';
 import classNames from 'classnames/bind';
 import Title from './../component/Title';
+import KakaoMap from '../component/KakaoMap';
 
 const bs = classNames.bind(styles);
 
@@ -26,6 +27,7 @@ function Bus() {
         <div>latitude: {location.latitude}</div>
         <div>longitude: {location.longitude}</div>
         <button onClick={() => updateLocation()}>위치 새로고침</button>
+        <KakaoMap />
       </div>
     </div>
   );
