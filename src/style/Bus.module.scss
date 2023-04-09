@@ -6,13 +6,16 @@ $backColor1: #413543;
 .bus__body {
   padding: 0 10px;
 }
+// 지도와 블럭 사이공간
+div + .bus__block1 {
+  margin-top: 10px;
+}
 .bus__block1 {
   background-color: $backColor1;
   border-radius: 40px;
   display: flex;
   flex-direction: column;
   padding: 30px 30px;
-  margin-top: 10px;
 }
 .bus__block1--title {
   font-size: 15px;

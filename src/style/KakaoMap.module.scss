@@ -1,5 +1,10 @@
 .map {
   border-radius: 40px;
-  height: 200px;
   width: 100%;
+  &.large {
+    height: 180px;
+  }
+  &.small {
+    height: 170px;
+  }
 }

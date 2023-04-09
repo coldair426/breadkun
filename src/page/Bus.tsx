@@ -23,7 +23,7 @@ function Bus() {
     <div className={bs('bus')}>
       <Title letter='출퇴근 버스 정보' imgSrc='/icon/bus-title-icon.png' imgH='22px' />
       <div className={bs('bus__body')}>
-        <KakaoMap latitude={latLong.latitude} longitude={latLong.longitude} />
+        <KakaoMap latitude={latLong.latitude} longitude={latLong.longitude} trafficInfo={true} />
         <div className={bs('bus__block1')}>
           <div className={bs('bus__block1--title')}>현재 위치에서 남은 시간</div>
           <div>latitude: {latLong.latitude}</div>
