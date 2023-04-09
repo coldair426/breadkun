@@ -20,7 +20,7 @@ function KakaoMap({ latitude, longitude }: { latitude: number; longitude: number
       draggable: false, // 이동, 확대, 축소 금지
       level: 4, // 지도 확대 레벨
     };
-    const map = new window.kakao.maps.Map(container, options); // 지도생성
+    new window.kakao.maps.Map(container, options); // 지도생성
   }, [latitude, longitude]);
 
   return <div ref={mapRef} className={ks('map')} />;
