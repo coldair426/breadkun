@@ -3,9 +3,11 @@ $backColor1: #413543;
 .bus {
   padding: 0;
 }
+.bus__body {
+  padding: 0 10px;
+}
 .bus__block1 {
   background-color: $backColor1;
-  margin: 0 10px;
   border-radius: 40px;
   display: flex;
   flex-direction: column;
