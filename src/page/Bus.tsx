@@ -7,8 +7,7 @@ import KakaoMap from '../component/KakaoMap';
 const bs = classNames.bind(styles);
 
 function Bus() {
-  // const [latLong, setLatLong] = useState({ latitude: 37.756540912483615, longitude: 127.63819968679633 });
-  const [latLong, setLatLong] = useState({ latitude: 37.553931, longitude: 127.034848 });
+  const [latLong, setLatLong] = useState({ latitude: 37.756540912483615, longitude: 127.63819968679633 });
   const [address, setAddress] = useState({ region_1depth_name: '강원', region_2depth_name: '춘천시', region_3depth_name: '남산면' });
   useEffect(() => {
     // 페이지 최상단으로 스크롤링
