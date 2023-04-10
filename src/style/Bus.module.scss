@@ -22,7 +22,28 @@ div + .bus__block1 {
 }
 .bus__block1--left {
   background-color: $gray8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 35px;
 }
+.bus__block1--left-firstLine {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+.bus__block1--left-secoundLine {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+.bus__block1--left-secoundLine > div:nth-child(1) {
+  font-size: 60px;
+}
+.bus__block1--left-secoundLine > div:nth-child(2) {
+  font-size: 15px;
+}
+
 .bus__block1--right {
   background-color: $backColor1;
   display: flex;
@@ -42,6 +63,7 @@ div + .bus__block1 {
   margin-top: 8px;
 }
 .refresh-button {
+  cursor: pointer;
   height: 40px;
 }
 .bus__block1--left + .bus__block1--right {

@@ -41,7 +41,31 @@ function Bus() {
       <div className={bs('bus__body')}>
         <KakaoMap size={'large'} latitude={latLong.latitude} longitude={latLong.longitude} levelNum={5} draggableType={false} trafficInfo={true} />
         <div className={bs('bus__block1')}>
-          <div className={bs('bus__block1--left')}></div>
+          <div className={bs('bus__block1--left')}>
+            <div className={bs('bus__block1--left-firstLine')}>
+              <div>
+                <select>
+                  <optgroup label='춘천방면'>
+                    <option value='석사동'>석사동</option>
+                    <option value='후평동'>후평동</option>
+                    <option value='이마트'>이마트</option>
+                  </optgroup>
+                  <optgroup label='서울방면'>
+                    <option value='강변'>강변</option>
+                    <option value='천호'>천호</option>
+                    <option value='잠실'>잠실</option>
+                    <option value='태릉'>태릉</option>
+                    <option value='평내호평'>평내호평</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div>까지</div>
+            </div>
+            <div className={bs('bus__block1--left-secoundLine')}>
+              <div>45</div>
+              <div>분</div>
+            </div>
+          </div>
           <div className={bs('bus__block1--right')}>
             <div>
               <div className={bs('blcok1--right--sententce')}>{`${address.region_1depth_name} ${address.region_2depth_name}`}</div>
