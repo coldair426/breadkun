@@ -49,6 +49,7 @@ function KakaoMap({
     marker.setMap(map);
   }, [levelNum, draggableType, trafficInfo, latLong]);
 
+  // webkit borderRadius와 overflow-hidden 적용시 버그 해결을 위한 isolation.
   return <div ref={mapRef} style={{ height: mapHeight, width: mapWidth, borderRadius: '40px', isolation: 'isolate' }} />;
 }
 
