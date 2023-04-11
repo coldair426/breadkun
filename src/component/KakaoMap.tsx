@@ -51,7 +51,11 @@ function KakaoMap({
     marker.setMap(map);
   }, [latitude, longitude, levelNum, draggableType, trafficInfo]);
 
-  return <div ref={mapRef} className={ks('map', size)} />;
+  return (
+    <div className={ks('map-wrapper')}>
+      <div ref={mapRef} className={ks('map', size)} />
+    </div>
+  );
 }
 
 KakaoMap.defaultProps = {

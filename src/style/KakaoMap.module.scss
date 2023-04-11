@@ -1,7 +1,10 @@
-.map {
+.map-wrapper {
   border-radius: 40px;
   -webkit-border-radius: 40px; /* Webkit */
   -moz-border-radius: 40px; /* Mozilla */
+  overflow: hidden;
+}
+.map {
   width: 100%;
   &.large {
     height: 180px;
