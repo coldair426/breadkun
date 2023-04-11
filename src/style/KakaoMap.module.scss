@@ -1,5 +1,7 @@
 .map {
   border-radius: 40px;
+  -webkit-border-radius: 40px; /* Webkit */
+  -moz-border-radius: 40px; /* Mozilla */
   width: 100%;
   &.large {
     height: 180px;

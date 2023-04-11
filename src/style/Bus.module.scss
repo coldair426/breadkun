@@ -11,6 +11,10 @@ $gray8: #343a40;
 div + .bus__block1 {
   margin-top: 13px;
 }
+.bus__block1--left + .bus__block1--right {
+  margin-left: 13px;
+}
+
 .bus__block1 {
   display: flex;
   justify-content: center;
@@ -46,8 +50,16 @@ div + .bus__block1 {
 
 .bus__block1--right {
   background-color: $backColor1;
+  display: -webkit-box; /* Webkit */
+  display: -moz-box; /* Mozilla */
   display: flex;
+  -webkit-box-orient: vertical; /* Webkit */
+  -webkit-box-direction: normal; /* Webkit */
+  -moz-box-orient: vertical; /* Mozilla */
+  -moz-box-direction: normal; /* Mozilla */
   flex-direction: column;
+  -webkit-box-pack: justify; /* Webkit */
+  -moz-box-pack: justify; /* Mozilla */
   justify-content: space-between;
 }
 .bus__block1--right > div:nth-child(1) {
@@ -55,8 +67,12 @@ div + .bus__block1 {
   font-size: 18px;
 }
 .bus__block1--right > div:nth-child(2) {
+  display: -webkit-box; /* Webkit */
+  display: -moz-box; /* Mozilla */
   display: flex;
-  justify-content: right;
+  -webkit-box-pack: end; /* Webkit */
+  -moz-box-pack: end; /* Mozilla */
+  justify-content: flex-end;
   margin: 0 13px 13px 0;
 }
 .blcok1--right--sententce + .blcok1--right--sententce {
@@ -65,11 +81,4 @@ div + .bus__block1 {
 .refresh-button {
   cursor: pointer;
   height: 40px;
-}
-.bus__block1--left + .bus__block1--right {
-  margin-left: 13px;
-}
-.bus__block--title {
-  font-size: 15px;
-  text-align: center;
 }
