@@ -22,6 +22,7 @@ $gray-00: #f8f9fa; // 기본글자색
   display: flex;
   -webkit-flex-direction: column; /* 웹킷 */
   flex-direction: column;
+  -webkit-align-items: center; /* 웹킷 */
   align-items: center;
   font-size: 40px;
   letter-spacing: 2px;
