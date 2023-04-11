@@ -77,10 +77,13 @@ function Bus() {
             </div>
           </div>
           <div className={bs('bus__block1--right')}>
-            <div className={bs('bus__block1--right--1')}>
+            <div className={bs('bus__block1--right--recentAdr')}>
               <div>{`${address.region_2depth_name} ${address.region_3depth_name}`}</div>
             </div>
-            <div className={bs('bus__block1--right--2')}>
+            <div className={bs('bus__block1--right--arrow')}>
+              <img className={bs('arrow-img')} src='/icon/arrow-down.png' alt='아래화살표' />
+            </div>
+            <div className={bs('bus__block1--right--selectbox')}>
               <select>
                 <optgroup label='춘천방면'>
                   <option value='석사동'>석사동</option>
@@ -96,7 +99,7 @@ function Bus() {
                 </optgroup>
               </select>
             </div>
-            <div className={bs('bus__block1--right--3')}>
+            <div className={bs('bus__block1--right--refresh-button')}>
               <button onClick={() => updateLocation()}>
                 <img className={bs('refresh-button')} src='/icon/bus-refresh-button.png' alt='refresh-button'></img>
               </button>

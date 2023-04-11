@@ -29,10 +29,10 @@ $gray-09: #212529; // 기본배경색
     cursor: pointer;
   }
   &:active {
-    transform: scale(1.3);
-    -webkit-transform: scale(1.3); /* Webkit prefix */
-    -moz-transform: scale(1.3); /* Mozilla prefix */
-    -o-transform: scale(1.3); /* Opera prefix */
-    -ms-transform: scale(1.3); /* IE prefix */
+    transform: scale(1.8);
+    -webkit-transform: scale(1.8); /* Webkit prefix */
+    -moz-transform: scale(1.8); /* Mozilla prefix */
+    -o-transform: scale(1.8); /* Opera prefix */
+    -ms-transform: scale(1.8); /* IE prefix */
   }
 }

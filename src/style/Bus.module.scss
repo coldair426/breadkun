@@ -1,5 +1,6 @@
 $backColor1: #413543;
 $gray8: #343a40;
+$fontColor: #f8f9fa;
 
 .bus {
   padding: 0;
@@ -37,7 +38,7 @@ div + .bus__block1 {
 }
 .bus__block1--left-title {
   margin-top: 30px;
-  font-size: 20px;
+  font-size: 5.2vw;
   text-align: center;
 }
 .bus__block1--left-firstLine {
@@ -58,11 +59,11 @@ div + .bus__block1 {
 }
 .bus__block1--left-firstLine-contents > div:nth-child(1),
 .bus__block1--left-secLine-contents > div:nth-child(1) {
-  font-size: 35px;
+  font-size: 10vw;
 }
 .bus__block1--left-firstLine-contents > div:nth-child(2),
 .bus__block1--left-secLine-contents > div:nth-child(2) {
-  font-size: 15px;
+  font-size: 4vw;
   margin-left: 8px;
 }
 
@@ -83,26 +84,61 @@ div + .bus__block1 {
   -moz-box-pack: justify; /* Mozilla */
   justify-content: space-between;
 }
-.bus__block1--right--1 {
+.bus__block1--right--recentAdr {
   margin-top: 30px;
-  font-size: 20px;
+  font-size: 4.7vw;
   text-align: center;
 }
-// select box
-.bus__block1--right--2 {
-  margin-left: 13px;
+.bus__block1--right--arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.bus__block1--right--3 {
+.arrow-img {
+  height: 6vw;
+}
+// select box
+.bus__block1--right--selectbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bus__block1--right--selectbox > select {
+  // 화살표 숨기기
+  -webkit-appearance: none; /* 웹킷 */
+  -moz-appearance: none; /* 모질라 */
+  appearance: none;
+  font-size: 4.5vw;
+  font-weight: 900;
+  text-align-last: center; // 중앙정렬
+  padding: 1vw 0.5vw;
+  border-radius: 20px;
+  background-color: lighten($backColor1, 15%);
+  color: $fontColor;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: background-color 80ms ease;
+  &:hover {
+    cursor: pointer;
+  }
+  &:active {
+    background-color: lighten($backColor1, 25%);
+  }
+}
+
+.bus__block1--right--refresh-button {
   display: -webkit-box; /* Webkit */
   display: -moz-box; /* Mozilla */
   display: flex;
   -webkit-box-pack: end; /* Webkit */
   -moz-box-pack: end; /* Mozilla */
   justify-content: flex-end;
-  margin: 0 13px 13px 0;
+  margin: 0 15px 10px 0;
 }
 .refresh-button {
-  height: 40px;
+  display: inline-block;
+  height: 8vw;
   transition: all 80ms ease-in-out;
   -webkit-transition: all 80ms ease-in-out; /* Webkit prefix */
   -moz-transition: all 80ms ease-in-out; /* Mozilla prefix */
