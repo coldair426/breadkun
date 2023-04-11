@@ -1,11 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+import styles from '../style/KakaoMap.module.scss';
+import classNames from 'classnames/bind';
+
+const ks = classNames.bind(styles);
 
 declare global {
   interface Window {
     kakao: any;
   }
 }
-
 function KakaoMap({
   mapHeight,
   mapWidth,
@@ -21,14 +24,7 @@ function KakaoMap({
   draggableType: boolean;
   trafficInfo: boolean;
 }) {
-  const [levelState, setLevelState] = useState(0);
-
   const mapRef = useRef(null);
-
-  useEffect(() => {
-    setLevelState(levelNum);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   // 지도 생성(초기화)
   useEffect(() => {
@@ -36,7 +32,8 @@ function KakaoMap({
     const options = {
       center: new window.kakao.maps.LatLng(latLong.latitude, latLong.longitude), // 지도 중심좌표
       draggable: draggableType, // 이동, 확대, 축소 금지
-      level: levelState, // 지도 확대 레벨
+      disableDoubleClick: true, // 더블클릭 방지 옵션
+      level: levelNum, // 지도 확대 레벨
     };
 
     const map = new window.kakao.maps.Map(container, options); // 지도생성
@@ -55,25 +52,13 @@ function KakaoMap({
     });
     // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
-  }, [levelNum, draggableType, trafficInfo, latLong, levelState]);
+  }, [levelNum, draggableType, trafficInfo, latLong]);
 
   // webkit borderRadius와 overflow-hidden 적용시 버그 해결을 위한 isolation.
   return (
-    <>
+    <div className={ks('map_wrap')}>
       <div ref={mapRef} style={{ height: mapHeight, width: mapWidth, borderRadius: '40px', isolation: 'isolate' }} />
-      <button
-        onClick={() => {
-          setLevelState(levelState - 1);
-        }}>
-        확대
-      </button>
-      <button
-        onClick={() => {
-          setLevelState(levelState + 1);
-        }}>
-        축소
-      </button>
-    </>
+    </div>
   );
 }
 

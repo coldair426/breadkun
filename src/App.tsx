@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Reset } from 'styled-reset';
 import './style/App.scss';
 import { Routes, Route } from 'react-router-dom';
@@ -10,16 +10,35 @@ import Home from './page/Home';
 
 function App() {
   const [menuBox, setMenuBox] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // 너비가 768px 미만이면 모바일로 판별
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    // resize 이벤트 감지
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <>
       <Reset />
-      <Header setMenuBox={setMenuBox} />
-      {menuBox && <MenuBox setMenuBox={setMenuBox} />}
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/bus' element={<Bus />} />
-      </Routes>
-      <Footer />
+      {isMobile ? (
+        <>
+          <Header setMenuBox={setMenuBox} />
+          {menuBox && <MenuBox setMenuBox={setMenuBox} />}
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/bus' element={<Bus />} />
+          </Routes>
+          <Footer />
+        </>
+      ) : (
+        <div>모바일에서만 접속 가능합니다.</div>
+      )}
     </>
   );
 }
