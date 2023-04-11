@@ -39,7 +39,7 @@ function Bus() {
     <div className={bs('bus')}>
       <Title letter='출퇴근 버스' imgSrc='/icon/bus-title-icon.png' imgH='22px' />
       <div className={bs('bus__body')}>
-        <KakaoMap size={'large'} latitude={latLong.latitude} longitude={latLong.longitude} levelNum={5} draggableType={false} trafficInfo={true} />
+        <KakaoMap mapHeight={'180px'} mapWidth={'100%'} latLong={latLong} levelNum={5} draggableType={false} trafficInfo={true} />
         <div className={bs('bus__block1')}>
           <div className={bs('bus__block1--left')}>
             <div className={bs('bus__block1--left-firstLine')}>
