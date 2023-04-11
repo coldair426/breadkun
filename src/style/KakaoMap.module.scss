@@ -1,11 +1,14 @@
 .map-wrapper {
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
   border-radius: 40px;
-  -webkit-border-radius: 40px; /* Webkit */
-  -moz-border-radius: 40px; /* Mozilla */
   overflow: hidden;
 }
 .map {
   width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   &.large {
     height: 180px;
   }

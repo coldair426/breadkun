@@ -1,6 +1,7 @@
 $gray-00: #f8f9fa; // 기본글자색
 
 .menu-box {
+  display: -webkit-flex; /* 웹킷 */
   display: flex;
   justify-content: center;
 }
@@ -17,7 +18,9 @@ $gray-00: #f8f9fa; // 기본글자색
   position: fixed;
   top: 30vh;
   z-index: 100;
+  display: -webkit-flex; /* 웹킷 */
   display: flex;
+  -webkit-flex-direction: column; /* 웹킷 */
   flex-direction: column;
   align-items: center;
   font-size: 40px;
@@ -42,4 +45,6 @@ $gray-00: #f8f9fa; // 기본글자색
   margin-top: 50px;
   padding: 7px;
   border: 1px solid $gray-00;
+  -webkit-border-radius: 5px; /* 웹킷 */
+  border-radius: 5px;
 }

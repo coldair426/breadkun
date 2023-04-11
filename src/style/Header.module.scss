@@ -4,8 +4,11 @@ $gray-09: #212529; // 기본배경색
   background-color: $gray-09;
   position: sticky;
   top: 0;
+  display: -webkit-flex; /* Safari */
   display: flex;
+  -webkit-justify-content: space-between; /* Safari */
   justify-content: space-between;
+  -webkit-align-items: center; /* Safari */
   align-items: center;
   height: 70px;
   z-index: 80;
