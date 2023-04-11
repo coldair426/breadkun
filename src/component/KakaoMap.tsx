@@ -26,17 +26,13 @@ function KakaoMap({
   useEffect(() => {
     const container = mapRef.current; // return 값 DOM
     const options = {
-      center: new window.kakao.maps.LatLng(37.756540912483615, 127.63819968679633), // 지도 중심좌표
+      center: new window.kakao.maps.LatLng(latLong.latitude, latLong.longitude), // 지도 중심좌표
       draggable: draggableType, // 이동, 확대, 축소 금지
       level: levelNum, // 지도 확대 레벨
     };
+
     const map = new window.kakao.maps.Map(container, options); // 지도생성
     trafficInfo && map.addOverlayMapTypeId(window.kakao.maps.MapTypeId.TRAFFIC); // 교통정보
-
-    // 이동할 위도 경도 위치를 생성합니다
-    const moveLatLon = new window.kakao.maps.LatLng(latLong.latitude, latLong.longitude);
-    // 지도 중심을 이동 시킵니다
-    map.setCenter(moveLatLon);
 
     const imageSrc = '/logo/breadkun-marker.png', // 마커이미지의 주소입니다
       imageSize = new window.kakao.maps.Size(37, 41), // 마커이미지 크기
@@ -53,7 +49,7 @@ function KakaoMap({
     marker.setMap(map);
   }, [levelNum, draggableType, trafficInfo, latLong]);
 
-  return <div ref={mapRef} style={{ height: mapHeight, width: mapWidth, borderRadius: '40px' }} />;
+  return <div ref={mapRef} style={{ height: mapHeight, width: mapWidth, borderRadius: '40px', isolation: 'isolate' }} />;
 }
 
 KakaoMap.defaultProps = {
