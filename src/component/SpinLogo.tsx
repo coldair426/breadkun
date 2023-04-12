@@ -5,10 +5,10 @@ import classNames from 'classnames/bind';
 
 const ss = classNames.bind(styles);
 
-function SpinLogo({ text1, text2 }: { text1: string; text2: string }) {
+function SpinLogo({ minHeight, text1, text2 }: { minHeight: string; text1: string; text2: string }) {
   return (
     <div className={ss('spinLogo')}>
-      <div className={ss('spinLogo__wrap')}>
+      <div className={ss('spinLogo__wrap')} style={{ minHeight: minHeight }}>
         <Link to={'/'}>
           <img className={ss('spinLogo__wrap--logoImg')} src={'/logo/breadkunSpinLogo.png'} alt='logo' />
         </Link>
@@ -20,5 +20,7 @@ function SpinLogo({ text1, text2 }: { text1: string; text2: string }) {
     </div>
   );
 }
+
+SpinLogo.defaultProps = { minHeight: '100vh' };
 
 export default SpinLogo;

@@ -35,7 +35,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/bus' element={<Bus />} />
             <Route path='/bus/:destination' element={<Bus />} />
-            <Route path='*' element={<SpinLogo text1={'404 Not Found'} text2={'페이지를 찾을 수 없습니다.'} />} />
+            <Route path='*' element={<SpinLogo text1={'404 Not Found'} text2={'페이지를 찾을 수 없습니다.'} minHeight='80vh' />} />
           </Routes>
           <Footer />
         </>
