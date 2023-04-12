@@ -7,6 +7,7 @@ import Bus from './page/Bus';
 import Footer from './component/Footer';
 import MenuBox from './component/MenuBox';
 import Home from './page/Home';
+import SpinLogo from './component/SpinLogo';
 
 function App() {
   const [menuBox, setMenuBox] = useState(false);
@@ -37,7 +38,9 @@ function App() {
           <Footer />
         </>
       ) : (
-        <div>모바일에서만 접속 가능합니다.</div>
+        <div>
+          <SpinLogo text1={'빵돌이는 모바일전용입니다.'} text2={'모바일로 접속해 주세요!'} />
+        </div>
       )}
     </>
   );
