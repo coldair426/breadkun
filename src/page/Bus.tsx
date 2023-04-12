@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../style/Bus.module.scss';
 import classNames from 'classnames/bind';
+import { useParams } from 'react-router-dom';
 import Title from './../component/Title';
 import KakaoMap from '../component/KakaoMap';
 
 const bs = classNames.bind(styles);
 
 function Bus() {
+  // URL parameter
+  let { destination } = useParams();
   const [latLong, setLatLong] = useState({ latitude: 37.756540912483615, longitude: 127.63819968679633 });
   const [address, setAddress] = useState({ region_1depth_name: '강원', region_2depth_name: '춘천시', region_3depth_name: '남산면' });
+  // destination 선택된 값 또는 "이마트"(기본값)
+  const [selectedValue, setSelectedValue] = useState(destination || '강변');
+  // value 업데이트 함수
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedValue(e.target.value);
+  };
 
   useEffect(() => {
     // 페이지 최상단으로 스크롤링
@@ -92,7 +101,7 @@ function Bus() {
               <img className={bs('arrow-img')} src='/icon/arrow-down.png' alt='아래화살표' />
             </div>
             <div className={bs('bus__block1--right--selectbox')}>
-              <select>
+              <select value={selectedValue} onChange={handleChange}>
                 <optgroup label='춘천방면'>
                   <option value='석사동'>석사동</option>
                   <option value='후평동'>후평동</option>
