@@ -61,7 +61,7 @@ function Bus() {
         <div className={bs('bus__block1')}>
           <div className={bs('bus__block1--left')}>
             <div className={bs('bus__block1--left-title')}>
-              <div>도착</div>
+              <img src='/icon/bus-arrival-icon.png' alt='arrival icon' />
             </div>
             <div className={bs('bus__block1--left-firstLine')}>
               <div className={bs('bus__block1--left-firstLine-contents')}>
@@ -72,13 +72,21 @@ function Bus() {
             <div className={bs('bus__block1--left-secLine')}>
               <div className={bs('bus__block1--left-secLine-contents')}>
                 <div>45</div>
-                <div>분 뒤</div>
+                <div>분 남음</div>
               </div>
             </div>
           </div>
           <div className={bs('bus__block1--right')}>
-            <div className={bs('bus__block1--right--recentAdr')}>
-              <div>{`${address.region_2depth_name} ${address.region_3depth_name}`}</div>
+            <div>
+              <div className={bs('bus__block1--right--recentAdr')}>
+                <div>{address.region_2depth_name}</div>
+                <div>{address.region_3depth_name}</div>
+              </div>
+              <div className={bs('bus__block1--right--refresh-button')}>
+                <button onClick={() => updateLocation()}>
+                  <img className={bs('refresh-button')} src='/icon/bus-refresh-button.png' alt='refresh-button'></img>
+                </button>
+              </div>
             </div>
             <div className={bs('bus__block1--right--arrow')}>
               <img className={bs('arrow-img')} src='/icon/arrow-down.png' alt='아래화살표' />
@@ -98,11 +106,6 @@ function Bus() {
                   <option value='평내호평'>평내호평</option>
                 </optgroup>
               </select>
-            </div>
-            <div className={bs('bus__block1--right--refresh-button')}>
-              <button onClick={() => updateLocation()}>
-                <img className={bs('refresh-button')} src='/icon/bus-refresh-button.png' alt='refresh-button'></img>
-              </button>
             </div>
           </div>
         </div>
