@@ -72,6 +72,7 @@ div + .bus__block1 {
 }
 
 .bus__block1--right {
+  z-index: 5;
   border-radius: 40px;
   height: 170px;
   width: 50%;
@@ -87,16 +88,16 @@ div + .bus__block1 {
   -webkit-box-pack: justify; /* Webkit */
   -moz-box-pack: justify; /* Mozilla */
   justify-content: space-between;
+  position: relative;
 }
 .bus__block1--right > div:nth-child(1) {
   margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
 }
 .bus__block1--right--recentAdr {
-  font-size: 5.4vw;
+  font-size: 6vw;
   text-align: center;
 }
 
@@ -105,9 +106,12 @@ div + .bus__block1 {
 }
 
 .refresh-button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 10;
   display: inline-block;
-  height: 7vw;
-  margin-left: 7px;
+  height: 9vw;
   transition: all 80ms ease-in-out;
   -webkit-transition: all 80ms ease-in-out; /* Webkit prefix */
   -moz-transition: all 80ms ease-in-out; /* Mozilla prefix */
@@ -144,7 +148,7 @@ div + .bus__block1 {
   -webkit-appearance: none; /* 웹킷 */
   -moz-appearance: none; /* 모질라 */
   appearance: none;
-  font-size: 4.5vw;
+  font-size: 5vw;
   font-weight: 900;
   text-align-last: center; // 중앙정렬
   padding: 2vw 1vw;
