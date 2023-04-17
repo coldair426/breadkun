@@ -19,6 +19,7 @@ function Bus() {
   const [address, setAddress] = useState({ region_1depth_name: '강원', region_2depth_name: '춘천시', region_3depth_name: '남산면' });
   // 도착시간
   const [arrivalTime, setArrivalTime] = useState({ time: '--', ampm: '', remainingTime: '', remainingText: '' });
+  const [notification, setNotification] = useState(false);
 
   useEffect(() => {
     // 페이지 최상단으로 스크롤링
@@ -32,21 +33,24 @@ function Bus() {
   }, [latLong]);
   // 서버에서 남은 시간 받아오기
   useEffect(() => {
+    setNotification(true);
     axios
       .post('https://babkaotalk.herokuapp.com/webShuttle', { destNm: selectedValue, originGps: `${latLong.longitude},${latLong.latitude} ` })
       .then((result) => {
+        const resultVal = result.data.resultData;
+        let resultH = resultVal.arrivalTimeH > 12 ? resultVal.arrivalTimeH - 12 : resultVal.arrivalTimeH;
         // 리턴값
         setArrivalTime({
-          time: `${result.data.resultData.arrivalTimeH > 12 ? result.data.resultData.arrivalTimeH - 12 : result.data.resultData.arrivalTimeH}:${
-            result.data.resultData.arrivalTimeM
-          }`,
-          ampm: `${result.data.resultData.arrivalTimeH > 12 ? 'PM' : 'AM'}`,
-          remainingTime: `${result.data.resultData.durationH * 60 + result.data.resultData.durationM}`,
+          time: `${resultH < 10 ? '0' + resultH : resultH}:${resultVal.arrivalTimeM < 10 ? '0' + resultVal.arrivalTimeM : resultVal.arrivalTimeM}`,
+          ampm: `${resultVal.arrivalTimeH >= 12 ? 'PM' : 'AM'}`,
+          remainingTime: `${resultVal.durationH * 60 + resultVal.durationM}`,
           remainingText: '분 남음',
         });
+        setNotification(false);
       })
       .catch(() => {
         setArrivalTime({ time: '--', ampm: '', remainingTime: '', remainingText: '' });
+        setNotification(false);
       });
   }, [selectedValue, latLong]);
 
@@ -135,11 +139,20 @@ function Bus() {
                   <option value='잠실'>잠실</option>
                   <option value='태릉'>태릉</option>
                   <option value='평내호평'>평내호평</option>
+                  <option value='상봉'>상봉</option>
+                  <option value='구리'>구리</option>
                 </optgroup>
               </select>
             </div>
           </div>
         </div>
+        {notification && (
+          <div className={bs('bus__notification-wrapper')}>
+            <div className={bs('bus__notification')}>
+              <div>시간 계산 중.</div> <div>위치 정보 허용 필요.</div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
