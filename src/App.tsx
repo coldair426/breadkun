@@ -11,7 +11,7 @@ import SpinLogo from './component/SpinLogo';
 
 function App() {
   const [menuBox, setMenuBox] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
 
   // 너비가 768px 미만이면 모바일로 판별
   useEffect(() => {
