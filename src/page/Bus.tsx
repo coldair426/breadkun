@@ -36,11 +36,12 @@ function Bus() {
       .post('https://babkaotalk.herokuapp.com/webShuttle', { destNm: selectedValue, originGps: `${latLong.longitude},${latLong.latitude} ` })
       .then((result) => {
         // 리턴값
-        const resultDB: { arrivalTimeH: number; arrivalTimeM: number; distanceKm: number; durationH: number; durationM: number } = result.data.resultData;
         setArrivalTime({
-          time: `${resultDB.arrivalTimeH > 12 ? resultDB.arrivalTimeH - 12 : resultDB.arrivalTimeH}:${resultDB.arrivalTimeM}`,
-          ampm: `${resultDB.arrivalTimeH > 12 ? 'PM' : 'AM'}`,
-          remainingTime: `${resultDB.durationH * 60 + resultDB.durationM}`,
+          time: `${result.data.resultData.arrivalTimeH > 12 ? result.data.resultData.arrivalTimeH - 12 : result.data.resultData.arrivalTimeH}:${
+            result.data.resultData.arrivalTimeM
+          }`,
+          ampm: `${result.data.resultData.arrivalTimeH > 12 ? 'PM' : 'AM'}`,
+          remainingTime: `${result.data.resultData.durationH * 60 + result.data.resultData.durationM}`,
           remainingText: '분 남음',
         });
       })
