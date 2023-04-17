@@ -4,20 +4,21 @@ import classNames from 'classnames/bind';
 import { useParams } from 'react-router-dom';
 import Title from './../component/Title';
 import KakaoMap from '../component/KakaoMap';
+import axios from 'axios';
 
 const bs = classNames.bind(styles);
 
 function Bus() {
   // URL parameter
   let { destination } = useParams();
+  // 도착지 선택된 값 또는 "석사동"(기본값)
+  const [selectedValue, setSelectedValue] = useState(destination || '석사동');
+  // 현재위치 정보 lat&log
   const [latLong, setLatLong] = useState({ latitude: 37.756540912483615, longitude: 127.63819968679633 });
+  // 현재위치 정보 도로명 주소
   const [address, setAddress] = useState({ region_1depth_name: '강원', region_2depth_name: '춘천시', region_3depth_name: '남산면' });
-  // destination 선택된 값 또는 "이마트"(기본값)
-  const [selectedValue, setSelectedValue] = useState(destination || '강변');
-  // value 업데이트 함수
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedValue(e.target.value);
-  };
+  // 도착시간
+  const [arrivalTime, setArrivalTime] = useState({ time: '--', ampm: '', remainingTime: '', remainingText: '' });
 
   useEffect(() => {
     // 페이지 최상단으로 스크롤링
@@ -25,17 +26,33 @@ function Bus() {
     // 현재위치 업데이트 최초 1회 업데이트
     updateLocation();
   }, []);
-
   // 현재 도로명 주소 업데이트
   useEffect(() => {
     getAddr(latLong.latitude, latLong.longitude);
   }, [latLong]);
+  // 서버에서 남은 시간 받아오기
+  useEffect(() => {
+    axios
+      .post('https://babkaotalk.herokuapp.com/webShuttle', { destNm: selectedValue, originGps: `${latLong.longitude},${latLong.latitude} ` })
+      .then((result) => {
+        // 리턴값
+        const resultDB: { arrivalTimeH: number; arrivalTimeM: number; distanceKm: number; durationH: number; durationM: number } = result.data.resultData;
+        setArrivalTime({
+          time: `${resultDB.arrivalTimeH > 12 ? resultDB.arrivalTimeH - 12 : resultDB.arrivalTimeH}:${resultDB.arrivalTimeM}`,
+          ampm: `${resultDB.arrivalTimeH > 12 ? 'PM' : 'AM'}`,
+          remainingTime: `${resultDB.durationH * 60 + resultDB.durationM}`,
+          remainingText: '분 남음',
+        });
+      })
+      .catch(() => {
+        setArrivalTime({ time: '--', ampm: '', remainingTime: '', remainingText: '' });
+      });
+  }, [selectedValue, latLong]);
 
   // 현재좌표를 업데이트 하는 함수
   const updateLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => setLatLong({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
   };
-
   // 현재좌표 => 도로명 주소 변환 함수
   const getAddr = (lat: number, lng: number) => {
     const geocoder = new window.kakao.maps.services.Geocoder();
@@ -61,6 +78,10 @@ function Bus() {
     };
     geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
   };
+  // 도착지 값을 드롭다운에 따라 업데이트하는 함수
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedValue(e.target.value);
+  };
 
   return (
     <div className={bs('bus')}>
@@ -74,14 +95,14 @@ function Bus() {
             </div>
             <div className={bs('bus__block1--left-firstLine')}>
               <div className={bs('bus__block1--left-firstLine-contents')}>
-                <div>07:40</div>
-                <div>PM</div>
+                <div>{arrivalTime.time}</div>
+                <div>{arrivalTime.ampm}</div>
               </div>
             </div>
             <div className={bs('bus__block1--left-secLine')}>
               <div className={bs('bus__block1--left-secLine-contents')}>
-                <div>45</div>
-                <div>분 남음</div>
+                <div>{arrivalTime.remainingTime}</div>
+                <div>{arrivalTime.remainingText}</div>
               </div>
             </div>
           </div>
