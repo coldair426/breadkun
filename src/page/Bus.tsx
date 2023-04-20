@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import { useParams } from 'react-router-dom';
 import Title from './../component/Title';
 import KakaoMap from '../component/KakaoMap';
+import NotificationBox from './../component/NotificationBox';
 import axios from 'axios';
 
 const bs = classNames.bind(styles);
@@ -31,7 +32,6 @@ function Bus() {
   useEffect(() => {
     getAddr(latLong.latitude, latLong.longitude);
   }, [latLong]);
-
   // 서버에서 남은 시간 받아오기 비동기 처리(async & await)
   useEffect(() => {
     async function fetchData() {
@@ -63,7 +63,6 @@ function Bus() {
     }
     fetchData();
   }, [selectedValue, latLong]);
-
   // 서버에서 남은 시간 받아오기
   // useEffect(() => {
   //   setNotification(true);
@@ -186,13 +185,7 @@ function Bus() {
             </div>
           </div>
         </div>
-        {notification && (
-          <div className={bs('bus__notification-wrapper')}>
-            <div className={bs('bus__notification')}>
-              <div>시간 계산 중.</div> <div>위치 정보 허용 필요.</div>
-            </div>
-          </div>
-        )}
+        {notification && <NotificationBox firstText={'시간 계산 중.'} secText={'위치 정보 허용 필요.'} />}
       </div>
     </div>
   );

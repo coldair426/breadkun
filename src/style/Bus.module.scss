@@ -175,29 +175,3 @@ div + .bus__block1 {
     background-color: lighten($backColor1, 25%);
   }
 }
-.bus__notification-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.bus__notification {
-  position: fixed;
-  top: 85%;
-  z-index: 70;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 80%;
-  height: 22vw;
-  background-color: #2e4f4f;
-  border-radius: 25px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-  > div:nth-child(1) {
-    font-size: 6vw;
-  }
-  > div:nth-child(2) {
-    font-size: 4vw;
-    margin-top: 1.4vw;
-  }
-}
