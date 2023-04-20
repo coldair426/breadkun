@@ -18,7 +18,7 @@ function Bus() {
   // 현재위치 정보 도로명 주소
   const [address, setAddress] = useState({ region_1depth_name: '강원', region_2depth_name: '춘천시', region_3depth_name: '남산면' });
   // 도착시간
-  const [arrivalTime, setArrivalTime] = useState({ time: '--', ampm: '', remainingTime: '', remainingText: '' });
+  const [arrivalTime, setArrivalTime] = useState({ mainbox: '-----', time: '', ampm: '', remainingTime: '', remainingText: '' });
   const [notification, setNotification] = useState(false);
 
   useEffect(() => {
@@ -31,28 +31,67 @@ function Bus() {
   useEffect(() => {
     getAddr(latLong.latitude, latLong.longitude);
   }, [latLong]);
-  // 서버에서 남은 시간 받아오기
+
+  // 서버에서 남은 시간 받아오기 비동기 처리(async & await)
   useEffect(() => {
-    setNotification(true);
-    axios
-      .post('https://babkaotalk.herokuapp.com/webShuttle', { destNm: selectedValue, originGps: `${latLong.longitude},${latLong.latitude} ` })
-      .then((result) => {
-        const resultVal = result.data.resultData;
-        let resultH = resultVal.arrivalTimeH > 12 ? resultVal.arrivalTimeH - 12 : resultVal.arrivalTimeH;
-        // 리턴값
-        setArrivalTime({
-          time: `${resultH < 10 ? '0' + resultH : resultH}:${resultVal.arrivalTimeM < 10 ? '0' + resultVal.arrivalTimeM : resultVal.arrivalTimeM}`,
-          ampm: `${resultVal.arrivalTimeH >= 12 ? 'PM' : 'AM'}`,
-          remainingTime: `${resultVal.durationH * 60 + resultVal.durationM}`,
-          remainingText: '분 남음',
+    async function fetchData() {
+      setNotification(true);
+      try {
+        const result = await axios.post('https://babkaotalk.herokuapp.com/webShuttle', {
+          destNm: selectedValue,
+          originGps: `${latLong.longitude},${latLong.latitude} `,
         });
+        const { resultCode, resultData } = result.data;
+        if (resultCode === 104) {
+          setArrivalTime({ mainbox: '잠시 후 도착', time: '', ampm: '', remainingTime: '', remainingText: '' });
+        } else {
+          const resultVal = resultData;
+          let resultH = resultVal.arrivalTimeH > 12 ? resultVal.arrivalTimeH - 12 : resultVal.arrivalTimeH;
+          setArrivalTime({
+            mainbox: '',
+            time: `${resultH < 10 ? '0' + resultH : resultH}:${resultVal.arrivalTimeM < 10 ? '0' + resultVal.arrivalTimeM : resultVal.arrivalTimeM}`,
+            ampm: `${resultVal.arrivalTimeH >= 12 ? 'PM' : 'AM'}`,
+            remainingTime: `${resultVal.durationH * 60 + resultVal.durationM}`,
+            remainingText: '분 남음',
+          });
+        }
         setNotification(false);
-      })
-      .catch(() => {
-        setArrivalTime({ time: '--', ampm: '', remainingTime: '', remainingText: '' });
+      } catch (error) {
+        setArrivalTime({ mainbox: '-----', time: '', ampm: '', remainingTime: '', remainingText: '' });
         setNotification(false);
-      });
+      }
+    }
+    fetchData();
   }, [selectedValue, latLong]);
+
+  // 서버에서 남은 시간 받아오기
+  // useEffect(() => {
+  //   setNotification(true);
+  //   axios
+  //     .post('https://babkaotalk.herokuapp.com/webShuttle', { destNm: selectedValue, originGps: `${latLong.longitude},${latLong.latitude} ` })
+  //     .then((result) => {
+  //       // result.data.resultCode===104 => 출발지 & 도착지 5m이내 의미
+  //       if (result.data.resultCode === 104) {
+  //         setArrivalTime({ mainbox: '잠시 후 도착', time: '', ampm: '', remainingTime: '', remainingText: '' });
+  //       } else {
+  //         const resultVal = result.data.resultData;
+  //         let resultH = resultVal.arrivalTimeH > 12 ? resultVal.arrivalTimeH - 12 : resultVal.arrivalTimeH;
+  //         // 리턴값
+  //         setArrivalTime({
+  //           mainbox: '',
+  //           time: `${resultH < 10 ? '0' + resultH : resultH}:${resultVal.arrivalTimeM < 10 ? '0' + resultVal.arrivalTimeM : resultVal.arrivalTimeM}`,
+  //           ampm: `${resultVal.arrivalTimeH >= 12 ? 'PM' : 'AM'}`,
+  //           remainingTime: `${resultVal.durationH * 60 + resultVal.durationM}`,
+  //           remainingText: '분 남음',
+  //         });
+  //       }
+  //       setNotification(false);
+  //     })
+  //     .catch(() => {
+  //       setArrivalTime({ mainbox: '-----', time: '', ampm: '', remainingTime: '', remainingText: '' });
+  //       setNotification(false);
+  //     });
+  // }, [selectedValue, latLong]);
 
   // 현재좌표를 업데이트 하는 함수
   const updateLocation = () => {
@@ -98,6 +137,7 @@ function Bus() {
             <div className={bs('bus__block1--left-title')}>
               <img src='/icon/bus-arrival-icon.png' alt='arrival icon' />
             </div>
+            <div className={bs('bus__block1--left-mainBox')}>{arrivalTime.mainbox}</div>
             <div className={bs('bus__block1--left-firstLine')}>
               <div className={bs('bus__block1--left-firstLine-contents')}>
                 <div>{arrivalTime.time}</div>

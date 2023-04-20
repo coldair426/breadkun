@@ -35,6 +35,7 @@ div + .bus__block1 {
   -webkit-box-pack: justify; /* Webkit */
   -moz-box-pack: justify; /* Mozilla */
   justify-content: space-between;
+  position: relative;
 }
 .bus__block1--left-title {
   margin-top: 15px;
@@ -44,6 +45,13 @@ div + .bus__block1 {
 }
 .bus__block1--left-title > img {
   height: 10.5vw;
+}
+.bus__block1--left-mainBox {
+  position: absolute;
+  top: 85px;
+  width: 100%;
+  text-align: center;
+  font-size: 5.5vw;
 }
 .bus__block1--left-firstLine {
   display: flex;
