@@ -150,28 +150,31 @@ div + .bus__block1 {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.bus__block1--right--selectbox > select {
-  // 화살표 숨기기
-  -webkit-appearance: none; /* 웹킷 */
-  -moz-appearance: none; /* 모질라 */
-  appearance: none;
-  font-size: 5vw;
-  font-weight: 900;
-  text-align-last: center; // 중앙정렬
-  padding: 2vw 1vw;
-  border-radius: 20px;
-  background-color: lighten($backColor1, 15%);
-  color: $fontColor;
-  text-decoration: none;
-  border: none;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-  transition: background-color 80ms ease;
-  margin-bottom: 20px;
-  &:hover {
-    cursor: pointer;
-  }
-  &:active {
-    background-color: lighten($backColor1, 25%);
+  select {
+    // 화살표 숨기기
+    -webkit-appearance: none; /* 웹킷 */
+    -moz-appearance: none; /* 모질라 */
+    appearance: none;
+    font-size: 5vw;
+    font-weight: 900;
+    text-align-last: center; // 중앙정렬
+    -webkit-text-align-last: center;
+    -moz-text-align-last: center;
+    -ms-text-align-last: center;
+    padding: 2vw 1vw;
+    border-radius: 20px;
+    background-color: lighten($backColor1, 15%);
+    color: $fontColor;
+    text-decoration: none;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: background-color 80ms ease;
+    margin-bottom: 20px;
+    &:hover {
+      cursor: pointer;
+    }
+    &:active {
+      background-color: lighten($backColor1, 25%);
+    }
   }
 }
