@@ -20,19 +20,19 @@ $gray-09: #212529; // 기본배경색
 .header__button {
   margin-right: 20px;
   height: 50px;
-  transition: all 80ms ease-in-out;
-  -webkit-transition: all 80ms ease-in-out; /* Webkit prefix */
-  -moz-transition: all 80ms ease-in-out; /* Mozilla prefix */
-  -o-transition: all 80ms ease-in-out; /* Opera prefix */
-  -ms-transition: all 80ms ease-in-out; /* IE prefix */
+  transition: all 50ms ease-in-out;
+  -webkit-transition: all 50ms ease-in-out; /* Webkit prefix */
+  -moz-transition: all 50ms ease-in-out; /* Mozilla prefix */
+  -o-transition: all 50ms ease-in-out; /* Opera prefix */
+  -ms-transition: all 50ms ease-in-out; /* IE prefix */
   &:hover {
     cursor: pointer;
   }
   &:active {
-    transform: scale(1.8);
-    -webkit-transform: scale(1.8); /* Webkit prefix */
-    -moz-transform: scale(1.8); /* Mozilla prefix */
-    -o-transform: scale(1.8); /* Opera prefix */
-    -ms-transform: scale(1.8); /* IE prefix */
+    transform: scale(1.5);
+    -webkit-transform: scale(1.5); /* Webkit prefix */
+    -moz-transform: scale(1.5); /* Mozilla prefix */
+    -o-transform: scale(1.5); /* Opera prefix */
+    -ms-transform: scale(1.5); /* IE prefix */
   }
 }
