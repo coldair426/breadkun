@@ -1,5 +1,11 @@
-$gray-00: #f8f9fa; // 기본글자색
+$font: #868e96; // 기본글자색
 
 .footer {
-  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  margin-top: 13px;
+  border-top: 1px solid #343a40;
+  color: $font;
 }

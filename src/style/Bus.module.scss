@@ -51,7 +51,7 @@ div + .bus__block1 {
   top: 85px;
   width: 100%;
   text-align: center;
-  font-size: 5.5vw;
+  font-size: 6.2vw;
 }
 .bus__block1--left-firstLine {
   display: flex;
@@ -158,7 +158,7 @@ div + .bus__block1 {
     font-size: 5vw;
     font-weight: 900;
     text-align-last: center; // 중앙정렬
-    -webkit-text-align-last: center;
+    -webkit-text-align-last: center; // 아이폰에서도 적용
     -moz-text-align-last: center;
     -ms-text-align-last: center;
     padding: 2vw 1vw;
