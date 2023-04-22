@@ -567,5 +567,400 @@
         "longitude": "127.63755797028342"
       }
     ]
+  },
+  {
+    "route_name": "AC-4",
+    "bus_num": "2054",
+    "starting_point": "석사동",
+    "ending_point": "더존_강촌",
+    "route_type1": "출근",
+    "route_type2": "경유",
+    "route_type3": "춘천",
+    "bus_stops": [
+      {
+        "name": "석사동",
+        "location": "더퍼스트빌딩 앞(정관장 남춘천점 앞)",
+        "latitude": "37.85087214939062",
+        "longitude": "127.74518258358448",
+        "departure_time": "07:50"
+      },
+      {
+        "name": "무릉공원",
+        "location": "무릉공원(LG베스트샵 석사점 맞은편)",
+        "latitude": "37.8559413534525",
+        "longitude": "127.73815737748144",
+        "departure_time": "07:55"
+      },
+      {
+        "name": "이마트",
+        "location": "이마트 앞",
+        "latitude": "37.86363139702936",
+        "longitude": "127.71950608842425",
+        "departure_time": "08:00"
+      },
+      {
+        "name": "칠전동",
+        "location": "칠전동 버스정류장(육교 방면)",
+        "latitude": "37.84246720887632",
+        "longitude": "127.714159645188",
+        "departure_time": "08:05"
+      },
+      {
+        "name": "강촌역",
+        "location": "강촌역 프로포즈 계단 앞 버스정류장",
+        "latitude": "37.805991498131114",
+        "longitude": "127.63658107207559",
+        "departure_time": "08:20"
+      },
+      {
+        "name": "더존_강촌",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342"
+      }
+    ]
+  },
+  {
+    "route_name": "AC-5",
+    "bus_num": "2030",
+    "starting_point": "석사동",
+    "ending_point": "더존_강촌",
+    "route_type1": "출근",
+    "route_type2": "경유",
+    "route_type3": "춘천",
+    "bus_stops": [
+      {
+        "name": "석사동",
+        "location": "더퍼스트빌딩 앞(정관장 남춘천점 앞)",
+        "latitude": "37.85087214939062",
+        "longitude": "127.74518258358448",
+        "departure_time": "07:50"
+      },
+      {
+        "name": "무릉공원",
+        "location": "무릉공원(LG베스트샵 석사점 맞은편)",
+        "latitude": "37.8559413534525",
+        "longitude": "127.73815737748144",
+        "departure_time": "07:55"
+      },
+      {
+        "name": "이마트",
+        "location": "이마트 앞",
+        "latitude": "37.86363139702936",
+        "longitude": "127.71950608842425",
+        "departure_time": "08:00"
+      },
+      {
+        "name": "칠전동",
+        "location": "칠전동 버스정류장(육교 방면)",
+        "latitude": "37.84246720887632",
+        "longitude": "127.714159645188",
+        "departure_time": "08:05"
+      },
+      {
+        "name": "강촌역",
+        "location": "강촌역 프로포즈 계단 앞 버스정류장",
+        "latitude": "37.805991498131114",
+        "longitude": "127.63658107207559",
+        "departure_time": "08:20"
+      },
+      {
+        "name": "더존_강촌",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342"
+      }
+    ]
+  },
+  {
+    "route_name": "AC-6",
+    "bus_num": "1056",
+    "starting_point": "이마트",
+    "ending_point": "더존_강촌",
+    "route_type1": "출근",
+    "route_type2": "직행",
+    "route_type3": "춘천",
+    "bus_stops": [
+      {
+        "name": "이마트",
+        "location": "이마트 앞",
+        "latitude": "37.86363139702936",
+        "longitude": "127.71950608842425",
+        "departure_time": "08:00"
+      },
+      {
+        "name": "더존_강촌",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342"
+      }
+    ]
+  },
+  {
+    "route_name": "BC-1",
+    "bus_num": "1",
+    "starting_point": "더존_을지",
+    "ending_point": "춘천",
+    "route_type1": "퇴근",
+    "route_type2": "경유",
+    "route_type3": "춘천",
+    "bus_stops": [
+      {
+        "name": "더존_을지",
+        "location": "을지타워 청계문 앞",
+        "latitude": "37.566171350393866",
+        "longitude": "126.98080587687647",
+        "departure_time": "18:20"
+      },
+      {
+        "name": "이마트",
+        "location": "이마트 맞은편 버스정류장(온의사거리 방면)",
+        "latitude": "37.86375067144642",
+        "longitude": "127.71989078633447"
+      },
+      {
+        "name": "남춘천역",
+        "location": "남춘천역 버스정류장(석사동 방면)",
+        "latitude": "37.86388640155135",
+        "longitude": "127.72310246927925"
+      },
+      {
+        "name": "무릉공원",
+        "location": "무릉공원 맞은편(LG베스트샵 석사점 앞)",
+        "latitude": "37.855703920871036",
+        "longitude": "127.73794763780819"
+      },
+      {
+        "name": "안디옥교회",
+        "location": "안디옥교회(거두리 방면)",
+        "latitude": "37.852994622492865",
+        "longitude": "127.74470400097775"
+      },
+      {
+        "name": "춘천",
+        "location": "포스코아파트 정문 맞은편 신한은행 앞",
+        "latitude": "37.87997996164184",
+        "longitude": "127.74999398321422"
+      }
+    ]
+  },
+  {
+    "route_name": "BC-2",
+    "bus_num": "1",
+    "starting_point": "더존_강촌",
+    "ending_point": "후평동",
+    "route_type1": "퇴근",
+    "route_type2": "경유",
+    "route_type3": "춘천",
+    "bus_stops": [
+      {
+        "name": "더존_강촌",
+        "location": "1번",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342",
+        "departure_time": "18:20"
+      },
+      {
+        "name": "팔호광장",
+        "location": "팔호광장 하나은행 버스정류장(후평동 방면)",
+        "latitude": "37.87634294020494",
+        "longitude": "127.73347353899187"
+      },
+      {
+        "name": "후평동",
+        "location": "포스코아파트 후문 버스정류장(후평환승센터 방면)",
+        "latitude": "37.88157610480643",
+        "longitude": "127.74692407947029"
+      }
+    ]
+  },
+  {
+    "route_name": "BC-3",
+    "bus_num": "2",
+    "starting_point": "더존_강촌",
+    "ending_point": "후평동",
+    "route_type1": "퇴근",
+    "route_type2": "경유",
+    "route_type3": "춘천",
+    "bus_stops": [
+      {
+        "name": "더존_강촌",
+        "location": "2번",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342",
+        "departure_time": "18:20"
+      },
+      {
+        "name": "이마트",
+        "location": "이마트 맞은편 버스정류장(온의사거리 방면)",
+        "latitude": "37.8637461496812",
+        "longitude": "127.71989358337014"
+      },
+      {
+        "name": "팔호광장",
+        "location": "팔호광장 하나은행 버스정류장(후평동 방면)",
+        "latitude": "37.87634294020494",
+        "longitude": "127.73347353899187"
+      },
+      {
+        "name": "후평동",
+        "location": "포스코아파트 후문 버스정류장(후평환승센터 방면)",
+        "latitude": "37.88157610480643",
+        "longitude": "127.74692407947029"
+      }
+    ]
+  },
+  {
+    "route_name": "BC-4",
+    "bus_num": "3",
+    "starting_point": "더존_강촌",
+    "ending_point": "석사동",
+    "route_type1": "퇴근",
+    "route_type2": "경유",
+    "route_type3": "춘천",
+    "bus_stops": [
+      {
+        "name": "더존_강촌",
+        "location": "3번",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342",
+        "departure_time": "18:20"
+      },
+      {
+        "name": "한숲시티",
+        "location": "한숲시티 정문 맞은편 버스정류장(홈플러스 방면)",
+        "latitude": "37.85308272881296",
+        "longitude": "127.72955022428656"
+      },
+      {
+        "name": "하이마트",
+        "location": "하이마트 맞은편(춘천휴먼타운아파트 방면)",
+        "latitude": "37.85526392203101",
+        "longitude": "127.73879261926665"
+      },
+      {
+        "name": "석사동",
+        "location": "투탑시티 버스정류장(성원초등학교 방면)",
+        "latitude": "37.85051577980031",
+        "longitude": "127.74419333905591"
+      }
+    ]
+  },
+  {
+    "route_name": "BC-5",
+    "bus_num": "4",
+    "starting_point": "더존_강촌",
+    "ending_point": "석사동",
+    "route_type1": "퇴근",
+    "route_type2": "경유",
+    "route_type3": "춘천",
+    "bus_stops": [
+      {
+        "name": "더존_강촌",
+        "location": "4번",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342",
+        "departure_time": "18:20"
+      },
+      {
+        "name": "강촌역",
+        "location": "강촌역 프로포즈계단 맞은편",
+        "latitude": "37.8061034053624",
+        "longitude": "127.63671261870276"
+      },
+      {
+        "name": "칠전동",
+        "location": "칠전동 사거리 버스정류장(이마트 방면)",
+        "latitude": "37.8414225412287",
+        "longitude": "127.71446198998397"
+      },
+      {
+        "name": "이마트",
+        "location": "이마트 맞은편 버스정류장(온의사거리 방면)",
+        "latitude": "37.86375067144642",
+        "longitude": "127.71989078633447"
+      },
+      {
+        "name": "하이마트",
+        "location": "하이마트 맞은편(춘천휴먼타운아파트 방면)",
+        "latitude": "37.85526392203101",
+        "longitude": "127.73879261926665"
+      },
+      {
+        "name": "석사동",
+        "location": "투탑시티 버스정류장(성원초등학교 방면)",
+        "latitude": "37.85051577980031",
+        "longitude": "127.74419333905591"
+      }
+    ]
+  },
+  {
+    "route_name": "BC-6",
+    "bus_num": "1",
+    "starting_point": "더존_강촌",
+    "ending_point": "이마트",
+    "route_type1": "퇴근",
+    "route_type2": "경유",
+    "route_type3": "춘천",
+    "bus_stops": [
+      {
+        "name": "더존_강촌",
+        "location": "정문",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342",
+        "departure_time": "20:00"
+      },
+      {
+        "name": "강촌역",
+        "location": "강촌역 프로포즈계단 맞은편",
+        "latitude": "37.8061034053624",
+        "longitude": "127.63671261870276"
+      },
+      {
+        "name": "칠전동",
+        "location": "칠전동 사거리 버스정류장(이마트 방면)",
+        "latitude": "37.8414225412287",
+        "longitude": "127.71446198998397"
+      },
+      {
+        "name": "이마트",
+        "location": "이마트 맞은편 버스정류장(온의사거리 방면)",
+        "latitude": "37.86375067144642",
+        "longitude": "127.71989078633447"
+      }
+    ]
+  },
+  {
+    "route_name": "BC-7",
+    "bus_num": "1",
+    "starting_point": "더존_강촌",
+    "ending_point": "이마트",
+    "route_type1": "퇴근",
+    "route_type2": "경유",
+    "route_type3": "춘천",
+    "bus_stops": [
+      {
+        "name": "더존_강촌",
+        "location": "정문",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342",
+        "departure_time": "21:00"
+      },
+      {
+        "name": "강촌역",
+        "location": "강촌역 프로포즈계단 맞은편",
+        "latitude": "37.8061034053624",
+        "longitude": "127.63671261870276"
+      },
+      {
+        "name": "칠전동",
+        "location": "칠전동 사거리 버스정류장(이마트 방면)",
+        "latitude": "37.8414225412287",
+        "longitude": "127.71446198998397"
+      },
+      {
+        "name": "이마트",
+        "location": "이마트 맞은편 버스정류장(온의사거리 방면)",
+        "latitude": "37.86375067144642",
+        "longitude": "127.71989078633447"
+      }
+    ]
   }
 ]
