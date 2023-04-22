@@ -1,1 +1,445 @@
-[]
+[
+  {
+    "route_name": "AS-1",
+    "bus_num": "2057",
+    "starting_point": "태릉",
+    "ending_point": "더존_강촌",
+    "route_type1": "출근",
+    "route_type2": "직행",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "태릉",
+        "location": "태릉입구역(6호선) 7번 출구 전방 100m 버스정류장 옆",
+        "latitude": "37.617842488123095",
+        "longitude": "127.07656907083147",
+        "departure_time": "07:20"
+      },
+      {
+        "name": "더존_강촌",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342"
+      }
+    ]
+  },
+  {
+    "route_name": "AS-2",
+    "bus_num": "1033",
+    "starting_point": "태릉",
+    "ending_point": "더존_강촌",
+    "route_type1": "출근",
+    "route_type2": "경유",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "태릉",
+        "location": "태릉입구역(6호선) 7번 출구 전방 100m 버스정류장 옆",
+        "latitude": "37.617842488123095",
+        "longitude": "127.07656907083147",
+        "departure_time": "07:20"
+      },
+      {
+        "name": "구리",
+        "location": "구리패션아울렛 일룸 구리남양주점 앞",
+        "latitude": "37.60320736234289",
+        "longitude": "127.14653702691739",
+        "departure_time": "07:35"
+      },
+      {
+        "name": "더존_강촌",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342"
+      }
+    ]
+  },
+  {
+    "route_name": "AS-3",
+    "bus_num": "1034",
+    "starting_point": "상봉",
+    "ending_point": "더존_강촌",
+    "route_type1": "출근",
+    "route_type2": "직행",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "상봉",
+        "location": "상봉역(7호선) 2번 출구 전방 130m 서브웨이(상봉역점) 앞",
+        "latitude": "37.59678993791444",
+        "longitude": "127.08762196562873",
+        "departure_time": "07:20"
+      },
+      {
+        "name": "더존_강촌",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342"
+      }
+    ]
+  },
+  {
+    "route_name": "AS-4",
+    "bus_num": "2060",
+    "starting_point": "잠실",
+    "ending_point": "더존_강촌",
+    "route_type1": "출근",
+    "route_type2": "직행",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "잠실",
+        "location": "잠실역(8호선) 9번 출구 우측 100m 삼성생명잠실빌딩 횡단보도 앞",
+        "latitude": "37.514581681759296",
+        "longitude": "127.1031295055446",
+        "departure_time": "07:25"
+      },
+      {
+        "name": "더존_강촌",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342"
+      }
+    ]
+  },
+  {
+    "route_name": "AS-5",
+    "bus_num": "1030",
+    "starting_point": "잠실",
+    "ending_point": "더존_강촌",
+    "route_type1": "출근",
+    "route_type2": "경유",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "잠실",
+        "location": "잠실역(8호선) 9번 출구 우측 100m 삼성생명잠실빌딩 횡단보도 앞",
+        "latitude": "37.514581681759296",
+        "longitude": "127.1031295055446",
+        "departure_time": "07:25"
+      },
+      {
+        "name": "천호",
+        "location": "천호역(5호선) 1번 출구 전방 150m 버스정류장 옆",
+        "latitude": "37.53933204443964",
+        "longitude": "127.12217826351116",
+        "departure_time": "07:40"
+      },
+      {
+        "name": "더존_강촌",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342"
+      }
+    ]
+  },
+  {
+    "route_name": "AS-6",
+    "bus_num": "1021",
+    "starting_point": "강변",
+    "ending_point": "더존_강촌",
+    "route_type1": "출근",
+    "route_type2": "직행",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "강변",
+        "location": "강변역 테크노마트 지하주차장 입구(프라임상가방면)",
+        "latitude": "37.53671878357462",
+        "longitude": "127.09571221397782",
+        "departure_time": "07:35"
+      },
+      {
+        "name": "더존_강촌",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342"
+      }
+    ]
+  },
+  {
+    "route_name": "AS-7",
+    "bus_num": "1027",
+    "starting_point": "강변",
+    "ending_point": "더존_강촌",
+    "route_type1": "출근",
+    "route_type2": "직행",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "강변",
+        "location": "강변역 테크노마트 지하주차장 입구(프라임상가방면)",
+        "latitude": "37.53671878357462",
+        "longitude": "127.09571221397782",
+        "departure_time": "07:35"
+      },
+      {
+        "name": "더존_강촌",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342"
+      }
+    ]
+  },
+  {
+    "route_name": "AS-8",
+    "bus_num": "1031",
+    "starting_point": "천호",
+    "ending_point": "더존_강촌",
+    "route_type1": "출근",
+    "route_type2": "직행",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "천호",
+        "location": "천호역(5호선) 1번 출구 전방 150m 버스정류장 옆",
+        "latitude": "37.53933204443964",
+        "longitude": "127.12217826351116",
+        "departure_time": "07:40"
+      },
+      {
+        "name": "더존_강촌",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342"
+      }
+    ]
+  },
+  {
+    "route_name": "AS-9",
+    "bus_num": "2235",
+    "starting_point": "평내호평",
+    "ending_point": "더존_강촌",
+    "route_type1": "출근",
+    "route_type2": "직행",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "평내호평",
+        "location": "평내호평역 1번 출구 120m 에이스프라자빌딩 신한은행(호평지점) 앞 (바불리 옛날왕만두 앞)",
+        "latitude": "37.654181640862596",
+        "longitude": "127.24391915664651",
+        "departure_time": "07:40"
+      },
+      {
+        "name": "더존_강촌",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342"
+      }
+    ]
+  },
+  {
+    "route_name": "BS-1",
+    "bus_num": "1",
+    "starting_point": "더존_강촌",
+    "ending_point": "강변",
+    "route_type1": "퇴근",
+    "route_type2": "직행",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "더존_강촌",
+        "location": "1번",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342",
+        "departure_time": "18:15"
+      },
+      {
+        "name": "강변",
+        "location": "강변역 테크노마트 지하주차장 입구(프라임상가방면)",
+        "latitude": "37.53671878357462",
+        "longitude": "127.09571221397782"
+      }
+    ]
+  },
+  {
+    "route_name": "BS-2",
+    "bus_num": "2",
+    "starting_point": "더존_강촌",
+    "ending_point": "강변",
+    "route_type1": "퇴근",
+    "route_type2": "직행",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "더존_강촌",
+        "location": "2번",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342",
+        "departure_time": "18:15"
+      },
+      {
+        "name": "강변",
+        "location": "강변역 테크노마트 지하주차장 입구(프라임상가방면)",
+        "latitude": "37.53671878357462",
+        "longitude": "127.09571221397782"
+      }
+    ]
+  },
+  {
+    "route_name": "BS-3",
+    "bus_num": "3",
+    "starting_point": "더존_강촌",
+    "ending_point": "천호",
+    "route_type1": "퇴근",
+    "route_type2": "직행",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "더존_강촌",
+        "location": "3번",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342",
+        "departure_time": "18:15"
+      },
+      {
+        "name": "천호",
+        "location": "천호역(5호선) 10번 출구 전방 150m 버스정류장 옆",
+        "latitude": "37.53898773710994",
+        "longitude": "127.12186371487952"
+      }
+    ]
+  },
+  {
+    "route_name": "BS-4",
+    "bus_num": "4",
+    "starting_point": "더존_강촌",
+    "ending_point": "잠실",
+    "route_type1": "퇴근",
+    "route_type2": "경유",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "더존_강촌",
+        "location": "4번",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342",
+        "departure_time": "18:15"
+      },
+      {
+        "name": "천호",
+        "location": "천호역(5호선) 10번 출구 전방 150m 버스정류장 옆",
+        "latitude": "37.53898773710994",
+        "longitude": "127.12186371487952"
+      },
+      {
+        "name": "잠실",
+        "location": "잠실역(2호선) 8번 출구 앞 버스정류장(잠실역 방면)",
+        "latitude": "37.514035653406545",
+        "longitude": "127.10159327577227"
+      }
+    ]
+  },
+  {
+    "route_name": "BS-5",
+    "bus_num": "5",
+    "starting_point": "더존_강촌",
+    "ending_point": "태릉",
+    "route_type1": "퇴근",
+    "route_type2": "직행",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "더존_강촌",
+        "location": "5번",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342",
+        "departure_time": "18:15"
+      },
+      {
+        "name": "태릉",
+        "location": "태릉입구역(6호선) 6번 출구 앞",
+        "latitude": "37.6179711682694",
+        "longitude": "127.07612179405557"
+      }
+    ]
+  },
+  {
+    "route_name": "BS-6",
+    "bus_num": "6",
+    "starting_point": "더존_강촌",
+    "ending_point": "평내호평",
+    "route_type1": "퇴근",
+    "route_type2": "직행",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "더존_강촌",
+        "location": "6번",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342",
+        "departure_time": "18:15"
+      },
+      {
+        "name": "평내호평",
+        "location": "평내호평역 버스정류장(효성, 세종아파트 방면)",
+        "latitude": "37.65345477137678",
+        "longitude": "127.243593812259"
+      }
+    ]
+  },
+  {
+    "route_name": "BS-7",
+    "bus_num": "7",
+    "starting_point": "더존_강촌",
+    "ending_point": "상봉",
+    "route_type1": "퇴근",
+    "route_type2": "직행",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "더존_강촌",
+        "location": "7번",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342",
+        "departure_time": "18:15"
+      },
+      {
+        "name": "상봉",
+        "location": "상봉역(7호선) 1번 출구 앞",
+        "latitude": "37.59659306351692",
+        "longitude": "127.0857929796146"
+      }
+    ]
+  },
+  {
+    "route_name": "BS-8",
+    "bus_num": "8",
+    "starting_point": "더존_강촌",
+    "ending_point": "구리",
+    "route_type1": "퇴근",
+    "route_type2": "직행",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "더존_강촌",
+        "location": "8번",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342",
+        "departure_time": "18:15"
+      },
+      {
+        "name": "구리",
+        "location": "구리역 롯데백화점 앞 버스정류장(돌다리사거리 방면)",
+        "latitude": "37.60243758710021",
+        "longitude": "127.14424514881044"
+      }
+    ]
+  },
+  {
+    "route_name": "BS-9",
+    "bus_num": "9",
+    "starting_point": "더존_강촌",
+    "ending_point": "강변",
+    "route_type1": "퇴근",
+    "route_type2": "직행",
+    "route_type3": "수도권",
+    "bus_stops": [
+      {
+        "name": "더존_강촌",
+        "location": "정문",
+        "latitude": "37.7577967099585",
+        "longitude": "127.63755797028342",
+        "departure_time": "21:00"
+      },
+      {
+        "name": "강변",
+        "location": "강변역 테크노마트 지하주차장 입구(프라임상가방면)",
+        "latitude": "37.53671878357462",
+        "longitude": "127.09571221397782"
+      }
+    ]
+  }
+]
