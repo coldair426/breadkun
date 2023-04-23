@@ -12,8 +12,8 @@ const bs = classNames.bind(styles);
 function Bus() {
   // URL parameter
   let { destination } = useParams();
-  // 도착지 선택된 값 또는 "석사동"(기본값)
-  const [selectedValue, setSelectedValue] = useState(destination || '석사동');
+  // 도착지 선택된 값 또는 "강변1"(기본값)
+  const [selectedValue, setSelectedValue] = useState(destination || '강변1');
   // 현재위치 정보 lat&log
   const [latLong, setLatLong] = useState({ latitude: 37.756540912483615, longitude: 127.63819968679633 });
   // 현재위치 정보 도로명 주소
@@ -167,21 +167,39 @@ function Bus() {
             </div>
             <div className={bs('bus__block1--right--selectbox')}>
               <select value={selectedValue} onChange={handleChange}>
-                <optgroup label='춘천방면'>
-                  <option value='석사동'>석사동</option>
-                  <option value='후평동'>후평동</option>
-                  <option value='이마트'>이마트</option>
-                </optgroup>
+                {/* <optgroup label='춘천방면'>
+                  <option value='후평동1'>① 후평동</option>
+                  <option value='후평동2'>② 후평동</option>
+                  <option value='석사동3'>③ 석사동</option>
+                  <option value='석사동4'>④ 석사동</option>
+                </optgroup> */}
                 <optgroup label='서울방면'>
-                  <option value='강변'>강변</option>
-                  <option value='천호'>천호</option>
-                  <option value='잠실'>잠실</option>
-                  <option value='태릉'>태릉</option>
-                  <option value='평내호평'>평내호평</option>
-                  <option value='상봉'>상봉</option>
-                  <option value='구리'>구리</option>
+                  <option value='강변1'>① 강변</option>
+                  <option value='강변2'>② 강변</option>
+                  <option value='천호'>③ 천호</option>
+                  <option value='잠실'>④ 잠실</option>
+                  <option value='태릉'>⑤ 태릉</option>
+                  <option value='평내호평'>⑥ 평내호평</option>
+                  <option value='상봉'>⑦ 상봉</option>
+                  <option value='구리'>⑧ 구리</option>
                 </optgroup>
               </select>
+            </div>
+          </div>
+        </div>
+        <div className={bs('bus__block2')}>
+          <div className={bs('bus__block2--stops')}>
+            <div className={bs('bus__block2--stop')}>
+              <div className={bs('bus__block2--stop-texts')}></div>
+              <img className={bs('bus__block2--stop-arrow')} src='/icon/bus-stops-arrow.png' alt='down arrow' />
+            </div>
+            <div className={bs('bus__block2--stop')}>
+              <div className={bs('bus__block2--stop-texts')}></div>
+              <img className={bs('bus__block2--stop-arrow')} src='/icon/bus-stops-arrow.png' alt='down arrow' />
+            </div>
+            <div className={bs('bus__block2--stop')}>
+              <div className={bs('bus__block2--stop-texts')}></div>
+              <img className={bs('bus__block2--stop-arrow')} src='/icon/bus-stops-arrow.png' alt='down arrow' />
             </div>
           </div>
         </div>

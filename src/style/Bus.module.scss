@@ -1,4 +1,5 @@
 $backColor1: #413543;
+$backColor2: #404258;
 $gray8: #343a40;
 $fontColor: #f8f9fa;
 
@@ -176,5 +177,28 @@ div + .bus__block1 {
     &:active {
       background-color: lighten($backColor1, 25%);
     }
+  }
+}
+.bus__block2 {
+  margin-top: 13px;
+  .bus__block2--stops {
+    > div:last-child > .bus__block2--stop-arrow {
+      display: none;
+    }
+  }
+  .bus__block2--stop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .bus__block2--stop-texts {
+    height: 50px;
+    width: 100%;
+    background-color: $backColor2;
+    border-radius: 40px;
+  }
+  .bus__block2--stop-arrow {
+    height: 20px;
   }
 }
