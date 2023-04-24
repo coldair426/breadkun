@@ -186,43 +186,58 @@ div + .bus__block1 {
       display: none;
     }
     .bus__block2--stop {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       .bus__block2--stop-texts {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 40px;
+        height: 50px;
         width: 100%;
         background-color: $backColor2;
         border-radius: 40px;
         .bus__block2--stop-title-wrapper {
           display: flex;
           align-items: center;
-          margin-left: 10px;
+          margin-left: 13px;
         }
         .bus__block2--stop-title {
-          border: 1.5px solid $fontColor;
-          padding: 6px;
+          padding: 9px;
           border-radius: 20px;
-          font-size: 8px;
-          font-weight: 900;
+          font-size: 15px;
+          background-color: darken($backColor2, 5%);
         }
         .bus__block2--stop-name {
-          font-size: 18px;
+          font-size: 20px;
           margin-left: 10px;
         }
         .bus__block2--stop-more {
-          font-size: 10px;
-          font-weight: 900;
-          margin-right: 15px;
+          font-size: 13px;
+          margin-right: 13px;
+          border-radius: 20px;
+          padding: 9px;
+          background-color: lighten($backColor2, 15%);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+          &:hover {
+            cursor: pointer;
+          }
+          &:active {
+            transform: scale(1.2);
+            -webkit-transform: scale(1.2); /* Webkit prefix */
+            -moz-transform: scale(1.2); /* Mozilla prefix */
+            -o-transform: scale(1.2); /* Opera prefix */
+            -ms-transform: scale(1.2); /* IE prefix */
+          }
         }
       }
+      .bus__block2--stop-arrow {
+        height: 20px;
+        margin-left: 27px;
+      }
     }
-    .bus__block2--stop-arrow {
-      height: 20px;
-    }
+  }
+  .busStops__map {
+    z-index: 80;
+    position: fixed;
+    right: 0px;
+    background-color: white;
   }
 }

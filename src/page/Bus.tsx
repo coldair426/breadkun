@@ -21,7 +21,41 @@ function Bus() {
   // 도착시간
   const [arrivalTime, setArrivalTime] = useState({ mainbox: '-----', time: '', ampm: '', remainingTime: '', remainingText: '' });
   const [notification, setNotification] = useState(false);
-  const [stopsTest] = useState(['더존_강촌', '미금역', '강남역', '천호역', '강변역']);
+  // test 서버
+  const [stopsTest] = useState([
+    {
+      name: '더존_강촌',
+      locaiton: '잠실역(2호선) 8번 출구 앞 버스정류장(잠실역 방면)',
+      latitude: '37.7577967099585',
+      longitude: '127.63755797028342',
+    },
+    {
+      name: '천호역',
+      locaiton: '천호역(5호선) 10번 출구 전방 150m 버스정류장 옆',
+      longitude: '127.1219037455087',
+      latitude: '37.53904703398166',
+    },
+    {
+      name: '잠실역',
+      locaiton: '잠실역(2호선) 8번 출구 앞 버스정류장(잠실역 방면)',
+      longitude: '127.10159327577227',
+      latitude: '37.514035653406545',
+    },
+    {
+      name: '태릉',
+      location: '태릉입구역(6호선) 7번 출구 전방 100m 버스정류장 옆',
+      latitude: '37.617842488123095',
+      longitude: '127.07656907083147',
+    },
+    {
+      name: '구리',
+      location: '구리패션아울렛 일룸 구리남양주점 앞',
+      latitude: '37.60320736234289',
+      longitude: '127.14653702691739',
+    },
+  ]);
+  // 자세히 보기 지도 좌표
+  const [testLatLong, setTestLatLong] = useState({ latitude: 37.756540912483615, longitude: 127.63819968679633 });
 
   useEffect(() => {
     // 페이지 최상단으로 스크롤링
@@ -199,7 +233,7 @@ function Bus() {
                       {i === 0 || i === stopsTest.length - 1 ? (i === 0 ? '기점' : '종점') : `경유${i}`}
                     </div>
                     <div className={bs('bus__block2--stop-name')} key={i}>
-                      {v}
+                      {v.name}
                     </div>
                   </div>
                   <div className={bs('bus__block2--stop-more')}>자세히 보기</div>
@@ -210,6 +244,10 @@ function Bus() {
           </div>
         </div>
         {notification && <NotificationBox firstText={'시간 계산 중.'} secText={'위치 정보 허용 필요.'} />}
+        {/* 자세히 보기 지도 */}
+        <div className={bs('busStops__map')}>
+          <KakaoMap mapHeight='400px' mapWidth='100%' latLong={testLatLong} />
+        </div>
       </div>
     </div>
   );

@@ -1,8 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import styles from '../style/KakaoMap.module.scss';
-import classNames from 'classnames/bind';
-
-const ks = classNames.bind(styles);
 
 declare global {
   interface Window {
@@ -56,7 +52,7 @@ function KakaoMap({
 
   // webkit borderRadius와 overflow-hidden 적용시 버그 해결을 위한 isolation.
   return (
-    <div className={ks('map_wrap')}>
+    <div>
       <div ref={mapRef} style={{ height: mapHeight, width: mapWidth, borderRadius: '40px', isolation: 'isolate' }} />
     </div>
   );
