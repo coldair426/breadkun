@@ -21,6 +21,7 @@ function Bus() {
   // 도착시간
   const [arrivalTime, setArrivalTime] = useState({ mainbox: '-----', time: '', ampm: '', remainingTime: '', remainingText: '' });
   const [notification, setNotification] = useState(false);
+  const [stopsTest] = useState(['더존_강촌', '미금역', '강남역', '천호역', '강변역']);
 
   useEffect(() => {
     // 페이지 최상단으로 스크롤링
@@ -55,6 +56,7 @@ function Bus() {
             remainingText: '분 남음',
           });
         }
+        console.log(result);
         setNotification(false);
       } catch (error) {
         setArrivalTime({ mainbox: '-----', time: '', ampm: '', remainingTime: '', remainingText: '' });
@@ -189,18 +191,22 @@ function Bus() {
         </div>
         <div className={bs('bus__block2')}>
           <div className={bs('bus__block2--stops')}>
-            <div className={bs('bus__block2--stop')}>
-              <div className={bs('bus__block2--stop-texts')}></div>
-              <img className={bs('bus__block2--stop-arrow')} src='/icon/bus-stops-arrow.png' alt='down arrow' />
-            </div>
-            <div className={bs('bus__block2--stop')}>
-              <div className={bs('bus__block2--stop-texts')}></div>
-              <img className={bs('bus__block2--stop-arrow')} src='/icon/bus-stops-arrow.png' alt='down arrow' />
-            </div>
-            <div className={bs('bus__block2--stop')}>
-              <div className={bs('bus__block2--stop-texts')}></div>
-              <img className={bs('bus__block2--stop-arrow')} src='/icon/bus-stops-arrow.png' alt='down arrow' />
-            </div>
+            {stopsTest.map((v, i) => (
+              <div className={bs('bus__block2--stop')} key={i}>
+                <div className={bs('bus__block2--stop-texts')} key={i}>
+                  <div className={bs('bus__block2--stop-title-wrapper')}>
+                    <div className={bs('bus__block2--stop-title')} key={`title${i}`}>
+                      {i === 0 || i === stopsTest.length - 1 ? (i === 0 ? '기점' : '종점') : `경유${i}`}
+                    </div>
+                    <div className={bs('bus__block2--stop-name')} key={i}>
+                      {v}
+                    </div>
+                  </div>
+                  <div className={bs('bus__block2--stop-more')}>자세히 보기</div>
+                </div>
+                <img className={bs('bus__block2--stop-arrow')} src='/icon/bus-stops-arrow.png' alt='down arrow' />
+              </div>
+            ))}
           </div>
         </div>
         {notification && <NotificationBox firstText={'시간 계산 중.'} secText={'위치 정보 허용 필요.'} />}

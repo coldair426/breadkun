@@ -185,20 +185,44 @@ div + .bus__block1 {
     > div:last-child > .bus__block2--stop-arrow {
       display: none;
     }
-  }
-  .bus__block2--stop {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .bus__block2--stop-texts {
-    height: 50px;
-    width: 100%;
-    background-color: $backColor2;
-    border-radius: 40px;
-  }
-  .bus__block2--stop-arrow {
-    height: 20px;
+    .bus__block2--stop {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .bus__block2--stop-texts {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 40px;
+        width: 100%;
+        background-color: $backColor2;
+        border-radius: 40px;
+        .bus__block2--stop-title-wrapper {
+          display: flex;
+          align-items: center;
+          margin-left: 10px;
+        }
+        .bus__block2--stop-title {
+          border: 1.5px solid $fontColor;
+          padding: 6px;
+          border-radius: 20px;
+          font-size: 8px;
+          font-weight: 900;
+        }
+        .bus__block2--stop-name {
+          font-size: 18px;
+          margin-left: 10px;
+        }
+        .bus__block2--stop-more {
+          font-size: 10px;
+          font-weight: 900;
+          margin-right: 15px;
+        }
+      }
+    }
+    .bus__block2--stop-arrow {
+      height: 20px;
+    }
   }
 }
