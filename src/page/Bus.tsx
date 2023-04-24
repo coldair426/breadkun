@@ -54,8 +54,6 @@ function Bus() {
       longitude: '127.14653702691739',
     },
   ]);
-  // 자세히 보기 지도 좌표
-  const [testLatLong, setTestLatLong] = useState({ latitude: 37.756540912483615, longitude: 127.63819968679633 });
 
   useEffect(() => {
     // 페이지 최상단으로 스크롤링
@@ -244,10 +242,6 @@ function Bus() {
           </div>
         </div>
         {notification && <NotificationBox firstText={'시간 계산 중.'} secText={'위치 정보 허용 필요.'} />}
-        {/* 자세히 보기 지도 */}
-        <div className={bs('busStops__map')}>
-          <KakaoMap mapHeight='400px' mapWidth='100%' latLong={testLatLong} />
-        </div>
       </div>
     </div>
   );
