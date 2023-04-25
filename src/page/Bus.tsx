@@ -247,8 +247,8 @@ function Bus() {
                     className={bs('bus__block2--stop-more')}
                     onClick={() => {
                       setStopLatLong({ latitude: v.latitude, longitude: v.longitude });
-                      setPopUpMap(true);
                       setStopLocation(v.location);
+                      setPopUpMap(true);
                     }}>
                     자세히 보기
                   </div>

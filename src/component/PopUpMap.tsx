@@ -37,13 +37,13 @@ function PopUpMap({
     const container = mapRef.current; // return 값 DOM
     const options = {
       center: new window.kakao.maps.LatLng(stopLatLong.latitude, stopLatLong.longitude), // 지도 중심좌표
+      mapTypeId: window.kakao.maps.MapTypeId.HYBRID,
       draggable: true, // 이동, 확대, 축소 금지
       disableDoubleClick: true, // 더블클릭 방지 옵션
-      level: 3, // 지도 확대 레벨
+      level: 2, // 지도 확대 레벨
     };
     const map = new window.kakao.maps.Map(container, options); // 지도생성
-    map.addOverlayMapTypeId(window.kakao.maps.MapTypeId.TRAFFIC); // 교통정보
-    const imageSrc = '/logo/breadkun-marker.png', // 마커이미지의 주소입니다
+    const imageSrc = '/icon/busStop-marker.png', // 마커이미지의 주소입니다
       imageSize = new window.kakao.maps.Size(37, 41), // 마커이미지 크기
       imageOption = { offset: new window.kakao.maps.Point(15, 35) }; // 마커이미지 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표 설정.
     // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
