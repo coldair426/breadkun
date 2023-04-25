@@ -23,37 +23,45 @@ function Bus() {
   const [arrivalTime, setArrivalTime] = useState({ mainbox: '-----', time: '', ampm: '', remainingTime: '', remainingText: '' });
   const [notification, setNotification] = useState(false);
   const [popUpMap, setPopUpMap] = useState(false);
+  const [stopLatLong, setStopLatLong] = useState({ latitude: 0, longitude: 0 });
+  const [stopLocation, setStopLocation] = useState('');
   // test 서버
   const [stopsTest] = useState([
     {
       name: '더존_강촌',
-      locaiton: '잠실역(2호선) 8번 출구 앞 버스정류장(잠실역 방면)',
-      latitude: '37.7577967099585',
-      longitude: '127.63755797028342',
+      location: '노선 번호별 승차위치 확인',
+      latitude: 37.7577967099585,
+      longitude: 127.63755797028342,
     },
     {
       name: '천호역',
-      locaiton: '천호역(5호선) 10번 출구 전방 150m 버스정류장 옆',
-      longitude: '127.1219037455087',
-      latitude: '37.53904703398166',
+      location: '천호역(5호선) 10번 출구 전방 150m 버스정류장 옆',
+      longitude: 127.1219037455087,
+      latitude: 37.53904703398166,
     },
     {
       name: '잠실역',
-      locaiton: '잠실역(2호선) 8번 출구 앞 버스정류장(잠실역 방면)',
-      longitude: '127.10159327577227',
-      latitude: '37.514035653406545',
+      location: '잠실역(2호선) 8번 출구 앞 버스정류장(잠실역 방면)',
+      longitude: 127.10159327577227,
+      latitude: 37.514035653406545,
     },
     {
       name: '태릉',
       location: '태릉입구역(6호선) 7번 출구 전방 100m 버스정류장 옆',
-      latitude: '37.617842488123095',
-      longitude: '127.07656907083147',
+      latitude: 37.617842488123095,
+      longitude: 127.07656907083147,
     },
     {
       name: '구리',
       location: '구리패션아울렛 일룸 구리남양주점 앞',
-      latitude: '37.60320736234289',
-      longitude: '127.14653702691739',
+      latitude: 37.60320736234289,
+      longitude: 127.14653702691739,
+    },
+    {
+      name: '평내호평',
+      location: '평내호평역 1번 출구 120m 에이스프라자빌딩 신한은행(호평지점) 앞 (바불리 옛날왕만두 앞)',
+      latitude: 37.654181640862596,
+      longitude: 127.24391915664651,
     },
   ]);
 
@@ -235,7 +243,13 @@ function Bus() {
                       {v.name}
                     </div>
                   </div>
-                  <div className={bs('bus__block2--stop-more')} onClick={() => setPopUpMap(true)}>
+                  <div
+                    className={bs('bus__block2--stop-more')}
+                    onClick={() => {
+                      setStopLatLong({ latitude: v.latitude, longitude: v.longitude });
+                      setPopUpMap(true);
+                      setStopLocation(v.location);
+                    }}>
                     자세히 보기
                   </div>
                 </div>
@@ -244,7 +258,7 @@ function Bus() {
             ))}
           </div>
         </div>
-        {popUpMap && <PopUpMap onOffButton={setPopUpMap} />}
+        {popUpMap && <PopUpMap onOffButton={setPopUpMap} stopLatLong={stopLatLong} stopLocation={stopLocation} />}
         {notification && <NotificationBox firstText={'시간 계산 중.'} secText={'위치 정보 허용 필요.'} />}
       </div>
     </div>

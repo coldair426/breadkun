@@ -16,7 +16,7 @@ $gray-00: #f8f9fa; // 기본글자색
   .pop-up-map__kakao-map--wrapper {
     width: 100%;
     position: fixed;
-    top: 0;
+    top: 17.95vw;
     z-index: 100;
     display: -webkit-flex; /* 웹킷 */
     display: flex;
@@ -24,6 +24,17 @@ $gray-00: #f8f9fa; // 기본글자색
     flex-direction: column;
     -webkit-align-items: center; /* 웹킷 */
     align-items: center;
+  }
+  .pop-up-map__location {
+    position: fixed;
+    z-index: 100;
+    top: 122vw;
+    font-size: 6vw;
+    padding: 0 3vw;
+    line-height: 7.5vw;
+    text-align: center;
+    // 단어기준으로 줄바꿈 하기
+    word-break: keep-all;
   }
   .pop-up-map__close {
     position: fixed;
