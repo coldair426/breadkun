@@ -14,9 +14,9 @@ $gray-00: #f8f9fa; // 기본글자색
     z-index: 90;
   }
   .pop-up-map__kakao-map--wrapper {
-    width: 100%;
+    width: 93.34%;
     position: fixed;
-    top: 17.95vw;
+    top: 15vw;
     z-index: 100;
     display: -webkit-flex; /* 웹킷 */
     display: flex;
@@ -24,44 +24,40 @@ $gray-00: #f8f9fa; // 기본글자색
     flex-direction: column;
     -webkit-align-items: center; /* 웹킷 */
     align-items: center;
-  }
-  .pop-up-map__location {
-    position: fixed;
-    z-index: 100;
-    top: 122vw;
-    font-size: 6vw;
-    padding: 0 3vw;
-    line-height: 7.5vw;
-    text-align: center;
-    // 단어기준으로 줄바꿈 하기
-    word-break: keep-all;
-  }
-  .pop-up-map__close {
-    position: fixed;
-    z-index: 100;
-    top: 150vw;
-    // font-size: 15px;
-    font-size: 3.85vw;
-    font-weight: 900;
-    // letter-spacing: 2px;
-    letter-spacing: 0.51vw;
-    margin-top: 5vw;
-    // padding: 7px;
-    padding: 1.79vw;
-    border: 1px solid $gray-00;
-    -moz-border-radius: 1.28vw;
-    -webkit-border-radius: 1.28vw;
-    border-radius: 1.28vw;
-    -moz-transition: transform 50ms ease-in-out;
-    -webkit-transition: transform 50ms ease-in-out;
-    transition: transform 50ms ease-in-out;
-    &:hover {
-      cursor: pointer;
+    .pop-up-map__location {
+      padding: 0 10vw;
+      margin-top: 2.5vw;
+      font-size: 5vw;
+      line-height: 6.5vw;
+      text-align: center;
+      letter-spacing: 0.3vw;
+      // 단어기준으로 줄바꿈 하기
+      word-break: keep-all;
     }
-    &:active {
-      -moz-transform: scale(1.3);
-      -webkit-transform: scale(1.3);
-      transform: scale(1.3);
+    .pop-up-map__close {
+      // font-size: 15px;
+      font-size: 3.85vw;
+      font-weight: 900;
+      // letter-spacing: 2px;
+      letter-spacing: 0.51vw;
+      margin-top: 2.5vw;
+      // padding: 7px;
+      padding: 1.79vw;
+      border: 1px solid $gray-00;
+      -moz-border-radius: 1.28vw;
+      -webkit-border-radius: 1.28vw;
+      border-radius: 1.28vw;
+      -moz-transition: transform 50ms ease-in-out;
+      -webkit-transition: transform 50ms ease-in-out;
+      transition: transform 50ms ease-in-out;
+      &:hover {
+        cursor: pointer;
+      }
+      &:active {
+        -moz-transform: scale(1.3);
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3);
+      }
     }
   }
 }
