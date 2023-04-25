@@ -7,22 +7,27 @@ $fontColor: #f8f9fa;
   padding: 0;
 }
 .bus__body {
-  padding: 0 13px;
+  // padding: 0 13px;
+  padding: 0 3.33vw;
 }
 // 지도와 블럭 사이공간
 div + .bus__block1 {
-  margin-top: 13px;
+  // margin-top: 13px;
+  margin-top: 3.33vw;
 }
 .bus__block1--left + .bus__block1--right {
-  margin-left: 13px;
+  // margin-left: 13px;
+  margin-left: 3.33vw;
 }
 .bus__block1 {
   display: flex;
   justify-content: center;
 }
 .bus__block1--left {
-  border-radius: 40px;
-  height: 170px;
+  // border-radius: 40px;
+  border-radius: 10.26vw;
+  // height: 170px;
+  height: 43.59vw;
   width: 50%;
   background-color: $gray8;
   display: -webkit-box; /* Webkit */
@@ -39,7 +44,8 @@ div + .bus__block1 {
   position: relative;
 }
 .bus__block1--left-title {
-  margin-top: 15px;
+  // margin-top: 15px;
+  margin-top: 3.85vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,7 +55,8 @@ div + .bus__block1 {
 }
 .bus__block1--left-mainBox {
   position: absolute;
-  top: 85px;
+  // top: 85px;
+  top: 21.79vw;
   width: 100%;
   text-align: center;
   font-size: 6.2vw;
@@ -63,7 +70,8 @@ div + .bus__block1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
+  margin-bottom: 5.13vw;
 }
 .bus__block1--left-firstLine-contents,
 .bus__block1--left-secLine-contents {
@@ -77,13 +85,16 @@ div + .bus__block1 {
 .bus__block1--left-firstLine-contents > div:nth-child(2),
 .bus__block1--left-secLine-contents > div:nth-child(2) {
   font-size: 4vw;
-  margin-left: 8px;
+  // margin-left: 8px;
+  margin-left: 2.05vw;
 }
 
 .bus__block1--right {
   z-index: 5;
-  border-radius: 40px;
-  height: 170px;
+  // border-radius: 40px;
+  border-radius: 10.26vw;
+  // height: 170px;
+  height: 43.59vw;
   width: 50%;
   background-color: $backColor1;
   display: -webkit-box; /* Webkit */
@@ -100,7 +111,8 @@ div + .bus__block1 {
   position: relative;
 }
 .bus__block1--right > div:nth-child(1) {
-  margin-top: 20px;
+  // margin-top: 20px;
+  margin-top: 5.13vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -163,14 +175,16 @@ div + .bus__block1 {
     -moz-text-align-last: center;
     -ms-text-align-last: center;
     padding: 2vw 1vw;
-    border-radius: 20px;
+    // border-radius: 20px;
+    border-radius: 5.13vw;
     background-color: lighten($backColor1, 15%);
     color: $fontColor;
     text-decoration: none;
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     transition: background-color 80ms ease;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
+    margin-bottom: 5.13vw;
     &:hover {
       cursor: pointer;
     }
@@ -180,7 +194,8 @@ div + .bus__block1 {
   }
 }
 .bus__block2 {
-  margin-top: 13px;
+  // margin-top: 13px;
+  margin-top: 3.33vw;
   .bus__block2--stops {
     > div:last-child > .bus__block2--stop-arrow {
       display: none;
@@ -190,30 +205,39 @@ div + .bus__block1 {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 50px;
+        // height: 45px;
+        height: 11.54vw;
         width: 100%;
         background-color: $backColor2;
-        border-radius: 40px;
+        // border-radius: 20px;
+        border-radius: 5.13vw;
         .bus__block2--stop-title-wrapper {
           display: flex;
           align-items: center;
-          margin-left: 13px;
+          // margin-left: 8px;
+          margin-left: 2.05vw;
         }
         .bus__block2--stop-title {
-          padding: 9px;
-          border-radius: 20px;
-          font-size: 15px;
+          // padding: 9px;
+          padding: 2.31vw;
+          // border-radius: 20px;
+          border-radius: 5.13vw;
+          font-size: 3.85vw;
           background-color: darken($backColor2, 5%);
         }
         .bus__block2--stop-name {
-          font-size: 20px;
-          margin-left: 10px;
+          font-size: 5.13vw;
+          // margin-left: 10px;
+          margin-left: 2.56vw;
         }
         .bus__block2--stop-more {
-          font-size: 13px;
-          margin-right: 13px;
-          border-radius: 20px;
-          padding: 9px;
+          font-size: 3.33vw;
+          // margin-right: 8px;
+          margin-right: 2.05vw;
+          // border-radius: 20px;
+          border-radius: 5.13vw;
+          // padding: 9px;
+          padding: 2.31vw;
           background-color: lighten($backColor2, 15%);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
           &:hover {
@@ -229,8 +253,10 @@ div + .bus__block1 {
         }
       }
       .bus__block2--stop-arrow {
-        height: 20px;
-        margin-left: 27px;
+        // height: 20px;
+        height: 5.13vw;
+        // margin-left: 27px;
+        margin-left: 6.92vw;
       }
     }
   }

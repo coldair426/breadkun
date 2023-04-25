@@ -54,7 +54,7 @@ function PopUpMap({ onOffButton }: { onOffButton: React.Dispatch<React.SetStateA
     <div className={ps('pop-up-map')}>
       <div className={ps('pop-up-map__mask')} onClick={() => onOffButton(false)} />
       <div className={ps('pop-up-map__kakao-map--wrapper')}>
-        <div ref={mapRef} style={{ height: '500px', width: '100%', borderBottomRightRadius: '40px', borderBottomLeftRadius: '40px', isolation: 'isolate' }} />
+        <div ref={mapRef} style={{ height: '150vw', width: '100%', borderBottomRightRadius: '10.26vw', borderBottomLeftRadius: '10.26vw', isolation: 'isolate' }} />
       </div>
       <div className={ps('pop-up-map__close')} onClick={() => onOffButton(false)}>
         닫기

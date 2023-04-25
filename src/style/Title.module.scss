@@ -7,7 +7,8 @@ $iconBackground: #404258;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin-bottom: 15px;
+  // margin-bottom: 15px;
+  margin-bottom: 3.85vw;
 }
 .title__icon {
   display: -webkit-box;
@@ -19,13 +20,19 @@ $iconBackground: #404258;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  height: 45px;
-  width: 45px;
-  border-radius: 20px;
+  // height: 45px;
+  // width: 45px;
+  height: 11.54vw;
+  width: 11.54vw;
+  // border-radius: 20px;
+  border-radius: 5.13vw;
   background-color: $iconBackground;
-  margin-left: 15px;
-  margin-right: 15px;
+  // margin-left: 15px;
+  // margin-right: 15px;
+  margin-left: 3.85vw;
+  margin-right: 3.85vw;
 }
 .title__letter {
-  font-size: 21px;
+  // font-size: 21px;
+  font-size: 5.38vw;
 }

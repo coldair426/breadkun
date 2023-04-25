@@ -27,17 +27,20 @@ $gray-00: #f8f9fa; // 기본글자색
   }
   .pop-up-map__close {
     position: fixed;
-    top: 500px;
     z-index: 100;
-    font-size: 15px;
+    top: 150vw;
+    // font-size: 15px;
+    font-size: 3.85vw;
     font-weight: 900;
-    letter-spacing: 2px;
-    margin-top: 50px;
-    padding: 7px;
+    // letter-spacing: 2px;
+    letter-spacing: 0.51vw;
+    margin-top: 5vw;
+    // padding: 7px;
+    padding: 1.79vw;
     border: 1px solid $gray-00;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
+    -moz-border-radius: 1.28vw;
+    -webkit-border-radius: 1.28vw;
+    border-radius: 1.28vw;
     -moz-transition: transform 50ms ease-in-out;
     -webkit-transition: transform 50ms ease-in-out;
     transition: transform 50ms ease-in-out;
