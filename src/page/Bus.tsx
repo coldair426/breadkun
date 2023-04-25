@@ -6,6 +6,7 @@ import Title from './../component/Title';
 import KakaoMap from '../component/KakaoMap';
 import NotificationBox from './../component/NotificationBox';
 import axios from 'axios';
+import PopUpMap from './../component/PopUpMap';
 
 const bs = classNames.bind(styles);
 
@@ -21,6 +22,7 @@ function Bus() {
   // 도착시간
   const [arrivalTime, setArrivalTime] = useState({ mainbox: '-----', time: '', ampm: '', remainingTime: '', remainingText: '' });
   const [notification, setNotification] = useState(false);
+  const [popUpMap, setPopUpMap] = useState(false);
   // test 서버
   const [stopsTest] = useState([
     {
@@ -88,7 +90,6 @@ function Bus() {
             remainingText: '분 남음',
           });
         }
-        console.log(result);
         setNotification(false);
       } catch (error) {
         setArrivalTime({ mainbox: '-----', time: '', ampm: '', remainingTime: '', remainingText: '' });
@@ -234,13 +235,16 @@ function Bus() {
                       {v.name}
                     </div>
                   </div>
-                  <div className={bs('bus__block2--stop-more')}>자세히 보기</div>
+                  <div className={bs('bus__block2--stop-more')} onClick={() => setPopUpMap(true)}>
+                    자세히 보기
+                  </div>
                 </div>
                 <img className={bs('bus__block2--stop-arrow')} src='/icon/bus-stops-arrow.png' alt='down arrow' />
               </div>
             ))}
           </div>
         </div>
+        {popUpMap && <PopUpMap onOffButton={setPopUpMap} />}
         {notification && <NotificationBox firstText={'시간 계산 중.'} secText={'위치 정보 허용 필요.'} />}
       </div>
     </div>
