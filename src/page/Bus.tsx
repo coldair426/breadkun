@@ -29,9 +29,9 @@ function Bus() {
   const [stopsTest] = useState([
     {
       name: '더존_강촌',
-      location: '노선 번호별 승차위치 확인',
-      latitude: 37.7577967099585,
-      longitude: 127.63755797028342,
+      location: '번호로 노선별 승차 위치를 확인하세요!',
+      latitude: 37.757685934004726,
+      longitude: 127.63763361785992,
     },
     {
       name: '천호역',

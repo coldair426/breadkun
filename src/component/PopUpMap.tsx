@@ -44,7 +44,56 @@ function PopUpMap({
     };
     const map = new window.kakao.maps.Map(container, options); // 지도생성
     // 더존_강촌의 위도 경도가 들어올 때,
-    if (stopLatLong.latitude === 37.7577967099585 && stopLatLong.longitude === 127.63755797028342) {
+    if (stopLatLong.latitude === 37.757685934004726 && stopLatLong.longitude === 127.63763361785992) {
+      map.setLevel(1);
+      // 마커를 표시할 위치와 title 객체 배열입니다
+      const positions = [
+        {
+          title: '강변1',
+          latlng: new window.kakao.maps.LatLng(37.75731929962502, 127.63795672132375),
+        },
+        {
+          title: '강변2',
+          latlng: new window.kakao.maps.LatLng(37.757385137727994, 127.63786082999069),
+        },
+        {
+          title: '천호3',
+          latlng: new window.kakao.maps.LatLng(37.757462283192936, 127.63775652466634),
+        },
+        {
+          title: '잠실4',
+          latlng: new window.kakao.maps.LatLng(37.75753925972322, 127.63768342433004),
+        },
+        {
+          title: '태릉5',
+          latlng: new window.kakao.maps.LatLng(37.757636460655995, 127.63761900834801),
+        },
+        {
+          title: '평내호평6',
+          latlng: new window.kakao.maps.LatLng(37.75779658718164, 127.6375806650569),
+        },
+        {
+          title: '상봉7',
+          latlng: new window.kakao.maps.LatLng(37.757882173700416, 127.63758139962634),
+        },
+        {
+          title: '구리8',
+          latlng: new window.kakao.maps.LatLng(37.757976738629864, 127.63758788522958),
+        },
+      ];
+      for (let i = 0; i < positions.length; i++) {
+        const imageSrc = `/icon/stops/${i + 1}.png`; // 마커이미지의 주소입니다
+        const imageSize = new window.kakao.maps.Size(37, 37); // 마커 이미지의 이미지 크기 입니다
+        const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize); // 마커 이미지를 생성합니다
+        // 마커를 생성합니다
+        const marker = new window.kakao.maps.Marker({
+          position: positions[i].latlng, // 마커를 표시할 위치
+          title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+          image: markerImage, // 마커 이미지
+        });
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);
+      }
     } else {
       const imageSrc = '/icon/busStop-marker.png'; // 마커이미지의 주소입니다
       const imageSize = new window.kakao.maps.Size(37, 41); // 마커이미지 크기
