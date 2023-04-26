@@ -13,7 +13,7 @@ const bs = classNames.bind(styles);
 function Bus() {
   // URL parameter
   let { destination } = useParams();
-  // 선택된 노선 또는 "강변1"(기본값)
+  // 선택된 노선 또는 "강변1"(기본)
   const [selectedValue, setSelectedValue] = useState(destination || '강변1');
   // 현재위치 정보 lat&log
   const [latLong, setLatLong] = useState({ latitude: 37.756540912483615, longitude: 127.63819968679633 });
