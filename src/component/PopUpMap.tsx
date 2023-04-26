@@ -111,7 +111,7 @@ function PopUpMap({
       // 마커가 지도 위에 표시되도록 설정합니다
       marker.setMap(map);
     }
-  }, [stopLatLong]);
+  }, [stopLatLong, selectedValue]);
 
   return (
     <div className={ps('pop-up-map')}>
