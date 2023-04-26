@@ -43,26 +43,30 @@ function PopUpMap({
       level: 2, // 지도 확대 레벨
     };
     const map = new window.kakao.maps.Map(container, options); // 지도생성
-    const imageSrc = '/icon/busStop-marker.png', // 마커이미지의 주소입니다
-      imageSize = new window.kakao.maps.Size(37, 41), // 마커이미지 크기
-      imageOption = { offset: new window.kakao.maps.Point(15, 35) }; // 마커이미지 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표 설정.
-    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-    const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-      markerPosition = new window.kakao.maps.LatLng(stopLatLong.latitude, stopLatLong.longitude); // 마커 표시될 위치
-    // 마커를 생성합니다
-    const marker = new window.kakao.maps.Marker({
-      position: markerPosition,
-      image: markerImage, // 마커이미지 설정
-    });
-    // 마커가 지도 위에 표시되도록 설정합니다
-    marker.setMap(map);
+    // 더존_강촌의 위도 경도가 들어올 때,
+    if (stopLatLong.latitude === 37.7577967099585 && stopLatLong.longitude === 127.63755797028342) {
+    } else {
+      const imageSrc = '/icon/busStop-marker.png'; // 마커이미지의 주소입니다
+      const imageSize = new window.kakao.maps.Size(37, 41); // 마커이미지 크기
+      const imageOption = { offset: new window.kakao.maps.Point(15, 35) }; // 마커이미지 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표 설정.
+      // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+      const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+      const markerPosition = new window.kakao.maps.LatLng(stopLatLong.latitude, stopLatLong.longitude); // 마커 표시될 위치
+      // 마커를 생성합니다
+      const marker = new window.kakao.maps.Marker({
+        position: markerPosition,
+        image: markerImage, // 마커이미지 설정
+      });
+      // 마커가 지도 위에 표시되도록 설정합니다
+      marker.setMap(map);
+    }
   }, [stopLatLong]);
 
   return (
     <div className={ps('pop-up-map')}>
       <div className={ps('pop-up-map__mask')} />
       <div className={ps('pop-up-map__kakao-map--wrapper')}>
-        <div ref={mapRef} style={{ height: '93.34vw', width: '100%', borderRadius: '10.26vw', isolation: 'isolate' }} />
+        <div ref={mapRef} style={{ height: '93.4vw', width: '100%', borderRadius: '10.26vw', isolation: 'isolate' }} />
         <div className={ps('pop-up-map__location')}>{stopLocation}</div>
         <div className={ps('pop-up-map__close')} onClick={() => onOffButton(false)}>
           닫기
