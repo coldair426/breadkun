@@ -29,15 +29,15 @@ function PopUpMap({
       parentElement.removeEventListener('touchmove', handleTouchMove); // Touch 디바이스 스크롤 정지 해제
     };
   }, []);
-
   const handleTouchMove = (e: TouchEvent) => e.preventDefault();
   const mapRef = useRef(null);
+
   // 지도 생성(초기화)
   useEffect(() => {
     const container = mapRef.current; // return 값 DOM
     const options = {
       center: new window.kakao.maps.LatLng(stopLatLong.latitude, stopLatLong.longitude), // 지도 중심좌표
-      mapTypeId: window.kakao.maps.MapTypeId.HYBRID,
+      // mapTypeId: window.kakao.maps.MapTypeId.HYBRID,
       draggable: true, // 이동, 확대, 축소 금지
       disableDoubleClick: true, // 더블클릭 방지 옵션
       level: 2, // 지도 확대 레벨
