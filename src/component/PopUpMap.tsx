@@ -13,10 +13,12 @@ function PopUpMap({
   onOffButton,
   stopLatLong,
   stopLocation,
+  selectedValue,
 }: {
   onOffButton: React.Dispatch<React.SetStateAction<boolean>>;
   stopLatLong: { latitude: number; longitude: number };
   stopLocation: string;
+  selectedValue: string;
 }) {
   useEffect(() => {
     const parentElement = document.body; // DOM의 body 태그 지정
@@ -46,7 +48,7 @@ function PopUpMap({
     // 더존_강촌의 위도 경도가 들어올 때,
     if (stopLatLong.latitude === 37.757685934004726 && stopLatLong.longitude === 127.63763361785992) {
       map.setLevel(1);
-      // 마커를 표시할 위치와 title 객체 배열입니다
+      // 퇴근 버스 서울(수도권) 출발 정류장 위치
       const positions = [
         {
           title: '강변1',
@@ -57,32 +59,32 @@ function PopUpMap({
           latlng: new window.kakao.maps.LatLng(37.757385137727994, 127.63786082999069),
         },
         {
-          title: '천호3',
+          title: '천호',
           latlng: new window.kakao.maps.LatLng(37.757462283192936, 127.63775652466634),
         },
         {
-          title: '잠실4',
+          title: '잠실',
           latlng: new window.kakao.maps.LatLng(37.75753925972322, 127.63768342433004),
         },
         {
-          title: '태릉5',
+          title: '태릉',
           latlng: new window.kakao.maps.LatLng(37.757636460655995, 127.63761900834801),
         },
         {
-          title: '평내호평6',
+          title: '평내호평',
           latlng: new window.kakao.maps.LatLng(37.75779658718164, 127.6375806650569),
         },
         {
-          title: '상봉7',
+          title: '상봉',
           latlng: new window.kakao.maps.LatLng(37.757882173700416, 127.63758139962634),
         },
         {
-          title: '구리8',
+          title: '구리',
           latlng: new window.kakao.maps.LatLng(37.757976738629864, 127.63758788522958),
         },
       ];
       for (let i = 0; i < positions.length; i++) {
-        const imageSrc = `/icon/stops/${i + 1}.png`; // 마커이미지의 주소입니다
+        const imageSrc = positions[i].title === selectedValue ? `/icon/stops/${i + 1}-selected.png` : `/icon/stops/${i + 1}.png`; // 마커이미지의 주소입니다
         const imageSize = new window.kakao.maps.Size(37, 37); // 마커 이미지의 이미지 크기 입니다
         const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize); // 마커 이미지를 생성합니다
         // 마커를 생성합니다

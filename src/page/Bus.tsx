@@ -13,7 +13,7 @@ const bs = classNames.bind(styles);
 function Bus() {
   // URL parameter
   let { destination } = useParams();
-  // 도착지 선택된 값 또는 "강변1"(기본값)
+  // 선택된 노선 또는 "강변1"(기본값)
   const [selectedValue, setSelectedValue] = useState(destination || '강변1');
   // 현재위치 정보 lat&log
   const [latLong, setLatLong] = useState({ latitude: 37.756540912483615, longitude: 127.63819968679633 });
@@ -258,7 +258,7 @@ function Bus() {
             ))}
           </div>
         </div>
-        {popUpMap && <PopUpMap onOffButton={setPopUpMap} stopLatLong={stopLatLong} stopLocation={stopLocation} />}
+        {popUpMap && <PopUpMap onOffButton={setPopUpMap} stopLatLong={stopLatLong} stopLocation={stopLocation} selectedValue={selectedValue} />}
         {notification && <NotificationBox firstText={'시간 계산 중.'} secText={'위치 정보 허용 필요.'} />}
       </div>
     </div>
