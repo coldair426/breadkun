@@ -3,7 +3,7 @@ $gray-09: #212529; // 기본배경색
 .header {
   background-color: $gray-09;
   position: sticky;
-  top: 0;
+  top: 0px;
   display: -webkit-flex; /* Safari */
   display: flex;
   -webkit-justify-content: space-between; /* Safari */
@@ -14,6 +14,7 @@ $gray-09: #212529; // 기본배경색
   height: 17.95vw;
   width: 100%;
   z-index: 80;
+  opacity: 0.97;
 }
 .header__logo {
   // margin-left: 20px;

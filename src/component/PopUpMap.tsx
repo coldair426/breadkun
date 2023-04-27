@@ -27,7 +27,7 @@ function PopUpMap({
     parentElement.addEventListener('touchmove', handleTouchMove, { passive: false }); // Touch 디바이스 스크롤 정지
     // MenuBox 언마운트시,
     return () => {
-      parentElement.style.overflow = 'auto';
+      parentElement.style.overflow = 'visible';
       parentElement.removeEventListener('touchmove', handleTouchMove); // Touch 디바이스 스크롤 정지 해제
     };
   }, []);
