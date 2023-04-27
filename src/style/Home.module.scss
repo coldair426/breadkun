@@ -1,6 +1,7 @@
 $backColor1: #413543;
 $backColor2: #404258;
 $gray8: #343a40;
+$gray9: #212529; // 기본배경색
 $fontColor: #f8f9fa; // 기본글자색
 
 .home {
@@ -10,18 +11,11 @@ $fontColor: #f8f9fa; // 기본글자색
   }
 }
 .home__title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 10.26vw;
-  height: 12vw;
-  width: 100%;
-  background-color: $gray8;
-  font-size: 4.8vw;
   button {
-    height: 100%;
+    height: 12vw;
     width: 50%;
     text-align: center;
+    font-size: 4.8vw;
   }
   > button:nth-child(1) {
     border-top-left-radius: 10.26vw;
@@ -32,6 +26,17 @@ $fontColor: #f8f9fa; // 기본글자색
     border-bottom-right-radius: 10.26vw;
   }
   .home__title-selected {
-    background-color: #413543;
+    background-color: $backColor2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .home__title-unselected {
+    background-color: $gray8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

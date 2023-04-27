@@ -17,10 +17,10 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     <div className={hs('home')}>
       <div className={hs('home__body')}>
         <div className={hs('home__title')}>
-          <button className={hs(home && 'home__title-selected')} onClick={() => setHome(true)}>
+          <button className={hs(home ? 'home__title-selected' : 'home__title-unselected')} onClick={() => setHome(true)}>
             더존 강촌캠퍼스
           </button>
-          <button className={hs(home || 'home__title-selected')} onClick={() => setHome(false)}>
+          <button className={hs(home ? 'home__title-unselected' : 'home__title-selected')} onClick={() => setHome(false)}>
             더존 을지타워
           </button>
         </div>
