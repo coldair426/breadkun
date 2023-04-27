@@ -26,7 +26,7 @@ $fontColor: #f8f9fa; // 기본글자색
     border-bottom-right-radius: 10.26vw;
   }
   .home__title-selected {
-    background-color: $backColor2;
+    background-color: $backColor1;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     &:hover {
       cursor: pointer;
