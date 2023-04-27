@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import styles from '../style/MenuBox.module.scss';
 import classNames from 'classnames/bind';
 import { NavLink } from 'react-router-dom';
