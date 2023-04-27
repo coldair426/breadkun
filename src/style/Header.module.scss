@@ -2,6 +2,7 @@ $gray-09: #212529; // 기본배경색
 
 .header {
   background-color: $gray-09;
+  position: -webkit-sticky;
   position: sticky;
   top: 0px;
   display: -webkit-flex; /* Safari */
