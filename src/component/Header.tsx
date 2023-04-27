@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const hs = classNames.bind(styles);
 
-function Header({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
+const Header = ({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) => {
   return (
     <header className={hs('header')}>
       <Link to={'/'}>
@@ -16,6 +16,6 @@ function Header({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateActio
       </button>
     </header>
   );
-}
+};
 
 export default Header;

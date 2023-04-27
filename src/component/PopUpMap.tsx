@@ -20,6 +20,9 @@ function PopUpMap({
   stopLocation: string;
   selectedValue: string;
 }) {
+  const handleTouchMove = (e: TouchEvent) => e.preventDefault();
+  const mapRef = useRef(null);
+
   useEffect(() => {
     const parentElement = document.body; // DOM의 body 태그 지정
     // MenuBox 마운트시,
@@ -27,13 +30,10 @@ function PopUpMap({
     parentElement.addEventListener('touchmove', handleTouchMove, { passive: false }); // Touch 디바이스 스크롤 정지
     // MenuBox 언마운트시,
     return () => {
-      parentElement.style.overflow = 'visible';
+      parentElement.style.overflow = 'unset';
       parentElement.removeEventListener('touchmove', handleTouchMove); // Touch 디바이스 스크롤 정지 해제
     };
   }, []);
-  const handleTouchMove = (e: TouchEvent) => e.preventDefault();
-  const mapRef = useRef(null);
-
   // 지도 생성(초기화)
   useEffect(() => {
     const container = mapRef.current; // return 값 DOM

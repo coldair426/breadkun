@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 
 const ts = classNames.bind(styles);
 
-function Title({ letter, imgSrc, imgH }: { letter: string; imgSrc: string; imgH: string }) {
+const Title = ({ letter, imgSrc, imgH }: { letter: string; imgSrc: string; imgH: string }) => {
   return (
     <div className={ts('title')}>
       <div className={ts('title__icon')}>
@@ -19,6 +19,6 @@ function Title({ letter, imgSrc, imgH }: { letter: string; imgSrc: string; imgH:
       <div className={ts('title__letter')}>{letter}</div>
     </div>
   );
-}
+};
 
 export default Title;

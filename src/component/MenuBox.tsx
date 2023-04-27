@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from '../style/MenuBox.module.scss';
 import classNames from 'classnames/bind';
 import { NavLink } from 'react-router-dom';
@@ -6,6 +6,8 @@ import { NavLink } from 'react-router-dom';
 const ms = classNames.bind(styles);
 
 function MenuBox({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
+  const handleTouchMove = (e: TouchEvent) => e.preventDefault();
+
   useEffect(() => {
     const parentElement = document.body; // DOM의 body 태그 지정
     // MenuBox 마운트시,
@@ -17,7 +19,6 @@ function MenuBox({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateActi
       parentElement.removeEventListener('touchmove', handleTouchMove); // Touch 디바이스 스크롤 정지 해제
     };
   }, []);
-  const handleTouchMove = (e: TouchEvent) => e.preventDefault();
 
   return (
     <div className={ms('menu-box')}>

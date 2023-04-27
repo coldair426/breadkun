@@ -5,7 +5,7 @@ declare global {
     kakao: any;
   }
 }
-function KakaoMap({
+const KakaoMap = ({
   mapHeight,
   mapWidth,
   latLong,
@@ -19,7 +19,7 @@ function KakaoMap({
   levelNum: number;
   draggableType: boolean;
   trafficInfo: boolean;
-}) {
+}) => {
   const mapRef = useRef(null);
 
   // 지도 생성(초기화)
@@ -56,7 +56,7 @@ function KakaoMap({
       <div ref={mapRef} style={{ height: mapHeight, width: mapWidth, borderRadius: '10.26vw', isolation: 'isolate' }} />
     </div>
   );
-}
+};
 
 KakaoMap.defaultProps = {
   levelNum: 5,

@@ -10,7 +10,7 @@ import PopUpMap from './../component/PopUpMap';
 
 const bs = classNames.bind(styles);
 
-function Bus() {
+function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
   // URL parameter
   let { destination } = useParams();
   // 선택된 노선 또는 "강변1"(기본)
@@ -104,7 +104,9 @@ function Bus() {
     window.scrollTo(0, 0);
     // 현재위치 업데이트 최초 1회 업데이트
     updateLocation();
-  }, []);
+    // 메뉴 닫기(이전버튼 클릭시)
+    setMenuBox(false);
+  }, [setMenuBox]);
   // 현재 도로명 주소 업데이트
   useEffect(() => {
     getAddr(latLong.latitude, latLong.longitude);
@@ -258,9 +260,9 @@ function Bus() {
             ))}
           </div>
         </div>
-        {popUpMap && <PopUpMap onOffButton={setPopUpMap} stopLatLong={stopLatLong} stopLocation={stopLocation} selectedValue={selectedValue} />}
-        {notification && <NotificationBox firstText={'시간 계산 중.'} secText={'위치 정보 허용 필요.'} />}
       </div>
+      {popUpMap && <PopUpMap onOffButton={setPopUpMap} stopLatLong={stopLatLong} stopLocation={stopLocation} selectedValue={selectedValue} />}
+      {notification && <NotificationBox firstText={'시간 계산 중.'} secText={'위치 정보 허용 필요.'} />}
     </div>
   );
 }
