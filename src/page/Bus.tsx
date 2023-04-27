@@ -65,6 +65,40 @@ function Bus() {
     },
   ]);
 
+  // 현재좌표를 업데이트 하는 함수
+  const updateLocation = () => {
+    navigator.geolocation.getCurrentPosition((position) => setLatLong({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
+  };
+  // 현재좌표 => 도로명 주소 변환 함수
+  const getAddr = (lat: number, lng: number) => {
+    const geocoder = new window.kakao.maps.services.Geocoder();
+    const coord = new window.kakao.maps.LatLng(lat, lng);
+    const callback = (result: any, status: any) => {
+      if (status === window.kakao.maps.services.Status.OK) {
+        // 글자 자르기
+        setAddress({
+          region_1depth_name:
+            result[0].address.region_1depth_name.indexOf(' ') >= 0
+              ? result[0].address.region_1depth_name.slice(0, result[0].address.region_1depth_name.indexOf(' '))
+              : result[0].address.region_1depth_name,
+          region_2depth_name:
+            result[0].address.region_2depth_name.indexOf(' ') >= 0
+              ? result[0].address.region_2depth_name.slice(0, result[0].address.region_2depth_name.indexOf(' '))
+              : result[0].address.region_2depth_name,
+          region_3depth_name:
+            result[0].address.region_3depth_name.indexOf(' ') >= 0
+              ? result[0].address.region_3depth_name.slice(0, result[0].address.region_3depth_name.indexOf(' '))
+              : result[0].address.region_3depth_name,
+        });
+      }
+    };
+    geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+  };
+  // 도착지 값을 드롭다운에 따라 업데이트하는 함수
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedValue(e.target.value);
+  };
+
   useEffect(() => {
     // 페이지 최상단으로 스크롤링
     window.scrollTo(0, 0);
@@ -134,40 +168,6 @@ function Bus() {
   //       setNotification(false);
   //     });
   // }, [selectedValue, latLong]);
-
-  // 현재좌표를 업데이트 하는 함수
-  const updateLocation = () => {
-    navigator.geolocation.getCurrentPosition((position) => setLatLong({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
-  };
-  // 현재좌표 => 도로명 주소 변환 함수
-  const getAddr = (lat: number, lng: number) => {
-    const geocoder = new window.kakao.maps.services.Geocoder();
-    const coord = new window.kakao.maps.LatLng(lat, lng);
-    const callback = (result: any, status: any) => {
-      if (status === window.kakao.maps.services.Status.OK) {
-        // 글자 자르기
-        setAddress({
-          region_1depth_name:
-            result[0].address.region_1depth_name.indexOf(' ') >= 0
-              ? result[0].address.region_1depth_name.slice(0, result[0].address.region_1depth_name.indexOf(' '))
-              : result[0].address.region_1depth_name,
-          region_2depth_name:
-            result[0].address.region_2depth_name.indexOf(' ') >= 0
-              ? result[0].address.region_2depth_name.slice(0, result[0].address.region_2depth_name.indexOf(' '))
-              : result[0].address.region_2depth_name,
-          region_3depth_name:
-            result[0].address.region_3depth_name.indexOf(' ') >= 0
-              ? result[0].address.region_3depth_name.slice(0, result[0].address.region_3depth_name.indexOf(' '))
-              : result[0].address.region_3depth_name,
-        });
-      }
-    };
-    geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
-  };
-  // 도착지 값을 드롭다운에 따라 업데이트하는 함수
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedValue(e.target.value);
-  };
 
   return (
     <div className={bs('bus')}>

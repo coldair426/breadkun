@@ -1,12 +1,37 @@
-$gray-00: #f8f9fa; // 기본글자색
-$gray-08: #343a40;
+$backColor1: #413543;
+$backColor2: #404258;
+$gray8: #343a40;
+$fontColor: #f8f9fa; // 기본글자색
+
 .home {
   padding: 0;
+  .home__body {
+    padding: 0 3.33vw;
+  }
 }
-.test1 {
-  background-color: $gray-08;
-  margin: 0 20px;
-  border: 1px solid $gray-00;
-  border-radius: 25px;
-  height: 900px;
+.home__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10.26vw;
+  height: 12vw;
+  width: 100%;
+  background-color: $gray8;
+  font-size: 4.8vw;
+  button {
+    height: 100%;
+    width: 50%;
+    text-align: center;
+  }
+  > button:nth-child(1) {
+    border-top-left-radius: 10.26vw;
+    border-bottom-left-radius: 10.26vw;
+  }
+  > button:nth-child(2) {
+    border-top-right-radius: 10.26vw;
+    border-bottom-right-radius: 10.26vw;
+  }
+  .home__title-selected {
+    background-color: #413543;
+  }
 }
