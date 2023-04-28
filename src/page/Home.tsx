@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 const hs = classNames.bind(styles);
 
 function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
-  const [home, setHome] = useState(true); // true: 강촌, false: 을지
+  const [company, setCompany] = useState(localStorage.getItem('company') || '강촌'); // 강촌, 을지
 
   useEffect(() => {
     setMenuBox(false); // 메뉴 닫기(이전버튼 클릭시)
@@ -13,15 +13,18 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   useEffect(() => {
     window.scrollTo(0, 0); // 페이지 최상단으로 스크롤링
   }, []);
+  useEffect(() => {
+    localStorage.setItem('company', company); // 로컬 스토리지 업데이트
+  }, [company]);
 
   return (
     <div className={hs('home')}>
       <div className={hs('home__body')}>
         <div className={hs('home__title')}>
-          <button className={hs(home ? 'home__title-selected' : 'home__title-unselected')} onClick={() => setHome(true)}>
+          <button className={hs(company === '강촌' ? 'home__title-selected' : 'home__title-unselected')} onClick={() => setCompany('강촌')}>
             더존 강촌캠퍼스
           </button>
-          <button className={hs(home ? 'home__title-unselected' : 'home__title-selected')} onClick={() => setHome(false)}>
+          <button className={hs(company === '을지' ? 'home__title-selected' : 'home__title-unselected')} onClick={() => setCompany('을지')}>
             더존 을지타워
           </button>
         </div>

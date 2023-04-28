@@ -105,7 +105,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
     getAddr(latLong.latitude, latLong.longitude); // 현재 도로명 주소 업데이트
   }, [latLong]);
   useEffect(() => {
-    localStorage.setItem('currentDestination', selectedValue);
+    localStorage.setItem('currentDestination', selectedValue); // 로컬 스토리지 업데이트
   }, [selectedValue]);
   // 서버에서 남은 시간 받아오기 비동기 처리(async & await)
   useEffect(() => {

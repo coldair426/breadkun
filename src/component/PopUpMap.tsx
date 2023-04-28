@@ -39,7 +39,7 @@ function PopUpMap({
     const container = mapRef.current; // return 값 DOM
     const options = {
       center: new window.kakao.maps.LatLng(stopLatLong.latitude, stopLatLong.longitude), // 지도 중심좌표
-      // mapTypeId: window.kakao.maps.MapTypeId.HYBRID,
+      // mapTypeId: window.kakao.maps.MapTypeId.HYBRID, // 위성사진(하이브리드)으로 변경하기
       draggable: true, // 이동, 확대, 축소 금지
       disableDoubleClick: true, // 더블클릭 방지 옵션
       level: 2, // 지도 확대 레벨
@@ -93,23 +93,20 @@ function PopUpMap({
           title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
           image: markerImage, // 마커 이미지
         });
-        // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
+        marker.setMap(map); // 마커가 지도 위에 표시되도록 설정합니다
       }
     } else {
       const imageSrc = '/icon/busStop-marker.png'; // 마커이미지의 주소입니다
       const imageSize = new window.kakao.maps.Size(37, 41); // 마커이미지 크기
       const imageOption = { offset: new window.kakao.maps.Point(15, 35) }; // 마커이미지 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표 설정.
-      // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-      const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+      const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOption); // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
       const markerPosition = new window.kakao.maps.LatLng(stopLatLong.latitude, stopLatLong.longitude); // 마커 표시될 위치
       // 마커를 생성합니다
       const marker = new window.kakao.maps.Marker({
         position: markerPosition,
         image: markerImage, // 마커이미지 설정
       });
-      // 마커가 지도 위에 표시되도록 설정합니다
-      marker.setMap(map);
+      marker.setMap(map); // 마커가 지도 위에 표시되도록 설정합니다
     }
   }, [stopLatLong, selectedValue]);
 
