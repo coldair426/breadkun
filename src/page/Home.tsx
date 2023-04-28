@@ -8,10 +8,11 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   const [home, setHome] = useState(true); // true: 강촌, false: 을지
 
   useEffect(() => {
-    window.scrollTo(0, 0); // 페이지 최상단으로 스크롤링
-    // 메뉴 닫기(이전버튼 클릭시)
-    setMenuBox(false);
+    setMenuBox(false); // 메뉴 닫기(이전버튼 클릭시)
   }, [setMenuBox]);
+  useEffect(() => {
+    window.scrollTo(0, 0); // 페이지 최상단으로 스크롤링
+  }, []);
 
   return (
     <div className={hs('home')}>

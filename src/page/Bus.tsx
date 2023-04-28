@@ -11,20 +11,15 @@ import PopUpMap from './../component/PopUpMap';
 const bs = classNames.bind(styles);
 
 function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
-  // URL parameter
-  let { destination } = useParams();
-  // 선택된 노선 또는 "강변1"(기본)
-  const [selectedValue, setSelectedValue] = useState(destination || '강변1');
-  // 현재위치 정보 lat&log
-  const [latLong, setLatLong] = useState({ latitude: 37.756540912483615, longitude: 127.63819968679633 });
-  // 현재위치 정보 도로명 주소
-  const [address, setAddress] = useState({ region_1depth_name: '강원', region_2depth_name: '춘천시', region_3depth_name: '남산면' });
-  // 도착시간
-  const [arrivalTime, setArrivalTime] = useState({ mainbox: '-----', time: '', ampm: '', remainingTime: '', remainingText: '' });
-  const [notification, setNotification] = useState(false);
-  const [popUpMap, setPopUpMap] = useState(false);
-  const [stopLatLong, setStopLatLong] = useState({ latitude: 0, longitude: 0 });
-  const [stopLocation, setStopLocation] = useState('');
+  let { destination } = useParams(); // URL parameter
+  const [selectedValue, setSelectedValue] = useState(destination || localStorage.getItem('currentDestination') || '강변1'); // URL parameter 노선 or 로컬스토리지 or "강변1"(기본)
+  const [latLong, setLatLong] = useState({ latitude: 37.756540912483615, longitude: 127.63819968679633 }); // 현재위치 정보 lat&log
+  const [address, setAddress] = useState({ region_1depth_name: '강원', region_2depth_name: '춘천시', region_3depth_name: '남산면' }); // 현재위치 정보 도로명 주소
+  const [arrivalTime, setArrivalTime] = useState({ mainbox: '-----', time: '', ampm: '', remainingTime: '', remainingText: '' }); // 도착시간
+  const [notification, setNotification] = useState(false); // 스낵바
+  const [popUpMap, setPopUpMap] = useState(false); // 자세히 보기 정류장 지도
+  const [stopLatLong, setStopLatLong] = useState({ latitude: 0, longitude: 0 }); // 자세히 보기 정류장 위도경도
+  const [stopLocation, setStopLocation] = useState(''); // 자세히 보기 정류장 위치 설명
   // test 서버
   const [stopsTest] = useState([
     {
@@ -100,17 +95,18 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
   };
 
   useEffect(() => {
-    // 페이지 최상단으로 스크롤링
-    window.scrollTo(0, 0);
-    // 현재위치 업데이트 최초 1회 업데이트
-    updateLocation();
-    // 메뉴 닫기(이전버튼 클릭시)
-    setMenuBox(false);
+    setMenuBox(false); // 메뉴 닫기(이전버튼 클릭시)
   }, [setMenuBox]);
-  // 현재 도로명 주소 업데이트
   useEffect(() => {
-    getAddr(latLong.latitude, latLong.longitude);
+    window.scrollTo(0, 0); // 페이지 최상단으로 스크롤링
+    updateLocation(); // 현재위치 업데이트 최초 1회 업데이트
+  }, []);
+  useEffect(() => {
+    getAddr(latLong.latitude, latLong.longitude); // 현재 도로명 주소 업데이트
   }, [latLong]);
+  useEffect(() => {
+    localStorage.setItem('currentDestination', selectedValue);
+  }, [selectedValue]);
   // 서버에서 남은 시간 받아오기 비동기 처리(async & await)
   useEffect(() => {
     async function fetchData() {
