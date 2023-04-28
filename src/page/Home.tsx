@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 const hs = classNames.bind(styles);
 
 function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
-  const [company, setCompany] = useState(localStorage.getItem('currentCompany') || '강촌'); // 강촌, 을지
+  const [company, setCompany] = useState(localStorage.getItem('recentCompany') || '강촌'); // 강촌, 을지
 
   useEffect(() => {
     setMenuBox(false); // 메뉴 닫기(이전버튼 클릭시)
@@ -14,7 +14,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     window.scrollTo(0, 0); // 페이지 최상단으로 스크롤링
   }, []);
   useEffect(() => {
-    localStorage.setItem('currentCompany', company); // 로컬 스토리지 업데이트
+    localStorage.setItem('recentCompany', company); // 로컬 스토리지 업데이트
   }, [company]);
 
   return (

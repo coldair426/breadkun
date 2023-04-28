@@ -12,7 +12,7 @@ const bs = classNames.bind(styles);
 
 function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
   let { destination } = useParams(); // URL parameter
-  const [selectedValue, setSelectedValue] = useState(destination || localStorage.getItem('currentDestination') || '강변1'); // URL parameter 노선 or 로컬스토리지 or "강변1"(기본)
+  const [selectedValue, setSelectedValue] = useState(destination || localStorage.getItem('recentDestination') || '강변1'); // URL parameter 노선 or 로컬스토리지 or "강변1"(기본)
   const [latLong, setLatLong] = useState({ latitude: 37.756540912483615, longitude: 127.63819968679633 }); // 현재위치 정보 lat&log
   const [address, setAddress] = useState({ region_1depth_name: '강원', region_2depth_name: '춘천시', region_3depth_name: '남산면' }); // 현재위치 정보 도로명 주소
   const [arrivalTime, setArrivalTime] = useState({ mainbox: '-----', time: '', ampm: '', remainingTime: '', remainingText: '' }); // 도착시간
@@ -105,7 +105,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
     getAddr(latLong.latitude, latLong.longitude); // 현재 도로명 주소 업데이트
   }, [latLong]);
   useEffect(() => {
-    localStorage.setItem('currentDestination', selectedValue); // 로컬 스토리지 업데이트
+    localStorage.setItem('recentDestination', selectedValue); // 로컬 스토리지 업데이트
   }, [selectedValue]);
   // 서버에서 남은 시간 받아오기 비동기 처리(async & await)
   useEffect(() => {
