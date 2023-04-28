@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../style/Home.module.scss';
 import classNames from 'classnames/bind';
+// import axios from 'axios';
 
 const hs = classNames.bind(styles);
 
@@ -13,6 +14,18 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   useEffect(() => {
     window.scrollTo(0, 0); // 페이지 최상단으로 스크롤링
   }, []);
+  // // 미세먼지, 초미세먼지 받아오기(async & await)
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const result = await axios.get('');
+  //       console.log(result);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
   useEffect(() => {
     localStorage.setItem('recentCompany', company); // 로컬 스토리지 업데이트
   }, [company]);

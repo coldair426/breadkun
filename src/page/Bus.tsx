@@ -168,98 +168,100 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
   // }, [selectedValue, latLong]);
 
   return (
-    <div className={bs('bus')}>
-      <Title letter='퇴근 버스' imgSrc='/icon/bus-title-icon.png' imgH='5.64vw' />
-      <div className={bs('bus__body')}>
-        <KakaoMap mapHeight={'64.1vw'} mapWidth={'100%'} latLong={latLong} levelNum={5} draggableType={true} trafficInfo={true} />
-        <div className={bs('bus__block1')}>
-          <div className={bs('bus__block1--left')}>
-            <div className={bs('bus__block1--left-title')}>
-              <img src='/icon/bus-arrival-icon.png' alt='arrival icon' />
-            </div>
-            <div className={bs('bus__block1--left-mainBox')}>{arrivalTime.mainbox}</div>
-            <div className={bs('bus__block1--left-firstLine')}>
-              <div className={bs('bus__block1--left-firstLine-contents')}>
-                <div>{arrivalTime.time}</div>
-                <div>{arrivalTime.ampm}</div>
+    <>
+      <div className={bs('bus')}>
+        <Title letter='퇴근 버스' imgSrc='/icon/bus-title-icon.png' imgH='5.64vw' />
+        <div className={bs('bus__body')}>
+          <KakaoMap mapHeight={'64.1vw'} mapWidth={'100%'} latLong={latLong} levelNum={5} draggableType={true} trafficInfo={true} />
+          <div className={bs('bus__block1')}>
+            <div className={bs('bus__block1--left')}>
+              <div className={bs('bus__block1--left-title')}>
+                <img src='/icon/bus-arrival-icon.png' alt='arrival icon' />
+              </div>
+              <div className={bs('bus__block1--left-mainBox')}>{arrivalTime.mainbox}</div>
+              <div className={bs('bus__block1--left-firstLine')}>
+                <div className={bs('bus__block1--left-firstLine-contents')}>
+                  <div>{arrivalTime.time}</div>
+                  <div>{arrivalTime.ampm}</div>
+                </div>
+              </div>
+              <div className={bs('bus__block1--left-secLine')}>
+                <div className={bs('bus__block1--left-secLine-contents')}>
+                  <div>{arrivalTime.remainingTime}</div>
+                  <div>{arrivalTime.remainingText}</div>
+                </div>
               </div>
             </div>
-            <div className={bs('bus__block1--left-secLine')}>
-              <div className={bs('bus__block1--left-secLine-contents')}>
-                <div>{arrivalTime.remainingTime}</div>
-                <div>{arrivalTime.remainingText}</div>
+            <div className={bs('bus__block1--right')}>
+              <div>
+                <div className={bs('bus__block1--right--recentAdr')}>
+                  <div>{address.region_2depth_name}</div>
+                  <div>{address.region_3depth_name}</div>
+                </div>
+                <div className={bs('bus__block1--right--refresh-button')}>
+                  <button onClick={() => updateLocation()}>
+                    <img className={bs('refresh-button')} src='/icon/bus-refresh-button.png' alt='refresh-button'></img>
+                  </button>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className={bs('bus__block1--right')}>
-            <div>
-              <div className={bs('bus__block1--right--recentAdr')}>
-                <div>{address.region_2depth_name}</div>
-                <div>{address.region_3depth_name}</div>
+              <div className={bs('bus__block1--right--arrow')}>
+                <img className={bs('arrow-img')} src='/icon/arrow-down.png' alt='아래화살표' />
               </div>
-              <div className={bs('bus__block1--right--refresh-button')}>
-                <button onClick={() => updateLocation()}>
-                  <img className={bs('refresh-button')} src='/icon/bus-refresh-button.png' alt='refresh-button'></img>
-                </button>
-              </div>
-            </div>
-            <div className={bs('bus__block1--right--arrow')}>
-              <img className={bs('arrow-img')} src='/icon/arrow-down.png' alt='아래화살표' />
-            </div>
-            <div className={bs('bus__block1--right--selectbox')}>
-              <select value={selectedValue} onChange={handleChange}>
-                {/* <optgroup label='춘천방면'>
+              <div className={bs('bus__block1--right--selectbox')}>
+                <select value={selectedValue} onChange={handleChange}>
+                  {/* <optgroup label='춘천방면'>
                   <option value='후평동1'>① 후평동</option>
                   <option value='후평동2'>② 후평동</option>
                   <option value='석사동3'>③ 석사동</option>
                   <option value='석사동4'>④ 석사동</option>
                 </optgroup> */}
-                <optgroup label='서울방면'>
-                  <option value='강변1'>① 강변</option>
-                  <option value='강변2'>② 강변</option>
-                  <option value='천호'>③ 천호</option>
-                  <option value='잠실'>④ 잠실</option>
-                  <option value='태릉'>⑤ 태릉</option>
-                  <option value='평내호평'>⑥ 평내호평</option>
-                  <option value='상봉'>⑦ 상봉</option>
-                  <option value='구리'>⑧ 구리</option>
-                </optgroup>
-              </select>
+                  <optgroup label='서울방면'>
+                    <option value='강변1'>① 강변</option>
+                    <option value='강변2'>② 강변</option>
+                    <option value='천호'>③ 천호</option>
+                    <option value='잠실'>④ 잠실</option>
+                    <option value='태릉'>⑤ 태릉</option>
+                    <option value='평내호평'>⑥ 평내호평</option>
+                    <option value='상봉'>⑦ 상봉</option>
+                    <option value='구리'>⑧ 구리</option>
+                  </optgroup>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
-        <div className={bs('bus__block2')}>
-          <div className={bs('bus__block2--stops')}>
-            {stopsTest.map((v, i) => (
-              <div className={bs('bus__block2--stop')} key={i}>
-                <div className={bs('bus__block2--stop-texts')} key={i}>
-                  <div className={bs('bus__block2--stop-title-wrapper')}>
-                    <div className={bs('bus__block2--stop-title')} key={`title${i}`}>
-                      {i === 0 || i === stopsTest.length - 1 ? (i === 0 ? '기점' : '종점') : `경유${i}`}
+          <div className={bs('bus__block2')}>
+            <div className={bs('bus__block2--stops')}>
+              {stopsTest.map((v, i) => (
+                <div className={bs('bus__block2--stop')} key={i}>
+                  <div className={bs('bus__block2--stop-texts')} key={i}>
+                    <div className={bs('bus__block2--stop-title-wrapper')}>
+                      <div className={bs('bus__block2--stop-title')} key={`title${i}`}>
+                        {i === 0 || i === stopsTest.length - 1 ? (i === 0 ? '기점' : '종점') : `경유${i}`}
+                      </div>
+                      <div className={bs('bus__block2--stop-name')} key={i}>
+                        {v.name}
+                      </div>
                     </div>
-                    <div className={bs('bus__block2--stop-name')} key={i}>
-                      {v.name}
+                    <div
+                      className={bs('bus__block2--stop-more')}
+                      onClick={() => {
+                        setStopLatLong({ latitude: v.latitude, longitude: v.longitude });
+                        setStopLocation(v.location);
+                        setPopUpMap(true);
+                      }}>
+                      자세히 보기
                     </div>
                   </div>
-                  <div
-                    className={bs('bus__block2--stop-more')}
-                    onClick={() => {
-                      setStopLatLong({ latitude: v.latitude, longitude: v.longitude });
-                      setStopLocation(v.location);
-                      setPopUpMap(true);
-                    }}>
-                    자세히 보기
-                  </div>
+                  <img className={bs('bus__block2--stop-arrow')} src='/icon/bus-stops-arrow.png' alt='down arrow' />
                 </div>
-                <img className={bs('bus__block2--stop-arrow')} src='/icon/bus-stops-arrow.png' alt='down arrow' />
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
       {popUpMap && <PopUpMap onOffButton={setPopUpMap} stopLatLong={stopLatLong} stopLocation={stopLocation} selectedValue={selectedValue} />}
       {notification && <NotificationBox firstText={'시간 계산 중.'} secText={'위치 정보 허용 필요.'} />}
-    </div>
+    </>
   );
 }
 
