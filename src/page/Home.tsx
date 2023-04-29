@@ -32,7 +32,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           console.log(resultS.data.response.body.items[0]);
         }
       } catch (error) {
-        console.log('error');
+        console.log(error);
       }
     }
     fetchData();
