@@ -29,7 +29,7 @@ $gray-00: #f8f9fa; // 기본글자색
     .pop-up-map__location {
       padding: 0 10vw;
       margin-top: 2.5vw;
-      font-size: 5vw;
+      font-size: clamp(1px, 5vw, 25px); // 갤럭시 폴드 대응
       line-height: 6.5vw;
       text-align: center;
       letter-spacing: 0.3vw;
@@ -37,14 +37,13 @@ $gray-00: #f8f9fa; // 기본글자색
       word-break: keep-all;
     }
     .pop-up-map__close {
-      // font-size: 15px;
-      font-size: 3.85vw;
+      font-size: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
       font-weight: 900;
       // letter-spacing: 2px;
       letter-spacing: 0.51vw;
-      margin-top: 2.5vw;
+      margin-top: clamp(1px, 2.5vw, 11px); // 갤럭시 폴드 대응
       // padding: 7px;
-      padding: 1.79vw;
+      padding: clamp(1px, 1.79vw, 8px);
       border: 1px solid $gray-00;
       -moz-border-radius: 1.28vw;
       -webkit-border-radius: 1.28vw;

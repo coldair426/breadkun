@@ -11,8 +11,8 @@ $gray-09: #212529; // 기본배경색
   justify-content: space-between;
   -webkit-align-items: center; /* Safari */
   align-items: center;
-  // height: 70px;
   height: 17.95vw;
+  max-height: 74px; // 갤럭시 폴드 대응
   width: 100%;
   z-index: 80;
   opacity: 0.97;
@@ -20,14 +20,14 @@ $gray-09: #212529; // 기본배경색
 .header__logo {
   // margin-left: 20px;
   margin-left: 5.13vw;
-  // height: 45px;
   height: 11.54vw;
+  max-height: 48px; // 갤럭시 폴드 대응
 }
 .header__button {
   // margin-right: 20px;
   margin-right: 5.13vw;
-  // height: 50px;
   height: 12.82vw;
+  max-height: 53px; // 갤럭시 폴드 대응
   transition: all 50ms ease-in-out;
   -webkit-transition: all 50ms ease-in-out; /* Webkit prefix */
   -moz-transition: all 50ms ease-in-out; /* Mozilla prefix */

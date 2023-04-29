@@ -10,7 +10,7 @@ $gray-09: #212529; // 기본배경색
   -ms-flex-align: center;
   align-items: center;
   // margin-bottom: 15px;
-  margin-bottom: 3.85vw;
+  margin-bottom: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
 }
 .title__icon {
   display: -webkit-box;
@@ -22,19 +22,15 @@ $gray-09: #212529; // 기본배경색
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  // height: 45px;
-  // width: 45px;
   height: 11.54vw;
+  max-height: 48px; // 갤럭시 폴드 대응
   width: 11.54vw;
-  // border-radius: 20px;
-  border-radius: 5.13vw;
+  max-width: 48px; // 갤럭시 폴드 대응
+  border-radius: clamp(1px, 5.13vw, 22px); // 갤럭시 폴드 대응
   background-color: $iconBackground;
-  // margin-left: 15px;
-  // margin-right: 15px;
-  margin-left: 3.85vw;
-  margin-right: 3.85vw;
+  margin-left: clamp(1px, 3.85vw, 27px); // 갤럭시 폴드 대응
+  margin-right: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
 }
 .title__letter {
-  // font-size: 21px;
-  font-size: 5.38vw;
+  font-size: clamp(1px, 5.38vw, 30px); // 갤럭시 폴드 대응
 }

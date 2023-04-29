@@ -13,6 +13,7 @@ function Title({ letter, imgSrc, imgH }: { letter: string; imgSrc: string; imgH:
           alt='before-button'
           style={{
             height: imgH,
+            maxHeight: '22px',
           }}
         />
       </div>

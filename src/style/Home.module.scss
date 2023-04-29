@@ -12,10 +12,11 @@ $fontColor: #f8f9fa; // 기본글자색
 }
 .home__title {
   button {
-    height: 12vw;
+    height: 11.54vw;
+    max-height: 50px; // 갤럭시 폴드 대응
     width: 50%;
     text-align: center;
-    font-size: 4.8vw;
+    font-size: clamp(1px, 4.8vw, 22px); // 최소 10px, 최대 22px, 기본값 4.8vw; 갤럭시 폴드 대응
   }
   > button:nth-child(1) {
     border-top-left-radius: 10.26vw;
