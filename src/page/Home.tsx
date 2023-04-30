@@ -21,13 +21,13 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         if (company === '강촌') {
           // 강촌캠 기상 상태 조회
           const resultK = await axios.get(
-            `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=가평&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_AIRKOREA_DUST_API}`
+            `//apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=가평&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_AIRKOREA_DUST_API}`
           );
           console.log(resultK.data.response.body.items[0]);
         } else {
           // 을지타워 기상 상태 조회
           const resultS = await axios.get(
-            `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=중구&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_AIRKOREA_DUST_API}`
+            `//apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=중구&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_AIRKOREA_DUST_API}`
           );
           console.log(resultS.data.response.body.items[0]);
         }
