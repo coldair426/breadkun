@@ -23,18 +23,16 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           const resultK = await axios.get(
             `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=가평&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`
           );
-          console.log('강촌');
           console.log(resultK.data.response.body.items[0]);
         } else {
           // 을지타워 기상 상태 조회
           const resultS = await axios.get(
             `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=중구&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`
           );
-          console.log('을지');
           console.log(resultS.data.response.body.items[0]);
         }
       } catch (error) {
-        console.log('에러입니다.');
+        console.log('미세먼지, 초미세먼지 수치 가져오기 실패.');
         console.log(error);
       }
     }
@@ -58,7 +56,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           console.log(resultS.data.response.body.items.item);
         }
       } catch (error) {
-        console.log('에러입니다.');
+        console.log('기상청 날씨 수치 가져오기 실패.');
         console.log(error);
       }
     }

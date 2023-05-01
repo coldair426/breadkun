@@ -117,6 +117,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
           originGps: `${latLong.longitude},${latLong.latitude} `,
         });
         const { resultCode, resultData } = result.data;
+        // 출발지와 도착지의 거리가 매우 가까울 때.
         if (resultCode === 104) {
           setArrivalTime({ mainbox: '잠시 후 도착', time: '', ampm: '', remainingTime: '', remainingText: '' });
         } else {
@@ -134,6 +135,8 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
       } catch (error) {
         setArrivalTime({ mainbox: '-----', time: '', ampm: '', remainingTime: '', remainingText: '' });
         setNotification(false);
+        console.log('현재 위치에서 도착지까지 남은 시간 가져오기 실패.');
+        console.log(error);
       }
     }
     fetchData();
