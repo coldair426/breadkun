@@ -6,8 +6,6 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - master
-env:
-  REACT_APP_KAKAOMAP_API: '${{ secrets.REACT_APP_KAKAOMAP_API }}'
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
