@@ -16,54 +16,38 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   }, []);
   // 에어코리아 미세먼지, 초미세먼지
   useEffect(() => {
+    localStorage.setItem('recentCompany', company); // 로컬 스토리지 업데이트
     async function fetchData() {
       try {
         if (company === '강촌') {
-          // 강촌캠 기상 상태 조회
-          const resultK = await axios.get(
+          // 강촌캠 미세먼지 조회
+          const dustGangchon = await axios.get(
             `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=가평&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`
           );
-          console.log(resultK.data.response.body.items[0]);
-        } else {
-          // 을지타워 기상 상태 조회
-          const resultS = await axios.get(
-            `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=중구&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`
-          );
-          console.log(resultS.data.response.body.items[0]);
-        }
-      } catch (error) {
-        console.log('미세먼지, 초미세먼지 수치 가져오기 실패.');
-        console.log(error);
-      }
-    }
-    fetchData();
-  }, [company]);
-  // 기상청 날씨
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        if (company === '강촌') {
+          console.log(dustGangchon.data.response.body.items[0]);
           // 강촌캠 날씨 조회
-          const resultK = await axios.get(
+          const weatherGangchon = await axios.get(
             `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}&numOfRows=100&pageNo=1&dataType=json&base_date=20230501&base_time=1900&nx=71&ny=132`
           );
-          console.log(resultK.data.response.body.items.item);
+          console.log(weatherGangchon.data.response.body.items.item);
         } else {
+          // 을지타워 미세먼지 조회
+          const dustEulji = await axios.get(
+            `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=중구&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`
+          );
+          console.log(dustEulji.data.response.body.items[0]);
           // 을지타워 날씨 조회
-          const resultS = await axios.get(
+          const weatherEulji = await axios.get(
             `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}&numOfRows=100&pageNo=1&dataType=json&base_date=20230501&base_time=1900&nx=60&ny=127`
           );
-          console.log(resultS.data.response.body.items.item);
+          console.log(weatherEulji.data.response.body.items.item);
         }
       } catch (error) {
-        console.log('기상청 날씨 수치 가져오기 실패.');
+        console.log('날씨, 미세먼지 가져오기 실패.');
         console.log(error);
       }
     }
     fetchData();
-  }, [company]);
-  useEffect(() => {
-    localStorage.setItem('recentCompany', company); // 로컬 스토리지 업데이트
   }, [company]);
 
   return (
