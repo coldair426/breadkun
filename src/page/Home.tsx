@@ -12,6 +12,9 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   const [weather, setWeather] = useState([]);
   const [notification, setNotification] = useState(false);
 
+  console.log(dust);
+  console.log(weather);
+
   useEffect(() => {
     setMenuBox(false); // 메뉴 닫기(이전버튼 클릭시)
   }, [setMenuBox]);
