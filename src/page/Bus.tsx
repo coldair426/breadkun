@@ -128,7 +128,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
             time: `${resultH < 10 ? '0' + resultH : resultH}:${resultVal.arrivalTimeM < 10 ? '0' + resultVal.arrivalTimeM : resultVal.arrivalTimeM}`,
             ampm: `${resultVal.arrivalTimeH >= 12 ? 'PM' : 'AM'}`,
             remainingTime: `${resultVal.durationH * 60 + resultVal.durationM}`,
-            remainingText: '분 남음',
+            remainingText: '분 소요',
           });
         }
         setNotification(false);
@@ -211,7 +211,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
                 <img className={bs('arrow-img')} src='/icon/arrow-down.png' alt='아래화살표' />
               </div>
               <div className={bs('bus__block1--right--selectbox')}>
-                <select value={selectedValue} onChange={handleChange}>
+                <select value={selectedValue} onChange={handleChange} aria-label='목적지를 선택해 주세요.'>
                   {/* <optgroup label='춘천방면'>
                   <option value='후평동1'>① 후평동</option>
                   <option value='후평동2'>② 후평동</option>

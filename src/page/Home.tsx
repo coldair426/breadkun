@@ -22,23 +22,23 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         if (company === '강촌') {
           // 강촌캠 미세먼지 조회
           const dustGangchon = await axios.get(
-            `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=가평&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`
+            `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=가평&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`
           );
           console.log(dustGangchon.data.response.body.items[0]);
           // 강촌캠 날씨 조회
           const weatherGangchon = await axios.get(
-            `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}&numOfRows=100&pageNo=1&dataType=json&base_date=20230501&base_time=1900&nx=71&ny=132`
+            `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}&numOfRows=100&pageNo=1&dataType=json&base_date=20230501&base_time=1900&nx=71&ny=132`
           );
           console.log(weatherGangchon.data.response.body.items.item);
         } else {
           // 을지타워 미세먼지 조회
           const dustEulji = await axios.get(
-            `http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=중구&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`
+            `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=중구&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`
           );
           console.log(dustEulji.data.response.body.items[0]);
           // 을지타워 날씨 조회
           const weatherEulji = await axios.get(
-            `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}&numOfRows=100&pageNo=1&dataType=json&base_date=20230501&base_time=1900&nx=60&ny=127`
+            `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}&numOfRows=100&pageNo=1&dataType=json&base_date=20230501&base_time=1900&nx=60&ny=127`
           );
           console.log(weatherEulji.data.response.body.items.item);
         }
