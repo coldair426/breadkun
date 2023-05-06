@@ -3,7 +3,6 @@ import styles from '../style/Home.module.scss';
 import classNames from 'classnames/bind';
 import axios from 'axios';
 import NotificationBox from './../component/NotificationBox';
-import Title from './../component/Title';
 
 const hs = classNames.bind(styles);
 
