@@ -50,12 +50,20 @@ $gray-09: #212529; // 기본배경색
     font-size: clamp(1px, 5.38vw, 25px); // 갤럭시 폴드 대응
   }
   select {
+    font-size: clamp(1px, 3.33vw, 15px); // 갤럭시 폴드 대응
+    font-weight: 900;
+    text-align-last: center; // 중앙정렬
+    -webkit-text-align-last: center; // 아이폰에서도 적용
+    -moz-text-align-last: center;
+    -ms-text-align-last: center;
     appearance: none;
     padding: 0;
     margin: 0;
     width: 100%;
     height: 100%;
     position: absolute;
+    background-color: $gray8;
+    color: $fontColor;
     top: 0;
     left: 0;
     opacity: 0;
@@ -70,14 +78,15 @@ $gray-09: #212529; // 기본배경색
     cursor: pointer;
   }
 }
-.home_dusts {
+.home__dusts {
   display: flex;
   justify-content: center;
-  .home_dust + .home_ultra-dust {
+  .home__dust + .home__ultra-dust {
     // margin-left: 13px;
     margin-left: 3.33vw;
   }
-  .home_dust {
+  .home__dust,
+  .home__ultra-dust {
     // border-radius: 40px;
     border-radius: 10.26vw;
     // height: 170px;
@@ -93,22 +102,30 @@ $gray-09: #212529; // 기본배경색
     -moz-box-orient: vertical; /* Mozilla */
     -moz-box-direction: normal; /* Mozilla */
     flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
   }
-  .home_ultra-dust {
-    // border-radius: 40px;
-    border-radius: 10.26vw;
-    // height: 170px;
-    height: 43.59vw;
-    max-height: 200px; // 갤럭시 폴드 대응
-    width: 50%;
-    background-color: $gray8;
-    display: -webkit-box; /* Webkit */
-    display: -moz-box; /* Mozilla */
+  .home__dust--title,
+  .home__ultra-dust--title {
+    font-size: 20px;
     display: flex;
-    -webkit-box-orient: vertical; /* Webkit */
-    -webkit-box-direction: normal; /* Webkit */
-    -moz-box-orient: vertical; /* Mozilla */
-    -moz-box-direction: normal; /* Mozilla */
+    > img {
+      height: 9px;
+    }
+  }
+  .home__dust--img-letter-wrapper,
+  .home__ultra-dust--img-letter-wrapper {
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    .home__dust--img,
+    .home__ultra-dust--img {
+      height: 70px;
+    }
+    .home__dust--level,
+    .home__ultra-dust--level {
+      margin-top: 15px;
+      font-size: 15px;
+    }
   }
 }

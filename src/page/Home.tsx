@@ -92,12 +92,26 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           </div>
         </div>
         <div className={hs('home__body')}>
-          <div className={hs('home_dusts')}>
-            <div className={hs('home_dust')}>
-              <div>미세먼지</div>
+          <div className={hs('home__dusts')}>
+            <div className={hs('home__dust')}>
+              <div className={hs('home__dust--title')}>
+                <span>미세먼지</span>
+                <img src='/icon/information.png' alt='information' />
+              </div>
+              <div className={hs('home__dust--img-letter-wrapper')}>
+                <img className={hs('home__dust--img')} src='/icon/home-dusts-bad.png' alt='dust-level-icon' />
+                <div className={hs('home__dust--level')}>좋음</div>
+              </div>
             </div>
-            <div className={hs('home_ultra-dust')}>
-              <div>초미세먼지</div>
+            <div className={hs('home__ultra-dust')}>
+              <div className={hs('home__ultra-dust--title')}>
+                <span>초미세먼지</span>
+                <img src='/icon/information.png' alt='information' />
+              </div>
+              <div className={hs('home__ultra-dust--img-letter-wrapper')}>
+                <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-bad.png' alt='dust-level-icon' />
+                <div className={hs('home__ultra-dust--level')}>좋음</div>
+              </div>
             </div>
           </div>
         </div>
