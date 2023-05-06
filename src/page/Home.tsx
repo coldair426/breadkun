@@ -12,6 +12,9 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   const [dust, setDust] = useState({});
   const [weather, setWeather] = useState([]);
 
+  console.log(dust);
+  console.log(weather);
+
   // 회사를 드롭다운에 따라 업데이트하는 함수
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCompany(e.target.value);
