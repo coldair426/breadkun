@@ -3,6 +3,8 @@ $backColor2: #404258;
 $gray8: #343a40;
 $gray9: #212529; // 기본배경색
 $fontColor: #f8f9fa; // 기본글자색
+$iconBackground: #404258;
+$gray-09: #212529; // 기본배경색
 
 .home {
   padding: 0;
@@ -10,34 +12,103 @@ $fontColor: #f8f9fa; // 기본글자색
     padding: 0 3.33vw;
   }
 }
-.home__title {
-  button {
+.title {
+  background-color: $gray-09;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  // margin-bottom: 15px;
+  margin-bottom: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
+  .title__icon {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
     height: 11.54vw;
-    max-height: 50px; // 갤럭시 폴드 대응
+    max-height: 48px; // 갤럭시 폴드 대응
+    width: 11.54vw;
+    max-width: 48px; // 갤럭시 폴드 대응
+    border-radius: clamp(1px, 5.13vw, 22px); // 갤럭시 폴드 대응
+    background-color: $iconBackground;
+    margin-left: clamp(1px, 3.85vw, 27px); // 갤럭시 폴드 대응
+    margin-right: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
+  }
+}
+.title__select {
+  position: relative;
+  display: flex;
+  align-items: center;
+  .title__letter {
+    font-size: clamp(1px, 5.38vw, 25px); // 갤럭시 폴드 대응
+  }
+  select {
+    appearance: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .title__select-button {
+    height: 6.5vw;
+    max-height: 30px; // 갤럭시 폴드 대응
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+}
+.home_dusts {
+  display: flex;
+  justify-content: center;
+  .home_dust + .home_ultra-dust {
+    // margin-left: 13px;
+    margin-left: 3.33vw;
+  }
+  .home_dust {
+    // border-radius: 40px;
+    border-radius: 10.26vw;
+    // height: 170px;
+    height: 43.59vw;
+    max-height: 200px; // 갤럭시 폴드 대응
     width: 50%;
-    text-align: center;
-    font-size: clamp(1px, 4.8vw, 22px); // 최소 10px, 최대 22px, 기본값 4.8vw; 갤럭시 폴드 대응
-  }
-  > button:nth-child(1) {
-    border-top-left-radius: 10.26vw;
-    border-bottom-left-radius: 10.26vw;
-  }
-  > button:nth-child(2) {
-    border-top-right-radius: 10.26vw;
-    border-bottom-right-radius: 10.26vw;
-  }
-  .home__title-selected {
-    background-color: $backColor1;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    &:hover {
-      cursor: pointer;
-    }
-  }
-  .home__title-unselected {
     background-color: $gray8;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    &:hover {
-      cursor: pointer;
-    }
+    display: -webkit-box; /* Webkit */
+    display: -moz-box; /* Mozilla */
+    display: flex;
+    -webkit-box-orient: vertical; /* Webkit */
+    -webkit-box-direction: normal; /* Webkit */
+    -moz-box-orient: vertical; /* Mozilla */
+    -moz-box-direction: normal; /* Mozilla */
+    flex-direction: column;
+  }
+  .home_ultra-dust {
+    // border-radius: 40px;
+    border-radius: 10.26vw;
+    // height: 170px;
+    height: 43.59vw;
+    max-height: 200px; // 갤럭시 폴드 대응
+    width: 50%;
+    background-color: $gray8;
+    display: -webkit-box; /* Webkit */
+    display: -moz-box; /* Mozilla */
+    display: flex;
+    -webkit-box-orient: vertical; /* Webkit */
+    -webkit-box-direction: normal; /* Webkit */
+    -moz-box-orient: vertical; /* Mozilla */
+    -moz-box-direction: normal; /* Mozilla */
+    flex-direction: column;
   }
 }

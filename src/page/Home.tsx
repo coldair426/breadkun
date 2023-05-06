@@ -3,17 +3,20 @@ import styles from '../style/Home.module.scss';
 import classNames from 'classnames/bind';
 import axios from 'axios';
 import NotificationBox from './../component/NotificationBox';
+import Title from './../component/Title';
 
 const hs = classNames.bind(styles);
 
 function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [company, setCompany] = useState(localStorage.getItem('recentCompany') || '강촌'); // 강촌, 을지
+  const [notification, setNotification] = useState(false);
   const [dust, setDust] = useState({});
   const [weather, setWeather] = useState([]);
-  const [notification, setNotification] = useState(false);
 
-  console.log(dust);
-  console.log(weather);
+  // 회사를 드롭다운에 따라 업데이트하는 함수
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCompany(e.target.value);
+  };
 
   useEffect(() => {
     setMenuBox(false); // 메뉴 닫기(이전버튼 클릭시)
@@ -73,14 +76,27 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   return (
     <>
       <div className={hs('home')}>
+        <div className={hs('title')}>
+          <div className={hs('title__icon')}>
+            <img src='/icon/home-title-icon.png' alt='before-button' style={{ height: '5.64vw', maxHeight: '22px' }} />
+          </div>
+          <div className={hs('title__select')}>
+            <div className={hs('title__letter')}>{company === '강촌' ? '더존 강촌캠퍼스' : '더존 을지타워'}</div>
+            <select value={company} onChange={handleChange} aria-label='회사를 선택해 주세요.'>
+              <option value='강촌'>더존 강촌캠퍼스</option>
+              <option value='을지'>더존 을지타워</option>
+            </select>
+            <img className={hs('title__select-button')} src='/icon/bus-stops-arrow.png' alt='dropdown-button' />
+          </div>
+        </div>
         <div className={hs('home__body')}>
-          <div className={hs('home__title')}>
-            <button className={hs(company === '강촌' ? 'home__title-selected' : 'home__title-unselected')} onClick={() => setCompany('강촌')}>
-              더존 강촌캠퍼스
-            </button>
-            <button className={hs(company === '을지' ? 'home__title-selected' : 'home__title-unselected')} onClick={() => setCompany('을지')}>
-              더존 을지타워
-            </button>
+          <div className={hs('home_dusts')}>
+            <div className={hs('home_dust')}>
+              <div>미세먼지</div>
+            </div>
+            <div className={hs('home_ultra-dust')}>
+              <div>초미세먼지</div>
+            </div>
           </div>
         </div>
       </div>
