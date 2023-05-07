@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../style/Home.module.scss';
 import classNames from 'classnames/bind';
-import axios from 'axios';
 import NotificationBox from './../component/NotificationBox';
+import axios from 'axios';
 
 const hs = classNames.bind(styles);
 
 function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [company, setCompany] = useState(localStorage.getItem('recentCompany') || '강촌'); // 강촌, 을지
   const [notification, setNotification] = useState(false);
-  const [dust, setDust] = useState({});
-  const [weather, setWeather] = useState([]);
-
-  console.log(dust);
-  console.log(weather);
+  const [dust, setDust] = useState({ dataTime: '--', stationName: '--', pm10Level: '조회중', pm25Level: '조회중', pm10Value: '--', pm25Value: '--' });
+  // const [weather, setWeather] = useState({ dataTime: '--', stationName: '--', pm10Level: '조회중', pm25Level: '조회중', pm10Value: '--', pm25Value: '--' });
 
   // 회사를 드롭다운에 따라 업데이트하는 함수
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -29,25 +26,25 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   // 에어코리아 미세먼지, 초미세먼지
   useEffect(() => {
     localStorage.setItem('recentCompany', company); // 로컬 스토리지 업데이트
-    const currentDate = new Date(); // 현재 날짜
-    let date: string;
-    let time: string;
-    if (currentDate.getHours() === 0) {
-      // 00시에는 하루전날 23시에 조회.
-      date =
-        `${currentDate.getFullYear()}` +
-        (currentDate.getMonth() + 1 > 9 ? `${currentDate.getMonth() + 1}` : `0${currentDate.getMonth() + 1}`) +
-        (currentDate.getDay() - 1 > 9 ? `${currentDate.getDay() - 1}` : `0${currentDate.getDay() - 1}`);
-      time = '2300';
-    } else {
-      // yyyymmdd 형식으로 수정
-      date =
-        `${currentDate.getFullYear()}` +
-        (currentDate.getMonth() + 1 > 9 ? `${currentDate.getMonth() + 1}` : `0${currentDate.getMonth() + 1}`) +
-        (currentDate.getDay() > 9 ? `${currentDate.getDay()}` : `0${currentDate.getDay()}`);
-      // hhmm 형식으로 수정 => 단, 분단위(mm)는 무조건 00분 이고 시간은 현재 시간에서 -1(한시간전) 조회
-      time = (currentDate.getHours() - 1 > 9 ? `${currentDate.getHours() - 1}` : `0${currentDate.getHours() - 1}`) + '00';
-    }
+    // const currentDate = new Date(); // 현재 날짜
+    // let date: string;
+    // let time: string;
+    // if (currentDate.getHours() === 0) {
+    //   // 00시에는 하루전날 23시에 조회.
+    //   date =
+    //     `${currentDate.getFullYear()}` +
+    //     (currentDate.getMonth() + 1 > 9 ? `${currentDate.getMonth() + 1}` : `0${currentDate.getMonth() + 1}`) +
+    //     (currentDate.getDay() - 1 > 9 ? `${currentDate.getDay() - 1}` : `0${currentDate.getDay() - 1}`);
+    //   time = '2300';
+    // } else {
+    //   // yyyymmdd 형식으로 수정
+    //   date =
+    //     `${currentDate.getFullYear()}` +
+    //     (currentDate.getMonth() + 1 > 9 ? `${currentDate.getMonth() + 1}` : `0${currentDate.getMonth() + 1}`) +
+    //     (currentDate.getDay() > 9 ? `${currentDate.getDay()}` : `0${currentDate.getDay()}`);
+    //   // hhmm 형식으로 수정 => 단, 분단위(mm)는 무조건 00분 이고 시간은 현재 시간에서 -1(한시간전) 조회
+    //   time = (currentDate.getHours() - 1 > 9 ? `${currentDate.getHours() - 1}` : `0${currentDate.getHours() - 1}`) + '00';
+    // }
     async function fetchData() {
       setNotification(true);
       try {
@@ -57,14 +54,37 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             company === '강촌' ? '가평' : '중구'
           }&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`
         );
-        setDust(dustResult.data.response.body.items[0]);
+        const { dataTime, stationName, pm10Value, pm25Value } = dustResult.data.response.body.items[0];
+        let pm10Level = '';
+        let pm25Level = '';
+        // 미세먼지 Level
+        if (+pm10Value >= 0 && +pm10Value <= 30) {
+          pm10Level = '좋음';
+        } else if (+pm10Value >= 31 && +pm10Value <= 50) {
+          pm10Level = '보통';
+        } else if (+pm10Value >= 51 && +pm10Value <= 100) {
+          pm10Level = '나쁨';
+        } else if (+pm10Value >= 101) {
+          pm10Level = '최악';
+        }
+        // 초미세먼지 Level
+        if (+pm25Value >= 0 && +pm25Value <= 15) {
+          pm25Level = '좋음';
+        } else if (+pm25Value >= 16 && +pm25Value <= 25) {
+          pm25Level = '보통';
+        } else if (+pm25Value >= 26 && +pm25Value <= 50) {
+          pm25Level = '나쁨';
+        } else if (+pm25Value >= 51) {
+          pm25Level = '최악';
+        }
+        setDust({ dataTime, stationName, pm10Level, pm25Level, pm10Value, pm25Value });
         // 날씨 조회
-        const weatherResult = await axios.get(
-          `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=${
-            process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY
-          }&numOfRows=100&pageNo=1&dataType=json&base_date=${date}&base_time=${time}&nx=${company === '강촌' ? 71 : 60}&ny=${company === '강촌' ? 132 : 127}`
-        );
-        setWeather(weatherResult.data.response.body.items.item);
+        // const weatherResult = await axios.get(
+        //   `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=${
+        //     process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY
+        //   }&numOfRows=100&pageNo=1&dataType=json&base_date=${date}&base_time=${time}&nx=${company === '강촌' ? 71 : 60}&ny=${company === '강촌' ? 132 : 127}`
+        // );
+        // setWeather(weatherResult.data.response.body.items.item);
         setNotification(false);
       } catch (error) {
         setNotification(false);
@@ -93,24 +113,34 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         </div>
         <div className={hs('home__body')}>
           <div className={hs('home__dusts')}>
-            <div className={hs('home__dust')}>
+            <div className={hs('home__dust', dust.pm10Level)}>
               <div className={hs('home__dust--title')}>
                 <span>미세먼지</span>
                 <img src='/icon/information.png' alt='information' />
               </div>
               <div className={hs('home__dust--img-letter-wrapper')}>
-                <img className={hs('home__dust--img')} src='/icon/home-dusts-bad.png' alt='dust-level-icon' />
-                <div className={hs('home__dust--level')}>좋음</div>
+                {dust.pm10Level === '좋음' && <img className={hs('home__dust--img')} src='/icon/home-dusts-good.png' alt='dust-level-icon' />}
+                {dust.pm10Level === '보통' && <img className={hs('home__dust--img')} src='/icon/home-dusts-nomal.png' alt='dust-level-icon' />}
+                {dust.pm10Level === '나쁨' && <img className={hs('home__dust--img')} src='/icon/home-dusts-bad.png' alt='dust-level-icon' />}
+                {dust.pm10Level === '최악' && <img className={hs('home__dust--img')} src='/icon/home-dusts-fuckingbad.png' alt='dust-level-icon' />}
+                <div className={hs('home__dust--level')}>
+                  {dust.pm10Level}/{dust.pm10Value}
+                </div>
               </div>
             </div>
-            <div className={hs('home__ultra-dust')}>
+            <div className={hs('home__ultra-dust', dust.pm25Level)}>
               <div className={hs('home__ultra-dust--title')}>
                 <span>초미세먼지</span>
                 <img src='/icon/information.png' alt='information' />
               </div>
               <div className={hs('home__ultra-dust--img-letter-wrapper')}>
-                <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-bad.png' alt='dust-level-icon' />
-                <div className={hs('home__ultra-dust--level')}>좋음</div>
+                {dust.pm25Level === '좋음' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-good.png' alt='dust-level-icon' />}
+                {dust.pm25Level === '보통' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-nomal.png' alt='dust-level-icon' />}
+                {dust.pm25Level === '나쁨' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-bad.png' alt='dust-level-icon' />}
+                {dust.pm25Level === '최악' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-fuckingbad.png' alt='dust-level-icon' />}
+                <div className={hs('home__ultra-dust--level')}>
+                  {dust.pm25Level}/{dust.pm25Value}
+                </div>
               </div>
             </div>
           </div>
