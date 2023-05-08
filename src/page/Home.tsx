@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../style/Home.module.scss';
 import classNames from 'classnames/bind';
-import NotificationBox from './../component/NotificationBox';
 import axios from 'axios';
+import NotificationBox from './../component/NotificationBox';
 
 const hs = classNames.bind(styles);
 
@@ -36,7 +36,6 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     const time = previousTime.getHours().toString().padStart(2, '0').padEnd(4, '0');
     const currentDate = `${year}${month}${day}`;
     const currentTime = `${time}`;
-
     async function fetchData() {
       setNotification(true);
       try {
