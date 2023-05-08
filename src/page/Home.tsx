@@ -9,7 +9,7 @@ const hs = classNames.bind(styles);
 function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [company, setCompany] = useState(localStorage.getItem('recentCompany') || '강촌'); // 강촌, 을지
   const [notification, setNotification] = useState(false);
-  const [dust, setDust] = useState({ dataTime: '--', stationName: '--', pm10Level: '조회중', pm25Level: '조회중', pm10Value: '--', pm25Value: '--' });
+  const [dust, setDust] = useState({ dataTime: '--', stationName: '--', pm10Level: '조회중', pm25Level: '조회중', pm10Value: '-', pm25Value: '-' });
   const [weather, setWeather] = useState([]);
   console.log(weather);
 
@@ -57,7 +57,9 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         let pm10Level = '';
         let pm25Level = '';
         // 미세먼지 Level
-        if (+pm10Value >= 0 && +pm10Value <= 30) {
+        if (pm10Value === '-') {
+          pm10Level = '통신장애';
+        } else if (+pm10Value >= 0 && +pm10Value <= 30) {
           pm10Level = '좋음';
         } else if (+pm10Value >= 31 && +pm10Value <= 50) {
           pm10Level = '보통';
@@ -67,7 +69,9 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           pm10Level = '최악';
         }
         // 초미세먼지 Level
-        if (+pm25Value >= 0 && +pm25Value <= 15) {
+        if (pm25Value === '-') {
+          pm25Level = '통신장애';
+        } else if (+pm25Value >= 0 && +pm25Value <= 15) {
           pm25Level = '좋음';
         } else if (+pm25Value >= 16 && +pm25Value <= 25) {
           pm25Level = '보통';
