@@ -10,7 +10,7 @@ $gray-09: #212529; // 기본배경색
   -ms-flex-align: center;
   align-items: center;
   // margin-bottom: 15px;
-  margin-bottom: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
+  margin-bottom: clamp(1px, 3vw, 16px); // 갤럭시 폴드 대응
 }
 .title__icon {
   display: -webkit-box;

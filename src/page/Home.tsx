@@ -4,14 +4,32 @@ import classNames from 'classnames/bind';
 import axios from 'axios';
 import NotificationBox from './../component/NotificationBox';
 
+interface WeatherReturn {
+  baseDate: string;
+  baseTime: string;
+  category: string;
+  fcstDate: string;
+  fcstTime: string;
+  fcstValue: string;
+  nx: number;
+  ny: number;
+}
+
 const hs = classNames.bind(styles);
 
 function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [company, setCompany] = useState(localStorage.getItem('recentCompany') || '강촌'); // 강촌, 을지
   const [notification, setNotification] = useState(false);
   const [dust, setDust] = useState({ dataTime: '--', stationName: '--', pm10Level: '조회중', pm25Level: '조회중', pm10Value: '-', pm25Value: '-' });
-  const [weather, setWeather] = useState([]);
-  console.log(weather);
+  const [sky, setSky] = useState([]); // 하늘상태
+  const [rain, setRain] = useState([]); // 강수형태
+  const [temperature, setTemperature] = useState([]); // 기온
+  const [humidity, setHumidity] = useState([]); // 습도
+
+  console.log(sky);
+  console.log(rain);
+  console.log(temperature);
+  console.log(humidity);
 
   // 회사를 드롭다운에 따라 업데이트하는 함수
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -81,9 +99,13 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           pm25Level = '최악';
         }
         setDust({ dataTime, stationName, pm10Level, pm25Level, pm10Value, pm25Value });
-        // 날씨
-        setWeather(weatherResult.data.response.body.items.item);
-        console.log(weatherResult.data.response.body.items.item);
+        // 날씨정보
+        const weather = weatherResult.data.response.body.items.item;
+        console.log(weather);
+        setSky(weather.filter((v: WeatherReturn) => v.category === 'SKY'));
+        setRain(weather.filter((v: WeatherReturn) => v.category === 'PTY'));
+        setTemperature(weather.filter((v: WeatherReturn) => v.category === 'T1H'));
+        setHumidity(weather.filter((v: WeatherReturn) => v.category === 'REH'));
         setNotification(false);
       } catch (error) {
         setNotification(false);
@@ -107,10 +129,11 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
               <option value='강촌'>더존 강촌캠퍼스</option>
               <option value='을지'>더존 을지타워</option>
             </select>
-            <img className={hs('title__select-button')} src='/icon/bus-stops-arrow.png' alt='dropdown-button' />
+            <img className={hs('title__select-button')} src='/icon/home-select-arrow.png' alt='dropdown-button' />
           </div>
         </div>
         <div className={hs('home__body')}>
+          <div className={hs('home__weather')}>날씨입니다.</div>
           <div className={hs('home__dusts')}>
             <div className={hs('home__dust', dust.pm10Level)}>
               <div className={hs('home__dust--title')}>

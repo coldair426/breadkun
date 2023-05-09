@@ -21,7 +21,7 @@ $gray-09: #212529; // 기본배경색
   -ms-flex-align: center;
   align-items: center;
   // margin-bottom: 15px;
-  margin-bottom: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
+  margin-bottom: clamp(1px, 3vw, 16px); // 갤럭시 폴드 대응
   .title__icon {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -50,13 +50,14 @@ $gray-09: #212529; // 기본배경색
     font-size: clamp(1px, 5.38vw, 25px); // 갤럭시 폴드 대응
   }
   select {
-    font-size: clamp(1px, 3.33vw, 15px); // 갤럭시 폴드 대응
-    font-weight: 900;
+    font-size: clamp(1px, 4vw, 15px); // 갤럭시 폴드 대응
     text-align-last: center; // 중앙정렬
     -webkit-text-align-last: center; // 아이폰에서도 적용
     -moz-text-align-last: center;
     -ms-text-align-last: center;
     appearance: none;
+    text-decoration: none;
+    border: none;
     padding: 0;
     margin: 0;
     width: 100%;
@@ -70,13 +71,23 @@ $gray-09: #212529; // 기본배경색
     cursor: pointer;
   }
   .title__select-button {
-    height: 6.5vw;
-    max-height: 30px; // 갤럭시 폴드 대응
+    width: 2vw;
+    max-width: 10px; // 갤럭시 폴드 대응
+    margin-left: 1.5vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
   }
+}
+.home__weather {
+  background-color: $gray8;
+  height: 55vw;
+  width: 100%;
+  border-radius: 10.26vw;
+}
+.home__weather + .home__dusts {
+  margin-top: 3.33vw;
 }
 .home__dusts {
   display: flex;
