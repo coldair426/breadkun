@@ -141,34 +141,6 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
     }
     fetchData();
   }, [selectedValue, latLong]);
-  // 서버에서 남은 시간 받아오기
-  // useEffect(() => {
-  //   setNotification(true);
-  //   axios
-  //     .post('https://babkaotalk.herokuapp.com/webShuttle', { destNm: selectedValue, originGps: `${latLong.longitude},${latLong.latitude} ` })
-  //     .then((result) => {
-  //       // result.data.resultCode===104 => 출발지 & 도착지 5m이내 의미
-  //       if (result.data.resultCode === 104) {
-  //         setArrivalTime({ mainbox: '잠시 후 도착', time: '', ampm: '', remainingTime: '', remainingText: '' });
-  //       } else {
-  //         const resultVal = result.data.resultData;
-  //         let resultH = resultVal.arrivalTimeH > 12 ? resultVal.arrivalTimeH - 12 : resultVal.arrivalTimeH;
-  //         // 리턴값
-  //         setArrivalTime({
-  //           mainbox: '',
-  //           time: `${resultH < 10 ? '0' + resultH : resultH}:${resultVal.arrivalTimeM < 10 ? '0' + resultVal.arrivalTimeM : resultVal.arrivalTimeM}`,
-  //           ampm: `${resultVal.arrivalTimeH >= 12 ? 'PM' : 'AM'}`,
-  //           remainingTime: `${resultVal.durationH * 60 + resultVal.durationM}`,
-  //           remainingText: '분 남음',
-  //         });
-  //       }
-  //       setNotification(false);
-  //     })
-  //     .catch(() => {
-  //       setArrivalTime({ mainbox: '-----', time: '', ampm: '', remainingTime: '', remainingText: '' });
-  //       setNotification(false);
-  //     });
-  // }, [selectedValue, latLong]);
 
   return (
     <>
