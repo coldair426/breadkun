@@ -110,6 +110,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
   // 서버에서 남은 시간 받아오기 비동기 처리(async & await)
   useEffect(() => {
     async function fetchData() {
+      setArrivalTime({ mainbox: '-----', time: '', ampm: '', remainingTime: '', remainingText: '' });
       setNotification(true);
       try {
         const result = await axios.post('https://babkaotalk.herokuapp.com/webShuttle', {

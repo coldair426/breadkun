@@ -22,14 +22,9 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   const [notification, setNotification] = useState(false);
   const [dust, setDust] = useState({ dataTime: '--', stationName: '--', pm10Level: '조회중', pm25Level: '조회중', pm10Value: '-', pm25Value: '-' });
   const [sky, setSky] = useState([]); // 하늘상태
-  const [rain, setRain] = useState([]); // 강수형태
-  const [temperature, setTemperature] = useState([]); // 기온
+  const [rain, setRain] = useState([]); // 강수확률
   const [humidity, setHumidity] = useState([]); // 습도
-
-  console.log(sky);
-  console.log(rain);
-  console.log(temperature);
-  console.log(humidity);
+  const [temperature, setTemperature] = useState([]); // 기온
 
   // 회사를 드롭다운에 따라 업데이트하는 함수
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -46,14 +41,51 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   useEffect(() => {
     localStorage.setItem('recentCompany', company); // 로컬 스토리지 업데이트
     const now = new Date(); // 현재 날짜
-    const previousTime = new Date(now);
-    previousTime.setHours(previousTime.getHours() - 1);
-    const year = previousTime.getFullYear();
-    const month = (previousTime.getMonth() + 1).toString().padStart(2, '0');
-    const day = previousTime.getDate().toString().padStart(2, '0');
-    const time = previousTime.getHours().toString().padStart(2, '0').padEnd(4, '0');
-    const currentDate = `${year}${month}${day}`;
-    const currentTime = `${time}`;
+    const yesterday = new Date(now); // 어제 날짜
+    yesterday.setDate(now.getDate() - 1); // 어제 날짜 설정
+    // 달과 연도 넘어갈때 버그 방지 처리
+    yesterday.getDate() > now.getDate() && yesterday.setMonth(yesterday.getMonth() - 1); // 현재 날짜와 어제 날짜의 일(day)이 다른 경우 이전 달로 설정
+    // 현재 날짜 및 시간 포맷
+    const year = now.getFullYear();
+    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+    const day = now.getDate().toString().padStart(2, '0');
+    const hour = now.getHours().toString().padStart(2, '0');
+    const minute = now.getMinutes().toString().padStart(2, '0');
+    const currentDate = `${year}${month}${day}`; // 현재 날짜
+    const currentTime = `${hour}${minute}`; // 현재 시간
+    // 어제 날짜 포맷
+    const yesterdayYear = yesterday.getFullYear();
+    const yesterdayMonth = (yesterday.getMonth() + 1).toString().padStart(2, '0');
+    const yesterdayDay = yesterday.getDate().toString().padStart(2, '0');
+    const yesterdayDate = `${yesterdayYear}${yesterdayMonth}${yesterdayDay}`; // 어제 날짜
+    let baseDate = ''; // 조회 날짜
+    let baseTime = ''; // 조회 시간
+    // '0200', '0500', '0800', '1100', '1400', '1700', '2000', '2300' 기상청 API 일 8회 업데이트 시간 1시간 후에 조회.
+    if (+currentTime < 300) {
+      baseDate = yesterdayDate;
+      baseTime = '2300';
+    } else if (+currentTime < 600) {
+      baseDate = currentDate;
+      baseTime = '0200';
+    } else if (+currentTime < 900) {
+      baseDate = currentDate;
+      baseTime = '0500';
+    } else if (+currentTime < 1200) {
+      baseDate = currentDate;
+      baseTime = '0800';
+    } else if (+currentTime < 1500) {
+      baseDate = currentDate;
+      baseTime = '1100';
+    } else if (+currentTime < 1800) {
+      baseDate = currentDate;
+      baseTime = '1400';
+    } else if (+currentTime < 2100) {
+      baseDate = currentDate;
+      baseTime = '1700';
+    } else {
+      baseDate = currentDate;
+      baseTime = '2000';
+    }
     async function fetchData() {
       setNotification(true);
       try {
@@ -65,9 +97,9 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         );
         // 날씨 조회
         const weatherPromise = axios.get(
-          `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?serviceKey=${
+          `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${
             process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY
-          }&numOfRows=100&pageNo=1&dataType=json&base_date=${currentDate}&base_time=${currentTime}&nx=${company === '강촌' ? 71 : 60}&ny=${company === '강촌' ? 132 : 127}`
+          }&numOfRows=350&pageNo=1&dataType=json&base_date=${baseDate}&base_time=${baseTime}&nx=${company === '강촌' ? 71 : 60}&ny=${company === '강촌' ? 132 : 127}`
         );
         const [dustResult, weatherResult] = await axios.all([dustPromise, weatherPromise]); // 병렬통신
         // 미세먼지, 초미세먼지
@@ -99,13 +131,14 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           pm25Level = '최악';
         }
         setDust({ dataTime, stationName, pm10Level, pm25Level, pm10Value, pm25Value });
-        // 날씨정보
-        const weather = weatherResult.data.response.body.items.item;
-        console.log(weather);
+        // 날씨정보, 현재 시각을 포함한 이상의 값만 가져오기.
+        const weather = weatherResult.data.response.body.items.item.filter(
+          (v: WeatherReturn) => +v.fcstDate > +currentDate || (+v.fcstDate === +currentDate && +v.fcstTime >= +hour.padEnd(4, '0'))
+        );
         setSky(weather.filter((v: WeatherReturn) => v.category === 'SKY'));
-        setRain(weather.filter((v: WeatherReturn) => v.category === 'PTY'));
-        setTemperature(weather.filter((v: WeatherReturn) => v.category === 'T1H'));
+        setRain(weather.filter((v: WeatherReturn) => v.category === 'POP'));
         setHumidity(weather.filter((v: WeatherReturn) => v.category === 'REH'));
+        setTemperature(weather.filter((v: WeatherReturn) => v.category === 'TMP'));
         setNotification(false);
       } catch (error) {
         setNotification(false);
@@ -133,7 +166,9 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           </div>
         </div>
         <div className={hs('home__body')}>
-          <div className={hs('home__weather')}>날씨입니다.</div>
+          <div className={hs('home__weather')}>
+            날씨입니다.{sky.length} {humidity.length} {rain.length} {temperature.length}
+          </div>
           <div className={hs('home__dusts')}>
             <div className={hs('home__dust', dust.pm10Level)}>
               <div className={hs('home__dust--title')}>
