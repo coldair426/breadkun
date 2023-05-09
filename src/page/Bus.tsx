@@ -15,7 +15,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
   const [selectedValue, setSelectedValue] = useState(destination || localStorage.getItem('recentDestination') || '강변1'); // URL parameter 노선 or 로컬스토리지 or "강변1"(기본)
   const [latLong, setLatLong] = useState({ latitude: 37.756540912483615, longitude: 127.63819968679633 }); // 현재위치 정보 lat&log, 기본값 더존 강촌캠
   const [address, setAddress] = useState({ region_1depth_name: '강원', region_2depth_name: '춘천시', region_3depth_name: '남산면' }); // 현재위치 정보 도로명 주소
-  const [arrivalTime, setArrivalTime] = useState({ mainbox: '조회중', time: '', ampm: '', remainingTime: '', remainingText: '' }); // 도착시간
+  const [arrivalTime, setArrivalTime] = useState({ mainbox: '----', time: '', ampm: '', remainingTime: '', remainingText: '' }); // 도착시간
   const [notification, setNotification] = useState(false); // 스낵바
   const [popUpMap, setPopUpMap] = useState(false); // 자세히 보기 정류장 지도
   const [stopLatLong, setStopLatLong] = useState({ latitude: 0, longitude: 0 }); // 자세히 보기 정류장 위도경도
@@ -110,7 +110,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
   // 서버에서 남은 시간 받아오기 비동기 처리(async & await)
   useEffect(() => {
     async function fetchData() {
-      setArrivalTime({ mainbox: '조회중', time: '', ampm: '', remainingTime: '', remainingText: '' });
+      setArrivalTime({ mainbox: '----', time: '', ampm: '', remainingTime: '', remainingText: '' });
       setNotification(true);
       try {
         const result = await axios.post('https://babkaotalk.herokuapp.com/webShuttle', {

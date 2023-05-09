@@ -20,7 +20,7 @@ const hs = classNames.bind(styles);
 function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [company, setCompany] = useState(localStorage.getItem('recentCompany') || '강촌'); // 강촌, 을지
   const [notification, setNotification] = useState(false);
-  const [dust, setDust] = useState({ dataTime: '--', stationName: '--', pm10Level: '조회중', pm25Level: '조회중', pm10Value: '-', pm25Value: '-' });
+  const [dust, setDust] = useState({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
   const [sky, setSky] = useState([]); // 하늘상태
   const [rain, setRain] = useState([]); // 강수확률
   const [humidity, setHumidity] = useState([]); // 습도
@@ -87,7 +87,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       baseTime = '2000';
     }
     async function fetchData() {
-      setDust({ dataTime: '--', stationName: '--', pm10Level: '조회중', pm25Level: '조회중', pm10Value: '-', pm25Value: '-' });
+      setDust({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
       setNotification(true);
       try {
         // 미세먼지 조회
@@ -172,7 +172,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             날씨입니다.{sky.length} {humidity.length} {rain.length} {temperature.length}
           </div>
           <div className={hs('home__dusts')}>
-            <div className={hs('home__dust', dust.pm10Level)}>
+            <div className={hs('home__dust', dust.pm10Level === '---' ? '조회중' : dust.pm10Level)}>
               <div className={hs('home__dust--title')}>
                 <span>미세먼지</span>
                 <img src='/icon/information.png' alt='information' />
@@ -187,7 +187,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 </div>
               </div>
             </div>
-            <div className={hs('home__ultra-dust', dust.pm25Level)}>
+            <div className={hs('home__ultra-dust', dust.pm25Level === '---' ? '조회중' : dust.pm25Level)}>
               <div className={hs('home__ultra-dust--title')}>
                 <span>초미세먼지</span>
                 <img src='/icon/information.png' alt='information' />
