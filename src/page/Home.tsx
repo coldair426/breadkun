@@ -87,6 +87,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       baseTime = '2000';
     }
     async function fetchData() {
+      setDust({ dataTime: '--', stationName: '--', pm10Level: '조회중', pm25Level: '조회중', pm10Value: '-', pm25Value: '-' });
       setNotification(true);
       try {
         // 미세먼지 조회
@@ -141,6 +142,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         setTemperature(weather.filter((v: WeatherReturn) => v.category === 'TMP'));
         setNotification(false);
       } catch (error) {
+        setDust({ dataTime: '--', stationName: '--', pm10Level: '통신장애', pm25Level: '통신장애', pm10Value: '-', pm25Value: '-' });
         setNotification(false);
         console.log('날씨, 미세먼지 가져오기 실패.');
         console.log(error);
