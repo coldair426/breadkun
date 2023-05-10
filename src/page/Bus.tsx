@@ -8,6 +8,19 @@ import NotificationBox from './../component/NotificationBox';
 import axios from 'axios';
 import PopUpMap from './../component/PopUpMap';
 
+interface BusStations {
+  arrivalTimeH?: number;
+  arrivalTimeM?: number;
+  distanceKm?: number;
+  durationH?: number;
+  durationM?: number;
+  notification?: string;
+  name: string;
+  location: string;
+  latitude: number;
+  longitude: number;
+}
+
 const bs = classNames.bind(styles);
 
 function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
@@ -20,45 +33,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
   const [popUpMap, setPopUpMap] = useState(false); // 자세히 보기 정류장 지도
   const [stopLatLong, setStopLatLong] = useState({ latitude: 0, longitude: 0 }); // 자세히 보기 정류장 위도경도
   const [stopLocation, setStopLocation] = useState(''); // 자세히 보기 정류장 위치 설명
-  // test 서버
-  const [stopsTest] = useState([
-    {
-      name: '더존_강촌',
-      location: '번호로 노선별 승차 위치를 확인하세요!',
-      latitude: 37.757685934004726,
-      longitude: 127.63763361785992,
-    },
-    {
-      name: '천호역',
-      location: '천호역(5호선) 10번 출구 전방 150m 버스정류장 옆',
-      longitude: 127.1219037455087,
-      latitude: 37.53904703398166,
-    },
-    {
-      name: '잠실역',
-      location: '잠실역(2호선) 8번 출구 앞 버스정류장(잠실역 방면)',
-      longitude: 127.10159327577227,
-      latitude: 37.514035653406545,
-    },
-    {
-      name: '태릉',
-      location: '태릉입구역(6호선) 7번 출구 전방 100m 버스정류장 옆',
-      latitude: 37.617842488123095,
-      longitude: 127.07656907083147,
-    },
-    {
-      name: '구리',
-      location: '구리패션아울렛 일룸 구리남양주점 앞',
-      latitude: 37.60320736234289,
-      longitude: 127.14653702691739,
-    },
-    {
-      name: '평내호평',
-      location: '평내호평역 1번 출구 120m 에이스프라자빌딩 신한은행(호평지점) 앞 (바불리 옛날왕만두 앞)',
-      latitude: 37.654181640862596,
-      longitude: 127.24391915664651,
-    },
-  ]);
+  const [busStations, setBusStations] = useState<BusStations[]>([]);
 
   // 현재좌표를 업데이트 하는 함수
   const updateLocation = () => {
@@ -111,6 +86,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
   useEffect(() => {
     async function fetchData() {
       setArrivalTime({ mainbox: '----', time: '', ampm: '', remainingTime: '', remainingText: '' });
+      setBusStations([]);
       setNotification(true);
       try {
         const result = await axios.post('https://babkaotalk.herokuapp.com/webShuttle', {
@@ -123,14 +99,19 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
           setArrivalTime({ mainbox: '잠시 후 도착', time: '', ampm: '', remainingTime: '', remainingText: '' });
         } else {
           const resultVal = resultData;
-          let resultH = resultVal.arrivalTimeH > 12 ? resultVal.arrivalTimeH - 12 : resultVal.arrivalTimeH;
+          // 소요시간 정보
+          const resultH = resultVal.arrivalTimeH > 12 ? resultVal.arrivalTimeH - 12 : resultVal.arrivalTimeH;
           setArrivalTime({
             mainbox: '',
-            time: `${resultH < 10 ? '0' + resultH : resultH}:${resultVal.arrivalTimeM < 10 ? '0' + resultVal.arrivalTimeM : resultVal.arrivalTimeM}`,
+            time: `${resultH.toString().padStart(2, '0')}:${resultVal.arrivalTimeM.toString().padStart(2, '0')}`,
             ampm: `${resultVal.arrivalTimeH >= 12 ? 'PM' : 'AM'}`,
             remainingTime: `${resultVal.durationH * 60 + resultVal.durationM}`,
             remainingText: '분 소요',
           });
+          setBusStations([
+            { name: '더존_강촌', notification: '18:15', location: '번호로 노선별 승차 위치를 확인하세요!', latitude: 37.757685934004726, longitude: 127.63763361785992 },
+            ...resultVal.sections,
+          ]);
         }
         setNotification(false);
       } catch (error) {
@@ -207,15 +188,15 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
           </div>
           <div className={bs('bus__block2')}>
             <div className={bs('bus__block2--stops')}>
-              {stopsTest.map((v, i) => (
+              {busStations.map((v, i) => (
                 <div className={bs('bus__block2--stop')} key={i}>
                   <div className={bs('bus__block2--stop-texts')} key={i}>
                     <div className={bs('bus__block2--stop-title-wrapper')}>
                       <div className={bs('bus__block2--stop-title')} key={`title${i}`}>
-                        {i === 0 || i === stopsTest.length - 1 ? (i === 0 ? '기점' : '종점') : `경유${i}`}
+                        {i === 0 || i === busStations.length - 1 ? (i === 0 ? '기점' : '종점') : `경유${i}`}
                       </div>
                       <div className={bs('bus__block2--stop-name')} key={i}>
-                        {v.name}
+                        {v?.notification ? `${v.name}(${v.notification})` : `${v.name}`}
                       </div>
                     </div>
                     <div
