@@ -204,7 +204,17 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         </div>
         <div className={hs('home__body')}>
           <div className={hs('home__weather')}>
-            날씨입니다.{sky?.length} {humidity?.length} {rain?.length} {temperature?.length}
+            날씨예측시각: {sky ? `${sky[0].baseDate}/${sky[0].baseTime}` : undefined}
+            <br />
+            날씨시작데이터: {sky ? `${sky[0].fcstDate}/${sky[0].fcstTime}` : undefined}
+            <br />
+            미세먼지데이터: {dust.dataTime}
+            <br />
+            {rain?.length}
+            <br />
+            {humidity?.length}
+            <br />
+            {temperature?.length}
           </div>
           <div className={hs('home__dusts')}>
             <div className={hs('home__dust', dust.pm10Level === '---' ? '조회중' : dust.pm10Level)}>
