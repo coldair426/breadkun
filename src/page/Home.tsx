@@ -91,17 +91,11 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       setNotification(true);
       try {
         // 미세먼지 조회
-        const dustPromise = axios.get('https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty', {
-          params: {
-            stationName: company === '강촌' ? '가평' : '중구',
-            ver: '1.4',
-            dataTerm: 'daily',
-            pageNo: '1',
-            numOfRows: '1',
-            returnType: 'json',
-            serviceKey: process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY,
-          },
-        });
+        const dustPromise = axios.get(
+          `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=${
+            company === '강촌' ? '가평' : '중구'
+          }&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`
+        );
         // 날씨 조회
         const weatherPromise = axios.get(
           `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${
