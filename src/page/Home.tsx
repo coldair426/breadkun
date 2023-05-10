@@ -30,6 +30,40 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCompany(e.target.value);
   };
+  // 미세먼지 Level 리턴 함수
+  const getPM10Level = (pm10Value: string): string => {
+    if (pm10Value === '-') {
+      return '통신장애';
+    } else {
+      const pm10 = +pm10Value;
+      if (pm10 <= 30) {
+        return '좋음';
+      } else if (pm10 <= 50) {
+        return '보통';
+      } else if (pm10 <= 100) {
+        return '나쁨';
+      } else {
+        return '최악';
+      }
+    }
+  };
+  // 초미세먼지 Level 리턴 함수
+  const getPM25Level = (pm25Value: string): string => {
+    if (pm25Value === '-') {
+      return '통신장애';
+    } else {
+      const pm25 = +pm25Value;
+      if (pm25 <= 15) {
+        return '좋음';
+      } else if (pm25 <= 25) {
+        return '보통';
+      } else if (pm25 <= 50) {
+        return '나쁨';
+      } else {
+        return '최악';
+      }
+    }
+  };
 
   useEffect(() => {
     setMenuBox(false); // 메뉴 닫기(이전버튼 클릭시)
@@ -49,10 +83,10 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     const year = now.getFullYear();
     const month = (now.getMonth() + 1).toString().padStart(2, '0');
     const day = now.getDate().toString().padStart(2, '0');
-    const hour = now.getHours().toString().padStart(2, '0');
-    const minute = now.getMinutes().toString().padStart(2, '0');
+    const hour = now.getHours();
+    const minute = now.getMinutes();
     const currentDate = `${year}${month}${day}`; // 현재 날짜
-    const currentTime = `${hour}${minute}`; // 현재 시간
+    const currentTime = hour * 60 + minute; // 현재 시간(분으로 표시)
     // 어제 날짜 포맷
     const yesterdayYear = yesterday.getFullYear();
     const yesterdayMonth = (yesterday.getMonth() + 1).toString().padStart(2, '0');
@@ -61,25 +95,25 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     let baseDate = ''; // 조회 날짜
     let baseTime = ''; // 조회 시간
     // '0200', '0500', '0800', '1100', '1400', '1700', '2000', '2300' 기상청 API 일 8회 업데이트 시간 1시간 후에 조회.
-    if (+currentTime < 300) {
+    if (currentTime < 180) {
       baseDate = yesterdayDate;
       baseTime = '2300';
-    } else if (+currentTime < 600) {
+    } else if (currentTime < 360) {
       baseDate = currentDate;
       baseTime = '0200';
-    } else if (+currentTime < 900) {
+    } else if (currentTime < 540) {
       baseDate = currentDate;
       baseTime = '0500';
-    } else if (+currentTime < 1200) {
+    } else if (currentTime < 720) {
       baseDate = currentDate;
       baseTime = '0800';
-    } else if (+currentTime < 1500) {
+    } else if (currentTime < 900) {
       baseDate = currentDate;
       baseTime = '1100';
-    } else if (+currentTime < 1800) {
+    } else if (currentTime < 1080) {
       baseDate = currentDate;
       baseTime = '1400';
-    } else if (+currentTime < 2100) {
+    } else if (currentTime < 1260) {
       baseDate = currentDate;
       baseTime = '1700';
     } else {
@@ -119,36 +153,14 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         const { dataTime, stationName, pm10Value, pm25Value } = dustResponse.data.response.body.items[0];
         let pm10Level = '';
         let pm25Level = '';
-        // 미세먼지 Level
-        if (pm10Value === '-') {
-          pm10Level = '통신장애';
-        } else if (+pm10Value >= 0 && +pm10Value <= 30) {
-          pm10Level = '좋음';
-        } else if (+pm10Value >= 31 && +pm10Value <= 50) {
-          pm10Level = '보통';
-        } else if (+pm10Value >= 51 && +pm10Value <= 100) {
-          pm10Level = '나쁨';
-        } else if (+pm10Value >= 101) {
-          pm10Level = '최악';
-        }
-        // 초미세먼지 Level
-        if (pm25Value === '-') {
-          pm25Level = '통신장애';
-        } else if (+pm25Value >= 0 && +pm25Value <= 15) {
-          pm25Level = '좋음';
-        } else if (+pm25Value >= 16 && +pm25Value <= 25) {
-          pm25Level = '보통';
-        } else if (+pm25Value >= 26 && +pm25Value <= 50) {
-          pm25Level = '나쁨';
-        } else if (+pm25Value >= 51) {
-          pm25Level = '최악';
-        }
+        pm10Level = getPM10Level(pm10Value);
+        pm25Level = getPM25Level(pm25Value);
         setDust({ dataTime, stationName, pm10Level, pm25Level, pm10Value, pm25Value });
         const weather = weatherResponse.data.response.body.items.item;
         const data = weather.reduce(
           (acc: { [key: string]: WeatherReturn[] }, currentVal: WeatherReturn) => {
             const { category, fcstDate, fcstTime } = currentVal;
-            const isCurrentTime = +fcstDate > +currentDate || (+fcstDate === +currentDate && +fcstTime >= +hour.padEnd(4, '0'));
+            const isCurrentTime = +fcstDate > +currentDate || (+fcstDate === +currentDate && +fcstTime >= +hour.toString().padStart(2, '0').padEnd(4, '0'));
             if (isCurrentTime) {
               if (!acc[category]) {
                 acc[category] = []; // 초기값 설정
@@ -157,12 +169,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             }
             return acc;
           },
-          {
-            SKY: [],
-            POP: [],
-            REH: [],
-            TMP: [],
-          }
+          { SKY: [], POP: [], REH: [], TMP: [] }
         );
         setSky(data.SKY);
         setRain(data.POP);
