@@ -26,8 +26,6 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   const [humidity, setHumidity] = useState([]); // 습도
   const [temperature, setTemperature] = useState([]); // 기온
 
-  console.log(sky, rain, humidity, temperature);
-
   // 회사를 드롭다운에 따라 업데이트하는 함수
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCompany(e.target.value);
@@ -93,20 +91,20 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       setNotification(true);
       try {
         // 미세먼지 조회
-        const dustResponse = await axios.get('https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty', {
-          // 쿼리 매개변수 대신 params 이용
-          params: {
-            stationName: company === '강촌' ? '가평' : '중구',
-            ver: '1.4',
-            dataTerm: 'daily',
-            pageNo: '1',
-            numOfRows: '1',
-            returnType: 'json',
-            serviceKey: process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY,
-          },
-        });
-        const dustResult = dustResponse.data.response.body.items[0];
-        const { dataTime, stationName, pm10Value, pm25Value } = dustResult;
+        const dustPromise = axios.get(
+          `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=${
+            company === '강촌' ? '가평' : '중구'
+          }&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`
+        );
+        // 날씨 조회
+        const weatherPromise = axios.get(
+          `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${
+            process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY
+          }&numOfRows=350&pageNo=1&dataType=json&base_date=${baseDate}&base_time=${baseTime}&nx=${company === '강촌' ? 71 : 60}&ny=${company === '강촌' ? 132 : 127}`
+        );
+        const [dustResult, weatherResult] = await axios.all([dustPromise, weatherPromise]); // 병렬통신
+        // 미세먼지, 초미세먼지
+        const { dataTime, stationName, pm10Value, pm25Value } = dustResult.data.response.body.items[0];
         let pm10Level = '';
         let pm25Level = '';
         // 미세먼지 Level
@@ -134,23 +132,10 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           pm25Level = '최악';
         }
         setDust({ dataTime, stationName, pm10Level, pm25Level, pm10Value, pm25Value });
-        // 날씨 조회
-        const weatherResponse = await axios.get('https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst', {
-          // 쿼리 매개변수 대신 params 이용
-          params: {
-            serviceKey: process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY,
-            numOfRows: '350',
-            pageNo: '1',
-            dataType: 'json',
-            base_date: baseDate,
-            base_time: baseTime,
-            nx: company === '강촌' ? '71' : '60',
-            ny: company === '강촌' ? '132' : '127',
-          },
-        });
-        const weatherResult = weatherResponse.data.response.body.items.item;
         // 날씨정보, 현재 시각을 포함한 이상의 값만 가져오기.
-        const weather = weatherResult.filter((v: WeatherReturn) => +v.fcstDate > +currentDate || (+v.fcstDate === +currentDate && +v.fcstTime >= +hour.padEnd(4, '0')));
+        const weather = weatherResult.data.response.body.items.item.filter(
+          (v: WeatherReturn) => +v.fcstDate > +currentDate || (+v.fcstDate === +currentDate && +v.fcstTime >= +hour.padEnd(4, '0'))
+        );
         setSky(weather.filter((v: WeatherReturn) => v.category === 'SKY'));
         setRain(weather.filter((v: WeatherReturn) => v.category === 'POP'));
         setHumidity(weather.filter((v: WeatherReturn) => v.category === 'REH'));

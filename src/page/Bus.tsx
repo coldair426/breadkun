@@ -15,7 +15,7 @@ interface BusStations {
   durationH?: number;
   durationM?: number;
   notification?: string;
-  destinationName: string;
+  name: string;
   location: string;
   latitude: number;
   longitude: number;
@@ -109,7 +109,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
             remainingText: '분 소요',
           });
           setBusStations([
-            { destinationName: '더존_강촌', notification: '18:15', location: '번호로 노선별 승차 위치를 확인하세요!', latitude: 37.757685934004726, longitude: 127.63763361785992 },
+            { name: '더존_강촌', notification: '18:15', location: '번호로 노선별 승차 위치를 확인하세요!', latitude: 37.757685934004726, longitude: 127.63763361785992 },
             ...resultVal.sections,
           ]);
         }
@@ -196,7 +196,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
                         {i === 0 || i === busStations.length - 1 ? (i === 0 ? '기점' : '종점') : `경유${i}`}
                       </div>
                       <div className={bs('bus__block2--stop-name')} key={i}>
-                        {v?.notification ? `${v.destinationName}(${v.notification})` : `${v.destinationName}`}
+                        {v?.notification ? `${v.name}(${v.notification})` : `${v.name}`}
                       </div>
                     </div>
                     <div
