@@ -92,8 +92,8 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     const yesterdayMonth = (yesterday.getMonth() + 1).toString().padStart(2, '0');
     const yesterdayDay = yesterday.getDate().toString().padStart(2, '0');
     const yesterdayDate = `${yesterdayYear}${yesterdayMonth}${yesterdayDay}`; // 어제 날짜
-    let baseDate = ''; // 조회 날짜
-    let baseTime = ''; // 조회 시간
+    let baseDate = ''; // 조회날짜
+    let baseTime = ''; // 조회시간
     // '0200', '0500', '0800', '1100', '1400', '1700', '2000', '2300' 기상청 API 일 8회 업데이트 시간 1시간 후에 조회.
     if (currentTime < 180) {
       baseDate = yesterdayDate;
