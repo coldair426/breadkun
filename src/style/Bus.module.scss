@@ -224,6 +224,9 @@ div + .bus__block1 {
           border-radius: 5.13vw;
           font-size: clamp(1px, 3.85vw, 18px); // 갤럭시 폴드 대응
           background-color: darken($backColor2, 5%);
+          text-align: center;
+          width: 10vw;
+          max-width: 45px;
         }
         .bus__block2--stop-name {
           font-size: clamp(1px, 5.13vw, 25px); // 갤럭시 폴드 대응
