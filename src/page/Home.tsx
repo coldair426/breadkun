@@ -21,10 +21,10 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   const [company, setCompany] = useState(localStorage.getItem('recentCompany') || '강촌'); // 강촌, 을지
   const [notification, setNotification] = useState(false);
   const [dust, setDust] = useState({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
-  const [sky, setSky] = useState([]); // 하늘상태
-  const [rain, setRain] = useState([]); // 강수확률
-  const [humidity, setHumidity] = useState([]); // 습도
-  const [temperature, setTemperature] = useState([]); // 기온
+  const [sky, setSky] = useState<WeatherReturn[] | undefined>(); // 하늘상태
+  const [rain, setRain] = useState<WeatherReturn[] | undefined>(); // 강수확률
+  const [humidity, setHumidity] = useState<WeatherReturn[] | undefined>(); // 습도
+  const [temperature, setTemperature] = useState<WeatherReturn[] | undefined>(); // 기온
 
   // 회사를 드롭다운에 따라 업데이트하는 함수
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -90,21 +90,33 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       setDust({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
       setNotification(true);
       try {
-        // 미세먼지 조회
-        const dustPromise = axios.get(
-          `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=${
-            company === '강촌' ? '가평' : '중구'
-          }&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`
-        );
-        // 날씨 조회
-        const weatherPromise = axios.get(
-          `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${
-            process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY
-          }&numOfRows=350&pageNo=1&dataType=json&base_date=${baseDate}&base_time=${baseTime}&nx=${company === '강촌' ? 71 : 60}&ny=${company === '강촌' ? 132 : 127}`
-        );
-        const [dustResult, weatherResult] = await axios.all([dustPromise, weatherPromise]); // 병렬통신
+        // 미세먼지 조회 쿼리매개변수 대신 params 이용
+        const dustResponse = await axios.get('https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty', {
+          params: {
+            serviceKey: decodeURIComponent(process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY || ''),
+            stationName: company === '강촌' ? '가평' : '중구',
+            ver: '1.4',
+            dataTerm: 'daily',
+            pageNo: '1',
+            numOfRows: '1',
+            returnType: 'json',
+          },
+        });
+        // 날씨 조회 쿼리매개변수 대신 params 이용
+        const weatherResponse = await axios.get(`https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst`, {
+          params: {
+            serviceKey: decodeURIComponent(process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY || ''),
+            numOfRows: '350',
+            pageNo: '1',
+            dataType: 'json',
+            base_date: baseDate,
+            base_time: baseTime,
+            nx: company === '강촌' ? '71' : '60',
+            ny: company === '강촌' ? '132' : '127',
+          },
+        });
         // 미세먼지, 초미세먼지
-        const { dataTime, stationName, pm10Value, pm25Value } = dustResult.data.response.body.items[0];
+        const { dataTime, stationName, pm10Value, pm25Value } = dustResponse.data.response.body.items[0];
         let pm10Level = '';
         let pm25Level = '';
         // 미세먼지 Level
@@ -132,14 +144,30 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           pm25Level = '최악';
         }
         setDust({ dataTime, stationName, pm10Level, pm25Level, pm10Value, pm25Value });
-        // 날씨정보, 현재 시각을 포함한 이상의 값만 가져오기.
-        const weather = weatherResult.data.response.body.items.item.filter(
-          (v: WeatherReturn) => +v.fcstDate > +currentDate || (+v.fcstDate === +currentDate && +v.fcstTime >= +hour.padEnd(4, '0'))
+        const weather = weatherResponse.data.response.body.items.item;
+        const data = weather.reduce(
+          (acc: { [key: string]: WeatherReturn[] }, currentVal: WeatherReturn) => {
+            const { category, fcstDate, fcstTime } = currentVal;
+            const isCurrentTime = +fcstDate > +currentDate || (+fcstDate === +currentDate && +fcstTime >= +hour.padEnd(4, '0'));
+            if (isCurrentTime) {
+              if (!acc[category]) {
+                acc[category] = []; // 초기값 설정
+              }
+              acc[category].push(currentVal);
+            }
+            return acc;
+          },
+          {
+            SKY: [],
+            POP: [],
+            REH: [],
+            TMP: [],
+          }
         );
-        setSky(weather.filter((v: WeatherReturn) => v.category === 'SKY'));
-        setRain(weather.filter((v: WeatherReturn) => v.category === 'POP'));
-        setHumidity(weather.filter((v: WeatherReturn) => v.category === 'REH'));
-        setTemperature(weather.filter((v: WeatherReturn) => v.category === 'TMP'));
+        setSky(data.SKY);
+        setRain(data.POP);
+        setHumidity(data.REH);
+        setTemperature(data.TMP);
         setNotification(false);
       } catch (error) {
         setDust({ dataTime: '--', stationName: '--', pm10Level: '통신장애', pm25Level: '통신장애', pm10Value: '-', pm25Value: '-' });
@@ -169,7 +197,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         </div>
         <div className={hs('home__body')}>
           <div className={hs('home__weather')}>
-            날씨입니다.{sky.length} {humidity.length} {rain.length} {temperature.length}
+            날씨입니다.{sky?.length} {humidity?.length} {rain?.length} {temperature?.length}
           </div>
           <div className={hs('home__dusts')}>
             <div className={hs('home__dust', dust.pm10Level === '---' ? '조회중' : dust.pm10Level)}>
