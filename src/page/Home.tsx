@@ -64,8 +64,16 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       }
     }
   };
-  // 날짜, 시간 형식을 반환하는 함수
-  const getBaseDateTime = () => {
+
+  useEffect(() => {
+    setMenuBox(false); // 메뉴 닫기(이전버튼 클릭시)
+  }, [setMenuBox]);
+  useEffect(() => {
+    window.scrollTo(0, 0); // 페이지 최상단으로 스크롤링
+  }, []);
+  // 에어코리아 미세먼지, 초미세먼지
+  useEffect(() => {
+    localStorage.setItem('recentCompany', company); // 로컬 스토리지 업데이트
     const now = new Date(); // 현재 날짜
     const yesterday = new Date(now); // 어제 날짜
     yesterday.setDate(now.getDate() - 1); // 어제 날짜 설정
@@ -84,40 +92,34 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     const yesterdayMonth = (yesterday.getMonth() + 1).toString().padStart(2, '0');
     const yesterdayDay = yesterday.getDate().toString().padStart(2, '0');
     const yesterdayDate = `${yesterdayYear}${yesterdayMonth}${yesterdayDay}`; // 어제 날짜
-    let baseDate = currentDate; // 조회날짜
+    let baseDate = ''; // 조회날짜
     let baseTime = ''; // 조회시간
     // '0200', '0500', '0800', '1100', '1400', '1700', '2000', '2300' 기상청 API 일 8회 업데이트 시간 1시간 후에 조회.
     if (currentTime < 180) {
       baseDate = yesterdayDate;
       baseTime = '2300';
     } else if (currentTime < 360) {
+      baseDate = currentDate;
       baseTime = '0200';
     } else if (currentTime < 540) {
+      baseDate = currentDate;
       baseTime = '0500';
     } else if (currentTime < 720) {
+      baseDate = currentDate;
       baseTime = '0800';
     } else if (currentTime < 900) {
+      baseDate = currentDate;
       baseTime = '1100';
     } else if (currentTime < 1080) {
+      baseDate = currentDate;
       baseTime = '1400';
     } else if (currentTime < 1260) {
+      baseDate = currentDate;
       baseTime = '1700';
     } else {
+      baseDate = currentDate;
       baseTime = '2000';
     }
-    return { currentDate, hour, baseDate, baseTime };
-  };
-
-  useEffect(() => {
-    setMenuBox(false); // 메뉴 닫기(이전버튼 클릭시)
-  }, [setMenuBox]);
-  useEffect(() => {
-    window.scrollTo(0, 0); // 페이지 최상단으로 스크롤링
-  }, []);
-  // 에어코리아 미세먼지, 초미세먼지
-  useEffect(() => {
-    localStorage.setItem('recentCompany', company); // 로컬 스토리지 업데이트
-    const { currentDate, hour, baseDate, baseTime } = getBaseDateTime(); // baseDate와 baseTime을 구하는 함수
     async function fetchData() {
       setDust({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
       setNotification(true);
