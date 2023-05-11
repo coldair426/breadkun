@@ -117,10 +117,10 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   // 에어코리아 미세먼지, 초미세먼지
   useEffect(() => {
     localStorage.setItem('recentCompany', company); // 로컬 스토리지 업데이트
-    const fetchData = async () => {
-      const { currentDate, hour, baseDate, baseTime } = getBaseDateTime(); // baseDate와 baseTime을 구하는 함수
-      setDust({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
-      setNotification(true);
+    const { currentDate, hour, baseDate, baseTime } = getBaseDateTime(); // baseDate와 baseTime을 구하는 함수
+    setDust({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
+    setNotification(true);
+    async function fetchData() {
       try {
         // 미세먼지 조회 쿼리매개변수 대신 params 이용
         const dustParams = {
@@ -182,7 +182,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         console.log('날씨, 미세먼지 가져오기 실패.');
         console.log(error);
       }
-    };
+    }
     fetchData();
   }, [company]);
 
