@@ -153,8 +153,10 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         const [dustResponse, weatherResponse] = await Promise.all([dustPromise, weatherPromise]);
         // 미세먼지, 초미세먼지
         const { dataTime, stationName, pm10Value, pm25Value } = dustResponse.data.response.body.items[0];
-        const pm10Level = getPM10Level(pm10Value);
-        const pm25Level = getPM25Level(pm25Value);
+        let pm10Level = '';
+        let pm25Level = '';
+        pm10Level = getPM10Level(pm10Value);
+        pm25Level = getPM25Level(pm25Value);
         setDust({ dataTime, stationName, pm10Level, pm25Level, pm10Value, pm25Value });
         const weather = weatherResponse.data.response.body.items.item;
         const data = weather.reduce(
