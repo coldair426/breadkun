@@ -113,12 +113,12 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     } else {
       baseTime = '2000';
     }
-    async function fetchData() {
+    async function fetchDustData() {
       setDust({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
       setNotification(true);
       try {
         // 미세먼지 조회 쿼리매개변수 대신 params 이용
-        const dustPromise = axios.get('https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty', {
+        const dustResponse = await axios.get('https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty', {
           params: {
             serviceKey: decodeURIComponent(process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY || ''),
             stationName: company === '강촌' ? '가평' : '중구',
@@ -129,8 +129,24 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             returnType: 'json',
           },
         });
+        // 미세먼지, 초미세먼지
+        const { dataTime, stationName, pm10Value, pm25Value } = dustResponse.data.response.body.items[0];
+        let pm10Level = '';
+        let pm25Level = '';
+        pm10Level = getPM10Level(pm10Value);
+        pm25Level = getPM25Level(pm25Value);
+        setDust({ dataTime, stationName, pm10Level, pm25Level, pm10Value, pm25Value });
+      } catch (error) {
+        setDust({ dataTime: '--', stationName: '--', pm10Level: '통신장애', pm25Level: '통신장애', pm10Value: '-', pm25Value: '-' });
+        console.log('미세먼지 가져오기 실패.');
+        console.log(error);
+      }
+    }
+    async function fetchWeatherData() {
+      setDust({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
+      try {
         // 날씨 조회 쿼리매개변수 대신 params 이용
-        const weatherPromise = axios.get(`https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst`, {
+        const weatherResponse = await axios.get(`https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst`, {
           params: {
             serviceKey: decodeURIComponent(process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY || ''),
             numOfRows: '350',
@@ -142,15 +158,6 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             ny: company === '강촌' ? '132' : '127',
           },
         });
-        // 병렬로 서버와 통신
-        const [dustResponse, weatherResponse] = await Promise.all([dustPromise, weatherPromise]);
-        // 미세먼지, 초미세먼지
-        const { dataTime, stationName, pm10Value, pm25Value } = dustResponse.data.response.body.items[0];
-        let pm10Level = '';
-        let pm25Level = '';
-        pm10Level = getPM10Level(pm10Value);
-        pm25Level = getPM25Level(pm25Value);
-        setDust({ dataTime, stationName, pm10Level, pm25Level, pm10Value, pm25Value });
         const weather = weatherResponse.data.response.body.items.item;
         const data = weather.reduce(
           (acc: { [key: string]: WeatherReturn[] }, currentVal: WeatherReturn) => {
@@ -178,7 +185,8 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         console.log(error);
       }
     }
-    fetchData();
+    fetchDustData();
+    fetchWeatherData();
   }, [company]);
 
   return (
