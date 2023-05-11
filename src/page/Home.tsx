@@ -150,7 +150,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           params: weatherParams,
         });
         // 병렬로 서버와 통신
-        const [dustResponse, weatherResponse] = await axios.all([dustPromise, weatherPromise]);
+        const [dustResponse, weatherResponse] = await Promise.all([dustPromise, weatherPromise]);
         // 미세먼지, 초미세먼지
         const { dataTime, stationName, pm10Value, pm25Value } = dustResponse.data.response.body.items[0];
         const pm10Level = getPM10Level(pm10Value);
