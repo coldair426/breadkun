@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from '../style/Home.module.scss';
 import classNames from 'classnames/bind';
 import axios from 'axios';
-import NotificationBox from './../component/NotificationBox';
+// import NotificationBox from './../component/NotificationBox';
 
 interface WeatherReturn {
   baseDate: string;
@@ -19,7 +19,7 @@ const hs = classNames.bind(styles);
 
 function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [company, setCompany] = useState(localStorage.getItem('recentCompany') || '강촌'); // 강촌, 을지
-  const [notification, setNotification] = useState(false);
+  // const [notification, setNotification] = useState(false);
   const [dust, setDust] = useState({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
   const [sky, setSky] = useState<WeatherReturn[] | undefined>(); // 하늘상태
   const [rain, setRain] = useState<WeatherReturn[] | undefined>(); // 강수확률
@@ -65,15 +65,44 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     }
   };
 
+  // 메뉴 닫기(이전버튼 클릭시)
   useEffect(() => {
-    setMenuBox(false); // 메뉴 닫기(이전버튼 클릭시)
+    setMenuBox(false);
   }, [setMenuBox]);
+  // 페이지 최상단으로 스크롤링
   useEffect(() => {
-    window.scrollTo(0, 0); // 페이지 최상단으로 스크롤링
+    window.scrollTo(0, 0);
   }, []);
+  // 로컬 스토리지 업데이트
+  useEffect(() => {
+    localStorage.setItem('recentCompany', company);
+  }, [company]);
+  // ------------------------------------------------------------------------------------------------------------------------------------------------------------
   // 에어코리아 미세먼지, 초미세먼지
   useEffect(() => {
-    localStorage.setItem('recentCompany', company); // 로컬 스토리지 업데이트
+    async function fetchDustData() {
+      setDust({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
+      try {
+        const dustResponse = await axios.get(
+          `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=${
+            company === '강촌' ? '가평' : '중구'
+          }&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`
+        );
+        // 미세먼지, 초미세먼지
+        const { dataTime, stationName, pm10Value, pm25Value } = dustResponse.data.response.body.items[0];
+        const pm10Level = getPM10Level(pm10Value);
+        const pm25Level = getPM25Level(pm25Value);
+        setDust({ dataTime, stationName, pm10Level, pm25Level, pm10Value, pm25Value });
+      } catch (error) {
+        setDust({ dataTime: '--', stationName: '--', pm10Level: '통신장애', pm25Level: '통신장애', pm10Value: '-', pm25Value: '-' });
+        console.log('미세먼지 가져오기 실패.');
+        console.log(error);
+      }
+    }
+    fetchDustData();
+  }, [company]);
+  // ------------------------------------------------------------------------------------------------------------------------------------------------------------
+  useEffect(() => {
     const now = new Date(); // 현재 날짜
     const yesterday = new Date(now); // 어제 날짜
     yesterday.setDate(now.getDate() - 1); // 어제 날짜 설정
@@ -113,49 +142,13 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     } else {
       baseTime = '2000';
     }
-    const publicOpenApiEncodingKey = process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY as string; // 공공 API KEY
-    async function fetchDustData() {
-      setDust({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
-      setNotification(true);
-      try {
-        // 미세먼지 조회 쿼리매개변수 대신 params 이용
-        const dustResponse = await axios.get('https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty', {
-          params: {
-            serviceKey: decodeURIComponent(publicOpenApiEncodingKey),
-            stationName: company === '강촌' ? '가평' : '중구',
-            ver: '1.4',
-            dataTerm: 'daily',
-            pageNo: '1',
-            numOfRows: '1',
-            returnType: 'json',
-          },
-        });
-        // 미세먼지, 초미세먼지
-        const { dataTime, stationName, pm10Value, pm25Value } = dustResponse.data.response.body.items[0];
-        const pm10Level = getPM10Level(pm10Value);
-        const pm25Level = getPM25Level(pm25Value);
-        setDust({ dataTime, stationName, pm10Level, pm25Level, pm10Value, pm25Value });
-      } catch (error) {
-        setDust({ dataTime: '--', stationName: '--', pm10Level: '통신장애', pm25Level: '통신장애', pm10Value: '-', pm25Value: '-' });
-        console.log('미세먼지 가져오기 실패.');
-        console.log(error);
-      }
-    }
     async function fetchWeatherData() {
       try {
-        // 날씨 조회 쿼리매개변수 대신 params 이용
-        const weatherResponse = await axios.get(`https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst`, {
-          params: {
-            serviceKey: decodeURIComponent(publicOpenApiEncodingKey),
-            numOfRows: '350',
-            pageNo: '1',
-            dataType: 'json',
-            base_date: baseDate,
-            base_time: baseTime,
-            nx: company === '강촌' ? '71' : '60',
-            ny: company === '강촌' ? '132' : '127',
-          },
-        });
+        const weatherResponse = await axios.get(
+          `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${
+            process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY
+          }&numOfRows=350&pageNo=1&dataType=json&base_date=${baseDate}&base_time=${baseTime}&nx=${company === '강촌' ? 71 : 60}&ny=${company === '강촌' ? 132 : 127}`
+        );
         const weather = weatherResponse.data.response.body.items.item;
         const data = weather.reduce(
           (acc: { [key: string]: WeatherReturn[] }, currentVal: WeatherReturn) => {
@@ -175,16 +168,14 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         setRain(data.POP);
         setHumidity(data.REH);
         setTemperature(data.TMP);
-        setNotification(false);
       } catch (error) {
-        setNotification(false);
         console.log('날씨 가져오기 실패.');
         console.log(error);
       }
     }
-    fetchDustData();
     fetchWeatherData();
   }, [company]);
+  // ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   return (
     <>
@@ -250,7 +241,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           </div>
         </div>
       </div>
-      {notification && <NotificationBox firstText={'기상상태 분석 중.'} secText={'잠시만 기다려 주세요.'} />}
+      {/* {notification && <NotificationBox firstText={'기상상태 분석 중.'} secText={'잠시만 기다려 주세요.'} />} */}
     </>
   );
 }
