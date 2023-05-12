@@ -113,6 +113,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     } else {
       baseTime = '2000';
     }
+    const publicOpenApiEncodingKey = process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY as string; // 공공 API KEY
     async function fetchDustData() {
       setDust({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
       setNotification(true);
@@ -120,7 +121,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         // 미세먼지 조회 쿼리매개변수 대신 params 이용
         const dustResponse = await axios.get('https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty', {
           params: {
-            serviceKey: decodeURIComponent(process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY || ''),
+            serviceKey: decodeURIComponent(publicOpenApiEncodingKey),
             stationName: company === '강촌' ? '가평' : '중구',
             ver: '1.4',
             dataTerm: 'daily',
@@ -131,10 +132,8 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         });
         // 미세먼지, 초미세먼지
         const { dataTime, stationName, pm10Value, pm25Value } = dustResponse.data.response.body.items[0];
-        let pm10Level = '';
-        let pm25Level = '';
-        pm10Level = getPM10Level(pm10Value);
-        pm25Level = getPM25Level(pm25Value);
+        const pm10Level = getPM10Level(pm10Value);
+        const pm25Level = getPM25Level(pm25Value);
         setDust({ dataTime, stationName, pm10Level, pm25Level, pm10Value, pm25Value });
       } catch (error) {
         setDust({ dataTime: '--', stationName: '--', pm10Level: '통신장애', pm25Level: '통신장애', pm10Value: '-', pm25Value: '-' });
@@ -143,12 +142,11 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       }
     }
     async function fetchWeatherData() {
-      setDust({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
       try {
         // 날씨 조회 쿼리매개변수 대신 params 이용
         const weatherResponse = await axios.get(`https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst`, {
           params: {
-            serviceKey: decodeURIComponent(process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY || ''),
+            serviceKey: decodeURIComponent(publicOpenApiEncodingKey),
             numOfRows: '350',
             pageNo: '1',
             dataType: 'json',
@@ -179,7 +177,6 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         setTemperature(data.TMP);
         setNotification(false);
       } catch (error) {
-        setDust({ dataTime: '--', stationName: '--', pm10Level: '통신장애', pm25Level: '통신장애', pm10Value: '-', pm25Value: '-' });
         setNotification(false);
         console.log('날씨 가져오기 실패.');
         console.log(error);
