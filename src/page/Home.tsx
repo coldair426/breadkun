@@ -147,7 +147,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         const weatherResponse = await axios.get(
           `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${
             process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY
-          }&numOfRows=350&pageNo=1&dataType=json&base_date=${baseDate}&base_time=${baseTime}&nx=${company === '강촌' ? 71 : 60}&ny=${company === '강촌' ? 132 : 127}`
+          }&numOfRows=350&pageNo=1&dataType=json&base_date=${baseDate}&base_time=${baseTime}&nx=${company === '강촌' ? '71' : '60'}&ny=${company === '강촌' ? '132' : '127'}`
         );
         const weather = weatherResponse.data.response.body.items.item;
         const data = weather.reduce(
