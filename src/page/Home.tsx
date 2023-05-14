@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from '../style/Home.module.scss';
 import classNames from 'classnames/bind';
 import axios from 'axios';
-// import NotificationBox from './../component/NotificationBox';
+import NotificationBox from './../component/NotificationBox';
 
 interface WeatherReturn {
   baseDate: string;
@@ -19,7 +19,9 @@ const hs = classNames.bind(styles);
 
 function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [company, setCompany] = useState(localStorage.getItem('recentCompany') || '강촌'); // 강촌, 을지
-  // const [notification, setNotification] = useState(false);
+  const [notification, setNotification] = useState(false);
+  const [dustRequestCompleted, setDustRequestCompleted] = useState(false);
+  const [weatherRequestCompleted, setWeatherRequestCompleted] = useState(false);
   const [dust, setDust] = useState({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
   const [sky, setSky] = useState<WeatherReturn[] | undefined>(); // 하늘상태
   const [rain, setRain] = useState<WeatherReturn[] | undefined>(); // 강수확률
@@ -77,9 +79,10 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   useEffect(() => {
     localStorage.setItem('recentCompany', company);
   }, [company]);
-  // ------------------------------------------------------------------------------------------------------------------------------------------------------------
   // 에어코리아 미세먼지, 초미세먼지
   useEffect(() => {
+    setNotification(true);
+    setDustRequestCompleted(false);
     async function fetchDustData() {
       setDust({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
       try {
@@ -93,15 +96,17 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         const pm10Level = getPM10Level(pm10Value);
         const pm25Level = getPM25Level(pm25Value);
         setDust({ dataTime, stationName, pm10Level, pm25Level, pm10Value, pm25Value });
+        setDustRequestCompleted(true);
       } catch (error) {
         setDust({ dataTime: '--', stationName: '--', pm10Level: '통신장애', pm25Level: '통신장애', pm10Value: '-', pm25Value: '-' });
+        setDustRequestCompleted(true);
         console.log('미세먼지 가져오기 실패.');
         console.log(error);
       }
     }
     fetchDustData();
   }, [company]);
-  // ------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // 기상청 날씨
   useEffect(() => {
     const now = new Date(); // 현재 날짜
     const yesterday = new Date(now); // 어제 날짜
@@ -142,6 +147,8 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     } else {
       baseTime = '2000';
     }
+    setNotification(true);
+    setWeatherRequestCompleted(false);
     async function fetchWeatherData() {
       try {
         const weatherResponse = await axios.get(
@@ -168,14 +175,21 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         setRain(data.POP);
         setHumidity(data.REH);
         setTemperature(data.TMP);
+        setWeatherRequestCompleted(true);
       } catch (error) {
+        setWeatherRequestCompleted(true);
         console.log('날씨 가져오기 실패.');
         console.log(error);
       }
     }
     fetchWeatherData();
   }, [company]);
-  // ------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // 모든 통신이 완료되면 스낵바 언마운트
+  useEffect(() => {
+    if (dustRequestCompleted && weatherRequestCompleted) {
+      setNotification(false);
+    }
+  }, [dustRequestCompleted, weatherRequestCompleted]);
 
   return (
     <>
@@ -241,7 +255,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           </div>
         </div>
       </div>
-      {/* {notification && <NotificationBox firstText={'기상상태 분석 중.'} secText={'잠시만 기다려 주세요.'} />} */}
+      {notification && <NotificationBox firstText={'기상상태 분석 중.'} secText={'잠시만 기다려 주세요.'} />}
     </>
   );
 }
