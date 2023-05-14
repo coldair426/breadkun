@@ -86,8 +86,9 @@ $gray-09: #212529; // 기본배경색
   width: 100%;
   border-radius: 10.26vw;
   display: flex;
+  align-items: center;
   .home__weather--now {
-    width: 40%;
+    width: 38%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -118,8 +119,44 @@ $gray-09: #212529; // 기본배경색
       }
     }
   }
-  .home__weather--forecast {
-    width: 60%;
+  .home__weather--forecasts {
+    width: 62%;
+    height: 80%;
+    border-left: 3px #868e96 dotted;
+    /* 세로 스크롤 기능 자동 동작 */
+    overflow-x: scroll;
+    /* 스크롤바 안보이기  */
+    -ms-overflow-style: none; /*익스플로러*/
+    scrollbar-width: none; /*파이어폭스*/
+    &::-webkit-scrollbar {
+      display: none; /* 크롬, 사파리, 오페라, 엣지 */
+    }
+    .home__weather--forecast {
+      margin-left: 18px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      .home__weather--forecast-time {
+        font-size: 10px;
+        font-weight: 900;
+        margin-right: 10px;
+      }
+      .home__weather--forecast-sky-icon {
+        width: 25px;
+        margin-right: 5px;
+      }
+      .home__weather--forecast-temperature {
+        font-size: 20px;
+        margin-right: 10px;
+      }
+      .home__weather--forecast-rain-img {
+        margin-right: 5px;
+        width: 15px;
+      }
+      .home__weather--forecast-rain-text {
+        font-size: 15px;
+      }
+    }
   }
 }
 .home__weather + .home__dusts {
@@ -194,4 +231,20 @@ $gray-09: #212529; // 기본배경색
 }
 .최악 {
   background-color: #a80038;
+}
+.home__dusts + .home__links {
+  margin-top: 3.33vw;
+}
+.home__links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & > button:nth-child(1) {
+    height: 100px;
+  }
+  & > button:nth-child(2) {
+    margin-top: 3.33vw;
+    height: 100px;
+  }
 }

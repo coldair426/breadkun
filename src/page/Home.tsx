@@ -92,6 +92,14 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     }
     return rainIcon;
   };
+  const getWeatherTime = (fcstTime: string): string | undefined => {
+    if (fcstTime && +fcstTime < 1200) {
+      return `오전${fcstTime.slice(0, 2)}시`;
+    } else if (fcstTime && +fcstTime < 2400) {
+      return `오후${fcstTime.slice(0, 2)}시`;
+    }
+    return undefined;
+  };
 
   // 메뉴 닫기(이전버튼 클릭시)
   useEffect(() => {
@@ -183,7 +191,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         const weatherResponse = await axios.get(
           `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${
             process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY
-          }&numOfRows=350&pageNo=1&dataType=json&base_date=${baseDate}&base_time=${baseTime}&nx=${company === '강촌' ? '71' : '60'}&ny=${company === '강촌' ? '132' : '127'}`
+          }&numOfRows=200&pageNo=1&dataType=json&base_date=${baseDate}&base_time=${baseTime}&nx=${company === '강촌' ? '71' : '60'}&ny=${company === '강촌' ? '132' : '127'}`
         );
         const weather = weatherResponse.data.response.body.items.item;
         const data = weather.reduce(
@@ -205,10 +213,6 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         setRain(data.POP);
         setTemperature(data.TMP);
         setWeatherRequestCompleted(true);
-        // console.log(sky);
-        // console.log(pty);
-        // console.log(rain);
-        // console.log(temperature);
       } catch (error) {
         setSky(undefined);
         setPty(undefined);
@@ -258,7 +262,30 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 <div className={hs('home__weather--now-rain-text')}> {`${rain?.[0].fcstValue || '-'}%`}</div>
               </div>
             </div>
-            <div className={hs('home__weather--forecast')}>예보</div>
+            <div className={hs('home__weather--forecasts')}>
+              {new Array(12).fill('0').map((currentVal, index) => (
+                <div className={hs('home__weather--forecast')} key={currentVal + index}>
+                  <div className={hs('home__weather--forecast-time')} key={index}>
+                    {getWeatherTime(temperature?.[index + 1].fcstTime || '')}
+                  </div>
+                  {pty?.[index + 1].fcstValue && (
+                    <img
+                      className={hs('home__weather--forecast-sky-icon')}
+                      src={getWeatherIconPath(pty?.[index + 1].fcstValue, sky?.[index + 1].fcstValue)}
+                      alt='weather-icon'
+                      key={`a${index}`}
+                    />
+                  )}
+                  <div className={hs('home__weather--forecast-temperature')} key={`d${index}`}>
+                    {temperature?.[index + 1].fcstValue ? `${temperature?.[index + 1].fcstValue}°C` : ''}
+                  </div>
+                  {pty?.[index + 1].fcstValue && <img className={hs('home__weather--forecast-rain-img')} src='/icon/weather/popPercent.png' alt='rain-percent' key={`c${index}`} />}
+                  <div className={hs('home__weather--forecast-rain-text')} key={`t${index}`}>
+                    {rain?.[index + 1].fcstValue ? `${rain?.[index + 1].fcstValue}%` : ''}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
           <div className={hs('home__dusts')}>
             <div className={hs('home__dust', dust.pm10Level === '---' ? '조회중' : dust.pm10Level)}>
@@ -291,6 +318,14 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 </div>
               </div>
             </div>
+          </div>
+          <div className={hs('home__links')}>
+            <button>
+              <div className={hs('home__link')}>버스 정보 보기</div>
+            </button>
+            <button>
+              <div className={hs('home__link')}>오늘의 식단 보기</div>
+            </button>
           </div>
         </div>
       </div>
