@@ -85,6 +85,42 @@ $gray-09: #212529; // 기본배경색
   height: 55vw;
   width: 100%;
   border-radius: 10.26vw;
+  display: flex;
+  .home__weather--now {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .home__weather--now-temperature {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .home__weather--now-temperature-img {
+        height: 90px;
+        margin-bottom: 10px;
+      }
+      .home__weather--now-temperature-text {
+        font-size: 30px;
+      }
+    }
+    .home__weather--now-rain {
+      display: flex;
+      align-items: center;
+      margin-top: 3px;
+      .home__weather--now-rain-img {
+        height: 15px;
+      }
+      .home__weather--now-rain-text {
+        margin-left: 5px;
+        font-size: 20px;
+        letter-spacing: 2px;
+      }
+    }
+  }
+  .home__weather--forecast {
+    width: 60%;
+  }
 }
 .home__weather + .home__dusts {
   margin-top: 3.33vw;

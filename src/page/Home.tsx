@@ -24,8 +24,8 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   const [weatherRequestCompleted, setWeatherRequestCompleted] = useState(false);
   const [dust, setDust] = useState({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
   const [sky, setSky] = useState<WeatherReturn[] | undefined>(); // 하늘상태
+  const [pty, setPty] = useState<WeatherReturn[] | undefined>(); // 강수형태
   const [rain, setRain] = useState<WeatherReturn[] | undefined>(); // 강수확률
-  const [humidity, setHumidity] = useState<WeatherReturn[] | undefined>(); // 습도
   const [temperature, setTemperature] = useState<WeatherReturn[] | undefined>(); // 기온
 
   // 회사를 드롭다운에 따라 업데이트하는 함수
@@ -66,6 +66,32 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       }
     }
   };
+  const getWeatherIconPath = (ptyCode: string | undefined, skyCode: string | undefined): string | undefined => {
+    const sunnyIcon = '/icon/weather/Sunny.png';
+    const cloudyIcon = '/icon/weather/cloudy.png';
+    const overcastIcon = '/icon/weather/overcast.png';
+    const rainIcon = '/icon/weather/rain.png';
+    const snowAndRainIcon = '/icon/weather/snowAndRain.png';
+    const snowIcon = '/icon/weather/snow.png';
+    // 강수형태가 0(없음) 일때,
+    switch (ptyCode) {
+      case '0':
+        switch (skyCode) {
+          case '1':
+            return sunnyIcon;
+          case '3':
+            return cloudyIcon;
+          case '4':
+            return overcastIcon;
+        }
+        break;
+      case '2':
+        return snowAndRainIcon;
+      case '3':
+        return snowIcon;
+    }
+    return rainIcon;
+  };
 
   // 메뉴 닫기(이전버튼 클릭시)
   useEffect(() => {
@@ -91,7 +117,6 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             company === '강촌' ? '가평' : '중구'
           }&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`
         );
-        // 미세먼지, 초미세먼지
         const { dataTime, stationName, pm10Value, pm25Value } = dustResponse.data.response.body.items[0];
         const pm10Level = getPM10Level(pm10Value);
         const pm25Level = getPM25Level(pm25Value);
@@ -150,6 +175,10 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     setNotification(true);
     setWeatherRequestCompleted(false);
     async function fetchWeatherData() {
+      setSky(undefined);
+      setPty(undefined);
+      setRain(undefined);
+      setTemperature(undefined);
       try {
         const weatherResponse = await axios.get(
           `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${
@@ -172,11 +201,19 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           { SKY: [], POP: [], REH: [], TMP: [] }
         );
         setSky(data.SKY);
+        setPty(data.PTY);
         setRain(data.POP);
-        setHumidity(data.REH);
         setTemperature(data.TMP);
         setWeatherRequestCompleted(true);
+        // console.log(sky);
+        // console.log(pty);
+        // console.log(rain);
+        // console.log(temperature);
       } catch (error) {
+        setSky(undefined);
+        setPty(undefined);
+        setRain(undefined);
+        setTemperature(undefined);
         setWeatherRequestCompleted(true);
         console.log('날씨 가져오기 실패.');
         console.log(error);
@@ -209,17 +246,19 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         </div>
         <div className={hs('home__body')}>
           <div className={hs('home__weather')}>
-            날씨예측시각: {sky ? `${sky[0].baseDate}/${sky[0].baseTime}` : undefined}
-            <br />
-            날씨시작데이터: {sky ? `${sky[0].fcstDate}/${sky[0].fcstTime}` : undefined}
-            <br />
-            미세먼지데이터: {dust.dataTime}
-            <br />
-            {rain?.length}
-            <br />
-            {humidity?.length}
-            <br />
-            {temperature?.length}
+            <div className={hs('home__weather--now')}>
+              <div className={hs('home__weather--now-temperature')}>
+                {pty?.[0].fcstValue && (
+                  <img className={hs('home__weather--now-temperature-img')} src={getWeatherIconPath(pty?.[0].fcstValue, sky?.[0].fcstValue)} alt='weather-icon' />
+                )}
+                <div className={hs('home__weather--now-temperature-text')}>{`${temperature?.[0].fcstValue || '-'}°C`}</div>
+              </div>
+              <div className={hs('home__weather--now-rain')}>
+                <img className={hs('home__weather--now-rain-img')} src='/icon/weather/popPercent.png' alt='rain-percent' />
+                <div className={hs('home__weather--now-rain-text')}> {`${rain?.[0].fcstValue || '-'}%`}</div>
+              </div>
+            </div>
+            <div className={hs('home__weather--forecast')}>예보</div>
           </div>
           <div className={hs('home__dusts')}>
             <div className={hs('home__dust', dust.pm10Level === '---' ? '조회중' : dust.pm10Level)}>
