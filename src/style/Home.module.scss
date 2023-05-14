@@ -236,15 +236,26 @@ $gray-09: #212529; // 기본배경색
   margin-top: 3.33vw;
 }
 .home__links {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  & > button:nth-child(1) {
-    height: 100px;
-  }
-  & > button:nth-child(2) {
+  font-size: 20px;
+  a + a {
     margin-top: 3.33vw;
-    height: 100px;
+  }
+  & > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 13vw;
+    background-color: darken(#404258, 5%);
+    border-radius: 10.26vw;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    &:active {
+      transform: scale(1.05);
+      -webkit-transform: scale(1.05); /* Webkit prefix */
+      -moz-transform: scale(1.05); /* Mozilla prefix */
+      -o-transform: scale(1.05); /* Opera prefix */
+      -ms-transform: scale(1.05); /* IE prefix */
+    }
   }
 }

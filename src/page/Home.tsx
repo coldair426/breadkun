@@ -3,6 +3,7 @@ import styles from '../style/Home.module.scss';
 import classNames from 'classnames/bind';
 import axios from 'axios';
 import NotificationBox from './../component/NotificationBox';
+import { Link } from 'react-router-dom';
 
 interface WeatherReturn {
   baseDate: string;
@@ -320,12 +321,12 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             </div>
           </div>
           <div className={hs('home__links')}>
-            <button>
+            <Link to={'/bus'}>
               <div className={hs('home__link')}>버스 정보 보기</div>
-            </button>
-            <button>
+            </Link>
+            <Link to={'/menu'}>
               <div className={hs('home__link')}>오늘의 식단 보기</div>
-            </button>
+            </Link>
           </div>
         </div>
       </div>
