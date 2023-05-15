@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../style/Meal.module.scss';
 import classNames from 'classnames/bind';
-import axios from 'axios';
+// import axios from 'axios';
 
 const ms = classNames.bind(styles);
 
@@ -24,21 +24,18 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     localStorage.setItem('recentCompany', company);
   }, [company]);
   // 식단 API 통신
-  useEffect(() => {
-    async function fetchMenuData() {
-      try {
-        // const result = await axios.get(
-        //   company === '강촌' ? 'https://breadboy-7b329-default-rtdb.firebaseio.com/%EA%B0%95%EC%B4%8C' : 'https://breadboy-7b329-default-rtdb.firebaseio.com/%EC%9D%84%EC%A7%80'
-        // );
-        const result = await axios.get('https://breadboy-7b329-default-rtdb.firebaseio.com/%EA%B0%95%EC%B4%8C.json');
-        console.log(result);
-      } catch (error) {
-        console.log('메뉴 가져오기 실패.');
-        console.log(error);
-      }
-    }
-    fetchMenuData();
-  }, [company]);
+  // useEffect(() => {
+  //   async function fetchMealData() {
+  //     try {
+  //       const result = await axios.get('https://breadboy-7b329-default-rtdb.firebaseio.com/%EA%B0%95%EC%B4%8C.json');
+  //       console.log(result);
+  //     } catch (error) {
+  //       console.log('메뉴 가져오기 실패.');
+  //       console.log(error);
+  //     }
+  //   }
+  //   fetchMealData();
+  // }, [company]);
 
   return (
     <>
