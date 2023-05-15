@@ -3,7 +3,6 @@ $backColor2: #404258;
 $gray8: #343a40;
 $gray9: #212529; // 기본배경색
 $fontColor: #f8f9fa; // 기본글자색
-$iconBackground: #404258;
 
 .home {
   padding: 0;
@@ -36,47 +35,47 @@ $iconBackground: #404258;
     width: 11.54vw;
     max-width: 48px; // 갤럭시 폴드 대응
     border-radius: clamp(1px, 5.13vw, 22px); // 갤럭시 폴드 대응
-    background-color: $iconBackground;
+    background-color: $backColor2;
     margin-left: clamp(1px, 3.85vw, 27px); // 갤럭시 폴드 대응
     margin-right: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
   }
-}
-.title__select {
-  position: relative;
-  display: flex;
-  align-items: center;
-  .title__letter {
-    font-size: clamp(1px, 5.38vw, 25px); // 갤럭시 폴드 대응
-  }
-  select {
-    font-size: clamp(1px, 4vw, 15px); // 갤럭시 폴드 대응
-    text-align-last: center; // 중앙정렬
-    -webkit-text-align-last: center; // 아이폰에서도 적용
-    -moz-text-align-last: center;
-    -ms-text-align-last: center;
-    appearance: none;
-    text-decoration: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-color: $gray8;
-    color: $fontColor;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    cursor: pointer;
-  }
-  .title__select-button {
-    width: 2vw;
-    max-width: 10px; // 갤럭시 폴드 대응
-    margin-left: 1.5vw;
+  .title__select {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
+    .title__letter {
+      font-size: clamp(1px, 5.38vw, 25px); // 갤럭시 폴드 대응
+    }
+    select {
+      font-size: clamp(1px, 4vw, 15px); // 갤럭시 폴드 대응
+      text-align-last: center; // 중앙정렬
+      -webkit-text-align-last: center; // 아이폰에서도 적용
+      -moz-text-align-last: center;
+      -ms-text-align-last: center;
+      appearance: none;
+      text-decoration: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background-color: $gray8;
+      color: $fontColor;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .title__select-button {
+      width: 2vw;
+      max-width: 10px; // 갤럭시 폴드 대응
+      margin-left: 1.5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
   }
 }
 .home__weather {

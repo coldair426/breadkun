@@ -1,7 +1,7 @@
-$gray-09: #212529; // 기본배경색
+$gray09: #212529; // 기본배경색
 
 .header {
-  background-color: $gray-09;
+  background-color: $gray09;
   top: 0;
   display: -webkit-flex; /* Safari */
   display: flex;
@@ -19,31 +19,31 @@ $gray-09: #212529; // 기본배경색
   border-bottom-left-radius: 35px;
   border-bottom-right-radius: 35px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-.header__logo {
-  // margin-left: 20px;
-  margin-left: 3.5vw;
-  height: 11.54vw;
-  max-height: 52px; // 갤럭시 폴드 대응
-}
-.header__button {
-  // margin-right: 20px;
-  margin-right: 3.5vw;
-  height: 12.82vw;
-  max-height: 57px; // 갤럭시 폴드 대응
-  transition: all 50ms ease-in-out;
-  -webkit-transition: all 50ms ease-in-out; /* Webkit prefix */
-  -moz-transition: all 50ms ease-in-out; /* Mozilla prefix */
-  -o-transition: all 50ms ease-in-out; /* Opera prefix */
-  -ms-transition: all 50ms ease-in-out; /* IE prefix */
-  &:hover {
-    cursor: pointer;
+  .header__logo {
+    // margin-left: 20px;
+    margin-left: 3.5vw;
+    height: 11.54vw;
+    max-height: 52px; // 갤럭시 폴드 대응
   }
-  &:active {
-    transform: scale(1.5);
-    -webkit-transform: scale(1.5); /* Webkit prefix */
-    -moz-transform: scale(1.5); /* Mozilla prefix */
-    -o-transform: scale(1.5); /* Opera prefix */
-    -ms-transform: scale(1.5); /* IE prefix */
+  .header__button {
+    // margin-right: 20px;
+    margin-right: 3.5vw;
+    height: 12.82vw;
+    max-height: 57px; // 갤럭시 폴드 대응
+    transition: all 50ms ease-in-out;
+    -webkit-transition: all 50ms ease-in-out; /* Webkit prefix */
+    -moz-transition: all 50ms ease-in-out; /* Mozilla prefix */
+    -o-transition: all 50ms ease-in-out; /* Opera prefix */
+    -ms-transition: all 50ms ease-in-out; /* IE prefix */
+    &:hover {
+      cursor: pointer;
+    }
+    &:active {
+      transform: scale(1.5);
+      -webkit-transform: scale(1.5); /* Webkit prefix */
+      -moz-transform: scale(1.5); /* Mozilla prefix */
+      -o-transform: scale(1.5); /* Opera prefix */
+      -ms-transform: scale(1.5); /* IE prefix */
+    }
   }
 }
