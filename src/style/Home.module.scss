@@ -118,48 +118,54 @@ $iconBackground: #404258;
       }
     }
   }
-  .home__weather--forecasts {
+  .home__weather--forecasts-wrapper {
     width: 58%;
-    height: 80%;
-    padding: 2% 0;
+    height: 87%;
     border-radius: 7vw;
     background-color: #495057;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    /* 세로 스크롤 기능 자동 동작 */
-    overflow-x: scroll;
-    /* 스크롤바 안보이기  */
-    -ms-overflow-style: none; /*익스플로러*/
-    scrollbar-width: none; /*파이어폭스*/
-    &::-webkit-scrollbar {
-      display: none; /* 크롬, 사파리, 오페라, 엣지 */
-    }
-    .home__weather--forecast + .home__weather--forecast {
-      margin-top: 2.82vw;
-    }
-    .home__weather--forecast {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      .home__weather--forecast-time {
-        font-size: 2.56vw;
-        font-weight: 900;
-        width: 14vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .home__weather--forecasts {
+      height: 87%;
+      width: 100%;
+      /* 세로 스크롤 기능 자동 동작 */
+      overflow-x: scroll;
+      /* 스크롤바 안보이기  */
+      -ms-overflow-style: none; /*익스플로러*/
+      scrollbar-width: none; /*파이어폭스*/
+      &::-webkit-scrollbar {
+        display: none; /* 크롬, 사파리, 오페라, 엣지 */
       }
-      .home__weather--forecast-sky-icon {
-        width: 6.41vw;
-        margin-right: 1.28vw;
+      .home__weather--forecast + .home__weather--forecast {
+        margin-top: 2.82vw;
       }
-      .home__weather--forecast-temperature {
-        font-size: 3.85vw;
-        width: 10.26vw;
-      }
-      .home__weather--forecast-rain-img {
-        margin-right: 1.28vw;
-        width: 5.13vw;
-      }
-      .home__weather--forecast-rain-text {
-        font-size: 3.85vw;
-        width: 5.13vw;
+      .home__weather--forecast {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .home__weather--forecast-time {
+          font-size: 2.56vw;
+          font-weight: 900;
+          width: 14vw;
+        }
+        .home__weather--forecast-sky-icon {
+          width: 6.41vw;
+          margin-right: 1.28vw;
+        }
+        .home__weather--forecast-temperature {
+          font-size: 3.85vw;
+          width: 10.26vw;
+        }
+        .home__weather--forecast-rain-img {
+          margin-right: 1.28vw;
+          width: 5.13vw;
+        }
+        .home__weather--forecast-rain-text {
+          font-size: 3.85vw;
+          width: 6vw;
+        }
       }
     }
   }

@@ -263,29 +263,33 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 <div className={hs('home__weather--now-rain-text')}> {`${rain?.[0].fcstValue.padStart(2, '0') || '-'}%`}</div>
               </div>
             </div>
-            <div className={hs('home__weather--forecasts')}>
-              {new Array(12).fill('0').map((currentVal, index) => (
-                <div className={hs('home__weather--forecast')} key={currentVal + index}>
-                  <div className={hs('home__weather--forecast-time')} key={index}>
-                    {getWeatherTime(temperature?.[index + 1].fcstTime || '')}
+            <div className={hs('home__weather--forecasts-wrapper')}>
+              <div className={hs('home__weather--forecasts')}>
+                {new Array(12).fill('0').map((currentVal, index) => (
+                  <div className={hs('home__weather--forecast')} key={currentVal + index}>
+                    <div className={hs('home__weather--forecast-time')} key={index}>
+                      {getWeatherTime(temperature?.[index + 1].fcstTime || '')}
+                    </div>
+                    {pty?.[index + 1].fcstValue && (
+                      <img
+                        className={hs('home__weather--forecast-sky-icon')}
+                        src={getWeatherIconPath(pty?.[index + 1].fcstValue, sky?.[index + 1].fcstValue)}
+                        alt='weather-icon'
+                        key={`a${index}`}
+                      />
+                    )}
+                    <div className={hs('home__weather--forecast-temperature')} key={`d${index}`}>
+                      {temperature?.[index + 1].fcstValue ? `${temperature?.[index + 1].fcstValue.padStart(2, '0')}°C` : ''}
+                    </div>
+                    {pty?.[index + 1].fcstValue && (
+                      <img className={hs('home__weather--forecast-rain-img')} src='/icon/weather/popPercent.png' alt='rain-percent' key={`c${index}`} />
+                    )}
+                    <div className={hs('home__weather--forecast-rain-text')} key={`t${index}`}>
+                      {rain?.[index + 1].fcstValue ? `${rain?.[index + 1].fcstValue.padStart(2, '0')}%` : ''}
+                    </div>
                   </div>
-                  {pty?.[index + 1].fcstValue && (
-                    <img
-                      className={hs('home__weather--forecast-sky-icon')}
-                      src={getWeatherIconPath(pty?.[index + 1].fcstValue, sky?.[index + 1].fcstValue)}
-                      alt='weather-icon'
-                      key={`a${index}`}
-                    />
-                  )}
-                  <div className={hs('home__weather--forecast-temperature')} key={`d${index}`}>
-                    {temperature?.[index + 1].fcstValue ? `${temperature?.[index + 1].fcstValue.padStart(2, '0')}°C` : ''}
-                  </div>
-                  {pty?.[index + 1].fcstValue && <img className={hs('home__weather--forecast-rain-img')} src='/icon/weather/popPercent.png' alt='rain-percent' key={`c${index}`} />}
-                  <div className={hs('home__weather--forecast-rain-text')} key={`t${index}`}>
-                    {rain?.[index + 1].fcstValue ? `${rain?.[index + 1].fcstValue.padStart(2, '0')}%` : ''}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
           <div className={hs('home__dusts')}>
