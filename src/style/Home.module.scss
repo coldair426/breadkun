@@ -97,24 +97,24 @@ $iconBackground: #404258;
       flex-direction: column;
       align-items: center;
       .home__weather--now-temperature-img {
-        height: 90px;
-        margin-bottom: 10px;
+        height: 23vw;
+        margin-bottom: 2.56vw;
       }
       .home__weather--now-temperature-text {
-        font-size: 30px;
+        font-size: 7.69vw; // 갤럭시 폴드 대응
       }
     }
     .home__weather--now-rain {
       display: flex;
       align-items: center;
-      margin-top: 3px;
+      margin-top: 0.8vw;
       .home__weather--now-rain-img {
-        height: 15px;
+        height: 3.85vw;
       }
       .home__weather--now-rain-text {
-        margin-left: 5px;
-        font-size: 20px;
-        letter-spacing: 2px;
+        margin-left: 1.28vw;
+        font-size: 5.13vw;
+        letter-spacing: 0.5vw;
       }
     }
   }
@@ -134,32 +134,32 @@ $iconBackground: #404258;
       display: none; /* 크롬, 사파리, 오페라, 엣지 */
     }
     .home__weather--forecast + .home__weather--forecast {
-      margin-top: 11px;
+      margin-top: 2.82vw;
     }
     .home__weather--forecast {
       display: flex;
       align-items: center;
       justify-content: center;
       .home__weather--forecast-time {
-        font-size: 10px;
+        font-size: 2.56vw;
         font-weight: 900;
-        width: 53px;
+        width: 14vw;
       }
       .home__weather--forecast-sky-icon {
-        width: 25px;
-        margin-right: 5px;
+        width: 6.41vw;
+        margin-right: 1.28vw;
       }
       .home__weather--forecast-temperature {
-        font-size: 15px;
-        width: 40px;
+        font-size: 3.85vw;
+        width: 10.26vw;
       }
       .home__weather--forecast-rain-img {
-        margin-right: 5px;
-        width: 20px;
+        margin-right: 1.28vw;
+        width: 5.13vw;
       }
       .home__weather--forecast-rain-text {
-        font-size: 15px;
-        width: 25px;
+        font-size: 3.85vw;
+        width: 5.13vw;
       }
     }
   }
@@ -195,11 +195,11 @@ $iconBackground: #404258;
   }
   .home__dust--title,
   .home__ultra-dust--title {
-    font-size: 20px;
-    margin-bottom: 15px;
+    font-size: clamp(1px, 5.13vw, 25px);
+    margin-bottom: 3.85vw;
     display: flex;
     > img {
-      height: 8px;
+      height: 2vw;
       opacity: 0.5;
     }
   }
@@ -210,12 +210,13 @@ $iconBackground: #404258;
     align-items: center;
     .home__dust--img,
     .home__ultra-dust--img {
-      height: 65px;
+      height: 16.67vw;
+      max-height: 80px;
     }
     .home__dust--level,
     .home__ultra-dust--level {
-      margin-top: 15px;
-      font-size: 17px;
+      margin-top: 3.85vw;
+      font-size: clamp(1px, 4.36vw, 22px);
     }
   }
 }
@@ -241,7 +242,7 @@ $iconBackground: #404258;
   margin-top: 3.33vw;
 }
 .home__links {
-  font-size: 20px;
+  font-size: clamp(1px, 5.13vw, 22px);
   a + a {
     margin-top: 3.33vw;
   }
@@ -251,6 +252,7 @@ $iconBackground: #404258;
     align-items: center;
     width: 100%;
     height: 13vw;
+    max-height: 55px;
     background-color: #413543;
     border-radius: 10.26vw;
     text-decoration: none;
