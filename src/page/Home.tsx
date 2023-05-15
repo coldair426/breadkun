@@ -325,12 +325,14 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             </div>
           </div>
           <div className={hs('home__links')}>
-            <Link to={'/bus'}>
-              <div className={hs('home__link')}>버스 정보 보기</div>
-            </Link>
             <Link to={'/menu'}>
               <div className={hs('home__link')}>오늘의 식단 보기</div>
             </Link>
+            {company === '강촌' && (
+              <Link to={'/bus'}>
+                <div className={hs('home__link')}>퇴근 버스 정보 보기</div>
+              </Link>
+            )}
           </div>
         </div>
       </div>

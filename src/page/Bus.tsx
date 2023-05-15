@@ -127,7 +127,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
   return (
     <>
       <div className={bs('bus')}>
-        <Title letter='퇴근 버스' imgSrc='/icon/bus-title-icon.png' imgH='5.64vw' />
+        <Title letter='강촌 퇴근 버스' imgSrc='/icon/bus-title-icon.png' imgH='5.64vw' />
         <div className={bs('bus__body')}>
           <KakaoMap mapHeight={'64.1vw'} mapWidth={'100%'} latLong={latLong} levelNum={5} draggableType={true} trafficInfo={true} />
           <div className={bs('bus__block1')}>
