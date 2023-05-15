@@ -116,32 +116,65 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   }, [company]);
   // 에어코리아 미세먼지, 초미세먼지
   useEffect(() => {
+    let isMounted = true; // 마운트 상태 확인 변수
+    const cancelTokenSource = axios.CancelToken.source(); // 요청 취소 토큰
     setNotification(true);
     setDustRequestCompleted(false);
-    async function fetchDustData() {
-      setDust({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
+    setDust({ dataTime: '--', stationName: '--', pm10Level: '---', pm25Level: '---', pm10Value: '-', pm25Value: '-' });
+    const fetchDustData = async () => {
       try {
         const dustResponse = await axios.get(
           `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=${
             company === '강촌' ? '가평' : '중구'
-          }&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`
+          }&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`,
+          { cancelToken: cancelTokenSource.token, timeout: 500 } // 캔슬토큰과 setTimeout 500ms 추가
         );
         const { dataTime, stationName, pm10Value, pm25Value } = dustResponse.data.response.body.items[0];
         const pm10Level = getPM10Level(pm10Value);
         const pm25Level = getPM25Level(pm25Value);
-        setDust({ dataTime, stationName, pm10Level, pm25Level, pm10Value, pm25Value });
-        setDustRequestCompleted(true);
+        if (isMounted) {
+          setDust({ dataTime, stationName, pm10Level, pm25Level, pm10Value, pm25Value });
+          setDustRequestCompleted(true);
+        }
       } catch (error) {
-        setDust({ dataTime: '--', stationName: '--', pm10Level: '통신장애', pm25Level: '통신장애', pm10Value: '-', pm25Value: '-' });
-        setDustRequestCompleted(true);
-        console.log('미세먼지 가져오기 실패.');
-        console.log(error);
+        if (isMounted) {
+          setDust({ dataTime: '--', stationName: '--', pm10Level: '통신장애', pm25Level: '통신장애', pm10Value: '-', pm25Value: '-' });
+          setDustRequestCompleted(true);
+          console.log('미세먼지 가져오기 실패.');
+          console.log(error);
+        }
       }
-    }
+    };
+    // retry 함수 3번시도
+    const retryDustData = async (retryCount: number) => {
+      try {
+        await fetchDustData();
+      } catch (error) {
+        if (retryCount >= 3) {
+          console.log('미세먼지 가져오기 재시도 실패.');
+          console.log(error);
+        } else {
+          console.log('미세먼지 가져오기 재시도...');
+          retryDustData(retryCount + 1);
+        }
+      }
+    };
     fetchDustData();
+    // 미세먼지 데이터 가져오기를 재시도하는 로직
+    const retryTimer = setTimeout(() => {
+      retryDustData(1);
+    }, 500); // 요청이 완료되지 않은 경우 500ms 후에 재시도
+    // 클린업 => 마운트가 해제될 때, 통신 취소
+    return () => {
+      cancelTokenSource.cancel('Component unmounted');
+      clearTimeout(retryTimer);
+      isMounted = false;
+    };
   }, [company]);
   // 기상청 날씨
   useEffect(() => {
+    let isMounted = true; // 마운트 상태 확인 변수
+    const cancelTokenSource = axios.CancelToken.source(); // 요청 취소 토큰
     const now = new Date(); // 현재 날짜
     const yesterday = new Date(now); // 어제 날짜
     yesterday.setDate(now.getDate() - 1); // 어제 날짜 설정
@@ -183,17 +216,21 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     }
     setNotification(true);
     setWeatherRequestCompleted(false);
-    async function fetchWeatherData() {
-      setSky(undefined);
-      setPty(undefined);
-      setRain(undefined);
-      setTemperature(undefined);
+    setSky(undefined);
+    setPty(undefined);
+    setRain(undefined);
+    setTemperature(undefined);
+    const fetchWeatherData = async () => {
       try {
         const weatherResponse = await axios.get(
           `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${
             process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY
-          }&numOfRows=200&pageNo=1&dataType=json&base_date=${baseDate}&base_time=${baseTime}&nx=${company === '강촌' ? '71' : '60'}&ny=${company === '강촌' ? '132' : '127'}`
+          }&numOfRows=200&pageNo=1&dataType=json&base_date=${baseDate}&base_time=${baseTime}&nx=${company === '강촌' ? '71' : '60'}&ny=${company === '강촌' ? '132' : '127'}`,
+          { cancelToken: cancelTokenSource.token, timeout: 1500 } // 1500ms 타임아웃 설정
         );
+        if (!isMounted) {
+          return; // 컴포넌트가 언마운트되었을 경우 더 이상 실행하지 않음
+        }
         const weather = weatherResponse.data.response.body.items.item;
         const data = weather.reduce(
           (acc: { [key: string]: WeatherReturn[] }, currentVal: WeatherReturn) => {
@@ -209,22 +246,49 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           },
           { SKY: [], POP: [], REH: [], TMP: [] }
         );
-        setSky(data.SKY);
-        setPty(data.PTY);
-        setRain(data.POP);
-        setTemperature(data.TMP);
-        setWeatherRequestCompleted(true);
+        if (isMounted) {
+          setSky(data.SKY);
+          setPty(data.PTY);
+          setRain(data.POP);
+          setTemperature(data.TMP);
+          setWeatherRequestCompleted(true);
+        }
       } catch (error) {
-        setSky(undefined);
-        setPty(undefined);
-        setRain(undefined);
-        setTemperature(undefined);
-        setWeatherRequestCompleted(true);
-        console.log('날씨 가져오기 실패.');
-        console.log(error);
+        if (isMounted) {
+          setSky(undefined);
+          setPty(undefined);
+          setRain(undefined);
+          setTemperature(undefined);
+          setWeatherRequestCompleted(true);
+          console.log('날씨 가져오기 실패.');
+          console.log(error);
+        }
       }
-    }
+    };
+    const retryWeatherData = async (retryCount: number) => {
+      try {
+        await fetchWeatherData();
+      } catch (error) {
+        if (retryCount >= 3) {
+          console.log('날씨 데이터 다시 가져오기 재시도 실패.');
+          console.log(error);
+        } else {
+          console.log('날씨 데이터 다시 가져오기 재시도...');
+          retryWeatherData(retryCount + 1);
+        }
+      }
+    };
     fetchWeatherData();
+    // 날씨 데이터 가져오기를 재시도하는 로직
+    const retryTimer = setTimeout(() => {
+      retryWeatherData(1);
+    }, 500); // 요청이 완료되지 않은 경우 500ms 후에 재시도
+    // 클린업 => 마운트가 해제될 때, 통신 취소
+    return () => {
+      cancelTokenSource.cancel('Component unmounted');
+      clearTimeout(retryTimer);
+      isMounted = false;
+    };
   }, [company]);
   // 모든 통신이 완료되면 스낵바 언마운트
   useEffect(() => {
