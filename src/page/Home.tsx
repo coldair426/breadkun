@@ -138,8 +138,6 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         }
       } catch (error) {
         if (isMounted) {
-          setDust({ dataTime: '--', stationName: '--', pm10Level: '통신장애', pm25Level: '통신장애', pm10Value: '-', pm25Value: '-' });
-          setDustRequestCompleted(true);
           console.log('미세먼지 가져오기 실패.');
           console.log(error);
         }
@@ -151,6 +149,8 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         await fetchDustData();
       } catch (error) {
         if (retryCount >= 3) {
+          setDust({ dataTime: '--', stationName: '--', pm10Level: '통신장애', pm25Level: '통신장애', pm10Value: '-', pm25Value: '-' });
+          setDustRequestCompleted(true);
           console.log('미세먼지 가져오기 재시도 실패.');
           console.log(error);
         } else {
@@ -255,11 +255,6 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         }
       } catch (error) {
         if (isMounted) {
-          setSky(undefined);
-          setPty(undefined);
-          setRain(undefined);
-          setTemperature(undefined);
-          setWeatherRequestCompleted(true);
           console.log('날씨 가져오기 실패.');
           console.log(error);
         }
@@ -270,6 +265,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         await fetchWeatherData();
       } catch (error) {
         if (retryCount >= 3) {
+          setWeatherRequestCompleted(true);
           console.log('날씨 데이터 다시 가져오기 재시도 실패.');
           console.log(error);
         } else {
