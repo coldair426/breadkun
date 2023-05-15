@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../style/Menu.module.scss';
+import styles from '../style/Meal.module.scss';
 import classNames from 'classnames/bind';
 import axios from 'axios';
 
 const ms = classNames.bind(styles);
 
-function Menu({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
+function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [company, setCompany] = useState(localStorage.getItem('recentCompany') || '강촌'); // 강촌, 을지
 
   // 회사를 드롭다운에 따라 업데이트하는 함수
@@ -42,10 +42,10 @@ function Menu({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
 
   return (
     <>
-      <div className={ms('menu')}>
+      <div className={ms('meal')}>
         <div className={ms('title')}>
           <div className={ms('title__icon')}>
-            <img src='/icon/menu-title-icon.png' alt='title' style={{ height: '5.64vw', maxHeight: '22px' }} />
+            <img src='/icon/meal-title-icon.png' alt='title' style={{ height: '5.64vw', maxHeight: '22px' }} />
           </div>
           <div className={ms('title__select')}>
             <div className={ms('title__letter')}>{company === '강촌' ? '강촌 식단' : '을지 식단'}</div>
@@ -56,10 +56,10 @@ function Menu({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             <img className={ms('title__select-button')} src='/icon/home-select-arrow.png' alt='dropdown-button' />
           </div>
         </div>
-        <div className={ms('menu__body')}></div>
+        <div className={ms('meal__body')}></div>
       </div>
     </>
   );
 }
 
-export default Menu;
+export default Meal;

@@ -27,8 +27,8 @@ function MenuBox({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateActi
         <NavLink className={({ isActive }) => (isActive ? ms('menu-box__menu-active') : ms('menu-box__menu'))} to={'/'} onClick={() => setMenuBox(false)}>
           HOME
         </NavLink>
-        <NavLink className={({ isActive }) => (isActive ? ms('menu-box__menu-active') : ms('menu-box__menu'))} to={'/menu'} onClick={() => setMenuBox(false)}>
-          MENU
+        <NavLink className={({ isActive }) => (isActive ? ms('menu-box__menu-active') : ms('menu-box__menu'))} to={'/meal'} onClick={() => setMenuBox(false)}>
+          MEAL
         </NavLink>
         <NavLink className={({ isActive }) => (isActive ? ms('menu-box__menu-active') : ms('menu-box__menu'))} to={'/bus'} onClick={() => setMenuBox(false)}>
           BUS
