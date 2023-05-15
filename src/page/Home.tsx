@@ -238,7 +238,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       <div className={hs('home')}>
         <div className={hs('title')}>
           <div className={hs('title__icon')}>
-            <img src='/icon/home-title-icon.png' alt='before-button' style={{ height: '5.64vw', maxHeight: '22px' }} />
+            <img src='/icon/home-title-icon.png' alt='title' style={{ height: '5.64vw', maxHeight: '22px' }} />
           </div>
           <div className={hs('title__select')}>
             <div className={hs('title__letter')}>{company === '강촌' ? '더존 강촌캠퍼스' : '더존 을지타워'}</div>
