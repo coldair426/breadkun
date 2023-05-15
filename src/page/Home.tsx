@@ -256,11 +256,11 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 {pty?.[0].fcstValue && (
                   <img className={hs('home__weather--now-temperature-img')} src={getWeatherIconPath(pty?.[0].fcstValue, sky?.[0].fcstValue)} alt='weather-icon' />
                 )}
-                <div className={hs('home__weather--now-temperature-text')}>{`${temperature?.[0].fcstValue || '-'}°C`}</div>
+                <div className={hs('home__weather--now-temperature-text')}>{`${temperature?.[0].fcstValue.padStart(2, '0') || '-'}°C`}</div>
               </div>
               <div className={hs('home__weather--now-rain')}>
                 <img className={hs('home__weather--now-rain-img')} src='/icon/weather/popPercent.png' alt='rain-percent' />
-                <div className={hs('home__weather--now-rain-text')}> {`${rain?.[0].fcstValue || '-'}%`}</div>
+                <div className={hs('home__weather--now-rain-text')}> {`${rain?.[0].fcstValue.padStart(2, '0') || '-'}%`}</div>
               </div>
             </div>
             <div className={hs('home__weather--forecasts')}>
@@ -278,11 +278,11 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                     />
                   )}
                   <div className={hs('home__weather--forecast-temperature')} key={`d${index}`}>
-                    {temperature?.[index + 1].fcstValue ? `${temperature?.[index + 1].fcstValue}°C` : ''}
+                    {temperature?.[index + 1].fcstValue ? `${temperature?.[index + 1].fcstValue.padStart(2, '0')}°C` : ''}
                   </div>
                   {pty?.[index + 1].fcstValue && <img className={hs('home__weather--forecast-rain-img')} src='/icon/weather/popPercent.png' alt='rain-percent' key={`c${index}`} />}
                   <div className={hs('home__weather--forecast-rain-text')} key={`t${index}`}>
-                    {rain?.[index + 1].fcstValue ? `${rain?.[index + 1].fcstValue}%` : ''}
+                    {rain?.[index + 1].fcstValue ? `${rain?.[index + 1].fcstValue.padStart(2, '0')}%` : ''}
                   </div>
                 </div>
               ))}

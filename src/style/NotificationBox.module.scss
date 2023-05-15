@@ -15,7 +15,7 @@
   max-width: 400px; // 갤럭시 폴드 대응
   height: 22vw;
   max-height: 100px; // 갤럭시 폴드 대응
-  background-color: #2e4f4f;
+  background-color: darken(#cf7500, 15%);
   // border-radius: 25px;
   border-radius: clamp(1px, 6.41vw, 30px); // 갤럭시 폴드 대응
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);

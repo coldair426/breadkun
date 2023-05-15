@@ -4,7 +4,6 @@ $gray8: #343a40;
 $gray9: #212529; // 기본배경색
 $fontColor: #f8f9fa; // 기본글자색
 $iconBackground: #404258;
-$gray-09: #212529; // 기본배경색
 
 .home {
   padding: 0;
@@ -13,7 +12,7 @@ $gray-09: #212529; // 기본배경색
   }
 }
 .title {
-  background-color: $gray-09;
+  background-color: $gray9;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -81,7 +80,7 @@ $gray-09: #212529; // 기본배경색
   }
 }
 .home__weather {
-  background-color: $gray8;
+  background-color: #343a40;
   height: 55vw;
   width: 100%;
   border-radius: 10.26vw;
@@ -120,9 +119,12 @@ $gray-09: #212529; // 기본배경색
     }
   }
   .home__weather--forecasts {
-    width: 62%;
+    width: 58%;
     height: 80%;
-    border-left: 3px #868e96 dotted;
+    padding: 2% 0;
+    border-radius: 7vw;
+    background-color: #495057;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     /* 세로 스크롤 기능 자동 동작 */
     overflow-x: scroll;
     /* 스크롤바 안보이기  */
@@ -131,30 +133,33 @@ $gray-09: #212529; // 기본배경색
     &::-webkit-scrollbar {
       display: none; /* 크롬, 사파리, 오페라, 엣지 */
     }
+    .home__weather--forecast + .home__weather--forecast {
+      margin-top: 11px;
+    }
     .home__weather--forecast {
-      margin-left: 18px;
-      margin-bottom: 10px;
       display: flex;
       align-items: center;
+      justify-content: center;
       .home__weather--forecast-time {
         font-size: 10px;
         font-weight: 900;
-        margin-right: 10px;
+        width: 53px;
       }
       .home__weather--forecast-sky-icon {
         width: 25px;
         margin-right: 5px;
       }
       .home__weather--forecast-temperature {
-        font-size: 20px;
-        margin-right: 10px;
+        font-size: 15px;
+        width: 40px;
       }
       .home__weather--forecast-rain-img {
         margin-right: 5px;
-        width: 15px;
+        width: 20px;
       }
       .home__weather--forecast-rain-text {
         font-size: 15px;
+        width: 25px;
       }
     }
   }
@@ -246,7 +251,7 @@ $gray-09: #212529; // 기본배경색
     align-items: center;
     width: 100%;
     height: 13vw;
-    background-color: darken(#404258, 5%);
+    background-color: #413543;
     border-radius: 10.26vw;
     text-decoration: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
