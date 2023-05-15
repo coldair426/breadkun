@@ -127,7 +127,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=${
             company === '강촌' ? '가평' : '중구'
           }&ver=1.4&dataTerm=daily&pageNo=1&numOfRows=1&returnType=json&serviceKey=${process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY}`,
-          { cancelToken: cancelTokenSource.token } // 캔슬토큰
+          { cancelToken: cancelTokenSource.token, timeout: 5000 } // 캔슬토큰, setTimeOut 5s
         );
         const { dataTime, stationName, pm10Value, pm25Value } = dustResponse.data.response.body.items[0];
         const pm10Level = getPM10Level(pm10Value);
@@ -226,7 +226,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${
             process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY
           }&numOfRows=200&pageNo=1&dataType=json&base_date=${baseDate}&base_time=${baseTime}&nx=${company === '강촌' ? '71' : '60'}&ny=${company === '강촌' ? '132' : '127'}`,
-          { cancelToken: cancelTokenSource.token }
+          { cancelToken: cancelTokenSource.token, timeout: 5000 } // 캔슬토큰, setTimeOut 5s
         );
         if (!isMounted) {
           return; // 컴포넌트가 언마운트되었을 경우 더 이상 실행하지 않음
