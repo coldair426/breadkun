@@ -195,9 +195,12 @@ $iconBackground: #404258;
   }
   .home__dust--title,
   .home__ultra-dust--title {
+    width: 100%;
     font-size: clamp(1px, 5.13vw, 25px);
     margin-bottom: 3.85vw;
     display: flex;
+    justify-content: center;
+    align-items: center;
     > img {
       height: 2vw;
       opacity: 0.5;
