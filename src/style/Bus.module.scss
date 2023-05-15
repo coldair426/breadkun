@@ -2,9 +2,44 @@ $backColor1: #413543;
 $backColor2: #404258;
 $gray8: #343a40;
 $fontColor: #f8f9fa;
+$iconBackground: #404258;
+$gray-09: #212529; // 기본배경색
 
 .bus {
   padding: 0;
+}
+.title {
+  background-color: $gray-09;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  // margin-bottom: 15px;
+  margin-bottom: clamp(1px, 3vw, 16px); // 갤럭시 폴드 대응
+  .title__icon {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 11.54vw;
+    max-height: 48px; // 갤럭시 폴드 대응
+    width: 11.54vw;
+    max-width: 48px; // 갤럭시 폴드 대응
+    border-radius: clamp(1px, 5.13vw, 22px); // 갤럭시 폴드 대응
+    background-color: $iconBackground;
+    margin-left: clamp(1px, 3.85vw, 27px); // 갤럭시 폴드 대응
+    margin-right: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
+  }
+  .title__letter {
+    font-size: clamp(1px, 5.38vw, 25px); // 갤럭시 폴드 대응
+  }
 }
 .bus__body {
   // padding: 0 13px;

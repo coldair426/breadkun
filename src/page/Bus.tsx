@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styles from '../style/Bus.module.scss';
 import classNames from 'classnames/bind';
 import { useParams } from 'react-router-dom';
-import Title from './../component/Title';
 import KakaoMap from '../component/KakaoMap';
 import NotificationBox from './../component/NotificationBox';
 import axios from 'axios';
@@ -127,7 +126,12 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
   return (
     <>
       <div className={bs('bus')}>
-        <Title letter='강촌 퇴근 버스' imgSrc='/icon/bus-title-icon.png' imgH='5.64vw' />
+        <div className={bs('title')}>
+          <div className={bs('title__icon')}>
+            <img src='/icon/bus-title-icon.png' alt='before-button' style={{ height: '5.64vw', maxHeight: '22px' }} />
+          </div>
+          <div className={bs('title__letter')}>강촌 퇴근 버스</div>
+        </div>
         <div className={bs('bus__body')}>
           <KakaoMap mapHeight={'64.1vw'} mapWidth={'100%'} latLong={latLong} levelNum={5} draggableType={true} trafficInfo={true} />
           <div className={bs('bus__block1')}>
