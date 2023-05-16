@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from '../style/Meal.module.scss';
 import classNames from 'classnames/bind';
 // import axios from 'axios';
+import mealData from '../meal-test-database.json';
 
 const ms = classNames.bind(styles);
 
@@ -18,6 +19,8 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   }, [setMenuBox]);
   useEffect(() => {
     window.scrollTo(0, 0); // 페이지 최상단으로 스크롤링
+    console.log(mealData.강촌);
+    console.log(mealData.을지);
   }, []);
   // 로컬 스토리지 업데이트
   useEffect(() => {

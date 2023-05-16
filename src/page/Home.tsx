@@ -28,6 +28,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   const [pty, setPty] = useState<WeatherReturn[] | undefined>(); // 강수형태
   const [rain, setRain] = useState<WeatherReturn[] | undefined>(); // 강수확률
   const [temperature, setTemperature] = useState<WeatherReturn[] | undefined>(); // 기온
+  const [refreshButton, setRefreshButton] = useState(true);
 
   // 회사를 드롭다운에 따라 업데이트하는 함수
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -101,6 +102,10 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     }
     return undefined;
   };
+  // refresh 버튼 클릭을 기록하는 함수.
+  const reFreshButtonClick = () => {
+    setRefreshButton(!refreshButton);
+  };
 
   // 메뉴 닫기(이전버튼 클릭시)
   useEffect(() => {
@@ -170,7 +175,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       clearTimeout(retryTimer);
       isMounted = false;
     };
-  }, [company]);
+  }, [company, refreshButton]);
   // 기상청 날씨
   useEffect(() => {
     let isMounted = true; // 마운트 상태 확인 변수
@@ -285,7 +290,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       clearTimeout(retryTimer);
       isMounted = false;
     };
-  }, [company]);
+  }, [company, refreshButton]);
   // 모든 통신이 완료되면 스낵바 언마운트
   useEffect(() => {
     if (dustRequestCompleted && weatherRequestCompleted) {
@@ -351,6 +356,12 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 ))}
               </div>
             </div>
+            <button
+              onClick={() => {
+                reFreshButtonClick();
+              }}>
+              <img className={hs('refresh-button')} src='/icon/bus-refresh-button.png' alt='refresh-button' />
+            </button>
           </div>
           <div className={hs('home__dusts')}>
             <div className={hs('home__dust', dust.pm10Level === '---' ? '조회중' : dust.pm10Level)}>

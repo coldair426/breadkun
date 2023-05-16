@@ -85,6 +85,7 @@ $fontColor: #f8f9fa; // 기본글자색
   border-radius: 10.26vw;
   display: flex;
   align-items: center;
+  position: relative;
   .home__weather--now {
     width: 38%;
     display: flex;
@@ -166,6 +167,30 @@ $fontColor: #f8f9fa; // 기본글자색
           width: 6vw;
         }
       }
+    }
+  }
+  .refresh-button {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 10;
+    display: inline-block;
+    height: 9vw;
+    max-height: 45px; // 갤럭시 폴드 대응
+    transition: all 80ms ease-in-out;
+    -webkit-transition: all 80ms ease-in-out; /* Webkit prefix */
+    -moz-transition: all 80ms ease-in-out; /* Mozilla prefix */
+    -o-transition: all 80ms ease-in-out; /* Opera prefix */
+    -ms-transition: all 80ms ease-in-out; /* IE prefix */
+    &:hover {
+      cursor: pointer;
+    }
+    &:active {
+      transform: scale(1.3);
+      -webkit-transform: scale(1.3); /* Webkit prefix */
+      -moz-transform: scale(1.3); /* Mozilla prefix */
+      -o-transform: scale(1.3); /* Opera prefix */
+      -ms-transform: scale(1.3); /* IE prefix */
     }
   }
 }

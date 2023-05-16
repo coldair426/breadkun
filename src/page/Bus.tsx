@@ -221,7 +221,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
         </div>
       </div>
       {popUpMap && <PopUpMap onOffButton={setPopUpMap} stopLatLong={stopLatLong} stopLocation={stopLocation} selectedValue={selectedValue} />}
-      {notification && <NotificationBox firstText={'시간 계산 중.'} secText={'위치 정보 허용 필요.'} />}
+      {notification && <NotificationBox firstText={'시간 계산 중.'} secText={'위치 정보를 허용해 주세요.'} />}
     </>
   );
 }
