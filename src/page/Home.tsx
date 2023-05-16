@@ -367,7 +367,6 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             <div className={hs('home__dust', dust.pm10Level === '---' ? '조회중' : dust.pm10Level)}>
               <div className={hs('home__dust--title')}>
                 <span>미세먼지</span>
-                <img src='/icon/information.png' alt='information' />
               </div>
               <div className={hs('home__dust--img-letter-wrapper')}>
                 {dust.pm10Level === '좋음' && <img className={hs('home__dust--img')} src='/icon/home-dusts-good.png' alt='dust-level-icon' />}
@@ -382,7 +381,6 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             <div className={hs('home__ultra-dust', dust.pm25Level === '---' ? '조회중' : dust.pm25Level)}>
               <div className={hs('home__ultra-dust--title')}>
                 <span>초미세먼지</span>
-                <img src='/icon/information.png' alt='information' />
               </div>
               <div className={hs('home__ultra-dust--img-letter-wrapper')}>
                 {dust.pm25Level === '좋음' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-good.png' alt='dust-level-icon' />}
