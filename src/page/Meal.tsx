@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styles from '../style/Meal.module.scss';
 import classNames from 'classnames/bind';
 // import axios from 'axios';
@@ -9,8 +9,10 @@ const ms = classNames.bind(styles);
 function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [company, setCompany] = useState(localStorage.getItem('recentCompany') || '강촌'); // 강촌, 을지
   const [days, setDays] = useState<string[]>();
-  // const today = new Date().getDay() - 1; // 오늘 요일 표시 => 월:0 ~ 일:6
+  const today = new Date().getDay() - 1; // 오늘 요일 표시 => 월:0 ~ 일:6
   // const nowHours = new Date().getHours(); // 현재시간
+  const [selectedDay, setSelectedDay] = useState(0); // 기본값 월(0)
+  const selectedDayRef = useRef<HTMLButtonElement>(null);
 
   // 회사를 드롭다운에 따라 업데이트하는 함수
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -30,6 +32,10 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   useEffect(() => {
     window.scrollTo(0, 0); // 페이지 최상단으로 스크롤링
   }, []);
+  // 오늘을 선택하는 effect
+  useEffect(() => {
+    setSelectedDay(today);
+  }, [today]);
   useEffect(() => {
     // 오늘을 포함한 주차의 월요일~일요일까지의 날짜 데이터 배열리턴 함수
     const getWeekDates = () => {
@@ -52,6 +58,26 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   useEffect(() => {
     localStorage.setItem('recentCompany', company);
   }, [company]);
+  // selectedDay 자동 중앙 스크롤
+  useEffect(() => {
+    if (selectedDayRef.current) {
+      const container = selectedDayRef.current.parentElement;
+      if (container) {
+        const { offsetLeft, clientWidth } = selectedDayRef.current;
+        const containerWidth = container.clientWidth;
+        const scrollOffset = offsetLeft - (containerWidth - clientWidth) / 2;
+        const marginLeft = parseInt(getComputedStyle(selectedDayRef.current).marginLeft, 10);
+        const marginRight = parseInt(getComputedStyle(selectedDayRef.current).marginRight, 10);
+        const totalMargin = marginLeft + marginRight;
+        const adjustedScrollOffset = scrollOffset - totalMargin;
+        container.scrollTo({
+          left: adjustedScrollOffset,
+          behavior: 'smooth',
+        });
+      }
+    }
+  }, [selectedDay]);
+
   // 식단 API 통신
   // useEffect(() => {
   //   async function fetchMealData() {
@@ -84,9 +110,9 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         </div>
         <div className={ms('meal__body')}>
           <div className={ms('days')}>
-            {days?.map((day) => (
-              <button>
-                <div className={ms('day')}>{day}</div>
+            {days?.map((day, index) => (
+              <button key={index} ref={index === selectedDay ? selectedDayRef : undefined} onClick={() => setSelectedDay(index)}>
+                <div className={index === selectedDay ? ms('day', 'selected-day') : ms('day')}>{index === today ? '오늘의 메뉴' : day}</div>
               </button>
             ))}
           </div>
