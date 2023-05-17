@@ -108,3 +108,60 @@ $iconBackground: #404258;
     padding: 11px;
   }
 }
+.days + .meal-categories {
+  margin-top: 3.33vw;
+}
+.meal-categories {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .meal-category {
+    color: #495057;
+    font-size: 16px;
+    text-align: center;
+    width: 25%;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .selected-meal-category {
+    color: #f8f9fa;
+    font-size: 18px;
+  }
+}
+.meal-categories + .meal-menus {
+  margin-top: 3.33vw;
+}
+.meal-menus {
+  .meal-menu + .meal-menu {
+    margin-top: 3.33vw;
+  }
+  .meal-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #2e4f4f;
+    border-radius: 30px;
+    height: 180px;
+    .meal-menu__title {
+      font-size: 18px;
+      margin-left: 20px;
+    }
+    .meal-menu__body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .meal-menu__image {
+        width: 130px;
+      }
+      .meal-menu__wrapper {
+        .meal-menu__name {
+          font-size: 15px;
+        }
+        .meal-menu__detaile {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}

@@ -13,6 +13,7 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   // const nowHours = new Date().getHours(); // 현재시간
   const [selectedDay, setSelectedDay] = useState(0); // 기본값 월(0)
   const selectedDayRef = useRef<HTMLButtonElement>(null);
+  const [selectedMealCategories, setSelectedMealCategories] = useState('조식');
 
   // 회사를 드롭다운에 따라 업데이트하는 함수
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -32,10 +33,17 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   useEffect(() => {
     window.scrollTo(0, 0); // 페이지 최상단으로 스크롤링
   }, []);
+  // 로컬 스토리지 업데이트
+  useEffect(() => {
+    localStorage.setItem('recentCompany', company);
+  }, [company]);
   // 오늘을 선택하는 effect
   useEffect(() => {
     setSelectedDay(today);
-  }, [today]);
+  }, [company, today]);
+  useEffect(() => {
+    setSelectedMealCategories('조식');
+  }, [company, selectedDay]);
   useEffect(() => {
     // 오늘을 포함한 주차의 월요일~일요일까지의 날짜 데이터 배열리턴 함수
     const getWeekDates = () => {
@@ -54,14 +62,10 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     const dates = getWeekDates();
     setDays(dates);
   }, []);
-  // 로컬 스토리지 업데이트
-  useEffect(() => {
-    localStorage.setItem('recentCompany', company);
-  }, [company]);
   // selectedDay 자동 중앙 스크롤
   useEffect(() => {
     if (selectedDayRef.current) {
-      const container = selectedDayRef.current.parentElement;
+      const container = selectedDayRef.current.parentElement; // days
       if (container) {
         const { offsetLeft, clientWidth } = selectedDayRef.current;
         const containerWidth = container.clientWidth;
@@ -115,6 +119,42 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 <div className={index === selectedDay ? ms('day', 'selected-day') : ms('day')}>{index === today ? '오늘의 메뉴' : day}</div>
               </button>
             ))}
+          </div>
+          <div className={ms('meal-categories')}>
+            <div
+              className={selectedMealCategories === '조식' ? ms('meal-category', 'selected-meal-category') : ms('meal-category')}
+              onClick={() => setSelectedMealCategories('조식')}>
+              조식
+            </div>
+            <div
+              className={selectedMealCategories === '중식' ? ms('meal-category', 'selected-meal-category') : ms('meal-category')}
+              onClick={() => setSelectedMealCategories('중식')}>
+              중식
+            </div>
+            <div
+              className={selectedMealCategories === '석식' ? ms('meal-category', 'selected-meal-category') : ms('meal-category')}
+              onClick={() => setSelectedMealCategories('석식')}>
+              석식
+            </div>
+            {company === '강촌' && (
+              <div
+                className={selectedMealCategories === '빵' ? ms('meal-category', 'selected-meal-category') : ms('meal-category')}
+                onClick={() => setSelectedMealCategories('빵')}>
+                빵
+              </div>
+            )}
+          </div>
+          <div className={ms('meal-menus')}>
+            <div className={ms('meal-menu')}>
+              <div className={ms('meal-menu__title')}>한식</div>
+              <div className={ms('meal-menu__body')}>
+                <img className={ms('meal-menu__image')} src='/logo192.png' alt='dish' />
+                <div className={ms('meal-menu__wrapper')}>
+                  <div className={ms('meal-menu__name')}>조랭이떡국</div>
+                  <div className={ms('meal-menu__detaile')}>버섯야채죽, 누룽지숭늉, 계란후라이, 동치미, 네모적구이, 요구르트, 그린샐러드, 무말랭이, 도시락김, 볶음김치</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
