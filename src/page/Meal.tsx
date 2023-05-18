@@ -10,10 +10,10 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   const [company, setCompany] = useState(localStorage.getItem('recentCompany') || '강촌'); // 강촌, 을지
   const [days, setDays] = useState<string[]>();
   const today = new Date().getDay() - 1; // 오늘 요일 표시 => 월:0 ~ 일:6
-  // const nowHours = new Date().getHours(); // 현재시간
   const [selectedDay, setSelectedDay] = useState(0); // 기본값 월(0)
   const selectedDayRef = useRef<HTMLButtonElement>(null);
   const [selectedMealCategories, setSelectedMealCategories] = useState('조식');
+  const nowHours = new Date().getHours(); // 현재시간
 
   // 회사를 드롭다운에 따라 업데이트하는 함수
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -41,9 +41,16 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   useEffect(() => {
     setSelectedDay(today);
   }, [company, today]);
+  // 시간에 따라 조,중,석식 선택하는 effect
   useEffect(() => {
-    setSelectedMealCategories('조식');
-  }, [company, selectedDay]);
+    if (nowHours < 9) {
+      setSelectedMealCategories('조식');
+    } else if (nowHours < 13) {
+      setSelectedMealCategories('중식');
+    } else {
+      setSelectedMealCategories('석식');
+    }
+  }, [company, nowHours]);
   useEffect(() => {
     // 오늘을 포함한 주차의 월요일~일요일까지의 날짜 데이터 배열리턴 함수
     const getWeekDates = () => {
@@ -115,44 +122,41 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         <div className={ms('meal__body')}>
           <div className={ms('days')}>
             {days?.map((day, index) => (
-              <button key={index} ref={index === selectedDay ? selectedDayRef : undefined} onClick={() => setSelectedDay(index)}>
+              <button
+                key={index}
+                ref={index === selectedDay ? selectedDayRef : undefined}
+                onClick={() => {
+                  setSelectedMealCategories('조식');
+                  setSelectedDay(index);
+                }}>
                 <div className={index === selectedDay ? ms('day', 'selected-day') : ms('day')}>{index === today ? '오늘의 메뉴' : day}</div>
               </button>
             ))}
           </div>
           <div className={ms('meal-categories')}>
-            <div
-              className={selectedMealCategories === '조식' ? ms('meal-category', 'selected-meal-category') : ms('meal-category')}
-              onClick={() => setSelectedMealCategories('조식')}>
-              조식
-            </div>
-            <div
-              className={selectedMealCategories === '중식' ? ms('meal-category', 'selected-meal-category') : ms('meal-category')}
-              onClick={() => setSelectedMealCategories('중식')}>
-              중식
-            </div>
-            <div
-              className={selectedMealCategories === '석식' ? ms('meal-category', 'selected-meal-category') : ms('meal-category')}
-              onClick={() => setSelectedMealCategories('석식')}>
-              석식
-            </div>
-            {company === '강촌' && (
+            {(company === '강촌' ? ['조식', '중식', '석식', '빵'] : ['조식', '중식', '석식']).map((v, index) => (
               <div
-                className={selectedMealCategories === '빵' ? ms('meal-category', 'selected-meal-category') : ms('meal-category')}
-                onClick={() => setSelectedMealCategories('빵')}>
-                빵
+                className={selectedMealCategories === v ? ms('meal-category', 'selected-meal-category') : ms('meal-category')}
+                onClick={() => setSelectedMealCategories(v)}
+                key={index}>
+                {v}
               </div>
-            )}
+            ))}
           </div>
           <div className={ms('meal-menus')}>
             <div className={ms('meal-menu')}>
-              <div className={ms('meal-menu__title')}>한식</div>
+              <div className={ms('meal-menu__title--wrapper')}>
+                <div className={ms('meal-menu__title')}>베이커리</div>
+                <div className={ms('meal-menu__name')}>에그두부텐더샐러드</div>
+              </div>
               <div className={ms('meal-menu__body')}>
-                <img className={ms('meal-menu__image')} src='/logo192.png' alt='dish' />
-                <div className={ms('meal-menu__wrapper')}>
-                  <div className={ms('meal-menu__name')}>조랭이떡국</div>
-                  <div className={ms('meal-menu__detaile')}>버섯야채죽, 누룽지숭늉, 계란후라이, 동치미, 네모적구이, 요구르트, 그린샐러드, 무말랭이, 도시락김, 볶음김치</div>
-                </div>
+                <div
+                  className={ms('meal-menu__image')}
+                  style={{
+                    backgroundImage: "url('/icon/meal-default.png')",
+                  }}
+                />
+                <div className={ms('meal-menu__detaile')}>버섯야채죽, 누룽지숭늉, 계란후라이, 동치미, 네모적구이, 요구르트, 그린샐러드, 무말랭이, 도시락김, 볶음김치</div>
               </div>
             </div>
           </div>

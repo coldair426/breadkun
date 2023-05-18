@@ -87,16 +87,17 @@ $iconBackground: #404258;
     display: none; /* 크롬, 사파리, 오페라, 엣지 */
   }
   button + button {
-    margin-left: 10px;
+    margin-left: 2.6vw;
   }
   .day {
     color: #adb5bd;
     background-color: #343a40;
-    font-size: 15px;
-    padding: 8px;
+    font-size: 3.6vw;
+    font-weight: 900;
+    padding: 2vw;
     white-space: nowrap;
     text-align: center;
-    border-radius: 4vw;
+    border-radius: 4.5vw;
     &:hover {
       cursor: pointer;
     }
@@ -104,8 +105,8 @@ $iconBackground: #404258;
   .selected-day {
     color: #f8f9fa;
     background-color: #cf7500;
-    font-size: 18px;
-    padding: 11px;
+    font-size: 4.1vw;
+    padding: 2.8vw;
   }
 }
 .days + .meal-categories {
@@ -117,7 +118,8 @@ $iconBackground: #404258;
   justify-content: center;
   .meal-category {
     color: #495057;
-    font-size: 16px;
+    font-size: 3.8vw;
+    font-weight: 900;
     text-align: center;
     width: 25%;
     &:hover {
@@ -126,7 +128,7 @@ $iconBackground: #404258;
   }
   .selected-meal-category {
     color: #f8f9fa;
-    font-size: 18px;
+    font-size: 4.3vw;
   }
 }
 .meal-categories + .meal-menus {
@@ -139,28 +141,47 @@ $iconBackground: #404258;
   .meal-menu {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    background-color: #2e4f4f;
-    border-radius: 30px;
-    height: 180px;
-    .meal-menu__title {
-      font-size: 18px;
-      margin-left: 20px;
+    background-color: #343a40;
+    border-radius: 7.7vw;
+    .meal-menu__title--wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 3vw 0;
+      .meal-menu__title {
+        display: inline-block;
+        font-size: 3vw;
+        background-color: lighten(#343a40, 15%);
+        padding: 1.8vw 1.3vw 1.3vw 2.6vw;
+        border-radius: 3.3vw;
+        text-align: center;
+        letter-spacing: 1.3vw;
+        font-weight: 900;
+      }
+      .meal-menu__name {
+        font-size: 4.5vw;
+        letter-spacing: 0.5vw;
+        margin-left: 2.1vw;
+      }
     }
     .meal-menu__body {
+      padding: 0 2vw 3vw 2vw;
       display: flex;
+      flex-direction: row;
+      justify-content: space-around;
       align-items: center;
-      justify-content: center;
       .meal-menu__image {
-        width: 130px;
+        background-size: cover; // 이미지를 div에 맞게 조절
+        background-position: center; // 이미지를 가운데 정렬
+        width: 33.3vw;
+        height: 26vw;
+        border-radius: 5.1vw;
       }
-      .meal-menu__wrapper {
-        .meal-menu__name {
-          font-size: 15px;
-        }
-        .meal-menu__detaile {
-          font-size: 10px;
-        }
+      .meal-menu__detaile {
+        width: 51vw;
+        font-size: 3.6vw;
+        letter-spacing: 0.6vw;
+        line-height: 4.6vw;
       }
     }
   }

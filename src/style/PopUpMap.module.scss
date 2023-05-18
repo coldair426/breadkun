@@ -33,8 +33,7 @@ $gray-00: #f8f9fa; // 기본글자색
       line-height: 6.5vw;
       text-align: center;
       letter-spacing: 0.3vw;
-      // 단어기준으로 줄바꿈 하기
-      word-break: keep-all;
+      word-break: keep-all; // 단어기준으로 줄바꿈
     }
     .pop-up-map__close {
       font-size: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
