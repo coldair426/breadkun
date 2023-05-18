@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import styles from '../style/Meal.module.scss';
 import classNames from 'classnames/bind';
 // import axios from 'axios';
-// import mealData from '../meal-test-database.json';
+import mealData from '../meal-test-database.json';
 
 const ms = classNames.bind(styles);
 
@@ -14,7 +14,9 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   const selectedDayRef = useRef<HTMLButtonElement>(null);
   const [selectedMealCategories, setSelectedMealCategories] = useState('조식');
   const nowHours = new Date().getHours(); // 현재시간
-
+  // testData
+  const [testData, setTestData] = useState({});
+  console.log(testData);
   // 회사를 드롭다운에 따라 업데이트하는 함수
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCompany(e.target.value);
@@ -88,7 +90,10 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       }
     }
   }, [selectedDay]);
-
+  // test api
+  useEffect(() => {
+    company === '강촌' ? setTestData(mealData.강촌) : setTestData(mealData.을지);
+  }, [company]);
   // 식단 API 통신
   // useEffect(() => {
   //   async function fetchMealData() {
@@ -146,7 +151,52 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           <div className={ms('meal-menus')}>
             <div className={ms('meal-menu')}>
               <div className={ms('meal-menu__title--wrapper')}>
+                <div className={ms('meal-menu__title')}>한식</div>
+                <div className={ms('meal-menu__name')}>에그두부텐더샐러드</div>
+              </div>
+              <div className={ms('meal-menu__body')}>
+                <div
+                  className={ms('meal-menu__image')}
+                  style={{
+                    backgroundImage: "url('/icon/meal-default.png')",
+                  }}
+                />
+                <div className={ms('meal-menu__detaile')}>버섯야채죽, 누룽지숭늉, 계란후라이, 동치미, 네모적구이, 요구르트, 그린샐러드, 무말랭이, 도시락김, 볶음김치</div>
+              </div>
+            </div>
+            <div className={ms('meal-menu')}>
+              <div className={ms('meal-menu__title--wrapper')}>
+                <div className={ms('meal-menu__title')}>라면</div>
+                <div className={ms('meal-menu__name')}>에그두부텐더샐러드</div>
+              </div>
+              <div className={ms('meal-menu__body')}>
+                <div
+                  className={ms('meal-menu__image')}
+                  style={{
+                    backgroundImage: "url('/icon/meal-default.png')",
+                  }}
+                />
+                <div className={ms('meal-menu__detaile')}>버섯야채죽, 누룽지숭늉, 계란후라이, 동치미, 네모적구이, 요구르트, 그린샐러드, 무말랭이, 도시락김, 볶음김치</div>
+              </div>
+            </div>
+            <div className={ms('meal-menu')}>
+              <div className={ms('meal-menu__title--wrapper')}>
                 <div className={ms('meal-menu__title')}>베이커리</div>
+                <div className={ms('meal-menu__name')}>에그두부텐더샐러드</div>
+              </div>
+              <div className={ms('meal-menu__body')}>
+                <div
+                  className={ms('meal-menu__image')}
+                  style={{
+                    backgroundImage: "url('/icon/meal-default.png')",
+                  }}
+                />
+                <div className={ms('meal-menu__detaile')}>버섯야채죽, 누룽지숭늉, 계란후라이, 동치미, 네모적구이, 요구르트, 그린샐러드, 무말랭이, 도시락김, 볶음김치</div>
+              </div>
+            </div>
+            <div className={ms('meal-menu')}>
+              <div className={ms('meal-menu__title--wrapper')}>
+                <div className={ms('meal-menu__title')}>선식</div>
                 <div className={ms('meal-menu__name')}>에그두부텐더샐러드</div>
               </div>
               <div className={ms('meal-menu__body')}>

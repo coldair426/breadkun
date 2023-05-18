@@ -150,7 +150,7 @@ $iconBackground: #404258;
       margin: 3vw 0;
       .meal-menu__title {
         display: inline-block;
-        font-size: 3vw;
+        font-size: 3.2vw;
         background-color: lighten(#343a40, 15%);
         padding: 1.8vw 1.3vw 1.3vw 2.6vw;
         border-radius: 3.3vw;
@@ -176,6 +176,14 @@ $iconBackground: #404258;
         width: 33.3vw;
         height: 26vw;
         border-radius: 5.1vw;
+      }
+      .meal-menu__image-bread {
+        background-size: cover; // 이미지를 div에 맞게 조절
+        background-position: center; // 이미지를 가운데 정렬
+        width: 70vw;
+        height: 51vw;
+        border-radius: 5.1vw;
+        margin-bottom: 4vw;
       }
       .meal-menu__detaile {
         width: 51vw;
