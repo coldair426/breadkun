@@ -124,20 +124,20 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             <img className={ms('title__select-button')} src='/icon/home-select-arrow.png' alt='dropdown-button' />
           </div>
         </div>
+        <div className={ms('days')}>
+          {days?.map((day, index) => (
+            <button
+              key={index}
+              ref={index === selectedDay ? selectedDayRef : undefined}
+              onClick={() => {
+                setSelectedMealCategories('조식');
+                setSelectedDay(index);
+              }}>
+              <div className={index === selectedDay ? ms('day', 'selected-day') : ms('day')}>{index === today ? '오늘의 메뉴' : day}</div>
+            </button>
+          ))}
+        </div>
         <div className={ms('meal__body')}>
-          <div className={ms('days')}>
-            {days?.map((day, index) => (
-              <button
-                key={index}
-                ref={index === selectedDay ? selectedDayRef : undefined}
-                onClick={() => {
-                  setSelectedMealCategories('조식');
-                  setSelectedDay(index);
-                }}>
-                <div className={index === selectedDay ? ms('day', 'selected-day') : ms('day')}>{index === today ? '오늘의 메뉴' : day}</div>
-              </button>
-            ))}
-          </div>
           <div className={ms('meal-categories')}>
             {(company === '강촌' ? ['조식', '중식', '석식', '빵'] : ['조식', '중식', '석식']).map((v, index) => (
               <div

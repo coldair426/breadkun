@@ -71,9 +71,6 @@ $iconBackground: #404258;
     }
   }
 }
-.meal__body {
-  padding: 0 3.33vw;
-}
 .days {
   display: flex;
   flex-direction: row;
@@ -98,6 +95,7 @@ $iconBackground: #404258;
     white-space: nowrap;
     text-align: center;
     border-radius: 4.5vw;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     &:hover {
       cursor: pointer;
     }
@@ -109,8 +107,11 @@ $iconBackground: #404258;
     padding: 2.8vw;
   }
 }
-.days + .meal-categories {
+.days + .meal__body {
   margin-top: 3.33vw;
+}
+.meal__body {
+  padding: 0 3.33vw;
 }
 .meal-categories {
   display: flex;
