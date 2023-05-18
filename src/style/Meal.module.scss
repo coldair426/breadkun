@@ -86,12 +86,19 @@ $iconBackground: #404258;
   button + button {
     margin-left: 2.6vw;
   }
+  > button:first-child > .day {
+    margin-left: 37vw;
+  }
+  > button:last-child > .day {
+    margin-right: 37vw;
+  }
   .day {
     color: #adb5bd;
     background-color: #343a40;
     font-size: 3.6vw;
     font-weight: 900;
     padding: 2vw;
+    margin: 1vw 0;
     white-space: nowrap;
     text-align: center;
     border-radius: 4.5vw;
@@ -130,7 +137,7 @@ $iconBackground: #404258;
   .selected-meal-category {
     color: #f8f9fa;
     font-size: 4.3vw;
-    margin: 1.5vw 0;
+    margin: 0.6vw 0;
   }
 }
 .meal-categories + .meal-menus {
