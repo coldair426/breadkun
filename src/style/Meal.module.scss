@@ -94,7 +94,7 @@ $iconBackground: #404258;
   }
   .day {
     color: #adb5bd;
-    background-color: #343a40;
+    background-color: darken(#343a40, 5%);
     font-size: 3.6vw;
     font-weight: 900;
     padding: 2vw;
@@ -151,6 +151,8 @@ $iconBackground: #404258;
     display: flex;
     flex-direction: column;
     background-color: #343a40;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     border-radius: 7.7vw;
     .meal-menu__title--wrapper {
       display: flex;
