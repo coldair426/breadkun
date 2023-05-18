@@ -79,10 +79,6 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         const { offsetLeft, clientWidth } = selectedDayRef.current;
         const containerWidth = container.clientWidth;
         const scrollOffset = offsetLeft - (containerWidth - clientWidth) / 2;
-        // const marginLeft = parseInt(getComputedStyle(selectedDayRef.current).marginLeft, 10);
-        // const marginRight = parseInt(getComputedStyle(selectedDayRef.current).marginRight, 10);
-        // const totalMargin = marginLeft + marginRight;
-        // const adjustedScrollOffset = scrollOffset - totalMargin;
         const adjustedScrollOffset = scrollOffset;
         container.scrollTo({
           left: adjustedScrollOffset,
