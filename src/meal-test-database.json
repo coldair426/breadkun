@@ -84,7 +84,7 @@
       },
       "점심": {
         "KOREAN": {
-          "image": "",
+          "image": "https://cjfw-prd-nb-fsapp-s3.s3.ap-northeast-2.amazonaws.com/meal/55c27ee6-0850-45f6-bec9-300a4e8c3909_1684462931300.jpg",
           "메뉴": [
             "뚝배기순대해장국",
             "쌀밥",
@@ -97,7 +97,7 @@
           ]
         },
         "NOODLE": {
-          "image": "",
+          "image": "https://cjfw-prd-nb-fsapp-s3.s3.ap-northeast-2.amazonaws.com/meal/46e590af-1e40-46e3-acf2-4d045557085b_1684462931427.jpg",
           "메뉴": [
             "망향비빔국수",
             "미숫가루",

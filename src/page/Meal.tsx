@@ -12,11 +12,10 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   const today = new Date().getDay() - 1; // 오늘 요일 표시 => 월:0 ~ 일:6
   const [selectedDay, setSelectedDay] = useState(0); // 기본값 월(0)
   const selectedDayRef = useRef<HTMLButtonElement>(null);
-  const [selectedMealCategories, setSelectedMealCategories] = useState('조식');
+  const [selectedMealCategories, setSelectedMealCategories] = useState('조식'); // 기본값 조식
   const nowHours = new Date().getHours(); // 현재시간
   // testData
-  const [testData, setTestData] = useState({});
-  console.log(testData);
+  const [testData, setTestData] = useState<Record<string, any>>({});
   // 회사를 드롭다운에 따라 업데이트하는 함수
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCompany(e.target.value);
@@ -27,6 +26,58 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     const formattedDate = new Intl.DateTimeFormat('ko-KR', options).format(date);
     const [month, day, weekday] = formattedDate.split('. ');
     return `${month}.${day}${weekday}`;
+  };
+  // 숫자를 요일로 변환하는 함수
+  const dayNumToSpell = (value: number): string => {
+    switch (value) {
+      case 0:
+        return '월';
+      case 1:
+        return '화';
+      case 2:
+        return '수';
+      case 3:
+        return '목';
+      case 4:
+        return '금';
+      case 5:
+        return '토';
+      case 6:
+        return '일';
+      default:
+        return '월';
+    }
+  };
+  // meal categories api binding을 위해 변환하는 함수
+  const mealCategoriesEdit = (value: string): string => {
+    switch (value) {
+      case '조식':
+        return '아침';
+      case '중식':
+        return '점심';
+      case '석식':
+        return '저녁';
+      default:
+        return '빵';
+    }
+  };
+  const mealMunutitleEdit = (value: string): string => {
+    switch (value) {
+      case 'KOREAN1':
+        return '한식';
+      case 'KOREAN2':
+        return '라면';
+      case 'CONVENIENCE':
+        return '간편식';
+      case 'KOREAN':
+        return '한식';
+      case 'NOODLE':
+        return '누들';
+      case 'SPECIAL':
+        return '일품';
+      default:
+        return '';
+    }
   };
 
   useEffect(() => {
@@ -104,7 +155,7 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   //   }
   //   fetchMealData();
   // }, [company]);
-
+  console.log(testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]);
   return (
     <>
       <div className={ms('meal')}>
@@ -146,66 +197,30 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             ))}
           </div>
           <div className={ms('meal-menus')}>
-            <div className={ms('meal-menu')}>
-              <div className={ms('meal-menu__title--wrapper')}>
-                <div className={ms('meal-menu__title')}>한식</div>
-                <div className={ms('meal-menu__name')}>에그두부텐더샐러드</div>
-              </div>
-              <div className={ms('meal-menu__body')}>
-                <div
-                  className={ms('meal-menu__image')}
-                  style={{
-                    backgroundImage: "url('/icon/meal-default.png')",
-                  }}
-                />
-                <div className={ms('meal-menu__detaile')}>버섯야채죽, 누룽지숭늉, 계란후라이, 동치미, 네모적구이, 요구르트, 그린샐러드, 무말랭이, 도시락김, 볶음김치</div>
-              </div>
-            </div>
-            <div className={ms('meal-menu')}>
-              <div className={ms('meal-menu__title--wrapper')}>
-                <div className={ms('meal-menu__title')}>라면</div>
-                <div className={ms('meal-menu__name')}>에그두부텐더샐러드</div>
-              </div>
-              <div className={ms('meal-menu__body')}>
-                <div
-                  className={ms('meal-menu__image')}
-                  style={{
-                    backgroundImage: "url('/icon/meal-default.png')",
-                  }}
-                />
-                <div className={ms('meal-menu__detaile')}>버섯야채죽, 누룽지숭늉, 계란후라이, 동치미, 네모적구이, 요구르트, 그린샐러드, 무말랭이, 도시락김, 볶음김치</div>
-              </div>
-            </div>
-            <div className={ms('meal-menu')}>
-              <div className={ms('meal-menu__title--wrapper')}>
-                <div className={ms('meal-menu__title')}>베이커리</div>
-                <div className={ms('meal-menu__name')}>에그두부텐더샐러드</div>
-              </div>
-              <div className={ms('meal-menu__body')}>
-                <div
-                  className={ms('meal-menu__image')}
-                  style={{
-                    backgroundImage: "url('/icon/meal-default.png')",
-                  }}
-                />
-                <div className={ms('meal-menu__detaile')}>버섯야채죽, 누룽지숭늉, 계란후라이, 동치미, 네모적구이, 요구르트, 그린샐러드, 무말랭이, 도시락김, 볶음김치</div>
-              </div>
-            </div>
-            <div className={ms('meal-menu')}>
-              <div className={ms('meal-menu__title--wrapper')}>
-                <div className={ms('meal-menu__title')}>선식</div>
-                <div className={ms('meal-menu__name')}>에그두부텐더샐러드</div>
-              </div>
-              <div className={ms('meal-menu__body')}>
-                <div
-                  className={ms('meal-menu__image')}
-                  style={{
-                    backgroundImage: "url('/icon/meal-default.png')",
-                  }}
-                />
-                <div className={ms('meal-menu__detaile')}>버섯야채죽, 누룽지숭늉, 계란후라이, 동치미, 네모적구이, 요구르트, 그린샐러드, 무말랭이, 도시락김, 볶음김치</div>
-              </div>
-            </div>
+            {['KOREAN1', 'KOREAN2', 'CONVENIENCE', 'KOREAN', 'NOODLE', 'SPECIAL'].map(
+              (value, index) =>
+                testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.메뉴 && (
+                  <div className={ms('meal-menu')}>
+                    <div className={ms('meal-menu__title--wrapper')}>
+                      <div className={ms('meal-menu__title')}>{mealMunutitleEdit(value)}</div>
+                      <div className={ms('meal-menu__name')}>{testData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value]['메뉴'][0]}</div>
+                    </div>
+                    <div className={ms('meal-menu__body')}>
+                      <div
+                        className={ms('meal-menu__image')}
+                        style={{
+                          backgroundImage: `url(${
+                            testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.image !== ''
+                              ? testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.image
+                              : '/icon/meal-default.png'
+                          })`,
+                        }}
+                      />
+                      <div className={ms('meal-menu__detaile')}>{testData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value]['메뉴'].join(',')}</div>
+                    </div>
+                  </div>
+                )
+            )}
           </div>
         </div>
       </div>
