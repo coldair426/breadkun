@@ -197,8 +197,11 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             ))}
           </div>
           <div className={ms('meal-menus')}>
-            {['KOREAN1', 'KOREAN2', 'CONVENIENCE', 'KOREAN', 'NOODLE', 'SPECIAL'].map(
-              (value, index) =>
+            {['SPECIAL', 'KOREAN1', 'KOREAN2', 'KOREAN', 'NOODLE', 'CONVENIENCE'].map((value) =>
+              // CONVENIENCE 세분류로 나누기
+              value === 'CONVENIENCE' ? (
+                <div>간편식</div>
+              ) : (
                 testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.메뉴 && (
                   <div className={ms('meal-menu')}>
                     <div className={ms('meal-menu__title--wrapper')}>
@@ -220,6 +223,7 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                     </div>
                   </div>
                 )
+              )
             )}
           </div>
         </div>
