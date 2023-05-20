@@ -177,7 +177,6 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   //   }
   //   fetchMealData();
   // }, [company]);
-  console.log(testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]);
   return (
     <>
       <div className={ms('meal')}>
@@ -227,7 +226,7 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                       testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.[secVal] && (
                         <div className={ms('meal-menu')} key={secVal + secIndex}>
                           <div className={ms('meal-menu__title--wrapper')}>
-                            <div className={ms('meal-menu__title')}>{convenienceMenuTitleEdit(secVal)}</div>
+                            <div className={ms('meal-menu__title', `${secVal}`)}>{convenienceMenuTitleEdit(secVal)}</div>
                             <div className={ms('meal-menu__name')}>{testData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value][secVal][0]}</div>
                           </div>
                           <div className={ms('meal-menu__body')}>
@@ -247,7 +246,7 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 : testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.메뉴 && (
                     <div className={ms('meal-menu')} key={index}>
                       <div className={ms('meal-menu__title--wrapper')}>
-                        <div className={ms('meal-menu__title')}>{mealMenutitleEdit(value)}</div>
+                        <div className={ms('meal-menu__title', `${value}`)}>{mealMenutitleEdit(value)}</div>
                         <div className={ms('meal-menu__name')}>{testData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value]['메뉴'][0]}</div>
                       </div>
                       <div className={ms('meal-menu__body')}>

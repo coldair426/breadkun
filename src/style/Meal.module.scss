@@ -151,32 +151,50 @@ $iconBackground: #404258;
     display: flex;
     flex-direction: column;
     background-color: #343a40;
-
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     border-radius: 7.7vw;
     .meal-menu__title--wrapper {
       display: flex;
-      justify-content: center;
+      justify-content: left;
       align-items: center;
-      margin: 3vw 0;
+      margin: 4vw 2vw 3.3vw 4vw;
       .meal-menu__title {
         display: inline-block;
-        font-size: 3.2vw;
-        background-color: #2e4f4f;
+        font-size: 3.5vw;
         padding: 1.8vw 1.3vw 1.3vw 2.6vw;
-        border-radius: 3.3vw;
+        border-radius: 3vw;
         text-align: center;
-        letter-spacing: 1.3vw;
+        letter-spacing: 0.4vw;
         font-weight: 900;
       }
+      .메뉴,
+      .PLUS {
+        background-color: #055e68;
+      }
+      .비고 {
+        background-color: #270082;
+      }
+      .SPECIAL {
+        background-color: #20615b;
+      }
+      .KOREAN1,
+      .KOREAN {
+        background-color: #4e9f3d;
+      }
+      .KOREAN2 {
+        background-color: #a80038;
+      }
+      .NOODLE {
+        background-color: #711a75;
+      }
       .meal-menu__name {
-        font-size: 4.5vw;
+        font-size: 5vw;
         letter-spacing: 0.5vw;
         margin-left: 2.1vw;
       }
     }
     .meal-menu__body {
-      padding: 0 2vw 3vw 2vw;
+      padding: 0 2vw 4vw 2vw;
       display: flex;
       flex-direction: row;
       justify-content: space-around;
