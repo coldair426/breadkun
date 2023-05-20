@@ -9,7 +9,7 @@ const ms = classNames.bind(styles);
 function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [company, setCompany] = useState(localStorage.getItem('recentCompany') || '강촌'); // 강촌, 을지
   const [days, setDays] = useState<string[]>();
-  const today = new Date().getDay() - 1; // 오늘 요일 표시 => 월:0 ~ 일:6
+  const today = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1; // 오늘 요일 표시 => 월:0 ~ 일:6
   const [selectedDay, setSelectedDay] = useState(0); // 기본값 월(0)
   const selectedDayRef = useRef<HTMLButtonElement>(null);
   const [selectedMealCategories, setSelectedMealCategories] = useState('조식'); // 기본값 조식
