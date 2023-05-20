@@ -61,20 +61,42 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         return '빵';
     }
   };
-  const mealMunutitleEdit = (value: string): string => {
+  const mealMenutitleEdit = (value: string): string => {
     switch (value) {
       case 'KOREAN1':
         return '한식';
       case 'KOREAN2':
         return '라면';
-      case 'CONVENIENCE':
-        return '간편식';
       case 'KOREAN':
         return '한식';
       case 'NOODLE':
         return '누들';
       case 'SPECIAL':
         return '일품';
+      default:
+        return '';
+    }
+  };
+  // CONVENIENCE 메뉴 분류; 비고를 제외한 모든 음식 => 간편식
+  const convenienceMenuTitleEdit = (value: string): string => {
+    return value === '비고' ? '프로틴' : '간편식';
+  };
+  const mealPixelImgSrc = (value: string): string => {
+    switch (value) {
+      case '메뉴':
+      case 'PLUS':
+        return "url('/icon/meal-simpleFood.png')";
+      case '비고':
+        return "url('/icon/meal-protein.png')";
+      case 'SPECIAL':
+        return "url('/icon/meal-special.png')";
+      case 'KOREAN2':
+        return "url('/icon/meal-ramen.png')";
+      case 'KOREAN':
+      case 'KOREAN1':
+        return "url('/icon/meal-korfood.png')";
+      case 'NOODLE':
+        return "url('/icon/meal-noodle.png')";
       default:
         return '';
     }
@@ -197,33 +219,51 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             ))}
           </div>
           <div className={ms('meal-menus')}>
-            {['SPECIAL', 'KOREAN1', 'KOREAN2', 'KOREAN', 'NOODLE', 'CONVENIENCE'].map((value) =>
+            {['SPECIAL', 'KOREAN1', 'KOREAN2', 'KOREAN', 'NOODLE', 'CONVENIENCE'].map((value, index) =>
               // CONVENIENCE 세분류로 나누기
-              value === 'CONVENIENCE' ? (
-                <div>간편식</div>
-              ) : (
-                testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.메뉴 && (
-                  <div className={ms('meal-menu')}>
-                    <div className={ms('meal-menu__title--wrapper')}>
-                      <div className={ms('meal-menu__title')}>{mealMunutitleEdit(value)}</div>
-                      <div className={ms('meal-menu__name')}>{testData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value]['메뉴'][0]}</div>
+              value === 'CONVENIENCE'
+                ? ['메뉴', 'PLUS', '비고'].map(
+                    (secVal, secIndex) =>
+                      testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.[secVal] && (
+                        <div className={ms('meal-menu')} key={secVal + secIndex}>
+                          <div className={ms('meal-menu__title--wrapper')}>
+                            <div className={ms('meal-menu__title')}>{convenienceMenuTitleEdit(secVal)}</div>
+                            <div className={ms('meal-menu__name')}>{testData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value][secVal][0]}</div>
+                          </div>
+                          <div className={ms('meal-menu__body')}>
+                            <div
+                              className={ms('meal-menu__image')}
+                              style={{
+                                backgroundImage: mealPixelImgSrc(secVal),
+                              }}
+                            />
+                            <div className={ms('meal-menu__detaile')}>
+                              {testData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value][secVal].join(',')}
+                            </div>
+                          </div>
+                        </div>
+                      )
+                  )
+                : testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.메뉴 && (
+                    <div className={ms('meal-menu')} key={index}>
+                      <div className={ms('meal-menu__title--wrapper')}>
+                        <div className={ms('meal-menu__title')}>{mealMenutitleEdit(value)}</div>
+                        <div className={ms('meal-menu__name')}>{testData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value]['메뉴'][0]}</div>
+                      </div>
+                      <div className={ms('meal-menu__body')}>
+                        <div
+                          className={ms('meal-menu__image')}
+                          style={{
+                            backgroundImage:
+                              testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.image !== ''
+                                ? `url(${testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.image})`
+                                : mealPixelImgSrc(value),
+                          }}
+                        />
+                        <div className={ms('meal-menu__detaile')}>{testData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value]['메뉴'].join(',')}</div>
+                      </div>
                     </div>
-                    <div className={ms('meal-menu__body')}>
-                      <div
-                        className={ms('meal-menu__image')}
-                        style={{
-                          backgroundImage: `url(${
-                            testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.image !== ''
-                              ? testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.image
-                              : '/icon/meal-default.png'
-                          })`,
-                        }}
-                      />
-                      <div className={ms('meal-menu__detaile')}>{testData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value]['메뉴'].join(',')}</div>
-                    </div>
-                  </div>
-                )
-              )
+                  )
             )}
           </div>
         </div>
