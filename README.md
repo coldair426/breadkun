@@ -1,3 +1,4 @@
+<br/>
 <div align = "center"><img src="./public/logo/breadkunLogoLightMode.png" alt="breadkun logo" width="400px"></div>
 <br/>
 <!-- Index -->
