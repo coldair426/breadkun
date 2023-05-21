@@ -394,14 +394,40 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             </div>
           </div>
           <div className={hs('home__links')}>
-            <Link to={'/meal'}>
-              <div className={hs('home__link')}>오늘의 식단 보기</div>
-            </Link>
-            {company === '강촌' && (
-              <Link to={'/bus'}>
-                <div className={hs('home__link')}>퇴근 버스 정보 보기</div>
+            <div className={hs('home__links--row')}>
+              <Link to={'/meal'}>
+                <div>
+                  <div className={hs('home__link--title')}>식단</div>
+                  <div className={hs('home__link--text')}>구내식당 오늘의 메뉴</div>
+                </div>
+                <img className={hs('home__link--image', '식단')} src='/icon/home-meal-button.png' alt='today meal' />
               </Link>
-            )}
+              <Link to={'/cafe'}>
+                <div>
+                  <div className={hs('home__link--title')}>카페</div>
+                  <div className={hs('home__link--text')}>따뜻한 아이스아메리 한잔</div>
+                </div>
+                <img className={hs('home__link--image', '카페')} src='/icon/home-caffe-button.png' alt='today meal' />
+              </Link>
+            </div>
+            <div className={hs('home__links--row')}>
+              {company === '강촌' && (
+                <Link to={'/bus'}>
+                  <div>
+                    <div className={hs('home__link--title')}>버스</div>
+                    <div className={hs('home__link--text')}>퇴근 버스 정보</div>
+                  </div>
+                  <img className={hs('home__link--image', '버스')} src='/icon/home-bus-button.png' alt='today meal' />
+                </Link>
+              )}
+              <Link to={'/omakase'}>
+                <div>
+                  <div className={hs('home__link--title')}>빵돌이오마카세</div>
+                  <div className={hs('home__link--text')}>いらっしゃいませ</div>
+                </div>
+                <img className={hs('home__link--image', '빵돌이오마카세')} src='/icon/home-omakase-button.png' alt='today meal' />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
