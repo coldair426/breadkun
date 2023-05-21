@@ -282,7 +282,6 @@ $fontColor: #f8f9fa; // 기본글자색
     & > a {
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
       align-items: center;
       width: 50%;
       height: 43.59vw;
@@ -299,27 +298,26 @@ $fontColor: #f8f9fa; // 기본글자색
         -ms-transform: scale(1.05); /* IE prefix */
       }
       .home__link--title {
-        font-size: clamp(1px, 4.2vw, 22px);
-        letter-spacing: 3px;
+        font-size: clamp(1px, 4.2vw, 21px);
+        letter-spacing: 0.7vw;
         font-weight: 900;
         text-align: center;
-        margin-top: 20px;
+        margin-top: clamp(1px, 6vw, 20px);
       }
       .home__link--text {
-        font-size: clamp(1px, 3.3vw, 22px);
-        font-weight: 900;
-        margin-top: 5px;
+        font-size: clamp(1px, 3.3vw, 16px);
+        margin-top: clamp(1px, 1.3vw, 5px);
         text-align: center;
       }
       .home__link--image {
-        height: 90px;
-      }
-      .빵돌이오마카세 {
-        margin-bottom: 5px;
+        height: 23vw;
+        max-height: 120px;
+        margin-top: clamp(1px, 3vw, 10px);
       }
       .버스 {
-        height: 70px;
-        margin: 10px 0;
+        height: 18vw;
+        max-height: 100px;
+        margin-top: clamp(1px, 5vw, 25px);
       }
     }
   }

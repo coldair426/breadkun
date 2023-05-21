@@ -405,7 +405,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
               <Link to={'/cafe'}>
                 <div>
                   <div className={hs('home__link--title')}>카페</div>
-                  <div className={hs('home__link--text')}>따뜻한 아이스아메리 한잔</div>
+                  <div className={hs('home__link--text')}>-서비스 준비중-</div>
                 </div>
                 <img className={hs('home__link--image', '카페')} src='/icon/home-caffe-button.png' alt='today meal' />
               </Link>
@@ -423,7 +423,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
               <Link to={'/omakase'}>
                 <div>
                   <div className={hs('home__link--title')}>빵돌이오마카세</div>
-                  <div className={hs('home__link--text')}>いらっしゃいませ</div>
+                  <div className={hs('home__link--text')}>-서비스 준비중-</div>
                 </div>
                 <img className={hs('home__link--image', '빵돌이오마카세')} src='/icon/home-omakase-button.png' alt='today meal' />
               </Link>
