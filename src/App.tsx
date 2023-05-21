@@ -35,8 +35,8 @@ function App() {
           <Routes>
             <Route path='/' element={<Home setMenuBox={setMenuBox} />} />
             <Route path='/meal' element={<Meal setMenuBox={setMenuBox} />} />
-            <Route path='/cafe' element={<></>} />
-            <Route path='/omakase' element={<></>} />
+            <Route path='/cafe' element={<SpinLogo text1={'COMMING SOON'} text2={'서비스 준비중입니다.'} minHeight='80vh' />} />
+            <Route path='/omakase' element={<SpinLogo text1={'COMMING SOON'} text2={'서비스 준비중입니다.'} minHeight='80vh' />} />
             <Route path='/bus' element={<Bus setMenuBox={setMenuBox} />} />
             <Route path='/bus/:destination' element={<Bus setMenuBox={setMenuBox} />} />
             <Route path='*' element={<SpinLogo text1={'404 Not Found'} text2={'페이지를 찾을 수 없습니다.'} minHeight='80vh' />} />
