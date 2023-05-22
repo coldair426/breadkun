@@ -228,7 +228,7 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         </div>
         <div className={ms('meal__body')}>
           <div className={ms('meal-categories')}>
-            {(company === '강촌' ? ['조식', '중식', '석식', '빵'] : ['조식', '중식', '석식']).map((v, index) => (
+            {['조식', '중식', '석식'].map((v, index) => (
               <div
                 className={selectedMealCategories === v ? ms('meal-category', 'selected-meal-category') : ms('meal-category')}
                 onClick={() => setSelectedMealCategories(v)}
