@@ -114,7 +114,12 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   }, [company]);
   // 오늘을 선택하는 effect
   useEffect(() => {
-    setSelectedDay(today);
+    if (company === '강촌') {
+      setSelectedDay(today);
+    } else {
+      // 을지는 주말 없음
+      today < 5 ? setSelectedDay(today) : setSelectedDay(0);
+    }
   }, [company, today]);
   // 시간에 따라 조,중,석식 선택하는 effect
   useEffect(() => {
@@ -159,7 +164,7 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         });
       }
     }
-  }, [selectedDay]);
+  }, [company, selectedDay]);
   // test api
   useEffect(() => {
     company === '강촌' ? setTestData(mealData.강촌) : setTestData(mealData.을지);
@@ -194,17 +199,32 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           </div>
         </div>
         <div className={ms('days')}>
-          {days?.map((day, index) => (
-            <button
-              key={index}
-              ref={index === selectedDay ? selectedDayRef : undefined}
-              onClick={() => {
-                setSelectedMealCategories('조식');
-                setSelectedDay(index);
-              }}>
-              <div className={index === selectedDay ? ms('day', 'selected-day') : ms('day')}>{index === today ? '오늘의 메뉴' : day}</div>
-            </button>
-          ))}
+          {company === '강촌'
+            ? days?.map((day, index) => (
+                <button
+                  key={index}
+                  ref={index === selectedDay ? selectedDayRef : undefined}
+                  onClick={() => {
+                    setSelectedMealCategories('조식');
+                    setSelectedDay(index);
+                  }}>
+                  <div className={index === selectedDay ? ms('day', 'selected-day') : ms('day')}>{index === today ? '오늘의 메뉴' : day}</div>
+                </button>
+              ))
+            : // 을지는 주말 없음
+              days?.map((day, index) =>
+                index < 5 ? (
+                  <button
+                    key={index}
+                    ref={index === selectedDay ? selectedDayRef : undefined}
+                    onClick={() => {
+                      setSelectedMealCategories('조식');
+                      setSelectedDay(index);
+                    }}>
+                    <div className={index === selectedDay ? ms('day', 'selected-day') : ms('day')}>{index === today ? '오늘의 메뉴' : day}</div>
+                  </button>
+                ) : undefined
+              )}
         </div>
         <div className={ms('meal__body')}>
           <div className={ms('meal-categories')}>
