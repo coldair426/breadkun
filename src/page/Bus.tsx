@@ -71,9 +71,13 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
   useEffect(() => {
     setMenuBox(false); // 메뉴 닫기(이전버튼 클릭시)
   }, [setMenuBox]);
+  // 페이지 최상단으로 스크롤링
   useEffect(() => {
-    window.scrollTo(0, 0); // 페이지 최상단으로 스크롤링
+    window.scrollTo(0, 0);
     updateLocation(); // 현재위치 업데이트 최초 1회 업데이트
+    return () => {
+      window.scrollTo(0, 0);
+    };
   }, []);
   useEffect(() => {
     getAddr(latLong.latitude, latLong.longitude); // 현재 도로명 주소 업데이트

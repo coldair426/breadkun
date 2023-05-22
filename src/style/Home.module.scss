@@ -267,57 +267,109 @@ $fontColor: #f8f9fa; // 기본글자색
 .최악 {
   background-color: #a80038;
 }
-.home__dusts + .home__links {
-  margin-top: 3.33vw;
-}
 .home__links {
-  .home__links--row + .home__links--row {
-    margin-top: 3.33vw;
-  }
-  .home__links--row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  & > a,
+  .home__link--bread {
     display: flex;
-    a + a {
-      margin-left: 3.33vw;
+    flex-direction: column;
+    align-items: center;
+    width: calc(50% - (3.33vw / 2));
+    height: 43.59vw;
+    max-height: 200px;
+    background-color: #413543;
+    border-radius: 10.26vw;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    margin-top: 3.33vw;
+    &:active {
+      transform: scale(1.05);
+      -webkit-transform: scale(1.05); /* Webkit prefix */
+      -moz-transform: scale(1.05); /* Mozilla prefix */
+      -o-transform: scale(1.05); /* Opera prefix */
+      -ms-transform: scale(1.05); /* IE prefix */
     }
-    & > a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 50%;
-      height: 43.59vw;
-      max-height: 200px;
-      background-color: #413543;
+    .home__link--title {
+      font-size: clamp(1px, 4.2vw, 21px);
+      letter-spacing: 0.7vw;
+      font-weight: 900;
+      text-align: center;
+      margin-top: clamp(1px, 6vw, 20px);
+    }
+    .home__link--text {
+      font-size: clamp(1px, 3.3vw, 16px);
+      margin-top: clamp(1px, 1.3vw, 5px);
+      text-align: center;
+    }
+    .home__link--image {
+      height: 23vw;
+      max-height: 120px;
+      margin-top: clamp(1px, 3vw, 10px);
+    }
+    .버스 {
+      height: 18vw;
+      max-height: 100px;
+      margin-top: clamp(1px, 5vw, 25px);
+    }
+    .빵 {
+      height: 20vw;
+      max-height: 110px;
+      margin-top: clamp(1px, 4vw, 15px);
+    }
+  }
+}
+.home__pop-up-bread {
+  display: -webkit-flex; /* 웹킷 */
+  display: flex;
+  justify-content: center;
+  .home__pop-up-bread--mask {
+    background-color: #000;
+    opacity: 0.8;
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 90;
+  }
+  .home__pop-up-bread--wrapper {
+    position: fixed;
+    text-align: center;
+    top: 26vh;
+    z-index: 100;
+    .home__pop-up-bread--img {
+      width: 75vw;
+      max-width: 385px;
       border-radius: 10.26vw;
-      text-decoration: none;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+    .home__pop-up-bread--text {
+      margin: 1.5vw 0 4vw 0;
+      font-size: clamp(1px, 5.2vw, 28px); // 갤럭시 폴드 대응
+      line-height: 6.5vw;
+      text-align: center;
+      letter-spacing: 0.3vw;
+      word-break: keep-all; // 단어기준으로 줄바꿈
+    }
+    .home__pop-up-bread--close {
+      font-size: clamp(1px, 3.85vw, 20px); // 갤럭시 폴드 대응
+      font-weight: 900;
+      letter-spacing: 0.51vw;
+      padding: clamp(1px, 1.79vw, 8px);
+      border: 1px solid #f8f9fa;
+      -moz-border-radius: 1.28vw;
+      -webkit-border-radius: 1.28vw;
+      border-radius: 1.28vw;
+      -moz-transition: transform 50ms ease-in-out;
+      -webkit-transition: transform 50ms ease-in-out;
+      transition: transform 50ms ease-in-out;
+      &:hover {
+        cursor: pointer;
+      }
       &:active {
-        transform: scale(1.05);
-        -webkit-transform: scale(1.05); /* Webkit prefix */
-        -moz-transform: scale(1.05); /* Mozilla prefix */
-        -o-transform: scale(1.05); /* Opera prefix */
-        -ms-transform: scale(1.05); /* IE prefix */
-      }
-      .home__link--title {
-        font-size: clamp(1px, 4.2vw, 21px);
-        letter-spacing: 0.7vw;
-        font-weight: 900;
-        text-align: center;
-        margin-top: clamp(1px, 6vw, 20px);
-      }
-      .home__link--text {
-        font-size: clamp(1px, 3.3vw, 16px);
-        margin-top: clamp(1px, 1.3vw, 5px);
-        text-align: center;
-      }
-      .home__link--image {
-        height: 23vw;
-        max-height: 120px;
-        margin-top: clamp(1px, 3vw, 10px);
-      }
-      .버스 {
-        height: 18vw;
-        max-height: 100px;
-        margin-top: clamp(1px, 5vw, 25px);
+        -moz-transform: scale(1.3);
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3);
       }
     }
   }

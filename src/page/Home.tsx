@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import axios from 'axios';
 import NotificationBox from './../component/NotificationBox';
 import { Link } from 'react-router-dom';
+import breadData from '../bread-test-database.json';
 
 interface WeatherReturn {
   baseDate: string;
@@ -29,6 +30,8 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   const [rain, setRain] = useState<WeatherReturn[] | undefined>(); // 강수확률
   const [temperature, setTemperature] = useState<WeatherReturn[] | undefined>(); // 기온
   const [refreshButton, setRefreshButton] = useState(true);
+  const [breadPopUp, setBreadPopUp] = useState(false);
+  const [bread, setBread] = useState<{ id: string; name: string; img: string } | undefined>();
 
   // 회사를 드롭다운에 따라 업데이트하는 함수
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -106,6 +109,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   const reFreshButtonClick = () => {
     setRefreshButton(!refreshButton);
   };
+  const handleTouchMove = (e: TouchEvent) => e.preventDefault(); // 스크롤 정지 함수
 
   // 메뉴 닫기(이전버튼 클릭시)
   useEffect(() => {
@@ -114,6 +118,9 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   // 페이지 최상단으로 스크롤링
   useEffect(() => {
     window.scrollTo(0, 0);
+    return () => {
+      window.scrollTo(0, 0);
+    };
   }, []);
   // 로컬 스토리지 업데이트
   useEffect(() => {
@@ -297,6 +304,26 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       setNotification(false);
     }
   }, [dustRequestCompleted, weatherRequestCompleted]);
+  useEffect(() => {
+    const parentElement = document.body; // DOM의 body 태그 지정
+    if (breadPopUp === true) {
+      // PopUpMap 마운트시,
+      parentElement.style.overflow = 'hidden';
+      parentElement.addEventListener('touchmove', handleTouchMove, { passive: false }); // Touch 디바이스 스크롤 정지
+    }
+    // cleanup
+    return () => {
+      parentElement.style.overflow = 'unset';
+      parentElement.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, [breadPopUp]);
+  // bread test api
+  useEffect(() => {
+    if (company === '강촌') {
+      const now = new Date(); // 현재 날짜
+      setBread(breadData.bread.find((value) => +value.id === now.getDate()));
+    }
+  }, [company]);
 
   return (
     <>
@@ -394,43 +421,60 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             </div>
           </div>
           <div className={hs('home__links')}>
-            <div className={hs('home__links--row')}>
-              <Link to={'/meal'}>
-                <div>
-                  <div className={hs('home__link--title')}>식단</div>
-                  <div className={hs('home__link--text')}>구내식당 오늘의 메뉴</div>
-                </div>
-                <img className={hs('home__link--image', '식단')} src='/icon/home-meal-button.png' alt='today meal' />
-              </Link>
-              <Link to={'/cafe'}>
-                <div>
-                  <div className={hs('home__link--title')}>카페</div>
-                  <div className={hs('home__link--text')}>-서비스 준비중-</div>
-                </div>
-                <img className={hs('home__link--image', '카페')} src='/icon/home-caffe-button.png' alt='today meal' />
-              </Link>
-            </div>
-            <div className={hs('home__links--row')}>
-              {company === '강촌' && (
+            <Link to={'/meal'}>
+              <div>
+                <div className={hs('home__link--title')}>식단</div>
+                <div className={hs('home__link--text')}>구내식당 메뉴</div>
+              </div>
+              <img className={hs('home__link--image', '식단')} src='/icon/home-meal-button.png' alt='today meal' />
+            </Link>
+            {company === '강촌' && (
+              <>
+                <button className={hs('home__link--bread')} onClick={() => setBreadPopUp(true)}>
+                  <div>
+                    <div className={hs('home__link--title')}>ORIGINAL</div>
+                    <div className={hs('home__link--text')}>오늘의 빵</div>
+                  </div>
+                  <img className={hs('home__link--image', '빵')} src='/icon/home-bread-button.png' alt='today bread' />
+                </button>
                 <Link to={'/bus'}>
                   <div>
                     <div className={hs('home__link--title')}>버스</div>
                     <div className={hs('home__link--text')}>퇴근 버스 정보</div>
                   </div>
-                  <img className={hs('home__link--image', '버스')} src='/icon/home-bus-button.png' alt='today meal' />
+                  <img className={hs('home__link--image', '버스')} src='/icon/home-bus-button.png' alt='today bus' />
                 </Link>
-              )}
-              <Link to={'/omakase'}>
-                <div>
-                  <div className={hs('home__link--title')}>빵돌이오마카세</div>
-                  <div className={hs('home__link--text')}>-서비스 준비중-</div>
-                </div>
-                <img className={hs('home__link--image', '빵돌이오마카세')} src='/icon/home-omakase-button.png' alt='today meal' />
-              </Link>
-            </div>
+              </>
+            )}
+            <Link to={'/cafe'}>
+              <div>
+                <div className={hs('home__link--title')}>카페</div>
+                <div className={hs('home__link--text')}>-서비스 준비중-</div>
+              </div>
+              <img className={hs('home__link--image', '카페')} src='/icon/home-caffe-button.png' alt='today cafe' />
+            </Link>
+            <Link to={'/omakase'}>
+              <div>
+                <div className={hs('home__link--title')}>빵돌이오마카세</div>
+                <div className={hs('home__link--text')}>-서비스 준비중-</div>
+              </div>
+              <img className={hs('home__link--image', '빵돌이오마카세')} src='/icon/home-omakase-button.png' alt='today omakase' />
+            </Link>
           </div>
         </div>
       </div>
+      {breadPopUp && (
+        <div className={hs('home__pop-up-bread')}>
+          <div className={hs('home__pop-up-bread--mask')} onClick={() => setBreadPopUp(false)} />
+          <div className={hs('home__pop-up-bread--wrapper')}>
+            <img className={hs('home__pop-up-bread--img')} src='/bread-test.jpg' alt='todays bread' />
+            <div className={hs('home__pop-up-bread--text')}>{bread?.name}</div>
+            <span className={hs('home__pop-up-bread--close')} onClick={() => setBreadPopUp(false)}>
+              닫기
+            </span>
+          </div>
+        </div>
+      )}
       {notification && <NotificationBox firstText={'기상상태 분석 중.'} secText={'잠시만 기다려 주세요.'} />}
     </>
   );

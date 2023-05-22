@@ -25,10 +25,10 @@ function PopUpMap({
 
   useEffect(() => {
     const parentElement = document.body; // DOM의 body 태그 지정
-    // MenuBox 마운트시,
+    // PopUpMap 마운트시,
     parentElement.style.overflow = 'hidden';
     parentElement.addEventListener('touchmove', handleTouchMove, { passive: false }); // Touch 디바이스 스크롤 정지
-    // MenuBox 언마운트시,
+    // PopUpMap 언마운트시,
     return () => {
       parentElement.style.overflow = 'unset';
       parentElement.removeEventListener('touchmove', handleTouchMove); // Touch 디바이스 스크롤 정지 해제

@@ -105,8 +105,12 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   useEffect(() => {
     setMenuBox(false); // 메뉴 닫기(이전버튼 클릭시)
   }, [setMenuBox]);
+  // 페이지 최상단으로 스크롤링
   useEffect(() => {
-    window.scrollTo(0, 0); // 페이지 최상단으로 스크롤링
+    window.scrollTo(0, 0);
+    return () => {
+      window.scrollTo(0, 0);
+    };
   }, []);
   // 로컬 스토리지 업데이트
   useEffect(() => {
@@ -117,38 +121,53 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     if (company === '강촌') {
       setSelectedDay(today);
     } else {
-      // 을지는 주말 없음
+      // 을지 주말 => 월요일 디폴트
       today < 5 ? setSelectedDay(today) : setSelectedDay(0);
     }
   }, [company, today]);
   // 시간에 따라 조,중,석식 선택하는 effect
   useEffect(() => {
-    if (nowHours < 9) {
-      setSelectedMealCategories('조식');
-    } else if (nowHours < 13) {
-      setSelectedMealCategories('중식');
+    if (company === '강촌') {
+      if (nowHours < 9) {
+        setSelectedMealCategories('조식');
+      } else if (nowHours < 13) {
+        setSelectedMealCategories('중식');
+      } else {
+        setSelectedMealCategories('석식');
+      }
     } else {
-      setSelectedMealCategories('석식');
+      if (today < 5) {
+        if (nowHours < 9) {
+          setSelectedMealCategories('조식');
+        } else if (nowHours < 13) {
+          setSelectedMealCategories('중식');
+        } else {
+          setSelectedMealCategories('석식');
+        }
+      } else {
+        // 을지 주말 기본값 조식
+        setSelectedMealCategories('조식');
+      }
     }
-  }, [company, nowHours]);
+  }, [company, today, nowHours]);
   useEffect(() => {
     // 오늘을 포함한 주차의 월요일~일요일까지의 날짜 데이터 배열리턴 함수
-    const getWeekDates = () => {
+    const getWeekDates = (dayCount: number) => {
       const today = new Date(); // 현재 date
       const currentDay = today.getDay(); // 요일 가져오기
       const weekStart = new Date(today); // today date 복사
       currentDay === 0 ? weekStart.setDate(today.getDate() - 6) : weekStart.setDate(today.getDate() - currentDay + 1); // 일요일 일때 ? 이전 주의 월요일 : 월요일 시작
       const weekDates: string[] = [];
-      for (let i = 0; i < 7; i++) {
+      for (let i = 0; i < dayCount; i++) {
         const date = new Date(weekStart);
         date.setDate(weekStart.getDate() + i); // 주의 시작일로부터 i일씩 증가하여 주간 날짜 생성
         weekDates.push(formatDate(date));
       }
       return weekDates;
     };
-    const dates = getWeekDates();
+    const dates = company === '강촌' ? getWeekDates(7) : getWeekDates(5); // 강촌 주7일, 을지 주5일(주말X)
     setDays(dates);
-  }, []);
+  }, [company]);
   // selectedDay 자동 중앙 스크롤
   useEffect(() => {
     if (selectedDayRef.current) {
@@ -165,7 +184,7 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       }
     }
   }, [company, selectedDay]);
-  // test api
+  // 식단 test api
   useEffect(() => {
     company === '강촌' ? setTestData(mealData.강촌) : setTestData(mealData.을지);
   }, [company]);
@@ -199,32 +218,17 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           </div>
         </div>
         <div className={ms('days')}>
-          {company === '강촌'
-            ? days?.map((day, index) => (
-                <button
-                  key={index}
-                  ref={index === selectedDay ? selectedDayRef : undefined}
-                  onClick={() => {
-                    setSelectedMealCategories('조식');
-                    setSelectedDay(index);
-                  }}>
-                  <div className={index === selectedDay ? ms('day', 'selected-day') : ms('day')}>{index === today ? '오늘의 메뉴' : day}</div>
-                </button>
-              ))
-            : // 을지는 주말 없음
-              days?.map((day, index) =>
-                index < 5 ? (
-                  <button
-                    key={index}
-                    ref={index === selectedDay ? selectedDayRef : undefined}
-                    onClick={() => {
-                      setSelectedMealCategories('조식');
-                      setSelectedDay(index);
-                    }}>
-                    <div className={index === selectedDay ? ms('day', 'selected-day') : ms('day')}>{index === today ? '오늘의 메뉴' : day}</div>
-                  </button>
-                ) : undefined
-              )}
+          {days?.map((day, index) => (
+            <button
+              key={index}
+              ref={index === selectedDay ? selectedDayRef : undefined}
+              onClick={() => {
+                setSelectedMealCategories('조식');
+                setSelectedDay(index);
+              }}>
+              <div className={index === selectedDay ? ms('day', 'selected-day') : ms('day')}>{index === today ? '오늘의 메뉴' : day}</div>
+            </button>
+          ))}
         </div>
         <div className={ms('meal__body')}>
           <div className={ms('meal-categories')}>
