@@ -4,7 +4,6 @@ import classNames from 'classnames/bind';
 import axios from 'axios';
 import NotificationBox from './../component/NotificationBox';
 import { Link } from 'react-router-dom';
-import breadData from '../bread-test-database.json';
 
 interface WeatherReturn {
   baseDate: string;
@@ -317,11 +316,20 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       parentElement.removeEventListener('touchmove', handleTouchMove);
     };
   }, [breadPopUp]);
-  // bread test api
+  // bread api
   useEffect(() => {
+    async function fetchData() {
+      try {
+        const result = await axios.post('https://babkaotalk.herokuapp.com/api/webBread');
+        const { resultData } = result.data;
+        setBread(resultData);
+      } catch (error) {
+        console.log('오늘의 빵 정보 가져오기 실패.');
+        console.log(error);
+      }
+    }
     if (company === '강촌') {
-      const now = new Date(); // 현재 날짜
-      setBread(breadData.bread.find((value) => +value.id === now.getDate()));
+      fetchData();
     }
   }, [company]);
 
@@ -467,7 +475,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         <div className={hs('home__pop-up-bread')}>
           <div className={hs('home__pop-up-bread--mask')} onClick={() => setBreadPopUp(false)} />
           <div className={hs('home__pop-up-bread--wrapper')}>
-            <img className={hs('home__pop-up-bread--img')} src='/bread-test.jpg' alt='todays bread' />
+            <img className={hs('home__pop-up-bread--img')} src={`https://babkaotalk.herokuapp.com${bread?.img}`} alt='todays bread' />
             <div className={hs('home__pop-up-bread--text')}>{bread?.name}</div>
             <span className={hs('home__pop-up-bread--close')} onClick={() => setBreadPopUp(false)}>
               닫기
