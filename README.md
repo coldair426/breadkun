@@ -78,4 +78,4 @@
 
 ---
 
-**Full README가 보고 싶다면 [velog](https://velog.io/@coldair426/series/%EB%B9%B5%EB%8F%8C%EC%9D%B4)를 참고하세요.**
+**Full README가 보고 싶다면 [velog](https://velog.io/@coldair426/series/breadkun)를 참고하세요.**
