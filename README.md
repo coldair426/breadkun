@@ -3,7 +3,7 @@
 <br/>
 <!-- Index -->
 
-Index
+**Index**
 
 <ul>
     <li><a href="#overview">Overview</a></li>
@@ -19,19 +19,24 @@ Index
 
 # Overview
 
-- 프로젝트명 : 더존 빵돌이
-- 기간 : 2023.04.04. ~
-- 목표 :
+- 프로젝트명 : 빵돌이(breadkun)
+- 기간 : 2023.04.04. ~ 2023.05.23.
+- 목표 : 더존비즈온 구내식당 식단과 통근 버스의 실시간 도착 시간을 안내하는 웹 서비스.
 - 배포주소 : https://breadkun.com/
 
 # Introduction
 
+- 000
+
 # Configuration
 
-<!--
-| <img src="./README_src/mobile.png" alt="메인"> | <img src="./README_src/ssb-menu.png" alt="메뉴판"> | <img src="./README_src/mobile (1).png" alt="네비게이션"> | <img src="./README_src/mobile (2).png" alt="관리자"> |
-| :--------------------------------------------: | :------------------------------------------------: | :------------------------------------------------------: | :--------------------------------------------------: |
-|                 메인                 |                    메뉴판(Menu)                    |                   네비게이션(Slidebox)                   |                 관리자 페이지(Admin)                 | -->
+| <img src="./readmeImgs/k_main.png" alt="더존(강촌)메인"> | <img src="./readmeImgs/u_main.png" alt="더존(을지)메인"> | <img src="./readmeImgs/k_meal.png" alt="더존(강촌)식단"> | <img src="./readmeImgs/u_meal.png" alt="더존(을지)식단"> | <img src="./readmeImgs/k_bread.png" alt="더존(강촌)빵"> |
+| :------------------------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: | :------------------------------------------------------: | :-----------------------------------------------------: |
+|                      더존(강촌)메인                      |                      더존(을지)메인                      |                      더존(강촌)식단                      |                      더존(을지)식단                      |                      더존(강촌)빵                       |
+
+| <img src="./readmeImgs/k_bus.png" alt=""> | <img src="./readmeImgs/k_bus-detail.png" alt=""> | <img src="./readmeImgs/k_bus-detail2.png" alt=""> | <img src="./readmeImgs/nav-menu.png" alt="네비게이션메뉴"> | <img src="./readmeImgs/404page.png" alt="404page"> |
+| :---------------------------------------: | :----------------------------------------------: | :-----------------------------------------------: | :--------------------------------------------------------: | :------------------------------------------------: |
+|              더존(강촌)버스               |                  더존(강촌)버스                  |                  더존(강촌)버스                   |                       네비게이션메뉴                       |                     404페이지                      |
 
 # Roadmap
 
@@ -59,15 +64,18 @@ Index
 
 # Browser Support
 
-<img src = "https://img.shields.io/badge/chrome-support-success?style=flat&logo=googlechrome&logoColor=white&labelColor=4285F4"> <img src = "https://img.shields.io/badge/Edge-support-success?style=flat&logo=microsoftedge&logoColor=white&labelColor=0078D7" > <img src = "https://img.shields.io/badge/Safari-support-success?style=flat&logo=Safari&logoColor=white&labelColor=000000">
+<img src = "https://img.shields.io/badge/AppleSafari-000000?logo=safari&logoColor=white" > <img src = "https://img.shields.io/badge/GoogleChrome-4285F4?logo=googlechrome&logoColor=white" > <img src = "https://img.shields.io/badge/MicrosoftEdge-0078D7?logo=microsoftedge&logoColor=white" >
 
 # Members
 
-<!-- - 홍찬기
-  - github : https://github.com/coldair426
-  - blog : https://velog.io/@coldair426
-  - mail : coldair426@gmail.com -->
+- HONG(FRONT-END)
+  - GitHub : https://github.com/coldair426
+  - Blog : https://velog.io/@coldair426
+  - Mail : coldair426@gmail.com
+- PARK(BACK-END)
+  - GitHub : https://github.com/pannchat
+  - Blog : https://pannchat.tistory.com/
 
 ---
 
-<!-- **Full README가 보고 싶다면 [velog](https://velog.io/@coldair426/series/%EC%8B%9D%EC%84%A0%EB%B9%84)를 참고하세요.** -->
+**Full README가 보고 싶다면 [velog](https://velog.io/@coldair426/series/%EB%B9%B5%EB%8F%8C%EC%9D%B4)를 참고하세요.**
