@@ -19,14 +19,14 @@
 
 # Overview
 
-- 프로젝트명 : Breadkun(빵돌이)
-- 기간 : 2023.04.04. ~ 2023.05.23.
-- 목표 : 더존비즈온 구내식당과 사내베이커리 식단, 통근 버스 정류장 정보 및 실시간 도착 시간을 안내하는 웹 서비스.
-- 배포주소 : https://breadkun.com/
+- **프로젝트명** : Breadkun(빵돌이)
+- **기간** : 2023.04.04. ~ 2023.05.23.
+- **목표** : 더존비즈온 구내식당과 사내베이커리 식단, 통근 버스 정류장 정보 및 실시간 도착 시간을 안내하는 웹 서비스.
+- **배포주소** : https://breadkun.com/
 
 # Introduction
 
-Breadkun(빵돌이)은 더존비즈온 구내식당과 사내베이커리 식단, 통근 버스 정류장 정보와 실시간 도착 시간을 손쉽게 확인할 수 있는 웹 서비스입니다. 이 프로젝트는 더존비즈온 직원들을 대상으로 구내식당과 사내베이커리 식단을 편리하게 접근하고, 통근 버스 정류장의 정확한 정보와 도착 시간을 실시간으로 확인할 수 있는 기능을 제공합니다.
+Breadkun(빵돌이)은 더존비즈온 구내식당과 사내베이커리 식단, 통근 버스 정류장 정보와 실시간 도착 시간을 손쉽게 확인할 수 있는 웹 서비스입니다.
 
 **주요 기능**:
 
@@ -40,7 +40,7 @@ Breadkun(빵돌이)은 더존비즈온 구내식당과 사내베이커리 식단
 
 - **PWA**: Breadkun은 Progressive Web App (PWA)로 제공되어, 사용자들이 웹 브라우저에서 손쉽게 앱 형태로 이용할 수 있습니다. 사용자들은 앱 설치 없이도 편리하게 Breadkun을 이용할 수 있으며, 지속적인 업데이트로 완성도와 사용성을 개선할 예정입니다.
 
-Breadkun은 더존비즈온 직원들에게 보다 편리하고 효율적인 식사와 교통 관리를 제공하여 업무 생산성을 높이는 데 도움이 됩니다. 향후 추가적인 기능과 개선사항이 예정되어 있으며, 사용자들의 피드백과 요구를 반영하여 지속적으로 발전할 예정입니다. 이제 Breadkun을 통해 스마트한 식단 관리와 신속한 교통 정보를 경험해보세요!
+Breadkun은 더존비즈온 직원들에게 보다 편리하고 효율적인 식사와 교통 관리를 제공하여 업무 생산성을 높이는 데 도움이 됩니다. 향후 추가적인 기능과 개선사항이 예정되어 있으며, 사용자들의 피드백과 요구를 반영하여 지속적으로 발전할 예정입니다.
 
 # Configuration
 
@@ -72,11 +72,11 @@ Breadkun은 더존비즈온 직원들에게 보다 편리하고 효율적인 식
 
 # Stacks
 
-- Environment : <img src = "https://img.shields.io/badge/VSCode-007ACC?logo=visual studio code" > <img src = "https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white" > <img src = "https://img.shields.io/badge/GitHub-181717?logo=github" > <img src = "https://img.shields.io/badge/Firebase-FFCA28?logo=Firebase&logoColor=white" >
+- **Environment** : <img src = "https://img.shields.io/badge/VSCode-007ACC?logo=visual studio code" > <img src = "https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white" > <img src = "https://img.shields.io/badge/GitHub-181717?logo=github" > <img src = "https://img.shields.io/badge/Firebase-FFCA28?logo=Firebase&logoColor=white" >
 
-- Developement
-  - FRONT-END : <img src = "https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white" > <img src = "https://img.shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=white" > <img src = "https://img.shields.io/badge/SASS-CC6699?logo=SASS&logoColor=white" >
-  - BACK-END : <img src = "https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white" > <img src = "https://img.shields.io/badge/Django-092E20?logo=django&logoColor=white" >
+- **Developement**
+  - **FRONT-END** : <img src = "https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white" > <img src = "https://img.shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=white" > <img src = "https://img.shields.io/badge/SASS-CC6699?logo=SASS&logoColor=white" >
+  - **BACK-END** : <img src = "https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white" > <img src = "https://img.shields.io/badge/Django-092E20?logo=django&logoColor=white" >
 
 # Browser Support
 
@@ -84,11 +84,13 @@ Breadkun은 더존비즈온 직원들에게 보다 편리하고 효율적인 식
 
 # Members
 
-- HONG(FRONT-END)
+- **HONG(FRONT-END)**
+
   - GitHub : https://github.com/coldair426
   - Blog : https://velog.io/@coldair426
   - Mail : coldair426@gmail.com
-- PARK(BACK-END)
+
+- **PARK(BACK-END)**
   - GitHub : https://github.com/pannchat
   - Blog : https://pannchat.tistory.com/
 
