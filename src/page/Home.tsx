@@ -475,8 +475,8 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         <div className={hs('home__pop-up-bread')}>
           <div className={hs('home__pop-up-bread--mask')} onClick={() => setBreadPopUp(false)} />
           <div className={hs('home__pop-up-bread--wrapper')}>
-            <img className={hs('home__pop-up-bread--img')} src={`https://babkaotalk.herokuapp.com${bread?.img}`} alt='todays bread' />
-            <div className={hs('home__pop-up-bread--text')}>{bread?.name}</div>
+            <img className={hs('home__pop-up-bread--img')} src={bread?.img ? `https://babkaotalk.herokuapp.com${bread?.img}` : '/icon/home-bread.png'} alt='todays bread' />
+            <div className={hs('home__pop-up-bread--text')}>{bread?.name || '오늘의 빵 정보가 없습니다.'}</div>
             <span className={hs('home__pop-up-bread--close')} onClick={() => setBreadPopUp(false)}>
               닫기
             </span>
