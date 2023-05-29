@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styles from '../style/Meal.module.scss';
 import classNames from 'classnames/bind';
-// import axios from 'axios';
-import mealData from '../meal-test-database.json';
+import axios from 'axios';
 
 const ms = classNames.bind(styles);
 
@@ -14,8 +13,7 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   const selectedDayRef = useRef<HTMLButtonElement>(null);
   const [selectedMealCategories, setSelectedMealCategories] = useState('조식'); // 기본값 조식
   const nowHours = new Date().getHours(); // 현재시간
-  // testData
-  const [testData, setTestData] = useState<Record<string, any>>({});
+  const [mealData, setMealData] = useState<Record<string, any>>({});
   // 회사를 드롭다운에 따라 업데이트하는 함수
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCompany(e.target.value);
@@ -58,47 +56,71 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       case '석식':
         return '저녁';
       default:
-        return '빵';
+        return '아침';
     }
   };
-  const mealMenutitleEdit = (value: string): string => {
+  // 강촌 메뉴 그룹핑
+  const kangchonMealMenutitleEdit = (value: string): string => {
     switch (value) {
       case 'KOREAN1':
         return '한식';
       case 'KOREAN2':
         return '라면';
-      case 'KOREAN':
-        return '한식';
-      case 'NOODLE':
-        return '누들';
       case 'SPECIAL':
         return '일품';
+      case 'NOODLE':
+        return '누들';
+      case 'CONVENIENCE1':
+      case 'CONVENIENCE2':
+        return '간편식';
+      case 'CONVENIENCE3':
+        return '프로틴';
       default:
         return '';
     }
   };
-  // CONVENIENCE 메뉴 분류; 비고를 제외한 모든 음식 => 간편식
-  const convenienceMenuTitleEdit = (value: string): string => {
-    return value === '비고' ? '프로틴' : '간편식';
-  };
-  const mealPixelImgSrc = (value: string): string => {
+  // 을지 메뉴 그룹핑
+  const euljiMealMenutitleEdit = (value: string): string => {
     switch (value) {
-      case '메뉴':
-      case 'PLUS':
-        return "url('/icon/meal-simpleFood.png')";
-      case '비고':
-        return "url('/icon/meal-protein.png')";
-      case 'SPECIAL':
-        return "url('/icon/meal-special.png')";
-      case 'KOREAN2':
-        return "url('/icon/meal-ramen.png')";
-      case 'KOREAN':
       case 'KOREAN1':
-        return "url('/icon/meal-korfood.png')";
-      case 'NOODLE':
-        return "url('/icon/meal-noodle.png')";
+        return '한식';
+      case 'KOREAN2':
+        return '라면';
+      case 'SPECIAL':
+        return '일품';
+      case 'CONVENIENCE1':
+        return '프레시박스';
       default:
         return '';
+    }
+  };
+  // pixelImg 경로 선택 함수
+  const mealPixelImgSrc = (value: string): string => {
+    switch (value) {
+      case 'SPECIAL':
+        return "url('/icon/meal-special.png')";
+      case 'KOREAN1':
+        return "url('/icon/meal-korfood.png')";
+      case 'KOREAN2':
+        return "url('/icon/meal-ramen.png')";
+      case 'NOODLE':
+        return "url('/icon/meal-noodle.png')";
+      case 'CONVENIENCE1':
+      case 'CONVENIENCE2':
+        return "url('/icon/meal-simpleFood.png')";
+      case 'CONVENIENCE3':
+        return "url('/icon/meal-protein.png')";
+      default:
+        return '';
+    }
+  };
+  // menu name 자르는 함수
+  const menuNameEdit = (value: string[]): string => {
+    if (value[0] === '★특별한 한상★') {
+      return value[1];
+    } else {
+      // "+", "(", " " 이 세가지로 자르는 정규식
+      return value[0].split(/[+ ()&*]/)[0];
     }
   };
 
@@ -184,23 +206,32 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       }
     }
   }, [company, selectedDay]);
-  // 식단 test api
+  // 식단 api
   useEffect(() => {
-    company === '강촌' ? setTestData(mealData.강촌) : setTestData(mealData.을지);
+    async function fetchKangchonMealData() {
+      try {
+        const result = await axios.post('https://babkaotalk.herokuapp.com/api/webDiet', {
+          location: '강촌',
+        });
+        setMealData(result.data.resultData);
+      } catch (error) {
+        console.log('메뉴 가져오기 실패.');
+        console.log(error);
+      }
+    }
+    async function fetchEuljiMealData() {
+      try {
+        const result = await axios.post('https://babkaotalk.herokuapp.com/api/webDiet', {
+          location: '을지',
+        });
+        setMealData(result.data.resultData);
+      } catch (error) {
+        console.log('메뉴 가져오기 실패.');
+        console.log(error);
+      }
+    }
+    company === '강촌' ? fetchKangchonMealData() : fetchEuljiMealData();
   }, [company]);
-  // 식단 API 통신
-  // useEffect(() => {
-  //   async function fetchMealData() {
-  //     try {
-  //       const result = await axios.get('https://breadboy-7b329-default-rtdb.firebaseio.com/%EA%B0%95%EC%B4%8C.json');
-  //       console.log(result);
-  //     } catch (error) {
-  //       console.log('메뉴 가져오기 실패.');
-  //       console.log(error);
-  //     }
-  //   }
-  //   fetchMealData();
-  // }, [company]);
   return (
     <>
       <div className={ms('meal')}>
@@ -257,52 +288,54 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             ))}
           </div>
           <div className={ms('meal-menus')}>
-            {['SPECIAL', 'KOREAN1', 'KOREAN2', 'KOREAN', 'NOODLE', 'CONVENIENCE'].map((value, index) =>
-              // CONVENIENCE 세분류로 나누기
-              value === 'CONVENIENCE'
-                ? ['메뉴', 'PLUS', '비고'].map(
-                    (secVal, secIndex) =>
-                      testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.[secVal] && (
-                        <div className={ms('meal-menu')} key={secVal + secIndex}>
-                          <div className={ms('meal-menu__title--wrapper')}>
-                            <div className={ms('meal-menu__title', `${secVal}`)}>{convenienceMenuTitleEdit(secVal)}</div>
-                            <div className={ms('meal-menu__name')}>{testData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value][secVal][0]}</div>
-                          </div>
-                          <div className={ms('meal-menu__body')}>
-                            <div
-                              className={ms('meal-menu__image')}
-                              style={{
-                                backgroundImage: mealPixelImgSrc(secVal),
-                              }}
-                            />
-                            <div className={ms('meal-menu__detaile')}>
-                              {testData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value][secVal].join(',')}
-                            </div>
-                          </div>
-                        </div>
-                      )
-                  )
-                : testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.메뉴 && (
+            {company === '강촌' &&
+              ['SPECIAL', 'KOREAN1', 'KOREAN2', 'NOODLE', 'CONVENIENCE1', 'CONVENIENCE2', 'CONVENIENCE3'].map(
+                (value, index) =>
+                  mealData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.메뉴 && (
                     <div className={ms('meal-menu')} key={index}>
                       <div className={ms('meal-menu__title--wrapper')}>
-                        <div className={ms('meal-menu__title', `${value}`)}>{mealMenutitleEdit(value)}</div>
-                        <div className={ms('meal-menu__name')}>{testData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value]['메뉴'][0]}</div>
+                        <div className={ms('meal-menu__title', `${value}`)}>{kangchonMealMenutitleEdit(value)}</div>
+                        <div className={ms('meal-menu__name')}>{menuNameEdit(mealData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value]['메뉴'])}</div>
                       </div>
                       <div className={ms('meal-menu__body')}>
                         <div
                           className={ms('meal-menu__image')}
                           style={{
                             backgroundImage:
-                              testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.image !== ''
-                                ? `url(${testData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.image})`
+                              mealData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.image !== ''
+                                ? `url(${mealData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.image})`
                                 : mealPixelImgSrc(value),
                           }}
                         />
-                        <div className={ms('meal-menu__detaile')}>{testData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value]['메뉴'].join(',')}</div>
+                        <div className={ms('meal-menu__detaile')}>{mealData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value]['메뉴'].join(',')}</div>
                       </div>
                     </div>
                   )
-            )}
+              )}
+            {company === '을지' &&
+              ['SPECIAL', 'KOREAN1', 'KOREAN2', 'CONVENIENCE1'].map(
+                (value, index) =>
+                  mealData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.메뉴 && (
+                    <div className={ms('meal-menu')} key={index}>
+                      <div className={ms('meal-menu__title--wrapper')}>
+                        <div className={ms('meal-menu__title', `${value}`)}>{euljiMealMenutitleEdit(value)}</div>
+                        <div className={ms('meal-menu__name')}>{menuNameEdit(mealData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value]['메뉴'])}</div>
+                      </div>
+                      <div className={ms('meal-menu__body')}>
+                        <div
+                          className={ms('meal-menu__image')}
+                          style={{
+                            backgroundImage:
+                              mealData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.image !== ''
+                                ? `url(${mealData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[value]?.image})`
+                                : mealPixelImgSrc(value),
+                          }}
+                        />
+                        <div className={ms('meal-menu__detaile')}>{mealData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][value]['메뉴'].join(',')}</div>
+                      </div>
+                    </div>
+                  )
+              )}
           </div>
         </div>
       </div>
