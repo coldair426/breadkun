@@ -1,5 +1,5 @@
 <br/>
-<div align = "center"><img src="./public/logo/og-image.png" alt="breadkun logo" width="400px"></div>
+<div align = "center"><img src="./public/logo/breadkunLogoLightMode.png" alt="breadkun logo" width="400px"></div>
 <br/>
 <!-- Index -->
 
