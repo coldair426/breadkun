@@ -119,8 +119,8 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     if (value[0] === '★특별한 한상★') {
       return value[1];
     } else {
-      // "+", "(", " " 이 세가지로 자르는 정규식
-      return value[0].split(/[+ ()&*]/)[0];
+      // "+", "(", " ", "&", "*" 5개로 자르는 정규식
+      return value[0].split(/[+ (&*]/)[0];
     }
   };
 
