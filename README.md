@@ -72,7 +72,7 @@
 - [x] Api Key env 저장
 - [x] 404Ppage
 - [x] SEO(Search Engine Optimization) 설정
-- [x] CI/CD (GitHub Actions, Firebase)
+- [x] 빌드 및 배포 자동화; CI/CD (GitHub Actions, Firebase)
 - [x] PWA(Progressive Web App) 설정
 - [x] 식단(Meal)의 일주일 날짜 표시 및 현재 날짜 및 식단 자동 선택 로직
 - [ ] PWA 개선
