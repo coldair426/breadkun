@@ -84,7 +84,7 @@
 - **Environment**: <img src = "https://img.shields.io/badge/VSCode-007ACC?logo=visual studio code" > <img src = "https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white" > <img src = "https://img.shields.io/badge/GitHub-181717?logo=github" > <img src = "https://img.shields.io/badge/Firebase-FFCA28?logo=Firebase&logoColor=white" >
 
 - **Developement**:
-  - **FRONT-END**: <img src = "https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white" > <img src = "https://img.shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=white" > <img src = "https://img.shields.io/badge/SASS-CC6699?logo=SASS&logoColor=white" >
+  - **FRONT-END**: <img src = "https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white" > <img src = "https://img.shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=white" > <img src = "https://img.shields.io/badge/SASS-CC6699?logo=SASS&logoColor=white" > <img src = "https://img.shields.io/badge/CSSModules-000000?logo=cssmodules&logoColor=white" >
   - **BACK-END**: <img src = "https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white" > <img src = "https://img.shields.io/badge/Django-092E20?logo=django&logoColor=white" >
 
 # Browser Support
