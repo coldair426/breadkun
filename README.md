@@ -61,20 +61,20 @@
 
 # Roadmap
 
-- [x] Cross-browsing을 위한 CSS reset (styled-reset)
-- [x] Router (react-router-dom)
-- [x] 카카오톡 플러스친구에서 링크 제공을 위한 URL 파라미터 (react-router-dom)
 - [x] 최근 옵션(회사, 버스종착지) 저장 (local storage)
+- [x] 식단(Meal)의 일주일 날짜 표시 및 현재 날짜 및 식단 자동 선택 로직
+- [x] 빌드 및 배포 자동화; CI/CD (GitHub Actions, Firebase)
+- [x] SEO(Search Engine Optimization) 설정
+- [x] PWA(Progressive Web App) 설정
 - [x] 대시보드(Home)의 날씨와 미세먼지 Api 연결 (Open Api)
 - [x] 버스(Bus)에서 사용자 현재위치 정보 가져오기 (Web Api)
 - [x] 버스(Bus)의 현재위치와 각종 정류장 위치정보 맵에 표시 (Kakao Api)
 - [x] 버스(Bus)의 현재위치로 부터 남은시간 받는 Api 연결 (Back-end)
+- [x] 카카오톡 플러스친구에서 링크 제공을 위한 URL 파라미터 (react-router-dom)
 - [x] Api Key env 저장
 - [x] 404Ppage
-- [x] SEO(Search Engine Optimization) 설정
-- [x] 빌드 및 배포 자동화; CI/CD (GitHub Actions, Firebase)
-- [x] PWA(Progressive Web App) 설정
-- [x] 식단(Meal)의 일주일 날짜 표시 및 현재 날짜 및 식단 자동 선택 로직
+- [x] Cross-browsing을 위한 CSS reset (styled-reset)
+- [x] Router (react-router-dom)
 - [ ] PWA 개선
 - [ ] 카페, 빵돌이오마카세 페이지
 - [ ] PC 환경 지원
