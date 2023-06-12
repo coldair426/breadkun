@@ -75,9 +75,9 @@
 - [x] 404Ppage
 - [x] Cross-browsing을 위한 CSS reset (styled-reset)
 - [x] Router (react-router-dom)
+- [ ] 반응형 웹(Responsive Web); Desktop 환경 지원
 - [ ] PWA 개선
 - [ ] 카페, 빵돌이오마카세 페이지
-- [ ] PC 환경 지원
 
 # Stacks
 
