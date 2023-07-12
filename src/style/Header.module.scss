@@ -1,7 +1,7 @@
-$gray09: #212529; // 기본배경색
+@import '_utilities.scss';
 
 .header {
-  background-color: $gray09;
+  background-color: $gray-09;
   top: 0;
   display: -webkit-flex; /* Safari */
   display: flex;
@@ -20,13 +20,11 @@ $gray09: #212529; // 기본배경색
   border-bottom-right-radius: 35px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   .header__logo {
-    // margin-left: 20px;
     margin-left: 4vw;
     height: 11.54vw;
     max-height: 52px; // 갤럭시 폴드 대응
   }
   .header__button {
-    // margin-right: 20px;
     margin-right: 3.5vw;
     height: 12.82vw;
     max-height: 57px; // 갤럭시 폴드 대응

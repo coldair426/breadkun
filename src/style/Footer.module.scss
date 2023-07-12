@@ -1,4 +1,4 @@
-$font: #868e96; // 기본글자색
+@import '_utilities.scss';
 
 .footer {
   display: flex;
@@ -6,8 +6,7 @@ $font: #868e96; // 기본글자색
   align-items: center;
   height: 10.26vw;
   max-height: 43px; // 갤럭시 폴드 대응
-  // margin-top: 13px;
   margin-top: 3.33vw;
-  border-top: 1px solid #343a40;
-  color: $font;
+  border-top: 1px solid $gray-08;
+  color: $gray-06;
 }

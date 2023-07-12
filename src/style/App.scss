@@ -1,3 +1,5 @@
+@import '_utilities.scss';
+
 // 웹폰트(둥근모꼴)
 @font-face {
   font-family: 'DungGeunMo';
@@ -5,8 +7,6 @@
   font-weight: normal;
   font-style: normal;
 }
-$gray-00: #f8f9fa; // 기본글자색
-$gray-09: #212529; // 기본배경색
 #root {
   -webkit-font-smoothing: antialiased; // webkit(크롬, 사파리) 글자 부드럽게
   -moz-osx-font-smoothing: grayscale; // 파이어폭스 글자 부드럽게

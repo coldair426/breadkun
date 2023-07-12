@@ -1,9 +1,4 @@
-$backColor1: #413543;
-$backColor2: #404258;
-$gray8: #343a40;
-$fontColor: #f8f9fa;
-$iconBackground: #404258;
-$gray-09: #212529; // 기본배경색
+@import '_utilities.scss';
 
 .bus {
   padding: 0;
@@ -16,7 +11,6 @@ $gray-09: #212529; // 기본배경색
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  // margin-bottom: 15px;
   margin-bottom: clamp(1px, 3vw, 16px); // 갤럭시 폴드 대응
   .title__icon {
     display: -webkit-box;
@@ -33,7 +27,7 @@ $gray-09: #212529; // 기본배경색
     width: 11.54vw;
     max-width: 48px; // 갤럭시 폴드 대응
     border-radius: clamp(1px, 5.13vw, 22px); // 갤럭시 폴드 대응
-    background-color: $iconBackground;
+    background-color: $blue-00;
     margin-left: clamp(1px, 3.85vw, 27px); // 갤럭시 폴드 대응
     margin-right: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
   }
@@ -42,16 +36,13 @@ $gray-09: #212529; // 기본배경색
   }
 }
 .bus__body {
-  // padding: 0 13px;
   padding: 0 3.33vw;
 }
 // 지도와 블럭 사이공간
 div + .bus__block1 {
-  // margin-top: 13px;
   margin-top: 3.33vw;
 }
 .bus__block1--left + .bus__block1--right {
-  // margin-left: 13px;
   margin-left: 3.33vw;
 }
 .bus__block1 {
@@ -59,13 +50,11 @@ div + .bus__block1 {
   justify-content: center;
 }
 .bus__block1--left {
-  // border-radius: 40px;
   border-radius: 10.26vw;
-  // height: 170px;
   height: 43.59vw;
   max-height: 200px; // 갤럭시 폴드 대응
   width: 50%;
-  background-color: $gray8;
+  background-color: $gray-08;
   display: -webkit-box; /* Webkit */
   display: -moz-box; /* Mozilla */
   display: flex;
@@ -128,7 +117,7 @@ div + .bus__block1 {
   height: 43.59vw;
   max-height: 200px; // 갤럭시 폴드 대응
   width: 50%;
-  background-color: $backColor1;
+  background-color: $purple-00;
   display: -webkit-box; /* Webkit */
   display: -moz-box; /* Mozilla */
   display: flex;
@@ -211,26 +200,23 @@ div + .bus__block1 {
     padding-bottom: clamp(1px, 2vw, 9px); // 갤럭시 폴드 대응;
     padding-left: clamp(1px, 1vw, 5px); // 갤럭시 폴드 대응;
     padding-right: clamp(1px, 1vw, 5px); // 갤럭시 폴드 대응;
-    // border-radius: 20px;
     border-radius: 5.13vw;
-    background-color: lighten($backColor1, 15%);
-    color: $fontColor;
+    background-color: lighten($purple-00, 15%);
+    color: $gray-00;
     text-decoration: none;
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     transition: background-color 80ms ease;
-    // margin-bottom: 20px;
     margin-bottom: clamp(1px, 5.13vw, 20px); // 갤럭시 폴드 대응
     &:hover {
       cursor: pointer;
     }
     &:active {
-      background-color: lighten($backColor1, 25%);
+      background-color: lighten($purple-00, 25%);
     }
   }
 }
 .bus__block2 {
-  // margin-top: 13px;
   margin-top: 3.33vw;
   .bus__block2--stops {
     > div:last-child > .bus__block2--stop-arrow {
@@ -241,11 +227,10 @@ div + .bus__block1 {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        // height: 45px;
         height: 11.54vw;
         max-height: 52px; // 갤럭시 폴드 대응
         width: 100%;
-        background-color: $backColor2;
+        background-color: $blue-00;
         border-radius: 5.13vw;
         .bus__block2--stop-title-wrapper {
           display: flex;
@@ -253,30 +238,24 @@ div + .bus__block1 {
           margin-left: 2.05vw;
         }
         .bus__block2--stop-title {
-          // padding: 9px;
           padding: clamp(1px, 2.31vw, 10px); // 갤럭시 폴드 대응
-          // border-radius: 20px;
           border-radius: 5.13vw;
           font-size: clamp(1px, 3.85vw, 18px); // 갤럭시 폴드 대응
-          background-color: darken($backColor2, 5%);
+          background-color: darken($blue-00, 5%);
           text-align: center;
           width: 10vw;
           max-width: 45px;
         }
         .bus__block2--stop-name {
           font-size: clamp(1px, 5.13vw, 25px); // 갤럭시 폴드 대응
-          // margin-left: 10px;
           margin-left: clamp(1px, 2.56vw, 12px);
         }
         .bus__block2--stop-more {
           font-size: clamp(1px, 3.33vw, 15px); // 갤럭시 폴드 대응
-          // margin-right: 8px;
           margin-right: 2.05vw;
-          // border-radius: 20px;
           border-radius: 5.13vw;
-          // padding: 9px;
           padding: clamp(1px, 2.31vw, 10px); // 갤럭시 폴드 대응
-          background-color: lighten($backColor2, 15%);
+          background-color: lighten($blue-00, 15%);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
           &:hover {
             cursor: pointer;
@@ -291,10 +270,8 @@ div + .bus__block1 {
         }
       }
       .bus__block2--stop-arrow {
-        // height: 20px;
         height: 5.13vw;
         max-height: 25px;
-        // margin-left: 27px;
         margin-left: clamp(1px, 6.92vw, 29px); // 갤럭시 폴드 대응
       }
     }

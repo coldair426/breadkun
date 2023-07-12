@@ -1,17 +1,13 @@
-$gray8: #343a40;
-$gray9: #212529; // 기본배경색
-$fontColor: #f8f9fa; // 기본글자색
-$iconBackground: #404258;
+@import '_utilities.scss';
 
 .title {
-  background-color: $gray9;
+  background-color: $gray-09;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  // margin-bottom: 15px;
   margin-bottom: clamp(1px, 3vw, 16px); // 갤럭시 폴드 대응
   .title__icon {
     display: -webkit-box;
@@ -28,7 +24,7 @@ $iconBackground: #404258;
     width: 11.54vw;
     max-width: 48px; // 갤럭시 폴드 대응
     border-radius: clamp(1px, 5.13vw, 22px); // 갤럭시 폴드 대응
-    background-color: $iconBackground;
+    background-color: $blue-00;
     margin-left: clamp(1px, 3.85vw, 27px); // 갤럭시 폴드 대응
     margin-right: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
   }
@@ -53,8 +49,8 @@ $iconBackground: #404258;
       width: 100%;
       height: 100%;
       position: absolute;
-      background-color: $gray8;
-      color: $fontColor;
+      background-color: $gray-08;
+      color: $gray-00;
       top: 0;
       left: 0;
       opacity: 0;
@@ -93,8 +89,8 @@ $iconBackground: #404258;
     margin-right: 37vw;
   }
   .day {
-    color: #adb5bd;
-    background-color: darken(#343a40, 5%);
+    color: $gray-05;
+    background-color: darken($gray-08, 5%);
     font-size: 3.6vw;
     font-weight: 900;
     padding: 2vw;
@@ -108,8 +104,8 @@ $iconBackground: #404258;
     }
   }
   .selected-day {
-    color: #f8f9fa;
-    background-color: #cf7500;
+    color: $gray-00;
+    background-color: $yellow-00;
     font-size: 4.1vw;
     padding: 2.8vw;
   }
@@ -125,7 +121,7 @@ $iconBackground: #404258;
   align-items: center;
   justify-content: center;
   .meal-category {
-    color: #495057;
+    color: $gray-07;
     font-size: 3.8vw;
     font-weight: 900;
     text-align: center;
@@ -135,7 +131,7 @@ $iconBackground: #404258;
     }
   }
   .selected-meal-category {
-    color: #f8f9fa;
+    color: $gray-00;
     font-size: 4.3vw;
     margin: 0.6vw 0;
   }
@@ -150,7 +146,7 @@ $iconBackground: #404258;
   .meal-menu {
     display: flex;
     flex-direction: column;
-    background-color: #343a40;
+    background-color: $gray-08;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     border-radius: 7.7vw;
     .meal-menu__title--wrapper {
@@ -181,7 +177,7 @@ $iconBackground: #404258;
         background-color: #4e9f3d;
       }
       .KOREAN2 {
-        background-color: #a80038;
+        background-color: $red-00;
       }
       .NOODLE {
         background-color: #711a75;

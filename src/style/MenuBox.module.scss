@@ -1,4 +1,4 @@
-$gray-00: #f8f9fa; // 기본글자색
+@import '_utilities.scss';
 
 .menu-box {
   display: -webkit-flex; /* 웹킷 */
@@ -25,7 +25,6 @@ $gray-00: #f8f9fa; // 기본글자색
   -webkit-align-items: center; /* 웹킷 */
   align-items: center;
   font-size: clamp(1px, 10.26vw, 43px); // 갤럭시 폴드 대응
-  // letter-spacing: 2px;
   letter-spacing: 0.51vw;
   color: $gray-00;
 }
@@ -69,14 +68,10 @@ $gray-00: #f8f9fa; // 기본글자색
 .menu-box__exit {
   font-size: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
   font-weight: 900;
-  // letter-spacing: 2px;
   letter-spacing: 0.51vw;
   margin-top: clamp(1px, 12.82vw, 53px); // 갤럭시 폴드 대응
   padding: clamp(1px, 1.79vw, 8px); // 갤럭시 폴드 대응
   border: 1px solid $gray-00;
-  // -moz-border-radius: 5px;
-  // -webkit-border-radius: 5px;
-  // border-radius: 5px;
   -moz-border-radius: 1.28vw;
   -webkit-border-radius: 1.28vw;
   border-radius: 1.28vw;
