@@ -3,6 +3,9 @@
 .bus {
   padding: 0;
   width: 100%;
+  @include desktop {
+    max-width: 950px;
+  }
 }
 .title {
   background-color: $gray-09;
@@ -56,16 +59,16 @@ div + .bus__block1 {
   max-height: 200px; // 갤럭시 폴드 대응
   width: 50%;
   background-color: $gray-08;
-  display: -webkit-box; /* Webkit */
-  display: -moz-box; /* Mozilla */
+  display: -webkit-box; // Webkit
+  display: -moz-box; // Mozilla
   display: flex;
-  -webkit-box-orient: vertical; /* Webkit */
-  -webkit-box-direction: normal; /* Webkit */
-  -moz-box-orient: vertical; /* Mozilla */
-  -moz-box-direction: normal; /* Mozilla */
+  -webkit-box-orient: vertical; // Webkit
+  -webkit-box-direction: normal; // Webkit
+  -moz-box-orient: vertical; // Mozilla
+  -moz-box-direction: normal; // Mozilla
   flex-direction: column;
-  -webkit-box-pack: justify; /* Webkit */
-  -moz-box-pack: justify; /* Mozilla */
+  -webkit-box-pack: justify; // Webkit
+  -moz-box-pack: justify; // Mozilla
   justify-content: space-between;
   position: relative;
 }
@@ -119,16 +122,16 @@ div + .bus__block1 {
   max-height: 200px; // 갤럭시 폴드 대응
   width: 50%;
   background-color: $purple-00;
-  display: -webkit-box; /* Webkit */
-  display: -moz-box; /* Mozilla */
+  display: -webkit-box; // Webkit
+  display: -moz-box; // Mozilla
   display: flex;
-  -webkit-box-orient: vertical; /* Webkit */
-  -webkit-box-direction: normal; /* Webkit */
-  -moz-box-orient: vertical; /* Mozilla */
-  -moz-box-direction: normal; /* Mozilla */
+  -webkit-box-orient: vertical; // Webkit
+  -webkit-box-direction: normal; // Webkit
+  -moz-box-orient: vertical; // Mozilla
+  -moz-box-direction: normal; // Mozilla
   flex-direction: column;
-  -webkit-box-pack: justify; /* Webkit */
-  -moz-box-pack: justify; /* Mozilla */
+  -webkit-box-pack: justify; // Webkit
+  -moz-box-pack: justify; // Mozilla
   justify-content: space-between;
   position: relative;
 }
@@ -156,19 +159,19 @@ div + .bus__block1 {
   height: 9vw;
   max-height: 45px; // 갤럭시 폴드 대응
   transition: all 80ms ease-in-out;
-  -webkit-transition: all 80ms ease-in-out; /* Webkit prefix */
-  -moz-transition: all 80ms ease-in-out; /* Mozilla prefix */
-  -o-transition: all 80ms ease-in-out; /* Opera prefix */
-  -ms-transition: all 80ms ease-in-out; /* IE prefix */
+  -webkit-transition: all 80ms ease-in-out; // Webkit prefix
+  -moz-transition: all 80ms ease-in-out; // Mozilla prefix
+  -o-transition: all 80ms ease-in-out; // Opera prefix
+  -ms-transition: all 80ms ease-in-out; // IE prefix
   &:hover {
     cursor: pointer;
   }
   &:active {
     transform: scale(1.3);
-    -webkit-transform: scale(1.3); /* Webkit prefix */
-    -moz-transform: scale(1.3); /* Mozilla prefix */
-    -o-transform: scale(1.3); /* Opera prefix */
-    -ms-transform: scale(1.3); /* IE prefix */
+    -webkit-transform: scale(1.3); // Webkit prefix
+    -moz-transform: scale(1.3); // Mozilla prefix
+    -o-transform: scale(1.3); // Opera prefix
+    -ms-transform: scale(1.3); // IE prefix
   }
 }
 
@@ -188,8 +191,8 @@ div + .bus__block1 {
   align-items: center;
   select {
     // 화살표 숨기기
-    -webkit-appearance: none; /* 웹킷 */
-    -moz-appearance: none; /* 모질라 */
+    -webkit-appearance: none; // 웹킷
+    -moz-appearance: none; // 모질라
     appearance: none;
     font-size: clamp(1px, 5vw, 25px); // 갤럭시 폴드 대응
     font-weight: 900;
@@ -263,10 +266,10 @@ div + .bus__block1 {
           }
           &:active {
             transform: scale(1.2);
-            -webkit-transform: scale(1.2); /* Webkit prefix */
-            -moz-transform: scale(1.2); /* Mozilla prefix */
-            -o-transform: scale(1.2); /* Opera prefix */
-            -ms-transform: scale(1.2); /* IE prefix */
+            -webkit-transform: scale(1.2); // Webkit prefix
+            -moz-transform: scale(1.2); // Mozilla prefix
+            -o-transform: scale(1.2); // Opera prefix
+            -ms-transform: scale(1.2); // IE prefix
           }
         }
       }

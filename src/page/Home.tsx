@@ -338,7 +338,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       <div className={hs('home')}>
         <div className={hs('title')}>
           <div className={hs('title__icon')}>
-            <img src='/icon/home-title-icon.png' alt='title' style={{ height: '5.64vw', maxHeight: '22px' }} />
+            <img src='/icon/home-title-icon.png' alt='title' />
           </div>
           <div className={hs('title__select')}>
             <div className={hs('title__letter')}>{company === '강촌' ? '더존 강촌캠퍼스' : '더존 을지타워'}</div>
@@ -470,6 +470,15 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
             </Link>
           </div>
         </div>
+        {company === '강촌' && (
+          <div className={hs('home__body-sec')}>
+            <div className={hs('home__body-sec--bread')}>
+              <div className={hs('body-sec__bread--title')}>오늘의 빵!</div>
+              <img className={hs('body-sec__bread--img')} src={bread?.img ? `https://babkaotalk.herokuapp.com${bread?.img}` : '/icon/home-bread.png'} alt='todays bread' />
+              <div className={hs('body-sec__bread--text')}>{bread?.name || '정보가 없습니다.'}</div>
+            </div>
+          </div>
+        )}
       </div>
       {breadPopUp && (
         <div className={hs('home__pop-up-bread')}>
