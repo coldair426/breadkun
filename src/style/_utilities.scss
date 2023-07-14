@@ -10,3 +10,19 @@ $purple-00: #413543; // 테마색
 $green-00: #2e4f4f; // 테마색
 $red-00: #a80038; // 테마색(로고)
 $yellow-00: #cf7500; // 테마색(로고)
+
+// 반응형 분기점
+$tablet: 768px;
+$desktop: 1024px;
+// 768px 이상
+@mixin tablet {
+  @media (min-width: $tablet) {
+    @content;
+  }
+}
+// 1024px 이상
+@mixin desktop {
+  @media (min-width: $desktop) {
+    @content;
+  }
+}

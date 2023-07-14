@@ -12,42 +12,34 @@ import Meal from './page/Meal';
 
 function App() {
   const [menuBox, setMenuBox] = useState(false);
-  const [isMobile, setIsMobile] = useState(true);
 
-  // 너비가 768px 미만이면 모바일로 판별
+  // 메뉴 창이 켜진 상태에서 너비 늘릴(너비가 768px 이상) 때 자동꺼짐
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      if (menuBox === true) {
+        window.innerWidth >= 768 && setMenuBox(false);
+      }
     };
-    // resize 이벤트 감지
+    handleResize(); // 최초 1회 실행
     window.addEventListener('resize', handleResize);
-    handleResize();
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [menuBox]);
 
   return (
     <>
       <Reset />
-      {isMobile ? (
-        <>
-          <Header setMenuBox={setMenuBox} />
-          {menuBox && <MenuBox setMenuBox={setMenuBox} />}
-          <Routes>
-            <Route path='/' element={<Home setMenuBox={setMenuBox} />} />
-            <Route path='/meal' element={<Meal setMenuBox={setMenuBox} />} />
-            <Route path='/cafe' element={<SpinLogo text1={'COMMING SOON'} text2={'서비스 준비중입니다.'} minHeight='80vh' />} />
-            <Route path='/omakase' element={<SpinLogo text1={'COMMING SOON'} text2={'서비스 준비중입니다.'} minHeight='80vh' />} />
-            <Route path='/bus' element={<Bus setMenuBox={setMenuBox} />} />
-            <Route path='/bus/:destination' element={<Bus setMenuBox={setMenuBox} />} />
-            <Route path='*' element={<SpinLogo text1={'404 Not Found'} text2={'페이지를 찾을 수 없습니다.'} minHeight='80vh' />} />
-          </Routes>
-          <Footer />
-        </>
-      ) : (
-        <div>
-          <SpinLogo text1={'빵돌이는 모바일전용입니다.'} text2={'모바일로 접속해 주세요!'} />
-        </div>
-      )}
+      <Header setMenuBox={setMenuBox} />
+      {menuBox && <MenuBox setMenuBox={setMenuBox} />}
+      <Routes>
+        <Route path='/' element={<Home setMenuBox={setMenuBox} />} />
+        <Route path='/meal' element={<Meal setMenuBox={setMenuBox} />} />
+        <Route path='/cafe' element={<SpinLogo text1={'COMMING SOON'} text2={'서비스 준비중입니다.'} minHeight='80vh' />} />
+        <Route path='/omakase' element={<SpinLogo text1={'COMMING SOON'} text2={'서비스 준비중입니다.'} minHeight='80vh' />} />
+        <Route path='/bus' element={<Bus setMenuBox={setMenuBox} />} />
+        <Route path='/bus/:destination' element={<Bus setMenuBox={setMenuBox} />} />
+        <Route path='*' element={<SpinLogo text1={'404 Not Found'} text2={'페이지를 찾을 수 없습니다.'} minHeight='80vh' />} />
+      </Routes>
+      <Footer />
     </>
   );
 }
