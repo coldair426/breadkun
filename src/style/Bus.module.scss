@@ -16,6 +16,9 @@
   -ms-flex-align: center;
   align-items: center;
   margin-bottom: clamp(1px, 3vw, 16px); // 갤럭시 폴드 대응
+  @include desktop {
+    margin-bottom: 25px;
+  }
   .title__icon {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -34,9 +37,30 @@
     background-color: $blue-00;
     margin-left: clamp(1px, 3.85vw, 27px); // 갤럭시 폴드 대응
     margin-right: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
+    @include desktop {
+      background-color: transparent;
+      height: auto;
+      width: auto;
+      max-height: none;
+      max-width: none;
+      border-radius: 0;
+      margin-left: 30px;
+      margin-right: 10px;
+    }
+    > img {
+      height: 5.64vw;
+      max-height: 22px;
+      @include desktop {
+        height: 20px;
+        max-height: none;
+      }
+    }
   }
   .title__letter {
     font-size: clamp(1px, 5.38vw, 25px); // 갤럭시 폴드 대응
+    @include desktop {
+      font-size: 20px;
+    }
   }
 }
 .bus__body {

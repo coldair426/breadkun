@@ -2,6 +2,7 @@
 
 .meal {
   @include desktop {
+    width: 100%;
     max-width: 950px;
   }
 }
@@ -14,6 +15,9 @@
   -ms-flex-align: center;
   align-items: center;
   margin-bottom: clamp(1px, 3vw, 16px); // 갤럭시 폴드 대응
+  @include desktop {
+    margin-bottom: 25px;
+  }
   .title__icon {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -32,6 +36,24 @@
     background-color: $blue-00;
     margin-left: clamp(1px, 3.85vw, 27px); // 갤럭시 폴드 대응
     margin-right: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
+    @include desktop {
+      background-color: transparent;
+      height: auto;
+      width: auto;
+      max-height: none;
+      max-width: none;
+      border-radius: 0;
+      margin-left: 30px;
+      margin-right: 10px;
+    }
+    > img {
+      height: 5.64vw;
+      max-height: 22px;
+      @include desktop {
+        height: 20px;
+        max-height: none;
+      }
+    }
   }
   .title__select {
     position: relative;
@@ -39,6 +61,9 @@
     align-items: center;
     .title__letter {
       font-size: clamp(1px, 5.38vw, 25px); // 갤럭시 폴드 대응
+      @include desktop {
+        font-size: 20px;
+      }
     }
     select {
       font-size: clamp(1px, 4vw, 15px); // 갤럭시 폴드 대응
@@ -60,6 +85,9 @@
       left: 0;
       opacity: 0;
       cursor: pointer;
+      @include desktop {
+        font-size: 20px;
+      }
     }
     .title__select-button {
       width: 2vw;
@@ -69,6 +97,11 @@
       align-items: center;
       justify-content: space-between;
       cursor: pointer;
+      @include desktop {
+        width: 8px;
+        max-width: none;
+        margin-left: 10px;
+      }
     }
   }
 }
@@ -81,6 +114,9 @@
   // 스크롤바 안보이기
   -ms-overflow-style: none; //익스플로러
   scrollbar-width: none; //파이어폭스
+  @include desktop {
+    overflow-y: visible;
+  }
   &::-webkit-scrollbar {
     display: none; // 크롬, 사파리, 오페라, 엣지
   }
@@ -89,9 +125,15 @@
   }
   > button:first-child > .day {
     margin-left: 37vw;
+    @include desktop {
+      margin-left: 0;
+    }
   }
   > button:last-child > .day {
     margin-right: 37vw;
+    @include desktop {
+      margin-right: 0;
+    }
   }
   .day {
     color: $gray-05;
@@ -104,6 +146,13 @@
     text-align: center;
     border-radius: 4.5vw;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    @include desktop {
+      font-size: 20px;
+      font-weight: 900;
+      padding: 10px;
+      margin: 0;
+      border-radius: 35px;
+    }
     &:hover {
       cursor: pointer;
     }
@@ -113,6 +162,10 @@
     background-color: $yellow-00;
     font-size: 4.1vw;
     padding: 2.8vw;
+    @include desktop {
+      font-size: 20px;
+      padding: 10px;
+    }
   }
 }
 .days + .meal__body {
