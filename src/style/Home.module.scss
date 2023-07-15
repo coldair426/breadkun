@@ -11,7 +11,6 @@
     @include desktop {
       padding: 0;
       display: flex;
-      flex-wrap: wrap;
       margin: 0 10px;
     }
   }
@@ -124,8 +123,8 @@
   align-items: center;
   position: relative;
   @include desktop {
-    width: calc(68vw - 40px);
-    max-width: 605.7px;
+    width: calc(63% - 10px);
+    margin-right: 10px;
     height: 300px;
     border-radius: 35px;
   }
@@ -135,6 +134,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    @include desktop {
+      width: 40%;
+    }
     .home__weather--now-temperature {
       display: flex;
       flex-direction: column;
@@ -192,7 +194,8 @@
     padding-right: 2.23vw;
     padding-left: 1.48vw;
     @include desktop {
-      width: calc(58% - 33px);
+      width: 60%;
+      margin-right: 20px;
       padding-right: 18px;
       padding-left: 15px;
       border-radius: 35px;
@@ -218,14 +221,17 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        @include desktop {
+          justify-content: space-around;
+        }
         .home__weather--forecast-time {
           font-size: 2.56vw;
           font-weight: 900;
           width: 14vw;
           @include desktop {
-            font-size: clamp(1px, 2.11vw, 20px);
+            font-size: 15px;
             width: auto;
-            margin-right: clamp(1px, 2.63vw, 15px);
+            margin-right: 0;
             letter-spacing: 3px;
           }
         }
@@ -233,34 +239,35 @@
           width: 6.41vw;
           margin-right: 1.28vw;
           @include desktop {
-            width: clamp(1px, 3.2vw, 30px);
-            margin-right: clamp(1px, 1vw, 10px);
+            width: 25px;
+            margin-right: 0;
           }
         }
         .home__weather--forecast-temperature {
           font-size: 3.85vw;
           width: 10.26vw;
           @include desktop {
-            font-size: clamp(1px, 1.9vw, 18px);
+            font-size: 20px;
             width: auto;
-            margin-right: clamp(1px, 2.63vw, 15px);
+            margin-right: 0;
           }
         }
         .home__weather--forecast-rain-img {
           margin-right: 1.28vw;
           width: 5.13vw;
           @include desktop {
-            width: clamp(1px, 3.2vw, 30px);
-            margin-right: clamp(1px, 1vw, 10px);
+            width: 25px;
+            margin-right: 0;
           }
         }
         .home__weather--forecast-rain-text {
           font-size: 3.85vw;
           width: 6vw;
           @include desktop {
-            font-size: clamp(1px, 1.9vw, 18px);
+            font-size: 20px;
             letter-spacing: 2px;
             width: auto;
+            margin-right: 10px;
           }
         }
       }
@@ -303,6 +310,9 @@
 .home__dusts {
   display: flex;
   justify-content: center;
+  @include desktop {
+    width: 37%;
+  }
   .home__dust + .home__ultra-dust {
     margin-left: 3.33vw;
     @include desktop {
@@ -315,22 +325,15 @@
     height: 43.59vw;
     max-height: 200px; // 갤럭시 폴드 대응
     width: 50%;
-    display: -webkit-box; // Webkit
-    display: -moz-box; // Mozilla
     display: flex;
-    -webkit-box-orient: vertical; // Webkit
-    -webkit-box-direction: normal; // Webkit
-    -moz-box-orient: vertical; // Mozilla
-    -moz-box-direction: normal; // Mozilla
     flex-direction: column;
     align-items: center;
     justify-content: center;
     @include desktop {
-      margin-left: 10px;
+      width: 50%;
       border-radius: 35px;
       height: 300px;
       max-height: none;
-      width: clamp(1px, 16vw, 152px);
     }
   }
   .home__dust--title,
@@ -453,19 +456,25 @@
     flex-direction: column;
     align-items: center;
     width: 300px;
+    height: 300px;
+    border-radius: 35px;
+    background-color: $brown-00;
     .body-sec__bread--title {
-      font-size: 25px;
+      font-size: 22px;
+      margin-top: 13px;
+      margin-bottom: 10px;
     }
     .body-sec__bread--img {
-      width: 300px;
+      height: 210px;
+      width: 210px;
       border-radius: 35px;
+      margin-bottom: 10px;
     }
     .body-sec__bread--text {
       font-size: 20px;
     }
   }
 }
-
 .home__pop-up-bread {
   display: -webkit-flex; // 웹킷
   display: flex;

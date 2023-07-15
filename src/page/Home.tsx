@@ -473,7 +473,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         {company === '강촌' && (
           <div className={hs('home__body-sec')}>
             <div className={hs('home__body-sec--bread')}>
-              <div className={hs('body-sec__bread--title')}>오늘의 빵!</div>
+              <div className={hs('body-sec__bread--title')}>오늘의 빵</div>
               <img className={hs('body-sec__bread--img')} src={bread?.img ? `https://babkaotalk.herokuapp.com${bread?.img}` : '/icon/home-bread.png'} alt='todays bread' />
               <div className={hs('body-sec__bread--text')}>{bread?.name || '정보가 없습니다.'}</div>
             </div>
