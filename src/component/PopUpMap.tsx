@@ -111,16 +111,18 @@ function PopUpMap({
   }, [stopLatLong, selectedValue]);
 
   return (
-    <div className={ps('pop-up-map')}>
-      <div className={ps('pop-up-map__mask')} />
-      <div className={ps('pop-up-map__kakao-map--wrapper')}>
-        <div ref={mapRef} style={{ height: '93.4vw', maxHeight: '420px', width: '93.4vw', borderRadius: '10.26vw', isolation: 'isolate' }} />
-        <div className={ps('pop-up-map__location')}>{stopLocation}</div>
-        <div className={ps('pop-up-map__close')} onClick={() => onOffButton(false)}>
-          닫기
+    <>
+      <div className={ps('pop-up-map')}>
+        <div className={ps('pop-up-map__mask')} />
+        <div className={ps('pop-up-map__kakao-map--wrapper')}>
+          <div ref={mapRef} style={{ width: '94%' }} />
+          <div className={ps('pop-up-map__location')}>{stopLocation}</div>
+          <div className={ps('pop-up-map__close')} onClick={() => onOffButton(false)}>
+            닫기
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

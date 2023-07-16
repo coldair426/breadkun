@@ -137,7 +137,8 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
           <div className={bs('title__letter')}>강촌 퇴근 버스</div>
         </div>
         <div className={bs('bus__body')}>
-          <KakaoMap mapHeight={'64.1vw'} mapWidth={'100%'} latLong={latLong} levelNum={5} draggableType={true} trafficInfo={true} />
+          <KakaoMap mapHeight={'64.1vw'} mapWidth={'100%'} mapBorderRadius={'10.26vw'} latLong={latLong} levelNum={5} draggableType={true} trafficInfo={true} />
+          <KakaoMap mapHeight={'450px'} mapWidth={'100%'} mapBorderRadius={'35px'} latLong={latLong} levelNum={5} draggableType={true} trafficInfo={true} />
           <div className={bs('bus__block1')}>
             <div className={bs('bus__block1--left')}>
               <div className={bs('bus__block1--left-title')}>
@@ -174,12 +175,6 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
               </div>
               <div className={bs('bus__block1--right--selectbox')}>
                 <select value={selectedValue} onChange={handleChange} aria-label='목적지를 선택해 주세요.'>
-                  {/* <optgroup label='춘천방면'>
-                  <option value='후평동1'>① 후평동</option>
-                  <option value='후평동2'>② 후평동</option>
-                  <option value='석사동3'>③ 석사동</option>
-                  <option value='석사동4'>④ 석사동</option>
-                </optgroup> */}
                   <optgroup label='서울방면'>
                     <option value='강변1'>① 강변</option>
                     <option value='강변2'>② 강변</option>

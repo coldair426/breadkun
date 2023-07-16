@@ -8,6 +8,7 @@ declare global {
 function KakaoMap({
   mapHeight,
   mapWidth,
+  mapBorderRadius,
   latLong,
   levelNum,
   draggableType,
@@ -15,6 +16,7 @@ function KakaoMap({
 }: {
   mapHeight: string;
   mapWidth: string;
+  mapBorderRadius: string;
   latLong: { latitude: number; longitude: number };
   levelNum: number;
   draggableType: boolean;
@@ -48,7 +50,7 @@ function KakaoMap({
   // webkit borderRadius와 overflow-hidden 적용시 버그 해결을 위한 isolation.
   return (
     <div>
-      <div ref={mapRef} style={{ height: mapHeight, width: mapWidth, borderRadius: '10.26vw', isolation: 'isolate' }} />
+      <div ref={mapRef} style={{ height: mapHeight, width: mapWidth, borderRadius: mapBorderRadius, isolation: 'isolate' }} />
     </div>
   );
 }

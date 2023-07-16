@@ -26,6 +26,22 @@
     flex-direction: column;
     -webkit-align-items: center; // 웹킷
     align-items: center;
+    width: 100%;
+    @include desktop {
+      width: 65%;
+    }
+    // 지도
+    > div:first-child {
+      isolation: isolate;
+      max-height: 420px;
+      border-radius: 10.26vw;
+      height: 60%;
+      @include desktop {
+        max-height: none;
+        height: 400px;
+        border-radius: 35px;
+      }
+    }
     .pop-up-map__location {
       padding: 0 10vw;
       margin-top: 2.5vw;
@@ -34,6 +50,13 @@
       text-align: center;
       letter-spacing: 0.3vw;
       word-break: keep-all; // 단어기준으로 줄바꿈
+      @include desktop {
+        padding: 0 10%;
+        margin-top: 10px;
+        font-size: 22px;
+        line-height: 30px;
+        letter-spacing: 1px;
+      }
     }
     .pop-up-map__close {
       font-size: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
@@ -42,12 +65,19 @@
       margin-top: clamp(1px, 2.5vw, 11px); // 갤럭시 폴드 대응
       padding: clamp(1px, 1.79vw, 8px);
       border: 1px solid $gray-00;
-      -moz-border-radius: 1.28vw;
-      -webkit-border-radius: 1.28vw;
       border-radius: 1.28vw;
       -moz-transition: transform 50ms ease-in-out;
       -webkit-transition: transform 50ms ease-in-out;
       transition: transform 50ms ease-in-out;
+      @include desktop {
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 5px;
+        margin-top: 11px;
+        padding: 8px 3px 8px 8px;
+        border: 1px solid $gray-00;
+        border-radius: 10px;
+      }
       &:hover {
         cursor: pointer;
       }

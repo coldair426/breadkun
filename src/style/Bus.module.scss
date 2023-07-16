@@ -65,17 +65,50 @@
 }
 .bus__body {
   padding: 0 3.33vw;
+  @include desktop {
+    padding: 0 10px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  // mobile 현재위치 지도
+  > div:first-child {
+    @include desktop {
+      display: none;
+    }
+  }
+  // desktop 현재위치 지도
+  > div:nth-child(2) {
+    display: none;
+    @include desktop {
+      display: block;
+      // width: 600px;
+      width: 74%;
+    }
+  }
 }
+
 // 지도와 블럭 사이공간
 div + .bus__block1 {
   margin-top: 3.33vw;
+  @include desktop {
+    margin-top: 0;
+    margin-left: 10px;
+  }
 }
 .bus__block1--left + .bus__block1--right {
   margin-left: 3.33vw;
+  @include desktop {
+    margin-left: 0;
+    margin-top: 10px;
+  }
 }
 .bus__block1 {
   display: flex;
   justify-content: center;
+  @include desktop {
+    flex-direction: column;
+    width: calc(26% - 10px);
+  }
 }
 .bus__block1--left {
   border-radius: 10.26vw;
@@ -95,16 +128,29 @@ div + .bus__block1 {
   -moz-box-pack: justify; // Mozilla
   justify-content: space-between;
   position: relative;
+  @include desktop {
+    border-radius: 35px;
+    height: 220px;
+    max-height: none;
+    width: 100%;
+  }
 }
 .bus__block1--left-title {
   margin-top: clamp(1px, 3.85vw, 16px); // 갤럭시 폴드 대응
   display: flex;
   justify-content: center;
   align-items: center;
+  @include desktop {
+    margin-top: 30px;
+  }
 }
 .bus__block1--left-title > img {
   height: 10.5vw;
   max-height: 50px; // 갤럭시 폴드 대응
+  @include desktop {
+    height: 50px;
+    max-height: none;
+  }
 }
 .bus__block1--left-mainBox {
   position: absolute;
@@ -112,6 +158,10 @@ div + .bus__block1 {
   width: 100%;
   text-align: center;
   font-size: clamp(1px, 6.2vw, 35px); // 갤럭시 폴드 대응
+  @include desktop {
+    top: 100px;
+    font-size: 35px;
+  }
 }
 .bus__block1--left-firstLine {
   display: flex;
@@ -123,6 +173,9 @@ div + .bus__block1 {
   justify-content: center;
   align-items: center;
   margin-bottom: clamp(1px, 5.13vw, 22px); // 갤럭시 폴드 대응
+  @include desktop {
+    margin-bottom: 30px;
+  }
 }
 .bus__block1--left-firstLine-contents,
 .bus__block1--left-secLine-contents {
@@ -132,11 +185,18 @@ div + .bus__block1 {
 .bus__block1--left-firstLine-contents > div:nth-child(1),
 .bus__block1--left-secLine-contents > div:nth-child(1) {
   font-size: clamp(1px, 10vw, 50px); // 갤럭시 폴드 대응
+  @include desktop {
+    font-size: 40px;
+  }
 }
 .bus__block1--left-firstLine-contents > div:nth-child(2),
 .bus__block1--left-secLine-contents > div:nth-child(2) {
   font-size: clamp(1px, 4vw, 20px); // 갤럭시 폴드 대응
   margin-left: clamp(1px, 2.05vw, 7px); // 갤럭시 폴드 대응
+  @include desktop {
+    font-size: 20px;
+    margin-left: 7px;
+  }
 }
 
 .bus__block1--right {
@@ -158,22 +218,35 @@ div + .bus__block1 {
   -moz-box-pack: justify; // Mozilla
   justify-content: space-between;
   position: relative;
+  @include desktop {
+    border-radius: 35px;
+    height: 220px;
+    max-height: none;
+    width: 100%;
+  }
 }
 .bus__block1--right > div:nth-child(1) {
   margin-top: clamp(1px, 5.13vw, 20px); // 갤럭시 폴드 대응
   display: flex;
   justify-content: center;
   align-items: center;
+  @include desktop {
+    margin-top: 30px;
+  }
 }
 .bus__block1--right--recentAdr {
   font-size: clamp(1px, 6vw, 30px); // 갤럭시 폴드 대응
   text-align: center;
+  @include desktop {
+    font-size: 26px;
+  }
 }
-
 .bus__block1--right--recentAdr > div:nth-child(2) {
   margin-top: clamp(1px, 1.5vw, 7px); // 갤럭시 폴드 대응
+  @include desktop {
+    margin-top: 6px;
+  }
 }
-
 .refresh-button {
   position: absolute;
   top: 0px;
@@ -187,6 +260,9 @@ div + .bus__block1 {
   -moz-transition: all 80ms ease-in-out; // Mozilla prefix
   -o-transition: all 80ms ease-in-out; // Opera prefix
   -ms-transition: all 80ms ease-in-out; // IE prefix
+  @include desktop {
+    display: none;
+  }
   &:hover {
     cursor: pointer;
   }
@@ -207,6 +283,10 @@ div + .bus__block1 {
 .arrow-img {
   height: 5vw;
   max-height: 21px;
+  @include desktop {
+    height: 18px;
+    max-height: none;
+  }
 }
 // select box
 .bus__block1--right--selectbox {
@@ -236,6 +316,12 @@ div + .bus__block1 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     transition: background-color 80ms ease;
     margin-bottom: clamp(1px, 5.13vw, 20px); // 갤럭시 폴드 대응
+    @include desktop {
+      font-size: 20px;
+      padding: 7px 0 7px 0;
+      border-radius: 20px;
+      margin-bottom: 25px;
+    }
     &:hover {
       cursor: pointer;
     }
@@ -246,6 +332,10 @@ div + .bus__block1 {
 }
 .bus__block2 {
   margin-top: 3.33vw;
+  @include desktop {
+    margin-top: 10px;
+    width: 100%;
+  }
   .bus__block2--stops {
     > div:last-child > .bus__block2--stop-arrow {
       display: none;
@@ -260,10 +350,19 @@ div + .bus__block1 {
         width: 100%;
         background-color: $blue-00;
         border-radius: 5.13vw;
+        @include desktop {
+          height: 45px;
+          max-height: none;
+          width: 74%;
+          border-radius: 25px;
+        }
         .bus__block2--stop-title-wrapper {
           display: flex;
           align-items: center;
           margin-left: 2.05vw;
+          @include desktop {
+            margin-left: 10px;
+          }
         }
         .bus__block2--stop-title {
           padding: clamp(1px, 2.31vw, 10px); // 갤럭시 폴드 대응
@@ -273,10 +372,22 @@ div + .bus__block1 {
           text-align: center;
           width: 10vw;
           max-width: 45px;
+          @include desktop {
+            padding: 9px 0;
+            border-radius: 20px;
+            font-size: 16px;
+            width: 50px;
+            max-width: none;
+          }
         }
         .bus__block2--stop-name {
           font-size: clamp(1px, 5.13vw, 25px); // 갤럭시 폴드 대응
           margin-left: clamp(1px, 2.56vw, 12px);
+          @include desktop {
+            font-size: 22px;
+            margin-left: 15px;
+            letter-spacing: 2px;
+          }
         }
         .bus__block2--stop-more {
           font-size: clamp(1px, 3.33vw, 15px); // 갤럭시 폴드 대응
@@ -285,6 +396,12 @@ div + .bus__block1 {
           padding: clamp(1px, 2.31vw, 10px); // 갤럭시 폴드 대응
           background-color: lighten($blue-00, 15%);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+          @include desktop {
+            font-size: 15px;
+            margin-right: 10px;
+            border-radius: 20px;
+            padding: 7px;
+          }
           &:hover {
             cursor: pointer;
           }
@@ -301,6 +418,11 @@ div + .bus__block1 {
         height: 5.13vw;
         max-height: 25px;
         margin-left: clamp(1px, 6.92vw, 29px); // 갤럭시 폴드 대응
+        @include desktop {
+          height: 25px;
+          max-height: none;
+          margin-left: 35%;
+        }
       }
     }
   }
