@@ -116,12 +116,17 @@
   scrollbar-width: none; //파이어폭스
   @include desktop {
     overflow-y: visible;
+    justify-content: left;
+    margin-left: 30px;
   }
   &::-webkit-scrollbar {
     display: none; // 크롬, 사파리, 오페라, 엣지
   }
   button + button {
     margin-left: 2.6vw;
+    @include desktop {
+      margin-left: 10px;
+    }
   }
   > button:first-child > .day {
     margin-left: 37vw;
@@ -147,11 +152,11 @@
     border-radius: 4.5vw;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     @include desktop {
-      font-size: 20px;
+      font-size: 17px;
       font-weight: 900;
-      padding: 10px;
+      padding: 7px;
       margin: 0;
-      border-radius: 35px;
+      border-radius: 12px;
     }
     &:hover {
       cursor: pointer;
@@ -163,27 +168,43 @@
     font-size: 4.1vw;
     padding: 2.8vw;
     @include desktop {
-      font-size: 20px;
-      padding: 10px;
+      font-size: 17px;
+      padding: 7px;
     }
   }
 }
 .days + .meal__body {
   margin-top: 3.33vw;
+  @include desktop {
+    margin-top: 20px;
+  }
 }
 .meal__body {
   padding: 0 3.33vw;
+  @include desktop {
+    padding: 0 10px;
+  }
 }
 .meal-categories {
   display: flex;
   align-items: center;
   justify-content: center;
+  @include desktop {
+    justify-content: left;
+    margin-left: 30px;
+  }
   .meal-category {
     color: $gray-07;
     font-size: 3.8vw;
     font-weight: 900;
     text-align: center;
     width: 30%;
+    @include desktop {
+      font-size: 18px;
+      font-weight: 900;
+      width: 70px;
+      letter-spacing: 5px;
+    }
     &:hover {
       cursor: pointer;
     }
@@ -192,14 +213,29 @@
     color: $gray-00;
     font-size: 4.3vw;
     margin: 0.6vw 0;
+    @include desktop {
+      font-size: 18px;
+      margin: 0;
+    }
   }
 }
 .meal-categories + .meal-menus {
   margin-top: 3.33vw;
+  @include desktop {
+    margin-top: 20px;
+  }
 }
 .meal-menus {
+  @include desktop {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
   .meal-menu + .meal-menu {
     margin-top: 3.33vw;
+    @include desktop {
+      margin-top: 0;
+    }
   }
   .meal-menu {
     display: flex;
@@ -207,11 +243,19 @@
     background-color: $gray-08;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     border-radius: 7.7vw;
+    @include desktop {
+      border-radius: 35px;
+      margin: 0px 0px 10px 0;
+      width: calc(50% - 5px);
+    }
     .meal-menu__title--wrapper {
       display: flex;
       justify-content: left;
       align-items: center;
       margin: 4vw 2vw 3.3vw 4vw;
+      @include desktop {
+        margin: 15px 0 10px 20px;
+      }
       .meal-menu__title {
         display: inline-block;
         font-size: 3.5vw;
@@ -220,6 +264,12 @@
         text-align: center;
         letter-spacing: 0.4vw;
         font-weight: 900;
+        @include desktop {
+          font-size: 16px;
+          padding: 8px;
+          border-radius: 12px;
+          letter-spacing: 0px;
+        }
       }
       .CONVENIENCE1,
       .CONVENIENCE2 {
@@ -244,6 +294,11 @@
         font-size: 5vw;
         letter-spacing: 0.5vw;
         margin-left: 2.1vw;
+        @include desktop {
+          font-size: 23px;
+          letter-spacing: 3px;
+          margin-left: 10px;
+        }
       }
     }
     .meal-menu__body {
@@ -252,26 +307,35 @@
       flex-direction: row;
       justify-content: space-around;
       align-items: center;
+      @include desktop {
+        padding: 0;
+        flex-direction: column;
+      }
       .meal-menu__image {
         background-size: cover; // 이미지를 div에 맞게 조절
         background-position: center; // 이미지를 가운데 정렬
         width: 33.3vw;
         height: 26vw;
         border-radius: 5.1vw;
-      }
-      .meal-menu__image-bread {
-        background-size: cover; // 이미지를 div에 맞게 조절
-        background-position: center; // 이미지를 가운데 정렬
-        width: 70vw;
-        height: 51vw;
-        border-radius: 5.1vw;
-        margin-bottom: 4vw;
+        @include desktop {
+          width: 90%;
+          height: 280px;
+          border-radius: 30px;
+          margin-bottom: 10px;
+        }
       }
       .meal-menu__detaile {
         width: 51vw;
         font-size: 3.6vw;
         letter-spacing: 0.6vw;
         line-height: 4.6vw;
+        @include desktop {
+          width: 85%;
+          font-size: 20px;
+          letter-spacing: 2px;
+          line-height: 25px;
+          margin-bottom: 15px;
+        }
       }
     }
   }
