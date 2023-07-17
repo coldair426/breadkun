@@ -35,7 +35,7 @@ function KakaoMap({
     };
     const map = new window.kakao.maps.Map(container, options); // 지도생성
     trafficInfo && map.addOverlayMapTypeId(window.kakao.maps.MapTypeId.TRAFFIC); // 교통정보
-    const imageSrc = '/logo/breadkun-marker.png'; // 마커이미지의 주소입니다
+    const imageSrc = '/logo/breadkun-marker.webp'; // 마커이미지의 주소입니다
     const imageSize = new window.kakao.maps.Size(37, 41); // 마커이미지 크기
     const imageOption = { offset: new window.kakao.maps.Point(15, 35) }; // 마커이미지 옵션. 마커의 좌표와 일치시킬 이미지 안에서의 좌표 설정.
     const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOption); // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다

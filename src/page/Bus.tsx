@@ -132,7 +132,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
       <div className={bs('bus')}>
         <div className={bs('title')}>
           <div className={bs('title__icon')}>
-            <img src='/icon/bus-title-icon.png' alt='before-button' style={{ height: '5.64vw', maxHeight: '22px' }} />
+            <img src='/icon/bus-title-icon.webp' alt='before-button' style={{ height: '5.64vw', maxHeight: '22px' }} />
           </div>
           <div className={bs('title__letter')}>강촌 퇴근 버스</div>
         </div>
@@ -142,7 +142,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
           <div className={bs('bus__block1')}>
             <div className={bs('bus__block1--left')}>
               <div className={bs('bus__block1--left-title')}>
-                <img src='/icon/bus-arrival-icon.png' alt='arrival icon' />
+                <img src='/icon/bus-arrival-icon.webp' alt='arrival icon' />
               </div>
               <div className={bs('bus__block1--left-mainBox')}>{arrivalTime.mainbox}</div>
               <div className={bs('bus__block1--left-firstLine')}>
@@ -166,12 +166,12 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
                 </div>
                 <div className={bs('bus__block1--right--refresh-button')}>
                   <button onClick={() => updateLocation()}>
-                    <img className={bs('refresh-button')} src='/icon/bus-refresh-button.png' alt='refresh-button'></img>
+                    <img className={bs('refresh-button')} src='/icon/bus-refresh-button.webp' alt='refresh-button'></img>
                   </button>
                 </div>
               </div>
               <div className={bs('bus__block1--right--arrow')}>
-                <img className={bs('arrow-img')} src='/icon/arrow-down.png' alt='아래화살표' />
+                <img className={bs('arrow-img')} src='/icon/arrow-down.webp' alt='아래화살표' />
               </div>
               <div className={bs('bus__block1--right--selectbox')}>
                 <select value={selectedValue} onChange={handleChange} aria-label='목적지를 선택해 주세요.'>
@@ -212,7 +212,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
                       자세히 보기
                     </div>
                   </div>
-                  <img className={bs('bus__block2--stop-arrow')} src='/icon/bus-stops-arrow.png' alt='down arrow' />
+                  <img className={bs('bus__block2--stop-arrow')} src='/icon/bus-stops-arrow.webp' alt='down arrow' />
                 </div>
               ))}
             </div>

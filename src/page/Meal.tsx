@@ -98,18 +98,18 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   const mealPixelImgSrc = (value: string): string => {
     switch (value) {
       case 'SPECIAL':
-        return "url('/icon/meal-special.png')";
+        return "url('/icon/meal-special.webp')";
       case 'KOREAN1':
-        return "url('/icon/meal-korfood.png')";
+        return "url('/icon/meal-korfood.webp')";
       case 'KOREAN2':
-        return "url('/icon/meal-ramen.png')";
+        return "url('/icon/meal-ramen.webp')";
       case 'NOODLE':
-        return "url('/icon/meal-noodle.png')";
+        return "url('/icon/meal-noodle.webp')";
       case 'CONVENIENCE1':
       case 'CONVENIENCE2':
-        return "url('/icon/meal-simpleFood.png')";
+        return "url('/icon/meal-simpleFood.webp')";
       case 'CONVENIENCE3':
-        return "url('/icon/meal-protein.png')";
+        return "url('/icon/meal-protein.webp')";
       default:
         return '';
     }
@@ -237,7 +237,7 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       <div className={ms('meal')}>
         <div className={ms('title')}>
           <div className={ms('title__icon')}>
-            <img src='/icon/meal-title-icon.png' alt='title' style={{ height: '5.64vw', maxHeight: '22px' }} />
+            <img src='/icon/meal-title-icon.webp' alt='title' style={{ height: '5.64vw', maxHeight: '22px' }} />
           </div>
           <div className={ms('title__select')}>
             <div className={ms('title__letter')}>{company === '강촌' ? '강촌 식단' : '을지 식단'}</div>
@@ -245,7 +245,7 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
               <option value='강촌'>강촌 식단</option>
               <option value='을지'>을지 식단</option>
             </select>
-            <img className={ms('title__select-button')} src='/icon/home-select-arrow.png' alt='dropdown-button' />
+            <img className={ms('title__select-button')} src='/icon/home-select-arrow.webp' alt='dropdown-button' />
           </div>
         </div>
         <div className={ms('days')}>

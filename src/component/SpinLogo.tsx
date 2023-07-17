@@ -10,7 +10,7 @@ function SpinLogo({ minHeight, text1, text2 }: { minHeight: string; text1: strin
     <div className={ss('spinLogo')}>
       <div className={ss('spinLogo__wrap')} style={{ minHeight: minHeight }}>
         <Link to={'/'}>
-          <img className={ss('spinLogo__wrap--logoImg')} src={'/logo/breadkunSpinLogo.png'} alt='logo' />
+          <img className={ss('spinLogo__wrap--logoImg')} src={'/logo/breadkunSpinLogo.webp'} alt='logo' />
         </Link>
         <div>
           <div className={ss('spinLogo__wrap--text')}>{text1}</div>

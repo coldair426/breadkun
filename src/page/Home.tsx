@@ -71,12 +71,12 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     }
   };
   const getWeatherIconPath = (ptyCode: string | undefined, skyCode: string | undefined): string | undefined => {
-    const sunnyIcon = '/icon/weather/Sunny.png';
-    const cloudyIcon = '/icon/weather/cloudy.png';
-    const overcastIcon = '/icon/weather/overcast.png';
-    const rainIcon = '/icon/weather/rain.png';
-    const snowAndRainIcon = '/icon/weather/snowAndRain.png';
-    const snowIcon = '/icon/weather/snow.png';
+    const sunnyIcon = '/icon/weather/Sunny.webp';
+    const cloudyIcon = '/icon/weather/cloudy.webp';
+    const overcastIcon = '/icon/weather/overcast.webp';
+    const rainIcon = '/icon/weather/rain.webp';
+    const snowAndRainIcon = '/icon/weather/snowAndRain.webp';
+    const snowIcon = '/icon/weather/snow.webp';
     // 강수형태가 0(없음) 일때,
     switch (ptyCode) {
       case '0':
@@ -338,7 +338,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
       <div className={hs('home')}>
         <div className={hs('title')}>
           <div className={hs('title__icon')}>
-            <img src='/icon/home-title-icon.png' alt='title' />
+            <img src='/icon/home-title-icon.webp' alt='title' />
           </div>
           <div className={hs('title__select')}>
             <div className={hs('title__letter')}>{company === '강촌' ? '더존 강촌캠퍼스' : '더존 을지타워'}</div>
@@ -346,7 +346,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
               <option value='강촌'>더존 강촌캠퍼스</option>
               <option value='을지'>더존 을지타워</option>
             </select>
-            <img className={hs('title__select-button')} src='/icon/home-select-arrow.png' alt='dropdown-button' />
+            <img className={hs('title__select-button')} src='/icon/home-select-arrow.webp' alt='dropdown-button' />
           </div>
         </div>
         <div className={hs('home__body')}>
@@ -359,7 +359,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 <div className={hs('home__weather--now-temperature-text')}>{`${temperature?.[0].fcstValue.padStart(2, '0') || '-'}°C`}</div>
               </div>
               <div className={hs('home__weather--now-rain')}>
-                <img className={hs('home__weather--now-rain-img')} src='/icon/weather/popPercent.png' alt='rain-percent' />
+                <img className={hs('home__weather--now-rain-img')} src='/icon/weather/popPercent.webp' alt='rain-percent' />
                 <div className={hs('home__weather--now-rain-text')}> {`${rain?.[0].fcstValue.padStart(2, '0') || '-'}%`}</div>
               </div>
             </div>
@@ -382,7 +382,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                       {temperature?.[index + 1].fcstValue ? `${temperature?.[index + 1].fcstValue.padStart(2, '0')}°C` : ''}
                     </div>
                     {pty?.[index + 1].fcstValue && (
-                      <img className={hs('home__weather--forecast-rain-img')} src='/icon/weather/popPercent.png' alt='rain-percent' key={`c${index}`} />
+                      <img className={hs('home__weather--forecast-rain-img')} src='/icon/weather/popPercent.webp' alt='rain-percent' key={`c${index}`} />
                     )}
                     <div className={hs('home__weather--forecast-rain-text')} key={`t${index}`}>
                       {rain?.[index + 1].fcstValue ? `${rain?.[index + 1].fcstValue.padStart(2, '0')}%` : ''}
@@ -395,7 +395,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
               onClick={() => {
                 reFreshButtonClick();
               }}>
-              <img className={hs('refresh-button')} src='/icon/bus-refresh-button.png' alt='refresh-button' />
+              <img className={hs('refresh-button')} src='/icon/bus-refresh-button.webp' alt='refresh-button' />
             </button>
           </div>
           <div className={hs('home__dusts')}>
@@ -404,10 +404,10 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 <span>미세먼지</span>
               </div>
               <div className={hs('home__dust--img-letter-wrapper')}>
-                {dust.pm10Level === '좋음' && <img className={hs('home__dust--img')} src='/icon/home-dusts-good.png' alt='dust-level-icon' />}
-                {dust.pm10Level === '보통' && <img className={hs('home__dust--img')} src='/icon/home-dusts-nomal.png' alt='dust-level-icon' />}
-                {dust.pm10Level === '나쁨' && <img className={hs('home__dust--img')} src='/icon/home-dusts-bad.png' alt='dust-level-icon' />}
-                {dust.pm10Level === '최악' && <img className={hs('home__dust--img')} src='/icon/home-dusts-fuckingbad.png' alt='dust-level-icon' />}
+                {dust.pm10Level === '좋음' && <img className={hs('home__dust--img')} src='/icon/home-dusts-good.webp' alt='dust-level-icon' />}
+                {dust.pm10Level === '보통' && <img className={hs('home__dust--img')} src='/icon/home-dusts-nomal.webp' alt='dust-level-icon' />}
+                {dust.pm10Level === '나쁨' && <img className={hs('home__dust--img')} src='/icon/home-dusts-bad.webp' alt='dust-level-icon' />}
+                {dust.pm10Level === '최악' && <img className={hs('home__dust--img')} src='/icon/home-dusts-fuckingbad.webp' alt='dust-level-icon' />}
                 <div className={hs('home__dust--level')}>
                   {dust.pm10Level}/{dust.pm10Value}
                 </div>
@@ -418,10 +418,10 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 <span>초미세먼지</span>
               </div>
               <div className={hs('home__ultra-dust--img-letter-wrapper')}>
-                {dust.pm25Level === '좋음' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-good.png' alt='dust-level-icon' />}
-                {dust.pm25Level === '보통' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-nomal.png' alt='dust-level-icon' />}
-                {dust.pm25Level === '나쁨' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-bad.png' alt='dust-level-icon' />}
-                {dust.pm25Level === '최악' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-fuckingbad.png' alt='dust-level-icon' />}
+                {dust.pm25Level === '좋음' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-good.webp' alt='dust-level-icon' />}
+                {dust.pm25Level === '보통' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-nomal.webp' alt='dust-level-icon' />}
+                {dust.pm25Level === '나쁨' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-bad.webp' alt='dust-level-icon' />}
+                {dust.pm25Level === '최악' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-fuckingbad.webp' alt='dust-level-icon' />}
                 <div className={hs('home__ultra-dust--level')}>
                   {dust.pm25Level}/{dust.pm25Value}
                 </div>
@@ -434,7 +434,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 <div className={hs('home__link--title')}>식단</div>
                 <div className={hs('home__link--text')}>구내식당 메뉴</div>
               </div>
-              <img className={hs('home__link--image', '식단')} src='/icon/home-meal-button.png' alt='today meal' />
+              <img className={hs('home__link--image', '식단')} src='/icon/home-meal-button.webp' alt='today meal' />
             </Link>
             {company === '강촌' && (
               <>
@@ -443,14 +443,14 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                     <div className={hs('home__link--title')}>ORIGINAL</div>
                     <div className={hs('home__link--text')}>오늘의 빵</div>
                   </div>
-                  <img className={hs('home__link--image', '빵')} src='/icon/home-bread-button.png' alt='today bread' />
+                  <img className={hs('home__link--image', '빵')} src='/icon/home-bread-button.webp' alt='today bread' />
                 </button>
                 <Link to={'/bus'}>
                   <div>
                     <div className={hs('home__link--title')}>버스</div>
                     <div className={hs('home__link--text')}>퇴근 버스 정보</div>
                   </div>
-                  <img className={hs('home__link--image', '버스')} src='/icon/home-bus-button.png' alt='today bus' />
+                  <img className={hs('home__link--image', '버스')} src='/icon/home-bus-button.webp' alt='today bus' />
                 </Link>
               </>
             )}
@@ -459,14 +459,14 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 <div className={hs('home__link--title')}>카페</div>
                 <div className={hs('home__link--text')}>-서비스 준비중-</div>
               </div>
-              <img className={hs('home__link--image', '카페')} src='/icon/home-caffe-button.png' alt='today cafe' />
+              <img className={hs('home__link--image', '카페')} src='/icon/home-caffe-button.webp' alt='today cafe' />
             </Link>
             <Link to={'/omakase'}>
               <div>
                 <div className={hs('home__link--title')}>빵돌이오마카세</div>
                 <div className={hs('home__link--text')}>-서비스 준비중-</div>
               </div>
-              <img className={hs('home__link--image', '빵돌이오마카세')} src='/icon/home-omakase-button.png' alt='today omakase' />
+              <img className={hs('home__link--image', '빵돌이오마카세')} src='/icon/home-omakase-button.webp' alt='today omakase' />
             </Link>
           </div>
         </div>
@@ -474,7 +474,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           <div className={hs('home__body-sec')}>
             <div className={hs('home__body-sec--bread')}>
               <div className={hs('body-sec__bread--title')}>오늘의 빵</div>
-              <img className={hs('body-sec__bread--img')} src={bread?.img ? `https://babkaotalk.herokuapp.com${bread?.img}` : '/icon/home-bread.png'} alt='todays bread' />
+              <img className={hs('body-sec__bread--img')} src={bread?.img ? `https://babkaotalk.herokuapp.com${bread?.img}` : '/icon/home-bread.webp'} alt='todays bread' />
               <div className={hs('body-sec__bread--text')}>{bread?.name || '정보가 없습니다.'}</div>
             </div>
           </div>
@@ -484,7 +484,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         <div className={hs('home__pop-up-bread')}>
           <div className={hs('home__pop-up-bread--mask')} onClick={() => setBreadPopUp(false)} />
           <div className={hs('home__pop-up-bread--wrapper')}>
-            <img className={hs('home__pop-up-bread--img')} src={bread?.img ? `https://babkaotalk.herokuapp.com${bread?.img}` : '/icon/home-bread.png'} alt='todays bread' />
+            <img className={hs('home__pop-up-bread--img')} src={bread?.img ? `https://babkaotalk.herokuapp.com${bread?.img}` : '/icon/home-bread.webp'} alt='todays bread' />
             <div className={hs('home__pop-up-bread--text')}>{bread?.name || '오늘의 빵 정보가 없습니다.'}</div>
             <span className={hs('home__pop-up-bread--close')} onClick={() => setBreadPopUp(false)}>
               닫기
