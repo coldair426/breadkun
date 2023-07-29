@@ -6,6 +6,7 @@ import KakaoMap from '../component/KakaoMap';
 import NotificationBox from './../component/NotificationBox';
 import axios from 'axios';
 import PopUpMap from './../component/PopUpMap';
+import BreadkunHelmet from '../component/BreadkunHelmet';
 
 interface BusStations {
   arrivalTimeH?: number;
@@ -129,6 +130,12 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
 
   return (
     <>
+      <BreadkunHelmet
+        title='더존 빵돌이 | 버스'
+        description='더존ICT 통근 버스의 정류장 위치, 위치기반 도착시간을 안내하는 서비스입니다.'
+        keywords='빵돌이, 더존ICT, 더존, 버스, 시간, 도착, 정류장'
+        url='https://breadkun.com/bus'
+      />
       <div className={bs('bus')}>
         <div className={bs('title')}>
           <div className={bs('title__icon')}>
