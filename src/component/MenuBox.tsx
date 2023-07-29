@@ -23,7 +23,7 @@ function MenuBox({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateActi
   return (
     <div className={ms('menu-box')}>
       <div className={ms('menu-box__mask')} onClick={() => setMenuBox(false)} />
-      <div className={ms('menu-box__menus')}>
+      <nav className={ms('menu-box__menus')}>
         <NavLink className={({ isActive }) => (isActive ? ms('menu-box__menu-active') : ms('menu-box__menu'))} to={'/'} onClick={() => setMenuBox(false)}>
           HOME
         </NavLink>
@@ -36,7 +36,7 @@ function MenuBox({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateActi
         <button className={ms('menu-box__exit')} onClick={() => setMenuBox(false)}>
           닫기
         </button>
-      </div>
+      </nav>
     </div>
   );
 }
