@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import styles from '../style/Meal.module.scss';
 import classNames from 'classnames/bind';
 import axios from 'axios';
-import BreadkunHelmet from '../component/BreadkunHelmet';
 
 const ms = classNames.bind(styles);
 
@@ -235,12 +234,6 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   }, [company]);
   return (
     <>
-      <BreadkunHelmet
-        title='더존 빵돌이 | 식단'
-        description='더존ICT 구내식당의 일주일치 식단 정보를 안내하는 서비스입니다.'
-        keywords='빵돌이, 더존ICT, 더존, 식당, 식단'
-        url='https://breadkun.com/meal'
-      />
       <div className={ms('meal')}>
         <div className={ms('title')}>
           <div className={ms('title__icon')}>
