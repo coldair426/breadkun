@@ -5,29 +5,29 @@ import axios from 'axios';
 
 const ms = classNames.bind(styles);
 
-// 주차를 구하는 함수
-const getWeekNumber = (date: Date): number => {
-  // 월요일이 0이 되도록 요일을 조정합니다.
-  const dayOfWeek = (date.getDay() + 6) % 7;
-  // 현재 주의 월요일을 계산합니다.
-  const monday = new Date(date);
-  monday.setDate(date.getDate() - dayOfWeek);
-  // 해당 주의 일요일을 계산합니다.
-  const sunday = new Date(monday);
-  sunday.setDate(monday.getDate() + 6);
-  // 현재 날짜가 속한 주차를 계산합니다.
-  const oneJan = new Date(date.getFullYear(), 0, 1);
-  const daysUntilMonday = (monday.getTime() - oneJan.getTime()) / (24 * 60 * 60 * 1000);
-  const weekNumber = Math.ceil((daysUntilMonday + oneJan.getDay() + 1) / 7);
-  return weekNumber;
-};
-
 function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
+  // 주차를 구하는 함수
+  const getWeekNumber = (date: Date): number => {
+    // 월요일이 0이 되도록 요일을 조정합니다.
+    const dayOfWeek = (date.getDay() + 6) % 7;
+    // 현재 주의 월요일을 계산합니다.
+    const monday = new Date(date);
+    monday.setDate(date.getDate() - dayOfWeek);
+    // 해당 주의 일요일을 계산합니다.
+    const sunday = new Date(monday);
+    sunday.setDate(monday.getDate() + 6);
+    // 현재 날짜가 속한 주차를 계산합니다.
+    const oneJan = new Date(date.getFullYear(), 0, 1);
+    const daysUntilMonday = (monday.getTime() - oneJan.getTime()) / (24 * 60 * 60 * 1000);
+    const weekNumber = Math.ceil((daysUntilMonday + oneJan.getDay() + 1) / 7);
+    return weekNumber;
+  };
+
   const [company, setCompany] = useState(localStorage.getItem('recentCompany') || '강촌'); // 강촌, 을지
   const [days, setDays] = useState<string[]>();
   const today = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1; // 오늘 요일 표시 => 월:0 ~ 일:6
   const [selectedDay, setSelectedDay] = useState(0); // 기본값 월(0)
-  const weekNumber = getWeekNumber(new Date('2023-07-31')); // 현재 주차
+  const [weekNumber] = useState(getWeekNumber(new Date())); // 현재 주차 설정.
   const selectedDayRef = useRef<HTMLButtonElement>(null);
   const [selectedMealCategories, setSelectedMealCategories] = useState('조식'); // 기본값 조식
   const nowHours = new Date().getHours(); // 현재시간
@@ -231,7 +231,7 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         const result = await axios.post('https://babkaotalk.herokuapp.com/api/webDiet', {
           location: '강촌',
         });
-        result.data.resultData.updated === weekNumber && setMealData(result.data.resultData);
+        result.data.resultData.updated === weekNumber ? setMealData(result.data.resultData) : console.log('DB의 주차와 일치하지 않습니다.');
       } catch (error) {
         console.log('메뉴 가져오기 실패.');
         console.log(error);
@@ -242,7 +242,7 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         const result = await axios.post('https://babkaotalk.herokuapp.com/api/webDiet', {
           location: '을지',
         });
-        result.data.resultData.updated === weekNumber && setMealData(result.data.resultData);
+        result.data.resultData.updated === weekNumber ? setMealData(result.data.resultData) : console.log('DB의 주차와 일치하지 않습니다.');
       } catch (error) {
         console.log('메뉴 가져오기 실패.');
         console.log(error);
@@ -250,6 +250,7 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     }
     company === '강촌' ? fetchKangchonMealData() : fetchEuljiMealData();
   }, [company, weekNumber]);
+
   return (
     <>
       <div className={ms('meal')}>
