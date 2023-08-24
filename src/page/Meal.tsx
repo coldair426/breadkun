@@ -231,9 +231,16 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         const result = await axios.post('https://babkaotalk.herokuapp.com/api/webDiet', {
           location: '강촌',
         });
-        result.data.resultData.updated === weekNumber ? setMealData(result.data.resultData) : console.log('DB의 주차와 일치하지 않습니다.');
+        if (result.data.resultData.updated === weekNumber) {
+          setMealData(result.data.resultData);
+        } else {
+          setMealData({});
+          alert('죄송합니다.\n현재 식단 정보를 가져올 수 없습니다.\n문제가 지속되면 관리자에게 문의해 주시기 바랍니다.');
+          console.log('주차 불일치');
+        }
       } catch (error) {
-        console.log('메뉴 가져오기 실패.');
+        setMealData({});
+        alert('죄송합니다.\n현재 식단 정보를 가져올 수 없습니다.\n문제가 지속되면 관리자에게 문의해 주시기 바랍니다.');
         console.log(error);
       }
     }
@@ -242,9 +249,16 @@ function Meal({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         const result = await axios.post('https://babkaotalk.herokuapp.com/api/webDiet', {
           location: '을지',
         });
-        result.data.resultData.updated === weekNumber ? setMealData(result.data.resultData) : console.log('DB의 주차와 일치하지 않습니다.');
+        if (result.data.resultData.updated === weekNumber) {
+          setMealData(result.data.resultData);
+        } else {
+          setMealData({});
+          alert('죄송합니다.\n현재 식단 정보를 가져올 수 없습니다.\n문제가 지속되면 관리자에게 문의해 주시기 바랍니다.');
+          console.log('주차 불일치');
+        }
       } catch (error) {
-        console.log('메뉴 가져오기 실패.');
+        setMealData({});
+        alert('죄송합니다.\n현재 식단 정보를 가져올 수 없습니다.\n문제가 지속되면 관리자에게 문의해 주시기 바랍니다.');
         console.log(error);
       }
     }
