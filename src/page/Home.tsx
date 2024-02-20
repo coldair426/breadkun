@@ -4,6 +4,8 @@ import classNames from 'classnames/bind';
 import axios from 'axios';
 import NotificationBox from './../component/NotificationBox';
 import { Link } from 'react-router-dom';
+import {ImageReturn} from "../utils/image-return";
+import {fetchDustDataTest} from "../apis/dust/dust-api";
 
 interface WeatherReturn {
   baseDate: string;
@@ -125,6 +127,24 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
   useEffect(() => {
     localStorage.setItem('recentCompany', company);
   }, [company]);
+
+  useEffect(()=>{
+    fetchDustDataTest(company).then((dustResponse)=>{
+      console.log(dustResponse)
+      if(dustResponse){
+        setDust( {dataTime:dustResponse.dataTime, stationName:dustResponse.stationName, pm10Level: dustResponse.pm10Level, pm25Level: dustResponse.pm25Level, pm10Value: dustResponse.pm10Value, pm25Value: dustResponse.pm25Value} );
+        setDustRequestCompleted(true);
+      }
+      // const { dataTime, stationName, pm10Value, pm25Value } = dustResponse
+      // const pm10Level = getPM10Level(pm10Value);
+      // const pm25Level = getPM25Level(pm25Value);
+      // if (isMounted) {
+
+      // }
+    });
+
+    // console.log(fetchDustDataTest({company}))
+  },[company, refreshButton])
   // 에어코리아 미세먼지, 초미세먼지
   useEffect(() => {
     let isMounted = true; // 마운트 상태 확인 변수
@@ -257,6 +277,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
           },
           { SKY: [], POP: [], REH: [], TMP: [] }
         );
+        console.log(data)
         if (isMounted) {
           setSky(data.SKY);
           setPty(data.PTY);
@@ -333,6 +354,12 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
     }
   }, [company]);
 
+  // console.log('rain', rain)
+  // console.log('temp', temperature)
+  // console.log('sky', sky)
+  // console.log('dust', dust)
+  // console.log('pty', pty)
+  // console.log(ImageReturn(dust.pm25Level))
   return (
     <>
       <div className={hs('home')}>
@@ -404,10 +431,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 <span>미세먼지</span>
               </div>
               <div className={hs('home__dust--img-letter-wrapper')}>
-                {dust.pm10Level === '좋음' && <img className={hs('home__dust--img')} src='/icon/home-dusts-good.webp' alt='dust-level-icon' />}
-                {dust.pm10Level === '보통' && <img className={hs('home__dust--img')} src='/icon/home-dusts-nomal.webp' alt='dust-level-icon' />}
-                {dust.pm10Level === '나쁨' && <img className={hs('home__dust--img')} src='/icon/home-dusts-bad.webp' alt='dust-level-icon' />}
-                {dust.pm10Level === '최악' && <img className={hs('home__dust--img')} src='/icon/home-dusts-fuckingbad.webp' alt='dust-level-icon' />}
+                {dust.pm10Level!=='통신장애'&&<img className={hs('home__dust--img')} src={ImageReturn(dust.pm10Level)} alt='dust-level-icon'/>}
                 <div className={hs('home__dust--level')}>
                   {dust.pm10Level}/{dust.pm10Value}
                 </div>
@@ -418,10 +442,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 <span>초미세먼지</span>
               </div>
               <div className={hs('home__ultra-dust--img-letter-wrapper')}>
-                {dust.pm25Level === '좋음' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-good.webp' alt='dust-level-icon' />}
-                {dust.pm25Level === '보통' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-nomal.webp' alt='dust-level-icon' />}
-                {dust.pm25Level === '나쁨' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-bad.webp' alt='dust-level-icon' />}
-                {dust.pm25Level === '최악' && <img className={hs('home__ultra-dust--img')} src='/icon/home-dusts-fuckingbad.webp' alt='dust-level-icon' />}
+                {dust.pm25Level!=='통신장애'&&<img className={hs('home__ultra-dust--img')} src={ImageReturn(dust.pm25Level)} alt='dust-level-icon'/>}
                 <div className={hs('home__ultra-dust--level')}>
                   {dust.pm25Level}/{dust.pm25Value}
                 </div>
