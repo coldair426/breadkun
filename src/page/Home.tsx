@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../style/Home.module.scss';
+import styles from 'style/Home.module.scss';
 import classNames from 'classnames/bind';
 import axios from 'axios';
-import NotificationBox from './../component/NotificationBox';
+import NotificationBox from 'component/NotificationBox';
 import { Link } from 'react-router-dom';
-import {getWeatherIconPath, ImageReturn} from "../utils/image-return";
-import {fetchDustDataTest} from "../apis/dust/dust-api";
-import {fetchWeatherData} from "../apis/weather/weather-api";
+import {getWeatherIconPath, ImageReturn} from "utils/image-return";
+import { fetchWeatherData } from 'apis/weather/weather-api';
+import { fetchDustDataTest } from 'apis/dust/dust-api';
 
 interface WeatherReturn {
   baseDate: string;
