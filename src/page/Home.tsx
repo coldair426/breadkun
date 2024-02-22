@@ -82,7 +82,6 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
         setDustRequestCompleted(true);
       }
     });
-    console.log(weather)
 
     const retryDustData = async (retryCount: number) => {
       try {
