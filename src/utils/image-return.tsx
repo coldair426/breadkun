@@ -1,4 +1,4 @@
-export const ImageReturn = (pmText: string): string => {
+export const imageReturn = (pmText: string): string => {
     const baseDustImageUrl = "/icon/home/dust"
             switch (pmText) {
                 case '좋음':

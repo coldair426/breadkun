@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import axios from 'axios';
 import NotificationBox from 'component/NotificationBox';
 import { Link } from 'react-router-dom';
-import {getWeatherIconPath, ImageReturn} from "utils/image-return";
+import {getWeatherIconPath, imageReturn} from "utils/image-return";
 import { fetchWeatherData } from 'apis/weather/weather-api';
 import { fetchDustDataTest } from 'apis/dust/dust-api';
 
@@ -253,7 +253,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 <span>미세먼지</span>
               </div>
               <div className={hs('home__dust--img-letter-wrapper')}>
-                {dust.pm10Level!=='통신장애'&&<img className={hs('home__dust--img')} src={ImageReturn(dust.pm10Level)} alt='dust-level-icon'/>}
+                {dust.pm10Level!=='통신장애'&&<img className={hs('home__dust--img')} src={imageReturn(dust.pm10Level)} alt='dust-level-icon'/>}
                 <div className={hs('home__dust--level')}>
                   {dust.pm10Level}/{dust.pm10Value}
                 </div>
@@ -264,7 +264,7 @@ function Home({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<
                 <span>초미세먼지</span>
               </div>
               <div className={hs('home__ultra-dust--img-letter-wrapper')}>
-                {dust.pm25Level!=='통신장애'&&<img className={hs('home__ultra-dust--img')} src={ImageReturn(dust.pm25Level)} alt='dust-level-icon'/>}
+                {dust.pm25Level!=='통신장애'&&<img className={hs('home__ultra-dust--img')} src={imageReturn(dust.pm25Level)} alt='dust-level-icon'/>}
                 <div className={hs('home__ultra-dust--level')}>
                   {dust.pm25Level}/{dust.pm25Value}
                 </div>
