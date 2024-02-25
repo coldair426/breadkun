@@ -16,6 +16,7 @@ function Meal({setMenuBox}: { setMenuBox: React.Dispatch<React.SetStateAction<bo
         // 현재 주의 월요일을 계산합니다.
         const monday = new Date(date);
         monday.setDate(date.getDate() - dayOfWeek);
+
         // 해당 주의 일요일을 계산합니다.
         const sunday = new Date(monday);
         sunday.setDate(monday.getDate() + 6);
@@ -123,7 +124,6 @@ function Meal({setMenuBox}: { setMenuBox: React.Dispatch<React.SetStateAction<bo
         setDays(dates);
     }, []);
 
-
     // selectedDay 자동 중앙 스크롤
     useEffect(() => {
         if (selectedDayRef.current) {
@@ -212,9 +212,9 @@ function Meal({setMenuBox}: { setMenuBox: React.Dispatch<React.SetStateAction<bo
                     <div className={ms('meal-menus')}>
                         {mealMenu(company).menu.map(
                             (menu, index) => {
-                                console.log(mealData)//{목:{아침:~}, {점심:~}, {저녁:~}}
+                                // console.log(mealData)//{목:{아침:~}, {점심:~}, {저녁:~}}
                                 // console.log(mealData[dayNumToSpell(selectedDay)]) //{아침:{"image": ""}, 점심:~}
-                                console.log(selectedMealCategories)
+                                // console.log(selectedMealCategories)
                                 // console.log(mealData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)])
                                 // {CONVENIENCE:{
                                 //     "image": "",
