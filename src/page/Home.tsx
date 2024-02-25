@@ -5,19 +5,10 @@ import axios from 'axios';
 import NotificationBox from 'component/NotificationBox';
 import { Link } from 'react-router-dom';
 import {getWeatherIconPath, imageReturn} from "utils/image-return";
-import { fetchWeatherData } from 'apis/weather/weather-api';
+import {fetchWeatherData} from 'apis/weather/weather-api';
 import { fetchDustDataTest } from 'apis/dust/dust-api';
+import { WeatherReturn } from 'types/home';
 
-interface WeatherReturn {
-  baseDate: string;
-  baseTime: string;
-  category: string;
-  fcstDate: string;
-  fcstTime: string;
-  fcstValue: string;
-  nx: number;
-  ny: number;
-}
 
 const hs = classNames.bind(styles);
 

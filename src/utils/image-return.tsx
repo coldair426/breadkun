@@ -1,17 +1,17 @@
 export const imageReturn = (pmText: string): string => {
-    const baseDustImageUrl = "/icon/home/dust"
-            switch (pmText) {
-                case '좋음':
-                    return `${baseDustImageUrl}/good.webp`;
-                case '보통':
-                    return `${baseDustImageUrl}/normal.webp`;
-                case '나쁨':
-                    return `${baseDustImageUrl}/bad.webp`;
-                case '최악':
-                    return `${baseDustImageUrl}/fuckingbad.webp`;
-                default:
-                     return `${baseDustImageUrl}/normal.webp`;
-            }
+    const baseImageUrl = "/icon/home/dust"
+    switch (pmText) {
+        case '좋음':
+            return `${baseImageUrl}/good.webp`;
+        case '보통':
+            return `${baseImageUrl}/normal.webp`;
+        case '나쁨':
+            return `${baseImageUrl}/bad.webp`;
+        case '최악':
+            return `${baseImageUrl}/fuckingbad.webp`;
+        default:
+            return `${baseImageUrl}/normal.webp`;
+    }
 };
 
 export const getWeatherIconPath = (ptyCode: string | undefined, skyCode: string | undefined): string | undefined => {
@@ -40,3 +40,24 @@ export const getWeatherIconPath = (ptyCode: string | undefined, skyCode: string 
     }
     return rainIcon;
 };
+
+export const getMealImagePath = (meal: string) => {
+    const baseUrl = "/icon/meal"
+    switch (meal) {
+        case 'SPECIAL':
+            return `${baseUrl}/special.webp`
+        case 'KOREAN1':
+            return `${baseUrl}/korfood.webp`
+        case 'KOREAN2':
+            return `${baseUrl}/ramen.webp`
+        case 'NOODLE':
+            return `${baseUrl}/noodle.webp`
+        case 'CONVENIENCE1':
+        case 'CONVENIENCE2':
+            return `${baseUrl}/simpleFood.webp`;
+        case 'CONVENIENCE3':
+            return `${baseUrl}/protein.webp`;
+        default:
+            return '';
+    }
+}
