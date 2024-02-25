@@ -151,101 +151,101 @@ function Meal({setMenuBox}: { setMenuBox: React.Dispatch<React.SetStateAction<bo
 
 
   return (
-      <>
-        <div className={ms('meal')}>
-          <div className={ms('title')}>
-            <div className={ms('title__icon')}>
-              <img src='/icon/meal-title-icon.webp' alt='title'
-                   style={{height: '5.64vw', maxHeight: '22px'}}/>
-            </div>
-            <div className={ms('title__select')}>
-              <div className={ms('title__letter')}>{company === '강촌' ? '강촌 식단' : '을지 식단'}</div>
-              <select value={company} onChange={handleChange} aria-label='회사를 선택해 주세요.'>
-                <option value='강촌'>강촌 식단</option>
-                <option value='을지'>을지 식단</option>
-              </select>
-              <img className={ms('title__select-button')} src='/icon/home-select-arrow.webp'
-                   alt='dropdown-button'/>
-            </div>
+    <>
+      <div className={ms('meal')}>
+        <div className={ms('title')}>
+          <div className={ms('title__icon')}>
+            <img src='/icon/meal-title-icon.webp' alt='title'
+                 style={{height: '5.64vw', maxHeight: '22px'}}/>
           </div>
-          <div className={ms('days')}>
-            {company === '강촌' &&
-                days?.map((day, index) => (
-                    <button
-                        key={index}
-                        ref={index === selectedDay ? selectedDayRef : undefined}
-                        onClick={() => {
-                          setSelectedMealCategories('조식');
-                          setSelectedDay(index);
-                        }}>
-                      <div
-                          className={index === selectedDay ? ms('day', 'selected-day') : ms('day')}>{index === today ? '오늘의 메뉴' : day}</div>
-                    </button>
-                ))}
-            {company === '을지' &&
-                days?.map((day, index) =>
-                    index < 5 ? (
-                        <button
-                            key={index}
-                            ref={index === selectedDay ? selectedDayRef : undefined}
-                            onClick={() => {
-                              setSelectedMealCategories('조식');
-                              setSelectedDay(index);
-                            }}>
-                          <div
-                              className={index === selectedDay ? ms('day', 'selected-day') : ms('day')}>{index === today ? '오늘의 메뉴' : day}</div>
-                        </button>
-                    ) : undefined
-                )}
-          </div>
-          <div className={ms('meal__body')}>
-            <div className={ms('meal-categories')}>
-              {mealMenu(company).mealTime.map((v, index) => (
-                  <div
-                      className={selectedMealCategories === v ? ms('meal-category', 'selected-meal-category') : ms('meal-category')}
-                      onClick={() => setSelectedMealCategories(v)}
-                      key={index}>
-                    {v}
-                  </div>
-              ))}
-            </div>
-            <div className={ms('meal-menus')}>
-              {mealMenu(company).menu.map(
-                  (menu, index) => {
-                    // console.log(mealData)//{목:{아침:~}, {점심:~}, {저녁:~}}
-                    // console.log(mealData[dayNumToSpell(selectedDay)]) //{아침:{"image": ""}, 점심:~}
-                    // console.log(selectedMealCategories)
-                    // console.log(mealData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)])
-                    // {CONVENIENCE:{
-                    //     "image": "",
-                    //     "메뉴": [
-                    //     "슈크림빵+컵시리얼"
-                    // ]}
-                    // }
-                    return (
-                        mealData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[menu.value]?.메뉴 && (
-                            <div className={ms('meal-menu')} key={index}>
-                              <div className={ms('meal-menu__title--wrapper')}>
-                                <div
-                                    className={ms('meal-menu__title', `${menu.value}`)}>{menu.label}</div>
-                                <div
-                                    className={ms('meal-menu__name')}>{menuNameEdit(mealData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][menu.value]['메뉴'])}</div>
-                              </div>
-                              <div className={ms('meal-menu__body')}>
-                                <img className={ms('meal-menu__image')}
-                                     src={getMealImagePath(menu.value)}/>
-                                <div
-                                    className={ms('meal-menu__detaile')}>{mealData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][menu.value]['메뉴'].join(',')}</div>
-                              </div>
-                            </div>
-                        )
-                    )
-                  }
-              )}
-            </div>
+          <div className={ms('title__select')}>
+            <div className={ms('title__letter')}>{company === '강촌' ? '강촌 식단' : '을지 식단'}</div>
+            <select value={company} onChange={handleChange} aria-label='회사를 선택해 주세요.'>
+              <option value='강촌'>강촌 식단</option>
+              <option value='을지'>을지 식단</option>
+            </select>
+            <img className={ms('title__select-button')} src='/icon/home-select-arrow.webp'
+                 alt='dropdown-button'/>
           </div>
         </div>
-      </>
+        <div className={ms('days')}>
+          {company === '강촌' &&
+            days?.map((day, index) => (
+              <button
+                key={index}
+                ref={index === selectedDay ? selectedDayRef : undefined}
+                onClick={() => {
+                  setSelectedMealCategories('조식');
+                  setSelectedDay(index);
+                }}>
+                <div
+                  className={index === selectedDay ? ms('day', 'selected-day') : ms('day')}>{index === today ? '오늘의 메뉴' : day}</div>
+              </button>
+            ))}
+          {company === '을지' &&
+            days?.map((day, index) =>
+              index < 5 ? (
+                <button
+                  key={index}
+                  ref={index === selectedDay ? selectedDayRef : undefined}
+                  onClick={() => {
+                    setSelectedMealCategories('조식');
+                    setSelectedDay(index);
+                  }}>
+                  <div
+                    className={index === selectedDay ? ms('day', 'selected-day') : ms('day')}>{index === today ? '오늘의 메뉴' : day}</div>
+                </button>
+              ) : undefined
+            )}
+        </div>
+        <div className={ms('meal__body')}>
+          <div className={ms('meal-categories')}>
+            {mealMenu(company).mealTime.map((v, index) => (
+              <div
+                className={selectedMealCategories === v ? ms('meal-category', 'selected-meal-category') : ms('meal-category')}
+                onClick={() => setSelectedMealCategories(v)}
+                key={index}>
+                {v}
+              </div>
+            ))}
+          </div>
+          <div className={ms('meal-menus')}>
+            {mealMenu(company).menu.map(
+              (menu, index) => {
+                // console.log(mealData)//{목:{아침:~}, {점심:~}, {저녁:~}}
+                // console.log(mealData[dayNumToSpell(selectedDay)]) //{아침:{"image": ""}, 점심:~}
+                // console.log(selectedMealCategories)
+                // console.log(mealData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)])
+                // {CONVENIENCE:{
+                //     "image": "",
+                //     "메뉴": [
+                //     "슈크림빵+컵시리얼"
+                // ]}
+                // }
+                return (
+                  mealData?.[dayNumToSpell(selectedDay)]?.[mealCategoriesEdit(selectedMealCategories)]?.[menu.value]?.메뉴 && (
+                    <div className={ms('meal-menu')} key={index}>
+                      <div className={ms('meal-menu__title--wrapper')}>
+                        <div
+                          className={ms('meal-menu__title', `${menu.value}`)}>{menu.label}</div>
+                        <div
+                          className={ms('meal-menu__name')}>{menuNameEdit(mealData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][menu.value]['메뉴'])}</div>
+                      </div>
+                      <div className={ms('meal-menu__body')}>
+                        <img className={ms('meal-menu__image')}
+                             src={getMealImagePath(menu.value)}/>
+                        <div
+                          className={ms('meal-menu__detaile')}>{mealData[dayNumToSpell(selectedDay)][mealCategoriesEdit(selectedMealCategories)][menu.value]['메뉴'].join(',')}</div>
+                      </div>
+                    </div>
+                  )
+                )
+              }
+            )}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
