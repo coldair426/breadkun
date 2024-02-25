@@ -1,57 +1,8 @@
 import axios from "axios";
+import { WeatherReturn } from "types/home";
 import {addOrSubDays, formatDate, formatTime} from "../../utils/dates";
 
 const cancelTokenSource = axios.CancelToken.source(); // 요청 취소 토큰
-
-export interface WeatherReturn {
-    baseDate: string;
-    baseTime: string;
-    category: string;
-    fcstDate: string;
-    fcstTime: string;
-    fcstValue: string;
-    nx: number;
-    ny: number;
-}
-
-const calculateDateAndTime = () => {
-    const now = new Date(); // 현재 날짜
-    const yesterday = new Date(now); // 어제 날짜
-
-// 달과 연도 넘어갈때 버그 방지 처리
-    yesterday.getDate() > now.getDate() && yesterday.setMonth(yesterday.getMonth() - 1); // 현재 날짜와 어제 날짜의 일(day)이 다른 경우 이전 달로 설정
-
-// 현재 날짜 및 시간 포맷
-    const currentDate = formatDate(now)
-    const currentTime = formatTime(now)
-
-// 어제 날짜 포맷
-    const yesterdayDate = formatDate(addOrSubDays('sub', now, 1))
-
-    let baseDate = currentDate; // 조회날짜
-    let baseTime = ''; // 조회시간
-// '0200', '0500', '0800', '1100', '1400', '1700', '2000', '2300' 기상청 API 일 8회 업데이트 시간 1시간 후에 조회.
-    if (currentTime < 180) {
-        baseDate = yesterdayDate;
-        baseTime = '2300';
-    } else if (currentTime < 360) {
-        baseTime = '0200';
-    } else if (currentTime < 540) {
-        baseTime = '0500';
-    } else if (currentTime < 720) {
-        baseTime = '0800';
-    } else if (currentTime < 900) {
-        baseTime = '1100';
-    } else if (currentTime < 1080) {
-        baseTime = '1400';
-    } else if (currentTime < 1260) {
-        baseTime = '1700';
-    } else {
-        baseTime = '2000';
-    }
-
-    return {baseDate, baseTime}
-}
 
 
 export const fetchWeatherData = async (company: string) => {
@@ -63,11 +14,11 @@ export const fetchWeatherData = async (company: string) => {
     yesterday.getDate() > now.getDate() && yesterday.setMonth(yesterday.getMonth() - 1); // 현재 날짜와 어제 날짜의 일(day)이 다른 경우 이전 달로 설정
 
 // 현재 날짜 및 시간 포맷
-    const currentDate = formatDate(now)
+    const currentDate = formatDate(now, 1)
     const currentTime = formatTime(now)
 
 // 어제 날짜 포맷
-    const yesterdayDate = formatDate(addOrSubDays('sub', now, 1))
+    const yesterdayDate = formatDate(addOrSubDays('sub', now, 1),1)
 
     let baseDate = currentDate; // 조회날짜
     let baseTime = ''; // 조회시간
