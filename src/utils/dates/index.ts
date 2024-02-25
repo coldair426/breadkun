@@ -53,3 +53,17 @@ export const dayNumToSpell = (value: number): string => {
             return '월';
     }
 };
+
+export const getWeekDates = () => {
+    const today = new Date(); // 현재 date
+    const currentDay = today.getDay(); // 요일 가져오기
+    const weekStart = new Date(today); // today date 복사
+    currentDay === 0 ? weekStart.setDate(today.getDate() - 6) : weekStart.setDate(today.getDate() - currentDay + 1); // 일요일 일때 ? 이전 주의 월요일 : 월요일 시작
+    const weekDates: string[] = [];
+    for (let i = 0; i < 7; i++) {
+        const date = new Date(weekStart);
+        date.setDate(weekStart.getDate() + i); // 주의 시작일로부터 i일씩 증가하여 주간 날짜 생성
+        weekDates.push(formatDate(date, 2));
+    }
+    return weekDates;
+};

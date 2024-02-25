@@ -1,9 +1,8 @@
 import React, {useEffect, useState, useRef} from 'react';
 import styles from '../style/Meal.module.scss';
 import classNames from 'classnames/bind';
-import axios from 'axios';
-import {getMealImagePath} from "../utils/image-return";
-import {dayNumToSpell, formatDate} from "../utils/dates";
+import {getMealImagePath} from "utils/image-return";
+import {dayNumToSpell, getWeekDates} from "../utils/dates";
 import {fetchMealData} from "../apis/meal/meal-api";
 import {mealMenu} from "../types/common";
 
@@ -41,7 +40,6 @@ function Meal({setMenuBox}: { setMenuBox: React.Dispatch<React.SetStateAction<bo
         setCompany(e.target.value);
     };
 
-
     // meal categories api binding을 위해 변환하는 함수
     const mealCategoriesEdit = (value: string): string => {
         switch (value) {
@@ -69,6 +67,7 @@ function Meal({setMenuBox}: { setMenuBox: React.Dispatch<React.SetStateAction<bo
     useEffect(() => {
         setMenuBox(false); // 메뉴 닫기(이전버튼 클릭시)
     }, [setMenuBox]);
+
     // 페이지 최상단으로 스크롤링
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -76,6 +75,7 @@ function Meal({setMenuBox}: { setMenuBox: React.Dispatch<React.SetStateAction<bo
             window.scrollTo(0, 0);
         };
     }, []);
+
     // 로컬 스토리지 업데이트
     useEffect(() => {
         localStorage.setItem('recentCompany', company);
@@ -90,9 +90,6 @@ function Meal({setMenuBox}: { setMenuBox: React.Dispatch<React.SetStateAction<bo
             today < 5 ? setSelectedDay(today) : setSelectedDay(0);
         }
     }, [company, today]);
-
-    console.log(today)
-    console.log(selectedDay)
 
     // 시간에 따라 조,중,석식 선택하는 effect
     useEffect(() => {
@@ -122,26 +119,10 @@ function Meal({setMenuBox}: { setMenuBox: React.Dispatch<React.SetStateAction<bo
 
     useEffect(() => {
         // 오늘을 포함한 주차의 월요일~일요일까지의 날짜 데이터 배열리턴 함수
-        const getWeekDates = () => {
-            const today = new Date(); // 현재 date
-            const currentDay = today.getDay(); // 요일 가져오기
-            const weekStart = new Date(today); // today date 복사
-            currentDay === 0 ? weekStart.setDate(today.getDate() - 6) : weekStart.setDate(today.getDate() - currentDay + 1); // 일요일 일때 ? 이전 주의 월요일 : 월요일 시작
-            const weekDates: string[] = [];
-            for (let i = 0; i < 7; i++) {
-                const date = new Date(weekStart);
-                date.setDate(weekStart.getDate() + i); // 주의 시작일로부터 i일씩 증가하여 주간 날짜 생성
-                weekDates.push(formatDate(date, 2));
-            }
-            return weekDates;
-        };
-        console.log(getWeekDates());
         const dates = getWeekDates(); // 강촌 주7일, 을지 주5일(주말X)
-        console.log(dates)
         setDays(dates);
     }, []);
 
-    console.log(days)
 
     // selectedDay 자동 중앙 스크롤
     useEffect(() => {
@@ -164,7 +145,6 @@ function Meal({setMenuBox}: { setMenuBox: React.Dispatch<React.SetStateAction<bo
     useEffect(() => {
         fetchMealData(company, weekNumber).then(res => {
             const {updated, ...rest} = res
-            console.log(rest)
             setMealData(rest)
         })
     }, [company, weekNumber]);
