@@ -70,12 +70,12 @@ function Meal({setMenuBox}: { setMenuBox: React.Dispatch<React.SetStateAction<bo
   }, [setMenuBox]);
 
   // 페이지 최상단으로 스크롤링
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    return () => {
-      window.scrollTo(0, 0);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  //   return () => {
+  //     window.scrollTo(0, 0);
+  //   };
+  // }, []);
 
   // 로컬 스토리지 업데이트
   useEffect(() => {
