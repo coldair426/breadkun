@@ -70,12 +70,12 @@ function Meal({setMenuBox}: { setMenuBox: React.Dispatch<React.SetStateAction<bo
   }, [setMenuBox]);
 
   // 페이지 최상단으로 스크롤링
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  //   return () => {
-  //     window.scrollTo(0, 0);
-  //   };
-  // }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    return () => {
+      window.scrollTo(0, 0);
+    };
+  }, []);
 
   // 로컬 스토리지 업데이트
   useEffect(() => {
@@ -85,7 +85,7 @@ function Meal({setMenuBox}: { setMenuBox: React.Dispatch<React.SetStateAction<bo
   // 오늘을 선택하는 effect
   useEffect(() => {
     if (company === '강촌') {
-      setSelectedDay(6);
+      setSelectedDay(today);
     } else {
       // 을지 주말 => 월요일 디폴트
       today < 5 ? setSelectedDay(today) : setSelectedDay(0);

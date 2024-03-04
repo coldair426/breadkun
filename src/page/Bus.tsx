@@ -6,6 +6,7 @@ import KakaoMap from '../component/KakaoMap';
 import NotificationBox from './../component/NotificationBox';
 import axios from 'axios';
 import PopUpMap from './../component/PopUpMap';
+import {fetchBusData, getAddr} from "../apis/bus/bus-api";
 
 interface BusStations {
   arrivalTimeH?: number;
@@ -38,31 +39,32 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
   const updateLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => setLatLong({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
   };
-  // 현재좌표 => 도로명 주소 변환 함수
-  const getAddr = (lat: number, lng: number) => {
-    const geocoder = new window.kakao.maps.services.Geocoder();
-    const coord = new window.kakao.maps.LatLng(lat, lng);
-    const callback = (result: any, status: any) => {
-      if (status === window.kakao.maps.services.Status.OK) {
-        // 글자 자르기
-        setAddress({
-          region_1depth_name:
-            result[0].address.region_1depth_name.indexOf(' ') >= 0
-              ? result[0].address.region_1depth_name.slice(0, result[0].address.region_1depth_name.indexOf(' '))
-              : result[0].address.region_1depth_name,
-          region_2depth_name:
-            result[0].address.region_2depth_name.indexOf(' ') >= 0
-              ? result[0].address.region_2depth_name.slice(0, result[0].address.region_2depth_name.indexOf(' '))
-              : result[0].address.region_2depth_name,
-          region_3depth_name:
-            result[0].address.region_3depth_name.indexOf(' ') >= 0
-              ? result[0].address.region_3depth_name.slice(0, result[0].address.region_3depth_name.indexOf(' '))
-              : result[0].address.region_3depth_name,
-        });
-      }
-    };
-    geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
-  };
+
+  // const getAddr = (lat: number, lng: number) => {
+  //   const geocoder = new window.kakao.maps.services.Geocoder();
+  //   const coord = new window.kakao.maps.LatLng(lat, lng);
+  //   const callback = (result: any, status: any) => {
+  //     if (status === window.kakao.maps.services.Status.OK) {
+  //       // 글자 자르기
+  //       setAddress({
+  //         region_1depth_name:
+  //           result[0].address.region_1depth_name.indexOf(' ') >= 0
+  //             ? result[0].address.region_1depth_name.slice(0, result[0].address.region_1depth_name.indexOf(' '))
+  //             : result[0].address.region_1depth_name,
+  //         region_2depth_name:
+  //           result[0].address.region_2depth_name.indexOf(' ') >= 0
+  //             ? result[0].address.region_2depth_name.slice(0, result[0].address.region_2depth_name.indexOf(' '))
+  //             : result[0].address.region_2depth_name,
+  //         region_3depth_name:
+  //           result[0].address.region_3depth_name.indexOf(' ') >= 0
+  //             ? result[0].address.region_3depth_name.slice(0, result[0].address.region_3depth_name.indexOf(' '))
+  //             : result[0].address.region_3depth_name,
+  //       });
+  //     }
+  //   };
+  //   geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+  // };
+
   // 도착지 값을 드롭다운에 따라 업데이트하는 함수
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedValue(e.target.value);
@@ -71,6 +73,7 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
   useEffect(() => {
     setMenuBox(false); // 메뉴 닫기(이전버튼 클릭시)
   }, [setMenuBox]);
+
   // 페이지 최상단으로 스크롤링
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -79,52 +82,53 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
       window.scrollTo(0, 0);
     };
   }, []);
+
   useEffect(() => {
-    getAddr(latLong.latitude, latLong.longitude); // 현재 도로명 주소 업데이트
+    getAddr(latLong.latitude, latLong.longitude, setAddress); // 현재 도로명 주소 업데이트
   }, [latLong]);
+
   useEffect(() => {
     localStorage.setItem('recentDestination', selectedValue); // 로컬 스토리지 업데이트
   }, [selectedValue]);
   // 서버에서 남은 시간 받아오기 비동기 처리(async & await)
   useEffect(() => {
-    setArrivalTime({ mainbox: '----', time: '', ampm: '', remainingTime: '', remainingText: '' });
-    setBusStations([]);
-    setNotification(true);
-    async function fetchData() {
-      try {
-        const result = await axios.post('https://babkaotalk.herokuapp.com/webShuttle', {
-          destNm: selectedValue,
-          originGps: `${latLong.longitude},${latLong.latitude} `,
-        });
-        const { resultCode, resultData } = result.data;
-        // 출발지와 도착지의 거리가 매우 가까울 때.
-        if (resultCode === 104) {
-          setArrivalTime({ mainbox: '잠시 후 도착', time: '', ampm: '', remainingTime: '', remainingText: '' });
-        } else {
-          const resultVal = resultData;
-          // 소요시간 정보
-          const resultH = resultVal.arrivalTimeH > 12 ? resultVal.arrivalTimeH - 12 : resultVal.arrivalTimeH;
-          setArrivalTime({
-            mainbox: '',
-            time: `${resultH.toString().padStart(2, '0')}:${resultVal.arrivalTimeM.toString().padStart(2, '0')}`,
-            ampm: `${resultVal.arrivalTimeH >= 12 ? 'PM' : 'AM'}`,
-            remainingTime: `${resultVal.durationH * 60 + resultVal.durationM}`,
-            remainingText: '분 소요',
-          });
-          setBusStations([
-            { destinationName: '더존_강촌', notification: '18:15', location: '번호로 노선별 승차 위치를 확인하세요!', latitude: 37.757685934004726, longitude: 127.63763361785992 },
-            ...resultVal.sections,
-          ]);
-        }
-        setNotification(false);
-      } catch (error) {
-        setArrivalTime({ mainbox: '통신장애', time: '', ampm: '', remainingTime: '', remainingText: '' });
-        setNotification(false);
-        console.log('현재 위치에서 도착지까지 남은 시간 가져오기 실패.');
-        console.log(error);
-      }
-    }
-    fetchData();
+    // async function fetchData() {
+    //   try {
+    //     const result = await axios.post('https://babkaotalk.herokuapp.com/webShuttle', {
+    //       destNm: selectedValue,
+    //       originGps: `${latLong.longitude},${latLong.latitude} `,
+    //     });
+    //     const { resultCode, resultData } = result.data;
+    //     // 출발지와 도착지의 거리가 매우 가까울 때.
+    //     if (resultCode === 104) {
+    //       setArrivalTime({ mainbox: '잠시 후 도착', time: '', ampm: '', remainingTime: '', remainingText: '' });
+    //     } else {
+    //       const resultVal = resultData;
+    //       // 소요시간 정보
+    //       const resultH = resultVal.arrivalTimeH > 12 ? resultVal.arrivalTimeH - 12 : resultVal.arrivalTimeH;
+    //       setArrivalTime({
+    //         mainbox: '',
+    //         time: `${resultH.toString().padStart(2, '0')}:${resultVal.arrivalTimeM.toString().padStart(2, '0')}`,
+    //         ampm: `${resultVal.arrivalTimeH >= 12 ? 'PM' : 'AM'}`,
+    //         remainingTime: `${resultVal.durationH * 60 + resultVal.durationM}`,
+    //         remainingText: '분 소요',
+    //       });
+    //       setBusStations([
+    //         { destinationName: '더존_강촌', notification: '18:15', location: '번호로 노선별 승차 위치를 확인하세요!', latitude: 37.757685934004726, longitude: 127.63763361785992 },
+    //         ...resultVal.sections,
+    //       ]);
+    //     }
+    //     console.log('busStations', busStations)
+    //     setNotification(false);
+    //   } catch (error) {
+    //     setArrivalTime({ mainbox: '통신장애', time: '', ampm: '', remainingTime: '', remainingText: '' });
+    //     setNotification(false);
+    //     console.log('현재 위치에서 도착지까지 남은 시간 가져오기 실패.');
+    //     console.log(error);
+    //   }
+    // }
+    //fetchData()
+    fetchBusData(selectedValue, latLong.latitude, latLong.longitude, setArrivalTime, setBusStations, setNotification);
   }, [selectedValue, latLong]);
 
   return (
