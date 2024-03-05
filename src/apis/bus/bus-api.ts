@@ -1,12 +1,22 @@
 import axios from 'axios';
+import { Dispatch, SetStateAction } from 'react';
+import { BusStations } from '../../types/bus';
 
 export const fetchBusData = async (
     selectedValue: string,
     lat: number,
     lng: number,
-    setArrivalTime: Function,
-    setBusStations: Function,
-    setNotification: Function
+    setArrivalTime: Dispatch<
+        SetStateAction<{
+            mainbox: string;
+            time: string;
+            ampm: string;
+            remainingTime: string;
+            remainingText: string;
+        }>
+    >,
+    setBusStations: Dispatch<SetStateAction<BusStations[]>>,
+    setNotification: Dispatch<SetStateAction<boolean>>
 ) => {
     try {
         const result = await axios.post('https://babkaotalk.herokuapp.com/webShuttle', {
@@ -16,7 +26,13 @@ export const fetchBusData = async (
         const { resultCode, resultData } = result.data;
         // 출발지와 도착지의 거리가 매우 가까울 때.
         if (resultCode === 104) {
-            setArrivalTime({ mainbox: '잠시 후 도착', time: '', ampm: '', remainingTime: '', remainingText: '' });
+            setArrivalTime({
+                mainbox: '잠시 후 도착',
+                time: '',
+                ampm: '',
+                remainingTime: '',
+                remainingText: ''
+            });
         } else {
             const resultVal = resultData;
             // 소요시간 정보
@@ -41,7 +57,13 @@ export const fetchBusData = async (
         }
         setNotification(false);
     } catch (error) {
-        setArrivalTime({ mainbox: '통신장애', time: '', ampm: '', remainingTime: '', remainingText: '' });
+        setArrivalTime({
+            mainbox: '통신장애',
+            time: '',
+            ampm: '',
+            remainingTime: '',
+            remainingText: ''
+        });
         setNotification(false);
         console.log('현재 위치에서 도착지까지 남은 시간 가져오기 실패.');
         console.log(error);
@@ -50,7 +72,17 @@ export const fetchBusData = async (
 
 // 현재좌표 => 도로명 주소 변환 함수
 // 매개변수로 함수를 전달하는 방식은 주로 콜백 함수나 이벤트 핸들러 등의 상황에서 사용
-export const getAddr = (lat: number, lng: number, setAddress: Function) => {
+export const getAddr = (
+    lat: number,
+    lng: number,
+    setAddress: Dispatch<
+        SetStateAction<{
+            region_1depth_name: string;
+            region_2depth_name: string;
+            region_3depth_name: string;
+        }>
+    >
+) => {
     const geocoder = new window.kakao.maps.services.Geocoder();
     const coord = new window.kakao.maps.LatLng(lat, lng);
     const callback = (result: any, status: any) => {

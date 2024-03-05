@@ -1,5 +1,5 @@
 export const imageReturn = (pmText: string): string => {
-    const baseImageUrl = "/icon/home/dust"
+    const baseImageUrl = '/icon/home/dust';
     switch (pmText) {
         case '좋음':
             return `${baseImageUrl}/good.webp`;
@@ -42,16 +42,16 @@ export const getWeatherIconPath = (ptyCode: string | undefined, skyCode: string 
 };
 
 export const getMealImagePath = (meal: string) => {
-    const baseUrl = "/icon/meal"
+    const baseUrl = '/icon/meal';
     switch (meal) {
         case 'SPECIAL':
-            return `${baseUrl}/special.webp`
+            return `${baseUrl}/special.webp`;
         case 'KOREAN1':
-            return `${baseUrl}/korfood.webp`
+            return `${baseUrl}/korfood.webp`;
         case 'KOREAN2':
-            return `${baseUrl}/ramen.webp`
+            return `${baseUrl}/ramen.webp`;
         case 'NOODLE':
-            return `${baseUrl}/noodle.webp`
+            return `${baseUrl}/noodle.webp`;
         case 'CONVENIENCE1':
         case 'CONVENIENCE2':
             return `${baseUrl}/simpleFood.webp`;
@@ -60,4 +60,4 @@ export const getMealImagePath = (meal: string) => {
         default:
             return '';
     }
-}
+};

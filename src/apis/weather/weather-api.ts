@@ -1,28 +1,27 @@
-import axios from "axios";
-import { WeatherReturn } from "types/home";
-import {addOrSubDays, formatDate, formatTime} from "../../utils/dates";
+import axios from 'axios';
+import { WeatherReturn } from 'types/home';
+import { addOrSubDays, formatDate, formatTime } from '../../utils/dates';
 
 const cancelTokenSource = axios.CancelToken.source(); // 요청 취소 토큰
 
-
 export const fetchWeatherData = async (company: string) => {
     const now = new Date(); // 현재 날짜
-    const hour = now.getHours()
+    const hour = now.getHours();
     const yesterday = new Date(now); // 어제 날짜
 
-// 달과 연도 넘어갈때 버그 방지 처리
+    // 달과 연도 넘어갈때 버그 방지 처리
     yesterday.getDate() > now.getDate() && yesterday.setMonth(yesterday.getMonth() - 1); // 현재 날짜와 어제 날짜의 일(day)이 다른 경우 이전 달로 설정
 
-// 현재 날짜 및 시간 포맷
-    const currentDate = formatDate(now, 1)
-    const currentTime = formatTime(now)
+    // 현재 날짜 및 시간 포맷
+    const currentDate = formatDate(now, 1);
+    const currentTime = formatTime(now);
 
-// 어제 날짜 포맷
-    const yesterdayDate = formatDate(addOrSubDays('sub', now, 1),1)
+    // 어제 날짜 포맷
+    const yesterdayDate = formatDate(addOrSubDays('sub', now, 1), 1);
 
     let baseDate = currentDate; // 조회날짜
     let baseTime = ''; // 조회시간
-// '0200', '0500', '0800', '1100', '1400', '1700', '2000', '2300' 기상청 API 일 8회 업데이트 시간 1시간 후에 조회.
+    // '0200', '0500', '0800', '1100', '1400', '1700', '2000', '2300' 기상청 API 일 8회 업데이트 시간 1시간 후에 조회.
     if (currentTime < 180) {
         baseDate = yesterdayDate;
         baseTime = '2300';
@@ -42,30 +41,37 @@ export const fetchWeatherData = async (company: string) => {
         baseTime = '2000';
     }
 
-    try{
-        const weatherResponse = await axios.get(`https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${
-            process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY
-        }&numOfRows=200&pageNo=1&dataType=json&base_date=${baseDate}&base_time=${baseTime}&nx=${company === '강촌' ? '71' : '60'}&ny=${company === '강촌' ? '132' : '127'}`, {
-            cancelToken: cancelTokenSource.token, timeout: 50000
-        })
-        const weather = weatherResponse.data.response.body.items.item;
-        const weatherData = weather.reduce((acc: { [key in string]: WeatherReturn[] }, curr: WeatherReturn) => {
-            const {category, fcstDate, fcstTime} = curr;
-            //카테고리가 같은 날씨 데이터끼리 묶기
-            const isCurrentTime = +fcstDate > +currentDate || (+fcstDate === +currentDate && +fcstTime >= +hour.toString().padStart(2, '0').padEnd(4, '0'));
-            if (isCurrentTime) {
-                if (!acc[category]) {
-                    acc[category] = []
-                }
-                acc[category].push(curr)
+    try {
+        const weatherResponse = await axios.get(
+            `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${
+                process.env.REACT_APP_PUBLIC_OPEN_API_ENCODING_KEY
+            }&numOfRows=200&pageNo=1&dataType=json&base_date=${baseDate}&base_time=${baseTime}&nx=${company === '강촌' ? '71' : '60'}&ny=${company === '강촌' ? '132' : '127'}`,
+            {
+                cancelToken: cancelTokenSource.token,
+                timeout: 50000
             }
-            return acc;
-        }, {SKY: [], POP: [], REH: [], TMP: []})
+        );
+        const weather = weatherResponse.data.response.body.items.item;
+        const weatherData = weather.reduce(
+            (acc: { [key in string]: WeatherReturn[] }, curr: WeatherReturn) => {
+                const { category, fcstDate, fcstTime } = curr;
+                //카테고리가 같은 날씨 데이터끼리 묶기
+                const isCurrentTime =
+                    +fcstDate > +currentDate ||
+                    (+fcstDate === +currentDate && +fcstTime >= +hour.toString().padStart(2, '0').padEnd(4, '0'));
+                if (isCurrentTime) {
+                    if (!acc[category]) {
+                        acc[category] = [];
+                    }
+                    acc[category].push(curr);
+                }
+                return acc;
+            },
+            { SKY: [], POP: [], REH: [], TMP: [] }
+        );
         return weatherData;
-
-    } catch (error){
+    } catch (error) {
         console.log('날씨 가져오기 실패.');
         console.log(error);
     }
-
-}
+};

@@ -1,9 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
 const cancelTokenSource = axios.CancelToken.source(); // 요청 취소 토큰
 
-export const fetchDustDataTest = async (company:string) => {
-
+export const fetchDustDataTest = async (company: string) => {
     const getPM10Level = (pm10Value: string): string => {
         if (pm10Value === '-') {
             return '통신장애';
@@ -48,9 +47,16 @@ export const fetchDustDataTest = async (company:string) => {
         const pm10Level = getPM10Level(pm10Value);
         const pm25Level = getPM25Level(pm25Value);
 
-        return {dataTime, stationName, pm10Level, pm25Level, pm10Value, pm25Value}
+        return {
+            dataTime,
+            stationName,
+            pm10Level,
+            pm25Level,
+            pm10Value,
+            pm25Value
+        };
     } catch (error) {
-            console.log('미세먼지 가져오기 실패.');
-            console.log(error);
+        console.log('미세먼지 가져오기 실패.');
+        console.log(error);
     }
 };

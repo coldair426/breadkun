@@ -24,11 +24,14 @@ interface BusStations {
 const bs = classNames.bind(styles);
 
 function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<boolean>> }) {
-    let { destination } = useParams(); // URL parameter
+    const { destination } = useParams(); // URL parameter
     const [selectedValue, setSelectedValue] = useState(
         destination || localStorage.getItem('recentDestination') || '강변1'
     ); // URL parameter 노선 or 로컬스토리지 or "강변1"(기본)
-    const [latLong, setLatLong] = useState({ latitude: 37.756540912483615, longitude: 127.63819968679633 }); // 현재위치 정보 lat&log, 기본값 더존 강촌캠
+    const [latLong, setLatLong] = useState({
+        latitude: 37.756540912483615,
+        longitude: 127.63819968679633
+    }); // 현재위치 정보 lat&log, 기본값 더존 강촌캠
     const [address, setAddress] = useState({
         region_1depth_name: '강원',
         region_2depth_name: '춘천시',
@@ -43,14 +46,20 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
     }); // 도착시간
     const [notification, setNotification] = useState(false); // 스낵바
     const [popUpMap, setPopUpMap] = useState(false); // 자세히 보기 정류장 지도
-    const [stopLatLong, setStopLatLong] = useState({ latitude: 0, longitude: 0 }); // 자세히 보기 정류장 위도경도
+    const [stopLatLong, setStopLatLong] = useState({
+        latitude: 0,
+        longitude: 0
+    }); // 자세히 보기 정류장 위도경도
     const [stopLocation, setStopLocation] = useState(''); // 자세히 보기 정류장 위치 설명
     const [busStations, setBusStations] = useState<BusStations[]>([]);
 
     // 현재좌표를 업데이트 하는 함수
     const updateLocation = () => {
         navigator.geolocation.getCurrentPosition(position =>
-            setLatLong({ latitude: position.coords.latitude, longitude: position.coords.longitude })
+            setLatLong({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            })
         );
     };
 
@@ -264,7 +273,10 @@ function Bus({ setMenuBox }: { setMenuBox: React.Dispatch<React.SetStateAction<b
                                         <div
                                             className={bs('bus__block2--stop-more')}
                                             onClick={() => {
-                                                setStopLatLong({ latitude: v.latitude, longitude: v.longitude });
+                                                setStopLatLong({
+                                                    latitude: v.latitude,
+                                                    longitude: v.longitude
+                                                });
                                                 setStopLocation(v.location);
                                                 setPopUpMap(true);
                                             }}
